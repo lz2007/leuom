@@ -40,20 +40,6 @@
 - index.js              // 应用启动，包括 polyfill/必要的依赖/root VM/路由启动
 ```
 
-
-## 关于雪碧图
-```
-1、build的时候会对 CSS 中，路径带 ?__sprite 的图片进行合并。仅对CSS文件中添加了此标志的雪碧图才会被处理，而其他HTML和JS中无效；
-2、请尽量使用字体或者png格式的图片；
-3、图片请使用原大小插入，不允许拉伸，不然合并后会变小或者变大；
-```
-
-## 关于全局配置文件的说明
-```
-/services/configService.js 在run build之后 ，会输出到 /static/configService.js
-请将有可能需要用到的全局配置、开关参数等等，写在这个文件内，然后在所需要的app或pages中import
-```
-
 ## 浏览器支持
 现代浏览器、IE8 及以上
 
