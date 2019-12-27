@@ -54,3 +54,17 @@
 ![下载中心.png](https://upload-images.jianshu.io/upload_images/7084049-ea2a5ee166494f1c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 ![修改密码.png](https://upload-images.jianshu.io/upload_images/7084049-8412d9caa50ea37f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+#### 指挥中心
+
+![实时指挥.gif](https://upload-images.jianshu.io/upload_images/7084049-6cbe52e15da16f2d.gif?imageMogr2/auto-orient/strip)
+
+![视频监控.gif](https://upload-images.jianshu.io/upload_images/7084049-ca1320d8498da57f.gif?imageMogr2/auto-orient/strip)
+
+![车牌布控.png](https://upload-images.jianshu.io/upload_images/7084049-85de8db5b3eeb9b5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+![告警订阅.png](https://upload-images.jianshu.io/upload_images/7084049-2c8db3dfda1b4b0d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+![人脸布控.png](https://upload-images.jianshu.io/upload_images/7084049-4c78d38526e4be9e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+![人脸核验.png](https://upload-images.jianshu.io/upload_images/7084049-d27e502628ed317c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
