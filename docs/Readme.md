@@ -1,6 +1,5 @@
 ## 开始
 
-- 将bin目录添加到系统path变量，并重启让其生效。
 
 - 日常运行项目
   ``` bash
@@ -58,32 +57,4 @@
 ## 浏览器支持
 现代浏览器、IE8 及以上
 
-
-## 参考网站
-http://avalonjs.coding.me/
-https://xxapp.github.io/ane/#!/
-https://www.easy-mock.com/          //模拟数据支持
-
-
-## 文件命名规则
-```
-1、字母全小写，根据模块对应的首字拼音进行命名。
-例：执法视音频数据管理系统-系统首页 对应 zfsypsjglpt-xtsy-index
-    执法视音频数据管理系统-统计分析-资产统计 对应 zfsypsjglpt-tjfx-zctj
-
-2、文件详情页查询，在对应的模块名称后加-detail
-例：执法视音频数据管理系统-视音频管理-执法记录仪视音频 对应 zfsypsjglpt-sypgl-zfjlysyp-detail
-
-3、公安交警共有模块不作特殊区分，以当前模块名称命名
-
-4、公安模块统一在后面加上 _gongan，  例：执法视音频数据管理系统-监督考评-考评核查总览 zfsypsjglpt-jdkp-kphczl_gongan；
-   交警模块统一在后面加上 _jiaojing，例：执法视音频数据管理系统-执法档案-强制措施 zfsypsjglpt-zfda-qzcs_jiaojing
-
-注：在执法视音频数据管理系统里，导航菜单的选中是根据所点击的项进行选中，因此在跳转后需要选中该项的，需满足路径前3级与所点击项一致。
-    例：简易程序为zfsypsjglpt-jdkp-jycx_jiaojing，而简易程序未考评即为zfsypsjglpt-jdkp-jycx-wkp_jiaojing，
-        简易程序已考评即为zfsypsjglpt-jdkp-jycx-ykp_jiaojing，均满足zfsypsjglpt-jdkp-jycx-*******_jiaojing的原则
-```
-
-## 前端规范补充
-- 模块内部创建或者定义的变量，务必在合适的位置将其置null
-- 每次手动出包后，请务必记得在出包位置打tag
+## 项目截图
