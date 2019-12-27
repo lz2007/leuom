@@ -1,0 +1,1050 @@
+.yhgl-total {
+    margin: 0px auto;
+    padding: 0;
+    /* height: 100%; */
+    width: 100%;
+    font-family: "microsoft yahei";
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.yhgl-total ::-ms-clear{
+    display: none;
+}
+.yhgl-total-left {
+    width: 300px;
+    height: 100%;
+    float: left;
+    background: #e6edf7;
+    position: relative;
+}
+.yhgl-total-right {
+    position: relative;
+    /* margin-left: 310px; */
+    height: 100%;
+}
+.yhgl-title {
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    color: #fff;
+    background: #2c477a;
+    padding: 0 20px;
+    font-size: 20px;
+}
+.yhgl-org-tree {
+    overflow: auto;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.ane-tree-select-dropdown {
+    width: 240px !important;
+    height: 300px !important;
+}
+
+.ane-tree-select-dropdown span{
+    color: #536b82;
+    font-size: 14px;
+}
+/* *****************************************查询样式******************************************* */
+
+.yhgl-search {
+    width: 100%;
+    height: 60px;
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color: #b0c4e1;
+    /* margin-bottom: 8px; */
+    /* border: 1px solid #E9E9EB; */
+}
+
+.yhgl-dataIpt {
+    width: 170px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: 13px;
+}
+
+.yhgl-dataIpt-check {
+    width: 100px;
+    height: 30px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: 13px;
+    margin-right: 20px;
+    /* margin-left: 10px; */
+}
+.yhgl-checkbox-label{
+    font-weight: normal;
+    color: #536b82;
+    cursor: pointer;
+}
+.yhgl-checkbox-label > img{
+    margin-bottom: 2px;
+    margin-right: 2px;
+}
+
+/* .yhgl-dataIpt-btn {
+    width: 120px;
+    height: 26px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: 13px;
+    margin-left: 10px;
+    color: #fff;
+    border-radius: 2px;
+} */
+/* .yhgl-dataIpt-btn > input{
+    height: 26px;
+    width: 120px;
+    background-color: #FD8703;
+    border-radius: 2px;
+    border: 1px solid #FD8703;
+    display: inline-block;
+}
+.yhgl-dataIpt-btn > span{
+    vertical-align: middle;
+    margin-left: -71px;
+    margin-bottom: 20px;
+    display: inline-block;
+    line-height: 26px;
+    height: 20px;
+} */
+.yhgl-dataIpt-btn{
+    width: 110px;
+    height: 36px;
+    float: right;
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: 12px;
+    /* margin-left: 10px; */
+    color: #fff;
+    font-weight: bold;
+    font-size: 16px;
+    background: #1055b3;
+    border: none;
+}
+.yhgl-dataIpt-btn span{
+    color: #fff !important;
+}
+.yhgl-dataIpt-btn:hover{
+    background-color: #107dda;
+}
+.yhgl-dataSpan {
+    font-weight: normal;
+    display: inline-block;
+    display: inline-block;
+    margin-top: 18px;
+    vertical-align: middle;
+    font-family: "microsoft yahei";
+    font-size: 16px;
+    color: #536b82;
+}
+
+.yhglRight {
+    margin-right: 16px;
+    margin-left: 10px;
+    font-weight: normal;
+}
+
+.yhgl-iptPoliceNum{
+    display: inline-block;
+    height: 28px;
+    width: 170px;
+    padding-left: 12px;
+    padding-right: 0px;
+    padding-top: 1px;
+    padding-bottom: 3px;
+    background-color: #fff;
+    /* border: 1px solid #d1d0d0; */
+    border-radius: 2px;
+    color: #536B82;
+    /* -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s; */
+}
+.yhgl-iptPoliceNum input {
+    border: none;
+    border-color: #fff;
+    width: 136px;
+    height: 26px;
+    line-height: 24px;
+    vertical-align: middle;
+}
+.yhgl-iptPoliceNum input:focus{
+    border: none;
+    outline:none;
+    /* box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(249, 250, 251, 0.6); */
+}
+.yhgl-iptPoliceNum-focus{
+    border-width:1px; 
+    border-color: #84bbf2;
+    border-width: 1px;
+    box-shadow: #bce2ff 0px 0px 8px;
+    -moz-box-shadow:  #bce2ff 0px 0px 8px;
+    -webkit-box-shadow:  #bce2ff 0px 0px 8px;    
+}
+
+.yhgl-search .form-control {
+    height: 30px;
+    padding: 6px 12px;
+    border-radius: 2px;
+}
+
+.yhgl-dataIpt ul li {
+    margin-top: -2px;
+    color: #536B82;
+}
+
+.yhgl-dataIpt .ane-tree-select .ane-tree-select-arrow {
+    top: 3px;
+}
+
+.yhgl-dataIpt .ane-select .ane-select-arrow {
+    top: 3px;
+}
+
+.yhgl-dataIpt .tree-select-wrap{
+    float: left;
+    width: 100%;
+}
+
+.yhgl-total .yhgl-dataIpt .tree-select-wrap .tree-select-selected{
+    top: 5px;
+    color: #536B82;
+}
+.yhgl-dataIpt .tree-select-wrap .tree-select-search{
+    outline: none;
+    border: none;
+    color: #536B82;
+    height: 20px;
+    margin-top: 4px;
+}
+.yhgl-dataIpt .tree-select-wrap .fa{
+    top:5px;
+}
+.yhgl-dataIpt .tree-select-wrap .treeSearchResult li:hover{
+    /* text-decoration: underline;
+    color: #0078D7; */
+    background-color: #DFF1FF;
+}
+
+.yhgl-checkbox-ipt {
+    margin-left: 10px;
+}
+
+.yhgl-search input[type="radio"]{
+    margin: 10px 0 10px 0;
+    cursor: pointer;
+}
+.yhgl-search input[type="checkbox"] {
+    width: 11px;
+    margin: 8px 0 8px 0;
+    cursor: pointer;
+    opacity: 0; 
+    filter:Alpha(opacity=0);
+    outline: none;
+    /* visibility: hidden; */
+    /* background:url('/static/image/xtpzgl-yhgl/selectNo.png?__sprite') no-repeat; */
+}
+.yhgl-iptPoliceNum-clear{
+    /* position: absolute;
+    left: 954px;
+    top: 23px; */
+    display: inline-block;
+    width: 20px;
+    height: 22px;
+    vertical-align: middle;
+    line-height: 22px;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    color: #536C80;
+}
+
+/* *****************************************导航菜单样式******************************************* */
+
+.yhgl-menu {
+    width: 100%;
+    background-color: #dfe9f7;
+    padding: 8px 20px;
+    border-top: 1px solid #fff;
+}
+
+.yhgl-menu ul {
+    list-style: none;
+}
+
+.yhgl-menu ul li {
+    list-style: none;
+    display: inline-block;
+    margin-right: 10px;
+    width: 100px;
+    height: 32px;
+    cursor: pointer;
+    background-color: #1055b3;
+}
+.yhgl-menu ul li:hover{
+    background-color: #107DDA;
+}
+
+.yhglMenu-label {
+    display: block;
+    font-weight: normal;
+    font-family: "HiraginoSansGB-W3", sans-serif;
+    font-size: 16px;
+    color: #fff;
+    vertical-align: middle;
+    line-height: 32px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.yhglMenu-img {
+    text-align: center;
+    height: 22px;
+    width: 22px;
+    margin-left: 15px;
+}
+
+.yhgl-btnBg{
+    background-color: #b2b2b2 !important;
+    cursor: not-allowed;
+}
+.yhgl-btnBg > label{
+    cursor: not-allowed;
+}
+
+
+/* *****************************************表格信息样式******************************************* */
+
+.yhgl-tabCont {
+    position: absolute;
+    bottom: 50px;
+    top: 143px;
+    right: 0;
+    left: 0;
+}
+.yhgl-tabCont .selected {
+    background-color: #F4F5F7;
+}
+
+.yhgl-tabCont table tr {
+    cursor: pointer;
+}
+
+.yhgl-tabCont table tbody tr:hover {
+    /* background-color: #F4F5F7; */
+    background-color: #E6E6E6;
+}
+
+.yhgl-tabCont .table-btn {
+    color: #1055b3;
+    padding: 0 10px;
+    cursor: pointer;
+}
+
+
+/* *****************************************底部分页样式******************************************* */
+
+.yhgl-pagination {
+    height: 30px;
+    position: absolute;
+    left: 8px;
+    right: 8px;
+    bottom: 5px;
+    /* background-color: #E8EDF1; */
+}
+
+.yhgl-pagination li {
+    float: right;
+    margin-right: 10px;
+    line-height: 30px;
+    vertical-align: middle;
+}
+
+.yhgl-pagination .pagination-num {
+    height: 20px;
+    margin-bottom: 5px;
+    vertical-align: bottom;
+    clear: both;
+}
+
+
+/* ****************************************修改/重写公共全局样式**************************************** */
+
+.ane-tree-select-dropdown .ztree {
+    height: 300px;
+    overflow: auto;
+}
+.yhgl-total .pagebar{
+    background-color: #E8EDF1;
+    border: 0px;
+    right: 8px;
+    left: 8px;
+}
+.yhgl-total .ane-checkbox .ane-checkbox-checked .text{
+    display: inline-block;
+    /* content: "\F00C";
+    background-color: #f5f8fc;
+    border-color: #333333; */
+    background-image: url('/static/image/tyywglpt-sbzygl/check_selected.png?__sprite');
+    background-repeat: no-repeat;
+    min-height: 16px;
+    min-width: 16px;
+    font-weight: bold;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+.yhgl-total .ane-checkbox .ane-checkbox-check .text{
+    border-width: 0px;
+    background-image: url('/static/image/tyywglpt-sbzygl/check_unselected.png?__sprite');
+    background-repeat: no-repeat;
+    min-height: 16px;
+    min-width: 16px;
+    width: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.yhgl-total .ane-checkbox-inner-ie span{
+    display: inline-block !important;
+}
+.yhgl-total .ane-checkbox input[type="checkbox"]:checked + .text::before {
+    display: none;
+}
+.yhgl-total .ane-checkbox input[type="checkbox"] + .text::before {
+    display: none;
+}
+.yhgl-total .ane-checkbox input[type=checkbox]{
+    width: 0px;
+}
+.yhgl-modal-backdrop{
+    filter: alpha(opacity=20)!important;
+    opacity: 0.2 !important;
+}
+.glyphicon-ok:before {
+    content: " ";
+}
+/* *****************************************弹窗样式*********************************************** */
+
+/* 新增用户弹窗 */
+.yhgl-addUser .modal-header{
+    height: 50px;
+    line-height: 50px;
+    background-color: #1c2551;
+    color: #fff;
+    cursor: move;
+    padding-left: 20px;
+}
+.yhgl-addUser .modal-header .close{
+    font-weight: normal;
+}
+.yhgl-addUser .modal-body{
+    background: #e6edf7;
+    padding: 0;
+}
+.yhgl-addUser .modal-content{
+    border-radius: 0px;
+    width: 690px;
+    height: 570px;
+}
+.yhgl-addUser .modal-content .modal-title{
+    font-size: 16px;
+}
+
+.yhgl-addUser .bootbox-close-button.close::after {
+    width: 20px;
+    height: 20px;
+    font-size: 14px;
+    line-height: 1;
+    background: url('/static/image/theme/sszhxt/mapIcon/close.png') no-repeat;
+}
+.yhgl-addUser-modalFooter {
+    text-align: right;
+    height: 70px;
+    padding: 15px 40px;
+    background: #ccdbf1;
+    text-align: center;
+}
+
+.yhgl-nextStep {
+    width: 130px;
+    height: 40px;
+    background-color: #1055b3;
+    color: #fff;
+    display: inline-block;
+    font-size: 16px; 
+    border: none;
+    margin: 0 20px;
+}
+
+.yhgl-nextStep:hover,
+.yhgl-preStep:hover,
+.yhgl-finish:hover{
+    background-color: #0057A1;
+}
+
+.yhgl-preStep {
+    width: 130px;
+    height: 40px;
+    background-color: #1055b3;
+    color: #fff;
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 16px;
+    border: none;
+}
+
+.yhgl-finish {
+    width: 130px;
+    height: 40px;
+    background-color: #1055b3;
+    color: #fff;
+    display: inline-block;
+    font-size: 16px;
+    border: none;
+}
+
+
+/* 编辑用户弹窗 */
+.yhgl-editUser .modal-header{
+    height: 50px;
+    line-height: 50px;
+    background-color: #1c2551;
+    color: #fff;
+    border: none;
+    cursor: move;
+}
+.yhgl-editUser .modal-header .close{
+    font-weight: normal;
+}
+.yhgl-editUser .modal-body {
+    background: #e6edf7;
+    padding: 0;
+}
+.yhgl-editUser .modal-content{
+    border-radius: 0px;
+    width: 690px;
+    height: 570px;
+}
+.yhgl-editUser .modal-content .modal-title{
+    font-size: 16px;
+}
+.yhgl-editUser-modalFooter {
+    text-align: right;
+    height: 70px;
+    padding: 15px 40px;
+    background: #ccdbf1;
+    text-align: center;
+}
+.yhgl-editUser .mgrEor{
+    color: red;
+    display: inline-block;
+    width: 300px;
+    float: left;
+}
+.yhgl-editUser .footerHtml{
+    width: 100%;
+    display: inline-block;
+}
+
+/* 管理范围弹窗 */
+.yhgl-mgrScopes .modal-header{
+    height: 50px;
+    line-height: 50px;
+    background-color: #1c2551;
+    color: #fff;
+    cursor: move;
+    padding-left: 20px;
+}
+.yhgl-mgrScopes .modal-header .close{
+    font-weight: normal;
+}
+.yhgl-mgrScopes .modal-body {
+    background: #e6edf7;
+}
+.yhgl-mgrScopes .bootbox-body{
+    padding: 0 30px;
+}
+.yhgl-mgrScopes .mgrScopes-dialog{
+    height: 420px;
+    overflow-y: auto;
+}
+.yhgl-mgrScopes .yhgl-mgrScopes-modalFooter{
+    text-align: right;
+    height: 70px;
+    padding: 15px 40px;
+    background: #ccdbf1;
+}
+.yhgl-mgrScopes .ztree * {
+    font-size: 14px;
+    color: #536C80;
+}
+.yhgl-mgrScopes .mgrEor{
+    color: red;
+    display: inline-block;
+    width: 300px;
+    float: left;
+}
+.yhgl-mgrScopes  .footerHtml{
+    width: 200px;
+    display: inline-block;
+}
+
+/* 删除用户弹窗 */
+.yhgl-deleteUser .modal-header{
+    height: 50px;
+    line-height: 50px;
+    background-color: #1c2551;
+    color: #fff;
+    border-color: #1c2551;
+    cursor: move;
+}
+.yhgl-deleteUser .modal-header .close{
+    font-weight: normal;
+}
+.yhgl-deleteUser .modal-content{
+    border-radius: 0px;
+}
+.yhgl-deleteUser .modal-content .modal-title{
+    font-size: 16px;
+}
+
+.yhgl-deleteUser .modal-body{
+    padding: 0;
+}
+
+.yhgl-deleteDialog-cont {
+    width: 100%;
+    font-size: 16px;
+    height: 98px;
+    line-height: 98px;
+    text-align: center;
+    color: #33414f;
+}
+.yhgl-deleteDialog-cont>span {
+    vertical-align: middle;
+    line-height: 50px;
+    font-size: 16px;
+    /* font-weight: bold; */
+    color: #536C80;
+    font-family: "microsoft yahei", sans-serif;
+}
+.yhgl-deleteBtn {
+    padding-top: 15px;
+    text-align: center;
+    height: 70px;
+    padding: 15px 20px 15px 20px;
+    background-color: #ccdbf1;
+}
+.yhgl-deleteBtn-ok,
+.yhgl-deleteBtn-no {
+    display: inline-block;
+    color: #fff;
+    background-color: #1055b3;
+    border: none;
+    font-size: 16px;
+    width: 130px;
+    height: 40px;
+    border-radius: 0;
+}
+.yhgl-deleteBtn-no {
+    margin-left: 40px;
+}
+.yhgl-deleteBtn-ok:hover,
+.yhgl-deleteBtn-no:hover{
+    background-color: #107dda;
+}
+
+/* 导入用户弹窗 */
+.yhgl-importUser{
+    width: 520px;
+}
+.yhgl-importUser ::-ms-clear{
+    display: none;
+}
+.yhgl-importUser .modal-header .close{
+    font-weight: normal;
+}
+.yhgl-importUser .modal-content{
+    width: 520px;
+    height: 240px;
+    border-radius: 0px;
+}
+.yhgl-importUser .modal-content .modal-title{
+    font-size: 16px;
+}
+.yhgl-importUser .modal-header{
+    height: 50px;
+    line-height: 50px;
+    background-color: #1c2551;
+    color: #fff;
+    cursor: move;
+    padding-left: 20px;
+}
+.yhgl-importUser .modal-footer{
+    border: 0px;
+    text-align: center;
+}
+.yhgl-importUser .modal-body {
+    padding: 45px 15px;
+}
+.yhgl-importUser .yhgl-importUserDialog{
+    padding: 7px 0px 0px 20px;
+}
+.yhgl-importUser .yhgl-importUserData{
+    height: 30px;
+}
+.yhgl-importUser .yhgl-importUserData-top{
+    margin-top: 15px;
+}
+.yhgl-importUser .yhgl-importUserDataLabel{
+    font-weight: bold;
+    color: #536B82;
+    font-size: 14px;
+    margin-bottom: 0px;
+    line-height: 30px;
+}
+.yhgl-importUser .yhgl-importUserDataRadio{
+    display: inline-block;
+    line-height: 30px;
+}
+.yhgl-importUser .yhgl-importUserDataRadio .ane-radio {
+    width: 100px;
+    display: inline-block;
+}
+.yhgl-importUser .yhgl-importUserDataRadio .radio {
+    width: 100px;
+    display: inline-block;
+}
+.yhgl-importUser .yhgl-importUserDataRadio  .ane-radio input[type="radio"]:checked + .text::before{
+    display: none;
+}
+.yhgl-importUser .yhgl-importUserDataRadio  .ane-radio input[type="radio"]+ .text::before{
+    display: none;
+}
+.yhgl-importUser .ane-radio-inner-ie span{
+    display: inline-block !important;
+}
+.yhgl-importUser .ane-radio input[type=radio] + .text:before{
+    display: none;
+}
+.yhgl-importUser .yhgl-importUserDataRadio  .ane-radio input[type="radio"]{
+    width: 0px;
+    margin-top: 0px!important;
+}
+.yhgl-importUser .yhgl-importUserDataRadio .ane-radio .check {
+    top: 1px;
+    margin-right: 5px;
+    background-image: url('/static/image/theme/default/radio.png?__sprite');
+    background-repeat: no-repeat;
+    line-height: 30px;
+    min-height: 16px;
+    min-width: 16px;
+}
+.yhgl-importUser .yhgl-importUserDataRadio .ane-radio .checked{
+    top: 1px;
+    margin-right: 5px;
+    background-image: url('/static/image/theme/default/radio-selected.png?__sprite');
+    background-repeat: no-repeat;
+    line-height: 30px;
+    min-height: 16px;
+    min-width: 16px;
+}
+.yhgl-importUser .yhgl-importUserDataIpt{
+    display: inline-block;
+    width: 244px;
+    height: 30px;
+    line-height: 28px;
+    padding-left: 12px;
+    border-radius: 2px;
+    border:1px solid #d1d0d0;
+    color: #536C80;
+    background-color: #fff;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+.yhgl-importUser .yhgl-importUserDataIpt:focus{
+    border-color: #84bbf2;
+    border-width: 1px;
+    box-shadow: #bce2ff 0px 0px 8px;
+    -moz-box-shadow:  #bce2ff 0px 0px 8px;
+    -webkit-box-shadow:  #bce2ff 0px 0px 8px;    
+}
+.yhgl-importUser .yhgl-importUserDataFile{
+    width: 120px;
+    height: 30px;
+    display: inline-block;
+    margin-left: -120px;
+    filter: alpha(opacity = 0);
+    opacity: 0;
+}
+.yhgl-importUser .yhgl-importUserDataFile:hover{
+    background-color: #0057A1;
+    border-color: #0057A1;
+    color: #fff;
+}
+.yhgl-importUser .yhgl-importUserDataBtn{
+    width: 120px;
+    height: 30px;
+    line-height: 30px;
+    display: inline-block;
+    margin-left: 12px;
+    background-color: #1055b3;
+    color: #fff;
+    border: none;
+    border:0px;
+    border-radius: 0;
+}
+.yhgl-importUser .yhgl-importUserDataBtn:hover{
+    background-color: #0057A1;
+    color: #fff;
+    border:0px;
+    border-radius: 0;
+}
+.yhgl-importUser .modal-footer {
+    height: 70px;
+    background: #ccdbf1;
+}
+.yhgl-importUser .modal-footer .btn{
+    width: 130px;
+    height: 40px;
+    background-color: #1055b3;
+    border: none;
+    border-radius: 0;
+    border-width: 0px;
+    color: #fff;
+    margin: 0;
+}
+.yhgl-importUser .modal-footer .btn:hover{
+    background-color: #0057A1;
+    color: #fff;
+    border:0px;
+    border-radius: 0;
+}
+.yhgl-importUser .modal-footer .btn-default{
+    margin-right: 0;
+    margin-left: 40px;
+}
+.yhgl-importUserDataRadio .ane-radio label{
+    color: #536C80;
+}
+
+/* 设置角色范围弹窗 */
+
+.yhgl-roleDialog-title {
+    margin-bottom: 10px;
+}
+.yhgl-setRole{
+    font-family: "Microsoft YaHei";
+    color: #536C80;
+}
+.yhgl-setRole label{
+    color: #536C80;
+}
+.yhgl-setRole .modal-content {
+    border-radius: 0px;
+    width: 500px;
+    height: 400px;
+}
+.yhgl-setRoleArea-modalFooter {
+    text-align: right;
+    height: 60px;
+    padding: 10px 40px 20px 40px;
+}
+.yhgl-setRole .modal-content .modal-title{
+    font-size: 16px;
+}
+.yhgl-setRole .modal-header{
+    height: 50px;
+    line-height: 50px;
+    background-color: #0078D7;
+    color: #fff;
+    border-color: #0078D7;
+    cursor: move;
+}
+.yhgl-setRole .modal-header .close{
+    font-weight: normal;
+}
+.yhgl-setRole .modal-body{
+    margin-left: 25px;
+    margin-right: 25px;
+    margin-bottom: 15px;
+    height: 275px;
+}
+.yhgl-setRole .modal-body .checkbox-group{
+    overflow: auto;
+    height: 260px;
+}
+.yhgl-setRole .modal-body .checkbox-group .ane-checkbox{
+    display: block;
+    text-align: left;
+}
+.yhgl-setRole .modal-body .checkbox-group .ane-checkbox input[type="checkbox"] + .text::before{
+    display: none;
+}
+.yhgl-setRole .modal-body .checkbox-group .ane-checkbox input[type="checkbox"]:checked + .text::before{
+    display: none;
+}
+.yhgl-setRole .modal-body .checkbox-group .ane-checkbox .ane-checkbox-check .text{
+    background-image: url(/static/image/xtpzgl-yhgl/selectNo.png?__sprite);
+    background-repeat: no-repeat;
+    line-height: 12px;
+    min-height: 12px;
+    min-width: 12px;
+    margin-right: 8px;
+}
+.yhgl-setRole .modal-body .checkbox-group .ane-checkbox .ane-checkbox-checked .text{
+    background-image: url(/static/image/xtpzgl-yhgl/selectYes.png?__sprite);
+    background-repeat: no-repeat;
+    line-height: 12px;
+    min-height: 12px;
+    min-width: 12px;
+    margin-right: 8px;
+}
+.yhgl-setRole  .ane-checkbox-inner-ie span{
+    display: inline-block !important;
+}
+.yhgl-setRole  .ane-checkbox input[type=checkbox]{
+    width: 0px;
+    margin-top: 0px!important;
+}
+.yhgl-setRole .modal-body .checkbox-group  .ane-checkbox label{
+    font-size: 14px;
+}
+.yhgl-setRole-all{
+    width: 0;
+    padding: 0;
+    height: 0;
+    border: 0;
+    margin: 0;
+}
+.yhgl-setRole-allLabel .setRoleCheck{
+    display: inline-block;
+    background-image: url(/static/image/xtpzgl-yhgl/selectNo.png?__sprite);
+    background-repeat: no-repeat;
+    line-height: 12px;
+    min-height: 12px;
+    min-width: 12px;
+    margin-right: 8px;
+}
+.yhgl-setRole-allLabel .setRoleChecked{
+    display: inline-block;
+    background-image: url(/static/image/xtpzgl-yhgl/selectYes.png?__sprite);
+    background-repeat: no-repeat;
+    line-height: 12px;
+    min-height: 12px;
+    min-width: 12px;
+    margin-right: 8px;
+}
+.yhgl-setRole-allLabel{
+    font-weight: normal;
+    font-size: 14px;
+    font-family: "Microsoft YaHei";
+    color: #536C80;
+}
+/* 批量删除按钮样式 */
+
+.yhgl-total .del-btn-pos {
+    position: absolute;
+    left: 20px;
+    bottom: 0px;
+}
+.yhgl-total .del-all-btn {
+    cursor: pointer;
+    float: right;
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+    color: #fff;
+    background-color: #1c9bff;
+    text-align: center;
+    /* border: 1px solid #b4b4bb; */
+    border-radius: 2px;
+}
+.yhgl-total .del-all-btn:hover {
+    background-color: #107dda;
+    color: #fff;
+}
+.yhgl-total .del-btn-disabled {
+    cursor: not-allowed;
+    background-color: #d4d7d9;
+    color: #fff;
+}
+.yhgl-total .del-btn-disabled:hover {
+    cursor: not-allowed;
+    background-color: #d4d7d9;
+    color: #fff;
+}
+.yhgl-total  .table-saika .table>tbody>tr>td{
+    word-break: keep-all;
+    white-space:nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#yhgl-operate-modal-account {
+    text-align: center;
+    padding: 45px 0 20px;
+}
+
+#yhgl-operate-modal-account .form-group label {
+    width: auto;
+    margin-right: 10px;
+}
+
+#yhgl-operate-modal-account .form-tip {
+    padding-left: 162px;
+}
+
+#yhgl-operate-modal-account .fix-item label.fix-label {
+    width: 108px;
+}
+
+#yhgl-operate-modal-account .fix-item .form-tip {
+    padding-left: 182px;
+}
+
+.yhgl-check-modal-account .com-modal-modal-body {
+    padding: 20px 0;
+}
+
+#yhgl-check-modal-account {
+    padding: 20px;
+}
+#yhgl-check-modal-account .inline {
+    width: 50%;
+    display: inline-block;
+    font-size: 16px;
+}
+
+#yhgl-check-modal-account label {
+    width: 120px;
+    font-weight: bold;
+}
+
+.yhgl-check-modal-account .com-modal-btn-cancle {
+    display: none;
+}
+
+.yhgl-span-star{
+    color: red;
+}
+
+.disabled-cls {
+    color: #b2b2b2;
+}
+
+.yhgl-total .com-pages{
+    z-index: 99;
+}

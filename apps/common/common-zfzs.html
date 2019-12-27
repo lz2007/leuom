@@ -1,0 +1,33 @@
+<template>
+    <div class="zfzs-content">
+        <div class="zfzs-left">
+            <ul class="list-ul">
+                <li ms-for="el in @zfzsList" class="list-li">
+                    <div :class="[@el.id, @el.selected ? 'list-div-selected' : '']" class="list-div" :click="@listClick(el.index)">
+                        <ms-pie :widget="{pieObject:@el.object, pieChangeData:@el.status}"></ms-pie>
+                    </div>
+                </li>
+            </ul>
+            <div class="zfzs-map">
+                <div class="map-title">执法区域情况</div>
+                <div id="show-map" :if="@versionSelection != 'Qianxinan'"></div>
+                <object type="image/svg+xml" data="/vendor/qianxinan_map/qxn.svg" id="qxn-map" :if="@versionSelection == 'Qianxinan'"></object>
+
+            </div>
+        </div>
+        <div class="zfzs-right">
+            <div class="time-control">
+                <span class="time-selected" :class="[@selectIndex == '0' ? 'time-selected-active' : '']" :click="selectClick(0)">本周</span>
+                <span class="time-selected" :class="[@selectIndex == '1' ? 'time-selected-active' : '']" :click="selectClick(1)">本月</span>
+                <span class="time-selected" :class="[@selectIndex == '2' ? 'time-selected-active' : '']" :click="selectClick(2)">本年</span>
+            </div>
+            <ul class="line-ul">
+                <li ms-for="el in @zfzsLine" class="line-li">
+                    <div class="line-div">
+                        <ms-line :widget="{lineObject:@el.object, lineChangeData:@el.status, lineFlag:@lineFlag}"></ms-line>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</template>

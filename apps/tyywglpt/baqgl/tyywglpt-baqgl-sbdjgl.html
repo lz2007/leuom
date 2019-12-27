@@ -1,0 +1,294 @@
+<!--
+ * @Description: 运维中心-办案区管理-设备对接管理
+ * @Author: chenjinxing
+ * @Date: 2019-07-09 11:46:19
+ * @LastEditTime: 2019-09-04 16:56:46
+ * @LastEditors: Please set LastEditors
+ -->
+
+<template>
+    <div class="tyywglpt-baqgl-sbdjgl" :class="[@extra_class ? 'znsb_baqgl_en' : '']">
+        <div class="search_box">
+            <div class="hBox">
+                <div>
+                    <!-- <div class="dataFormBox dataTreeBox">
+                        <span>所属办案区</span>
+                        <div class="dep_tree">
+                            <ms-select :widget="{onChange:@onChangeBAZX, value:[@BAZX_options.length > 0 ? @BAZX_options[0].value: ''], displayValue:'暂无办案中心', options:@BAZX_options}"></ms-select>
+                        </div>
+                    </div> -->
+                    <div class="dataFormBox dataTreeBox">
+                        <span>所属部门</span>
+                        <div class="dep_tree" :controller="baqsbgl_tree">
+                            <ms-tree-selecting :widget="{tree: @tree_data, showSearch: true, wrapId: 'baqgl-tree-select', getSelected: @getSelected, selectedKey: @tree_key ? @tree_key : '', selectedTitle: @tree_title ? @tree_title : '', onChange: @select_change, extraExpandHandle: @extraExpandHandle, branchShow:true, clickBranchBack:@clickBranchBack, includedStatus:@included_status}"></ms-tree-selecting>
+                        </div>
+                    </div>
+                    <div class="dataFormBox dataTreeBox baqName">
+                        <span>办案区名称</span>
+                        <input type="text" id="baqName" ms-duplex="@baqName" tabindex="1" class="form-control" :keyup="@name_input_enter">
+                    </div>
+                    <a class="common_search_btn" :click="@searchBtn" :if="@authority.SEARCH">查询</a>
+                </div>               
+            </div>
+        </div>
+          <!-- 按钮组-s :if="@authority.REGISTRY"  :if="@authority.SEARCH"-->
+        <div class="tyywglpt-tool-bar">
+            <div class="tyywglpt-tool-bar-inner">
+                <input  type="button" value="添加" :click="@handleAdd" class="btn btn-tool" :if="@authority.SAVE">
+            </div>
+        </div>
+        <div class="baqgl-table">
+            <ms-comtable :widget="{id:'znsb-baqgl-table', loading:@loading, data:@table_list, actions:@actions, panelCss:{position: 'absolute',bottom: 60,top: 214,left: 0,right: 0}}">
+                <ms-comtable-header :widget="{title:'序号', dataIndex:'table_index', colwidth:'4%', popover:true}"></ms-comtable-header>
+                <ms-comtable-header :widget="{title:'设备名称', popover:true, colwidth:'8%'}">
+                    <span :skip :attr="{'data-original-title':record.deviceName}">{{record.deviceName | isNull}}</span>
+                </ms-comtable-header>
+                <ms-comtable-header :widget="{title:'国标ID', popover:true, colwidth:'15%'}">
+                    <span :skip>{{record.gbcode | isNull}}</span>
+                </ms-comtable-header>
+                <ms-comtable-header :widget="{title:'IP', popover:true, colwidth:'10%'}">
+                    <span :skip>{{record.ip | isNull}}</span>
+                </ms-comtable-header>
+                <ms-comtable-header :widget="{title:'端口', popover:true, colwidth:'6%'}">
+                    <span :skip>{{record.port | isNull}}</span>
+                </ms-comtable-header>
+                <ms-comtable-header :widget="{title:'DGW网关', popover:true, colwidth:'8%'}">
+                    <span :skip>{{record.dgwGateway | isNull}}</span>
+                </ms-comtable-header>
+                <ms-comtable-header :widget="{title:'设备型号', colwidth:'8%', popover:true}">
+                    <span :skip>{{record.deviceTypeName | isNull}}</span>
+                </ms-comtable-header>
+                <ms-comtable-header :widget="{title:'所属办案区', colwidth:'8%', popover:true}">
+                    <span :skip>{{record.caseAreaName | isNull}}</span>
+                </ms-comtable-header>
+                <ms-comtable-header :widget="{title:'厂商名称', colwidth:'8%', popover:true}">
+                    <span :skip>{{record.manufacturer | isNull}}</span>
+                </ms-comtable-header>
+                <ms-comtable-header :widget="{title:'添加时间', colwidth:'11%', popover:true}">
+                    <span :skip>{{record.insertTime | isNull}}</span>
+                </ms-comtable-header>    
+                <ms-comtable-header :widget="{title:'在线状态', colwidth:'8%', popover:true}">
+                    <span :skip>{{record.isOnline | isNull}}</span>
+                </ms-comtable-header>            
+                <ms-comtable-header :widget="{title:'操作', colwidth:'6%', popover:true}">
+                    <span>
+                        <a class="action-btn" :click="handle('modify')">
+                            {{@record.oparate ? '修改': '-'}}
+                        </a>                        
+                    </span>
+                </ms-comtable-header>
+            </ms-comtable>
+        </div>
+        <!-- <div class="baqplsc">
+            <input class="btn btn-tool" :class="@checkedData.length < 1 && 'disabled'" type="button" value="批量删除" :click="@handleBatchDelete" />
+        </div> <a class="action-btn" :click="handle('delete')">
+                            删除
+                        </a>-->
+        <ms-pages :widget="{total:@table_pagination.total, pageSize:@table_pagination.pageSize, current:@table_pagination.current, onChange:@handlePageChange, getCurrent:@getCurrent, overLimit:@page_type}"></ms-pages>
+
+        <!--添加弹框-->
+        <div :controller="sbdjglAddDialog">
+                <xmp :widget="{is:'common-ms-modal', title:@title, modalSelector:'#sbdjglAddDialog', modalWidth:1150, modalHeight: 600, btnalign:'center',show:@show,ifokBtn:false ,cancelText:'关闭',onCancel:@handleCancel}">
+                    <div id="sbdjglAddDialog">
+                        <div class="left-addDevice">
+                            <div class="leftTitle"><h4>设备信息</h4></div>
+                                <div class="row">
+                                    <label><i style="color:red">* </i>设备名称:</label>
+                                    <div class="has-icon">
+                                        <input type="text" class="form-control" :attr="{title:@inputJson.deviceName}" :duplex="@inputJson.deviceName"
+                                            :focus="@handleFocus('deviceName',$event)" :blur="@handleFormat('deviceName',null,$event)" maxlength="20">
+                                        <i class="fa fa-close" :visible="false" :mousedown="@handleClear('deviceName',$event)|prevent"></i>
+                                    </div>
+                                    <div class="form-tip invalid-tip" :if="!@validJson.deviceName">{{@inputJson.deviceName.length > 30 ?
+                                        '最多只可输入30位字符' : '请输入唯一的设备名称'}}</div>
+                                </div>
+                                <div class="row">
+                                    <label class=""><i style="color:red">* </i>所属办案区</label>
+                                    <!-- <div class="dep_tree">
+                                        <ms-select :widget="{onChange:@onChangeBAZX, value:[@BAZX_options.length > 0 ?
+                                                @caseAreaId: ''], displayValue:'暂无办案区',
+                                                options:@BAZX_options}"></ms-select>
+                                    </div> -->
+                                    <div class="dep_tree" :controller="tree_sbdjgl">
+                                        <ms-tree-selecting :widget="{tree: @rdata, isDep: true,showSearch: true, width:220,wrapId: 'zfyps-tree-select', getSelected: @getSelected, selectedKey: @sjdw ? @sjdw : '', selectedTitle: @selectedTitle ? @selectedTitle : '', onChange: @select_change, extraExpandHandle: @extraExpandHandle}"></ms-tree-selecting>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label>
+                                        <i style="color:red">* </i>国标编号:</label>
+                                    <div class="has-icon">
+                                        <input type="text" class="form-control" :attr="{title:@inputJson.gbcode,readonly:true}" :duplex="@inputJson.gbcode"
+                                            :focus="@handleFocus('gbcode',$event)" :blur="@handleFormat('gbcode',@gbcodeReg,$event)">
+                                        <i class="fa fa-close" :visible="false" :mousedown="@handleClear('gbcode',$event)|prevent"></i>
+                                    </div>
+                                    <!-- <div class="form-tip valid-tip tip-md" :if="@showJson.gbcode">
+                                    <i class="fa fa-info-circle"></i>支持数字与字母组合，长度只能为20位（当前长度为{{@inputJson.gbcode.length}}）</div>
+                                    <div class="form-tip invalid-tip tip-md" :if="!@validJson.gbcode">请输入/生成正确的国标编号</div> -->
+                                </div>
+                                
+                                <div class="row">
+                                    <label class=""><i style="color:red">* </i>设备型号</label>
+                                    <div class="dep_tree">
+                                        <ms-select :widget="{onChange:@onChangeSBXH, value:[@sbxh_options.length > 0 ?
+                                            @deviceType: ''], displayValue:'暂无设备型号', options:@sbxh_options}"></ms-select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label><i style="color:red">* </i>设备IP:</label>
+                                    <div class="has-icon">
+                                        <input type="text" class="form-control" :attr="{title:@inputJson.ip,readonly:@isRecordEdit}"
+                                            :duplex="@inputJson.ip" :focus="@handleFocus('ip',$event)"
+                                            :blur="@handleFormat('ip',@ipReg,$event)">
+                                    </div>
+                                    <div class="form-tip valid-tip" :if="@showJson.ip">
+                                        <i class="fa fa-info-circle"></i>支持0~255的数字与.的组合</div>
+                                    <div class="form-tip invalid-tip tip-md" :if="!@validJson.ip">请输入正确的设备IP</div>
+                                </div>
+                                <div class="row">
+                                    <label><i style="color:red">* </i>登录账号:</label>
+                                    <div class="has-icon">
+                                        <input type="text" class="form-control" :attr="{title:@inputJson.account}" :duplex="@inputJson.account"
+                                            :focus="@handleFocus('account',$event)" :blur="@handleFormat('account',null,$event)">
+                                        <i class="fa fa-close" :visible="false" :mousedown="@handleClear('account',$event)|prevent"></i>
+                                    </div>
+                                    <div class="form-tip invalid-tip" :if="!@validJson.account">{{@inputJson.account.length > 30 ?
+                                        '最多只可输入30位字符' : '请输入登录账号'}}</div>
+                                </div>
+                                <div class="row">
+                                    <label><i style="color:red">* </i>登录密码:</label>
+                                    <div class="has-icon">
+                                        <input type="password" class="form-control" :attr="{title:@inputJson.pwd}" :duplex="@inputJson.pwd"
+                                            :focus="@handleFocus('pwd',$event)" :blur="@handleFormat('pwd',null,$event)">
+                                        <i class="fa fa-close" :visible="false" :mousedown="@handleClear('pwd',$event)|prevent"></i>
+                                    </div>
+                                    <div class="form-tip invalid-tip" :if="!@validJson.pwd">{{@inputJson.pwd.length > 30 ?
+                                        '最多只可输入30位字符' : '请输入登录密码'}}</div>
+                                </div>
+                                <div class="row">
+                                    <label><i style="color:red">* </i>设备端口:</label>
+                                    <div class="has-icon">
+                                        <input type="text" class="form-control" :attr="{title:@inputJson.port,readonly:@isRecordEdit}" :duplex="@inputJson.port"
+                                            :focus="@handleFocus('port',$event)" :blur="@handleFormat('port',null,$event)">
+                                    </div>
+                                    <div class="form-tip invalid-tip" :if="!@validJson.port">{{@inputJson.port.length > 5 ?
+                                        '最多只可输入5位字符' : '请输入设备端口'}}</div>
+                                </div>
+                                
+                                <div class="row">
+                                    <label class="">DGW网关</label>
+                                    <div class="has-icon">
+                                        <input type="text" class="form-control" :attr="{title:@inputJson.dgwGateway}"
+                                            :duplex="@inputJson.dgwGateway" :focus="@handleFocus('dgwGateway',$event)"
+                                            :blur="@handleFormat('dgwGateway',@ipReg,$event)">
+                                        <i class="fa fa-close" :visible="false"
+                                            :mousedown="@handleClear('dgwGateway',$event)|prevent"></i>
+                                    </div>
+                                    <div class="form-tip valid-tip" :if="@showJson.dgwGateway">
+                                        <i class="fa fa-info-circle"></i>支持0~255的数字与.的组合</div>
+                                </div>
+                                <div class="row">
+                                    <label class="">厂商名称</label>
+                                    <input type="text" class="form-control" :duplex="@inputJson.manufacturer" maxlength="20">
+                                </div>
+                                <div class="row_btn">
+                                    <input  type="button" :attr="{'value':@sureBtnTitle}" :click="@handleOk" class="btn btn-tool"  :class="[@isAdd ? 'notAllowBtn' : 'tjsbBtn']">
+                                </div>
+                        </div>
+                        <div class="right-addPassageway">
+                            <div class="leftTitle"><h4>通道信息</h4></div>
+                            <!-- <input  type="button" value="删除通道" :click="@handledeleteBtnShow" class="btn btn-tool tdBtn" :class="[@table_list.length>0 ? 'enableBtn' : '']"> -->
+                            <input  type="button" value="新增通道" :click="@handleAddTDBtn" class="btn btn-tool tdBtn" :class="['enableBtn']" :if="@channelAuthority">
+                            <!-- 表格 -->
+                            <div class="baqgl-tdxx-table" :if="@gbcodeIsHidden">
+                                <ms-comtable :widget="{id:'baqgl-tdgbxx-table', loading:@loading, data:@table_list,onChange:@selectChange, actions:@actions, panelCss:{position: 'absolute',bottom: 80,top: 150,left: 390,right: 5}}">
+                                    <ms-comtable-header :widget="{dataIndex:'id',type:'selection',colwidth:'10%'}"></ms-comtable-header>
+                                    <ms-comtable-header :widget="{title:'编号', dataIndex:'table_index', colwidth:'10%', popover:true}"></ms-comtable-header>
+                                    <ms-comtable-header :widget="{title:'通道号', popover:true, colwidth:'10%'}">
+                                        <span :skip :attr="{'data-original-title':record.channelNo}">{{record.channelNo | isNull}}</span>
+                                    </ms-comtable-header>
+                                    <ms-comtable-header :widget="{title:'国标编号', popover:true, colwidth:'25%'}">
+                                        <span :skip>{{record.channelGbcode | isNull}}</span>
+                                    </ms-comtable-header>
+                                    <ms-comtable-header :widget="{title:'通道名称', popover:true, colwidth:'25%'}">
+                                        <span :skip>{{record.channelName | isNull}}</span>
+                                    </ms-comtable-header>
+                                    <ms-comtable-header :widget="{title:'备注', popover:true, colwidth:'20%'}">
+                                        <span :skip>{{record.description | isNull}}</span>
+                                    </ms-comtable-header>
+                                </ms-comtable>
+                            </div>
+                            <div class="baqgl-tdxx-table" :if="!@gbcodeIsHidden">
+                                <ms-comtable :widget="{id:'baqgl-tdxx-table', loading:@loading, data:@table_list,onChange:@selectChange, actions:@actions, panelCss:{position: 'absolute',bottom: 80,top: 150,left: 390,right: 5}}">
+                                    <ms-comtable-header :widget="{dataIndex:'id',type:'selection',colwidth:'10%'}"></ms-comtable-header>
+                                    <ms-comtable-header :widget="{title:'编号', dataIndex:'table_index', colwidth:'10%', popover:true}"></ms-comtable-header>
+                                    <ms-comtable-header :widget="{title:'通道号', popover:true, colwidth:'10%'}">
+                                        <span :skip :attr="{'data-original-title':record.channelNo}">{{record.channelNo | isNull}}</span>
+                                    </ms-comtable-header>
+                                    <ms-comtable-header :widget="{title:'通道名称', popover:true, colwidth:'25%'}">
+                                        <span :skip>{{record.channelName | isNull}}</span>
+                                    </ms-comtable-header>
+                                    <ms-comtable-header :widget="{title:'备注', popover:true, colwidth:'45%'}">
+                                        <span :skip>{{record.description | isNull}}</span>
+                                    </ms-comtable-header>
+                                </ms-comtable>
+                            </div>
+                        </div>
+                            
+                    </div>
+                </xmp>
+            </div>
+            <!-- 新增通道 -->
+            <div :controller="sbdjglTDAddDialog">
+                <xmp :widget="{is:'common-ms-modal', title:@title, modalSelector:'#sbdjglTDAddDialog', modalWidth:450, modalHeight: 230, btnalign:'center',show:@show, onOk:@handleOk, onCancel:@handleCancel}">
+                    <div id="sbdjglTDAddDialog">
+                        <div class="row">
+                            <label><i style="color:red">* </i>通道号:</label>
+                            <div class="has-icon">
+                                <input type="text" class="form-control" :attr="{title:@inputJson.channelNo}" :duplex="@inputJson.channelNo"
+                                    :focus="@handleFocus('channelNo',$event)" :blur="@handleFormat('channelNo',@mustAndSpecialReg,$event)">
+                                <i class="fa fa-close" :visible="false" :mousedown="@handleClear('channelNo',$event)|prevent"></i>
+                            </div>
+                            <div class="form-tip invalid-tip" :if="!@validJson.channelNo">{{@inputJson.channelNo.length > 20 ?
+                                '最多只可输入20位字符' : '请输入正确的通道号'}}</div>
+                        </div>
+                        <div class="row" :if="@gbcodeIsHidden">
+                            <label><i style="color:red">* </i>国标编号:</label>
+                            <div class="has-icon">
+                                <input type="text" class="form-control" :attr="{title:@inputJson.channelGbcode,readonly:true}" :duplex="@inputJson.channelGbcode">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class=""><i style="color:red">* </i>通道名称:</label>
+                            <input type="text" class="form-control" :duplex="@inputJson.channelName" >
+                        </div>
+                        <div class="row">
+                            <label class="">备注:</label>
+                            <div class="has-icon">
+                                <textarea  maxlength="200" class="form-control" :attr="{title:@inputJson.description}"
+                                    :duplex="@inputJson.description"
+                                    :focus="@handleFocus('description',$event)"
+                                    :blur="@handleFormat('description',@descriptionReg,$event)"></textarea>
+                            </div>
+                            <div class="form-tip" style="text-align: right;padding-right: 25px;">{{@inputJson.description.length}}/200</div>
+                        </div>
+                    </div>
+                </xmp>
+            </div>
+
+            <div :controller="sbdjglDelete" class="deletemodal">
+                <xmp :widget="{is:'common-ms-modal',modalSelector:'#sbdjglDelete' ,modalWidth:450, modalHeight: 80, btnalign:'center',show:@show, onOk:@handleOk, onCancel:@handleCancel}">
+                    <div id="sbdjglDelete">
+                        <p class="message">是否删除记录？</p>
+                    </div>
+                </xmp>
+            </div>
+
+            <div :controller="sbdjglTDDelete" class="deletemodal">
+                <xmp :widget="{is:'common-ms-modal',modalSelector:'#sbdjglTDDelete' ,modalWidth:450, modalHeight: 80, btnalign:'center',show:@show, onOk:@handleOk, onCancel:@handleCancel}">
+                    <div id="sbdjglTDDelete">
+                        <p class="message">是否删除通道？</p>
+                    </div>
+                </xmp>
+            </div>
+    </div>
+</template>

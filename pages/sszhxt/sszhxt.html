@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+    <link href="/node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="/node_modules/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="/node_modules/ane/dist/ane.css" rel="stylesheet" />
+    <!--<link rel="stylesheet" href="http://10.10.9.95:8088/jsapi/3.14/dijit/themes/claro/claro.css">-->
+    <!--<link rel="stylesheet" href="http://10.10.9.95:8088/jsapi/3.14/esri/css/esri.css">-->
+    <script src="/static/mod.js"></script>
+    <!--[if lt IE 9]>
+    <script src="/static/polyfill/html5shiv.js"></script>
+    <script src="/static/polyfill/respond.src.js"></script>
+    <![endif]-->
+</head>
+
+<body :controller="sszhxt_vm" class="ms-controller" id="sszhxt">
+<ms-browser-upgrade-tips></ms-browser-upgrade-tips>
+<ms-common-layout :widget="{sideMenu: @menu}">
+    <div class="ant-currentPage" ms-html="@currentPage"></div>
+</ms-common-layout>
+<div :class="@locationKey.slice(1) + '-map'" class="map-iframe-wrap">
+    <iframe name="mapIframe" id="mapIframe" frameborder="0" style="width: 100%;height: 100%"></iframe>
+</div>
+<!--实时指挥的城市列表，因为加载太慢了，所以放这里-->
+<xmp :widget="{is:'common-sszh-mapcity'}"></xmp>
+
+<!-- 右上角弹窗组件 -->
+<ms-header-operation></ms-header-operation>
+
+<iframe id="iframe_zfsyps" src="about:blank" marginheight="0" marginwidth="0" style="display:none; position:absolute; visibility:inherit; top:0;left:0;width:0; height:0;z-index:992;opacity:1;filter:alpha(opacity=0);background: #fff;"
+        frameborder="0"></iframe>
+<div :controller="help_vm">
+    <xmp :widget="{is:'ms-dialog', $innerVm: 'help_inner_vm', show: @show, className:@extraClass, onCancel: @handleCancle, cancelText:@cancelText}">
+        <div slot="body" ms-skip>
+            <h5 :css="{'font-size': '16px'}" ms-text="@helpMsg"></h5>
+            <iframe src="about:blank" frameBorder="0" marginHeight="0" marginWidth="0" style="position:absolute; visibility:inherit; top:0px;left:0px;width:100%; height:100%;z-index:-1;opacity:0;filter:alpha(opacity=0);"></iframe>
+        </div>
+        <div slot="footer" class="modal-footer" ms-skip>
+            <a class="btn btn-default" :click="@handleClose">关闭</a>
+            <iframe src="about:blank" frameBorder="0" marginHeight="0" marginWidth="0" style="position:absolute; visibility:inherit; top:0px;left:0px;width:100%; height:100%;z-index:-1;opacity:0;filter:alpha(opacity=0);"></iframe>
+        </div>
+    </xmp>
+</div>
+
+<!-- 告警弹窗 -s -->
+<div class="sosContainer" :class="@locationKey.slice(1) + '-sos'">
+    <div id="alarmSlider" :class="@locationKey.slice(1) + '-sosBtn'" :click="@sosClick" :mousedown="@alarmBarMousedown($event)|stop" :css="{top: @moveY}">
+        <img draggable="false" class="alarm-icon-animated" src="/static/image/theme/sszhxt/alarmBar/alarm-icon.png?__sprite">
+        <div class="bg-piece"></div>
+    </div>
+    <button :visible="false" class="btn btn-primary sos-btn" :class="@locationKey.slice(1) + '-sosBtn'" :click="@sosClick">
+        {{@sszhxt_language.glInfo}}
+        <i style="vertical-align: initial;" class="fa fa-lg" :class="@sosInfoShow ? ['fa-angle-up']:['fa-angle-down']"></i>
+    </button>
+    <div class="sos-info" :class="@locationKey.slice(1) + '-sos-info'" :css="{display:(@sosInfoShow ? 'block':'none')}"
+         style="z-index: 9999;">
+        <ul class="sos-info-menu" style="z-index: 22;">
+            <li :click="@sosMenuClick('service')" :class="(@sosMenuType == 'service') ? ['active'] : ['']" style="z-index: 99991;position: relative;">{{@sszhxt_language.workAlarm}}</li>
+            <li :click="@sosMenuClick('device')" :class="(@sosMenuType == 'device') ? ['active'] : ['']" style="z-index: 99991;position: relative;">{{@sszhxt_language.deviceAlarm}}</li>
+            <li :click="@sosMenuClick('status')" :class="(@sosMenuType == 'status') ? ['active'] : ['']" style="z-index: 99991;position: relative;">{{@sszhxt_language.stateAlarm}}</li>
+            <iframe src="about:blank" frameBorder="0" marginHeight="0" marginWidth="0" style="position:absolute; visibility:inherit; top:0px;left:0px;width:100%; height:100%;z-index:1;opacity:0;filter:alpha(opacity=0);"></iframe>
+        </ul>
+        <div class="sos-info-content" style="z-index: 9999;">
+            <ul class="service-sos" :class="(@sosMenuType == 'service') ? ['activeInfo'] : ['']" style="z-index: 9999;">
+                <li>
+                    <div class="bottom-line"></div>
+                    <span class="ul-sos-title" :click="@clickSosTitle($event)"><i class="sos-icon bk-icon"></i>{{@sszhxt_language.SOSInfo}}</span>
+                    <ul class="device-sos-ul">
+                        <li :for="($index,record) in @serviceSOSData" :click="@handelSOS(record)">
+                            <div class="li-div li-div-1" :class="record['status'] == 0 ? 'sosWordColor' : '' " data-toggle="popover">{{record.userName | isNull}}<span data-toggle="popover">-{{record.userCode | isNull}}</span></div>
+                            <div class="li-div li-div-2" :class="record['status'] == 0 ? 'sosWordColor' : '' " data-toggle="popover">{{record.sosType}}</div>
+                            <div class="li-div li-div-3" :class="record['status'] == 0 ? 'sosWordColor' : '' " data-toggle="popover">{{record.datetime | date("yyyy-MM-dd HH:mm:ss")}}</div>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <div class="bottom-line"></div>
+                    <span class="ul-sos-title" :click="@clickSosTitle($event)"><i class="rlbk-icon bk-icon"></i>{{@sszhxt_language.faceInfo}}</span>
+                    <ul class="monitor-sos-ul">
+                        <li :for="($index,record) in @serviceFaceData" :click="@handelSOS(record)">
+                            <div class="ul-sos-info-left"><img :attr="{src: record.imgSrc}" onerror="javascript:this.src='../../static/image/sszhxt-znsb/rlbk_404.png';" alt=""></div>
+                            <div class="ul-sos-info-right" :class="record['status'] == 0 ? 'sosWordColor' : '' ">
+                                <p data-toggle="popover">拍摄警员：{{record.userName | isNull}}-{{record.userCode | isNull}}</p>
+                                <p data-toggle="popover">拍摄时间：{{record.datetime | date("yyyy-MM-dd HH:mm:ss")}}</p>
+                                <h4 data-toggle="popover">{{record.type}}</h4>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <li :if="!@extra_class">
+                    <div class="bottom-line"></div>
+                    <span class="ul-sos-title" :click="@clickSosTitle($event)"><i class="cpbk-icon bk-icon"></i>{{@sszhxt_language.carInfo}}</span>
+                    <ul class="monitor-sos-ul">
+                        <li :for="($index,record) in @serviceCarData" :click="@handelSOS(record)">
+                            <div class="ul-sos-info-left"><img :attr="{src: record.imgSrc}" onerror="javascript:this.src='../../static/image/sszhxt-znsb/rlbk_404.png';" alt=""></div>
+                            <div class="ul-sos-info-right" :class="record['status'] == 0 ? 'sosWordColor' : '' ">
+                                <p data-toggle="popover">拍摄警员：{{record.userName | isNull}}-{{record.userCode | isNull}}</p>
+                                <p data-toggle="popover">拍摄时间：{{record.datetime | date("yyyy-MM-dd HH:mm:ss")}}</p>
+                                <h4 data-toggle="popover">{{record.type}}</h4>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <div class="bottom-line"></div>
+                    <span class="ul-sos-title" :click="@clickSosTitle($event)"><i class="rzhy-icon bk-icon"></i>人证核验</span>
+                    <ul class="monitor-sos-ul">
+                        <li :for="($index,record) in @serviceCardData" :click="@handelSOS(record)">
+                            <div class="ul-sos-info-left"><img :attr="{src: record.imgSrc}" onerror="javascript:this.src='../../static/image/sszhxt-znsb/rlbk_404.png';" alt=""></div>
+                            <div class="ul-sos-info-right" :class="record['status'] == 0 ? 'sosWordColor' : '' ">
+                                <p data-toggle="popover">拍摄警员：{{record.userName | isNull}}-{{record.userCode | isNull}}</p>
+                                <p data-toggle="popover">拍摄时间：{{record.datetime | date("yyyy-MM-dd HH:mm:ss")}}</p>
+                                <h4 data-toggle="popover">{{record.type}}</h4>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <iframe src="about:blank" frameBorder="0" marginHeight="0" marginWidth="0" style="position:absolute; visibility:inherit; top:-0px;left:0px;width:100%; height:100%;z-index:1;opacity:0;filter:alpha(opacity=0);"></iframe>
+            </ul>
+            <ul class="device-sos" :class="(@sosMenuType == 'device') ? ['activeInfo'] : ['']" style="z-index: 9999;display: none;">
+                <li :for="($index,record) in @deviceSOSData" :click="@handelDeviceSOS(record)">
+                    <div class="li-div" style="width:120px;" data-toggle="popover">{{record.userName | isNull}}<span>-{{record.userCode | isNull}}</span></div>
+                    <div class="li-div" style="width:80px;" data-toggle="popover">{{record.sosType}}</div>
+                    <div class="li-div" style="width:150px;" data-toggle="popover">{{record.datetime | date("yyyy-MM-dd HH:mm:ss")}}</div>
+                </li>
+                <iframe src="about:blank" frameBorder="0" marginHeight="0" marginWidth="0" style="position:absolute; visibility:inherit; top:0px;left:0px;width:100%; height:100%;z-index:1;opacity:0;filter:alpha(opacity=0);"></iframe>
+
+            </ul>
+            <ul class="status-sos" :class="(@sosMenuType == 'status') ? ['activeInfo'] : ['']" style="z-index: 9999;display: none;">
+                <li :for="($index,record) in @statusSOSData">
+                    <div class="li-div" style="width:120px;" data-toggle="popover">{{record.userName | isNull}}<span>-{{record.userCode | isNull}}</span></div>
+                    <div class="li-div" style="width:80px;" data-toggle="popover">{{record.sosType}}</div>
+                    <div class="li-div" style="width:150px;" data-toggle="popover">{{record.datetime | date("yyyy-MM-dd HH:mm:ss")}}</div>
+                </li>
+                <iframe src="about:blank" frameBorder="0" marginHeight="0" marginWidth="0" style="position:absolute; visibility:inherit; top:0px;left:0px;width:100%; height:100%;z-index:1;opacity:0;filter:alpha(opacity=0);"></iframe>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- 告警弹窗 -e -->
+
+<script>
+    require(['./sszhxt']);
+</script>
+</body>
+
+</html>

@@ -1,0 +1,78 @@
+<template>
+    <div class="tyywglpt-sbzygl-cjgzztj">
+        <a class="return_btn" :click="@returnBtn" :if="@crumbsArr.length > 1"><i class="back_icon"></i>返回</a>
+        <div class="search_box" :if="@authority.SEARCH">
+            <div class="hBox">
+                <div class="dataFormBox" :if="@authority.SEARCH">
+                    <span>所属部门</span>
+                    <div class="dep_tree" :controller="cjgzztj_tree_jjb">
+                        <ms-tree-selecting :widget="{tree: @yspk_data, showSearch: true, wrapId: 'zfyps-tree-select', getSelected: @getSelected, selectedKey: @tree_key ? @tree_key : '', selectedTitle: @tree_title ? @tree_title : '', onChange: @select_change, extraExpandHandle: @extraExpandHandle}"></ms-tree-selecting>
+                    </div>
+                </div>
+                <div class="dataFormBox" :controller="cjgzztj_count_type_jjb">
+                    <span style="margin-right: 10px;">统计对象</span>
+                    <ms-select :widget="{col: 'con', options:@count_type_options, value: @count_type, onChange: @onChangeT}" :class="['formInput']"></ms-select>
+                </div>
+            </div>
+            <div class="cjgzztj_btnClass">
+                <a :if="@authority.SEARCH" class="search_btn" :click="@searchBtn(0)">查询</a>
+            </div>
+        </div>
+        <div :controller="tyywglpt_sbzygl_cjgzztj_table_jjb">
+            <div :class="['sbzygl_cjgzztj_tabCont']" :css="{top:@sbzygl_cjgzztj_tabCont_top}">
+                <div :controller="sbzygl_cjgzztj_table" :class="['table-index']" id="sbzygl_cjgzztj_table">
+                    <div class="table-index-thead-fixed">
+                        <ul class="cjgzztj_table_parent" :css="{paddingRight:@paddingRight}">
+                            <li parent="1" class="col-4">
+                                <span style="visibility: hidden;">序号</span>
+                            </li>
+                            <li parent="2" class="col-40">
+                                <span style="visibility: hidden;">所属部门</span>
+                            </li>
+                            <li parent="3" class="col-56">
+                                <span>采集工作站</span>
+                            </li>
+                        </ul>
+                        <ul class="table-index-thead cjgzztjjj_table_son" :css="{paddingRight:@paddingRight}">
+                            <li data-order="1" son="1" class="col-4" style="border-top: none">
+                                <span class="cjgzztjjj_table_son_span">序号</span>
+                            </li>
+                            <li data-order="2" son="2" class="col-40">
+                                <span class="cjgzztjjj_table_son_span">所属部门</span>
+                            </li>
+                            <li data-order="3" son="3" class="col-20 cjgzztjjj_table_down">台数</li>
+                            <li data-order="4" son="3" class="col-36 cjgzztjjj_table_down"> 总容量（GB） </li>
+                        </ul>
+                    </div>
+                    <ul class="table-index-tbody">
+                        <li class="list-null" :if="!@loading && !@data.length">暂无数据</li>
+                        <li :for="($index, record) in @data">
+                            <div class="tbody col-4">
+                                <div class="table-cont">{{(@currentPage - 1) * @prePageSize + $index + 1}}</div>
+                            </div>
+                            <div class="tbody col-40">
+                                <div class="table-cont" :click="@searchBtn(1,record)" style="color: #0419dc;cursor: pointer;" :attr="record['orgName'] && (record['orgName'] != '-') ? {rel:'drevil',dep:'dep_switch',fir:'true',tdval:key_dep_switch ? record['orgPath'] : record['orgName']}:''">
+                                    {{record['orgName']}}
+                                </div>
+                            </div>
+                            <div class="tbody col-20">
+                                <div class="table-cont" :attr="record['workstationTotal'] && (record['workstationTotal'] != '-') ? {rel:'drevil',tdval:record['workstationTotal']}:''" :click="@gTo(record)" style="color: #0979d0;cursor: pointer;">
+                                    {{record['workstationTotal']}}
+                                </div>
+                            </div>
+                            <div class="tbody col-36">
+                                <div class="table-cont" :attr="record['spaceTotal'] && (record['spaceTotal'] != '-') ? {rel:'drevil',tdval:record['spaceTotal']}:''">
+                                    {{record['spaceTotal']}}
+                                </div>
+                            </div>                        
+                        </li>
+                    </ul>
+                    <div class="table-index-loading" :if="@loading">
+                        <span class="loadingSpan">结果加载中</span>
+                    </div>
+                </div>
+            </div>
+            <ms-pages :widget="{total:@total,pageSize:@pageSize,current:@current,onChange:@pageChange,getCurrent:@getCurrent,getPageSize:@getPageSize}"></ms-pages>
+        </div>
+    </div>
+</template>

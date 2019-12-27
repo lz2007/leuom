@@ -1,0 +1,411 @@
+.common-sszhnew-side-bar {
+  float: left;
+  width: 280px;
+  height: 100%;
+  font-family: "Microsoft YaHei", serif;
+  border: 1px solid #d6dce1;
+  position: relative;
+  background: #fff;
+
+  .device-type-select {
+    padding: 0 5px;
+    margin-bottom: 5px;
+  }
+
+  .ane-select {
+    width: 168px;
+    padding: 0 20px 0 12px;
+    height: 28px;
+    line-height: 28px;
+    display: inline-block;
+    vertical-align: middle;
+    overflow: hidden;
+  }
+
+  .sszhSideBar_en .ane-select {
+    width: 138px;
+  }
+
+  .ane-select-arrow {
+    top: 4px;
+  }
+
+  .input-group {
+    margin-bottom: 5px;
+    position: relative;
+  }
+
+  .input-group .fa-close {
+    position: absolute;
+    color: #536b82;
+    font-size: 16px;
+    right: 38px;
+    top: 6px;
+    z-index: 1000;
+    cursor: pointer;
+  }
+
+  button {
+    width: 30px;
+    height: 30px;
+    padding: 5px 10px;
+    background: #f3f6f9 url(/static/image/sszhxt/sidebar-search.png?__sprite) center center no-repeat;
+    border: 1px solid #ccc;
+  }
+
+  button:focus {
+    outline: none;
+  }
+
+  .input-group input {
+    height: 28px;
+    line-height: 30px;
+    color: #000;
+    padding: 0;
+    border: none;
+  }
+
+  .input-group.input-tip input {
+    font-size: 12px;
+    color: #ccc;
+  }
+
+  .input-group.input-error input {
+    font-size: 12px;
+    color: #d8a09f;
+  }
+
+  .has-icon-input-wrap {
+    width: 100%;
+    display: inline-block;
+    padding-left: 12px;
+    padding-right: 20px;
+    margin-right: -1px;
+    border: 1px solid #d1d0d0;
+    border-radius: 4px;
+    border-right: none;
+    vertical-align: middle;
+    background: #fff;
+  }
+
+  .input-group.input-error .has-icon-input-wrap {
+    background: #fff;
+    border: 1px solid #d2403d;
+  }
+
+  .input-group.input-error button {
+    border-left: 1px solid #d2403d;
+  }
+
+  .check-container {
+    padding: 0 10px;
+  }
+
+  .check-container label {
+    font-weight: normal;
+  }
+
+  .check-container input {
+    display: none;
+    width: 0;
+  }
+
+  .check_selected,
+  .check_unselected {
+    width: 12px;
+    height: 12px;
+    margin: 0 5px 0 0;
+  }
+
+  .check_selected {
+    background: url(/static/image/tyywglpt/check_selected.png?__sprite) 0 0 no-repeat;
+  }
+
+  .check_unselected {
+    background: url(/static/image/tyywglpt/check_unselected.png?__sprite) 0 0 no-repeat;
+  }
+
+  .ztree-container {
+    width: 100%;
+    height: 82.12%;
+    overflow: auto;
+  }
+
+  .ztree-container .ztree {
+    padding-bottom: 20px;
+  }
+
+  .ztree li span.button.ico_close {
+    margin-right: 2px;
+    background: url(../../static/image/sszhxt/org.png) no-repeat scroll;
+    vertical-align: middle;
+  }
+
+  .ztree li span.button.ico_open {
+    margin-right: 2px;
+    background: url(../../static/image/sszhxt/org.png) no-repeat scroll;
+    vertical-align: middle;
+  }
+
+  .ztree li span.button.chk.checkbox_true_full {
+    background: url(/static/image/sszhxt/check_selected.png?__sprite) center center no-repeat;
+  }
+
+  .ztree li span.button.chk.checkbox_true_full_focus {
+    background: url(/static/image/sszhxt/check_selected.png?__sprite) center center no-repeat;
+  }
+
+  .ztree li span.button.chk.checkbox_false_full {
+    background: url(/static/image/sszhxt/check_unselected.png?__sprite) center center no-repeat;
+  }
+
+  .ztree li span.button.chk.checkbox_false_full_focus {
+    background: url(/static/image/sszhxt/check_unselected.png?__sprite) center center no-repeat;
+  }
+
+  .ztree li span.button.chk.checkbox_false_disable {
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+    background: url(/static/image/sszhxt/check_unselected.png?__sprite) center center no-repeat;
+  }
+
+  .recent-look {
+    font-size: 12px;
+  }
+
+  .recent-look .recent-item {
+    width: 100%;
+    height: 100%;
+    font-size: 12px;
+    height: 24px;
+    line-height: 24px;
+    padding-left: 24px;
+    cursor: pointer;
+  }
+
+  .recent-look .list-null {
+    color: #3c3c3c;
+    text-align: center;
+    padding-left: 0;
+  }
+
+  .recent-look .name,
+  .recent-look .time {
+    float: left;
+    text-align: left;
+  }
+
+  .recent-look .name {
+    width: 102px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #3c3c3c;
+    margin-right: 2px;
+  }
+
+  .recent-look .time {
+    color: #999;
+  }
+
+  .recent-look .person.isonline {
+    background: url(/static/image/sszhxt/person.png?__sprite) 0 2px no-repeat;
+  }
+
+  .recent-look .person.isoffline {
+    background: url(/static/image/sszhxt/person_offline.png?__sprite) 0 2px no-repeat;
+  }
+
+  .recent-look .device.isonline {
+    background: url(/static/image/sszhxt/device.png?__sprite) 0 2px no-repeat;
+  }
+
+  .recent-look .device.isoffline {
+    background: url(/static/image/sszhxt/device_offline.png?__sprite) 0 2px no-repeat;
+  }
+
+  .recent-look .active {
+    background-color: #e8eff5 !important;
+  }
+
+  .recent-look .device:hover {
+    background-color: #e8eff5;
+  }
+
+  .recent-look .device.isoffline:hover {
+    background-color: #fff;
+    cursor: not-allowed;
+  }
+
+  .recent-look .person:hover {
+    cursor: not-allowed;
+  }
+
+  .recent-look .person-device-list {
+    padding-left: 20px;
+  }
+
+  .recent-look .person-device-list li {
+    padding-left: 50px;
+    height: 24px;
+    line-height: 24px;
+    color: #3c3c3c;
+    cursor: pointer;
+    text-align: left;
+  }
+
+  .side-bar-main {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    font-size: 14px;
+    padding: 5px;
+
+    .search-box {
+      .dev-type-wrap {
+        margin: 10px;
+
+        ul {
+          height: 40px;
+
+          li {
+            width: 40px;
+            height: 40px;
+            float: left;
+            margin-right: 10px;
+            position: relative;
+
+            &.disactive {
+              background-color: #7a7a7a;
+            }
+          }
+
+          .type-dev {
+            background-color: #ff7e00;
+
+            &::after {
+              display: inline-block;
+              content: "";
+              width: 22px;
+              height: 30px;
+              background: url(/static/image/theme/sszhxt/deviceTree/dev-icon.png?__sprite) no-repeat;
+              position: absolute;
+              left: 50%;
+              top: 50%;
+              transform: translate(-50%, -50%);
+            }
+          }
+
+          .type-car {
+            background-color: #009bfe;
+
+            &::after {
+              display: inline-block;
+              content: "";
+              width: 33px;
+              height: 28px;
+              background: url(/static/image/theme/sszhxt/deviceTree/car-icon.png?__sprite) no-repeat;
+              position: absolute;
+              left: 50%;
+              top: 50%;
+              transform: translate(-50%, -50%);
+            }
+          }
+
+          .type-fastDomeCameras {
+            background-color: #00ad41;
+
+            &::after {
+              display: inline-block;
+              content: "";
+              width: 26px;
+              height: 30px;
+              background: url(/static/image/theme/sszhxt/deviceTree/fastDomeCameras-icon.png?__sprite) no-repeat;
+              position: absolute;
+              left: 50%;
+              top: 50%;
+              transform: translate(-50%, -50%);
+            }
+          }
+
+          .type-drone {
+            background-color: #4470ff;
+
+            &::after {
+              display: inline-block;
+              content: "";
+              width: 32px;
+              height: 34px;
+              background: url(/static/image/theme/sszhxt/deviceTree/drone-icon.png?__sprite) no-repeat;
+              position: absolute;
+              left: 50%;
+              top: 50%;
+              transform: translate(-50%, -50%);
+            }
+          }
+        }
+      }
+
+      .device-type-type {
+        margin-top: 2px;
+        width: 70px;
+
+        .ane-select {
+          width: 100%;
+        }
+      }
+
+      .device-type-search {
+        .form-control {
+          width: 174px;
+          margin-left: 4px;
+          padding-right: 16px;
+        }
+      }
+
+      .searchInfo {
+        border: 1px solid #ccc;
+        padding: 5px;
+        position: absolute;
+        background: #fff;
+        z-index: 99;
+        width: 96%;
+        height: auto;
+        max-height: 66%;
+        overflow: auto;
+      }
+    }
+  }
+
+  .input-group {
+    .select {
+      display: inline-block;
+      width: 70px;
+    }
+
+    .input {
+      display: inline-block;
+    }
+  }
+
+  .fold-control {
+    position: absolute;
+    right: -16px;
+    top: 50%;
+    width: 16px;
+    height: 100px;
+    transform: translateY(-50%);
+    background: url(/static/image/theme/sszhxt/deviceTree/toleft.png) no-repeat;
+    z-index: 10;
+  }
+
+  .fold-control:hover {
+    cursor: pointer;
+  }
+
+  .unfold-control {
+    background: url(/static/image/theme/sszhxt/deviceTree/toright.png) no-repeat;
+  }
+}

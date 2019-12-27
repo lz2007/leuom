@@ -1,0 +1,15 @@
+{
+    "code": 0,
+    "msg": "成功！",
+    "data":  [
+        {
+            "baqID": "baq001",
+            "baqName": "办案区001"
+          },
+          {
+            "baqID": "baq002",
+            "baqName": "办案区002"
+          }
+    ]
+    
+}

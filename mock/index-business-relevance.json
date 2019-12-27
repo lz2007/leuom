@@ -1,0 +1,27 @@
+{
+    "code": 0,
+    "data": {
+        "accidentCount": 40,
+        "accidentMatchCount": 22,
+        "accidentRate": 86,
+        "allCount": 0,
+        "allMatchCount": 0,
+        "allRate": 0,
+        "cmCount": 0,
+        "cmMatchCount": 0,
+        "cmRate": 0,
+        "forceCount": 83,
+        "forceMatchCount": 65,
+        "forceRate": 82,
+        "psCount": 0,
+        "psMatchCount": 0,
+        "psRate": 92,
+        "surveilCount": 102,
+        "surveilMatchCount": 84,
+        "surveilRate": 76,
+        "violationCOunt": 60,
+        "violationMatchCount": 42,
+        "violationRate": 100
+    },
+    "msg": "string"
+}

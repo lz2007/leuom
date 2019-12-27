@@ -1,0 +1,81 @@
+<template>
+    <div class="xtpzgl_yhlb">
+        <div class="searchBox">
+            <div class="dataFormBox">
+                <span>所属部门</span>
+                <div class="dep_tree" :controller="yhlb_tree">
+                    <ms-tree-selecting :widget="{tree: @yhlb_data, showSearch: true, wrapId: 'yhlb-tree-select', getSelected: @getSelected, selectedKey: @tree_key ? @tree_key : '', selectedTitle: @tree_title ? @tree_title : '', onChange: @select_change, extraExpandHandle: @extraExpandHandle}"></ms-tree-selecting>
+                </div>
+            </div>
+            <div class="dataFormBox">
+                <span>姓名/警号</span>
+                <div class="yhlb_input_panel">
+                    <input type="text" ms-duplex="@nameId" class="form-control-input nameId" :keyup="@enter_search"
+                        :attr="{title: @nameId}" :focus="@input_focus('nameId')" :blur="@input_blur('nameId')">
+                    <span class="fa fa-close yhlb_close" :mousedown="@close_click('nameId')" :if="@nameIdX"></span>
+                </div>
+            </div>
+            <div class="dataFormBox">
+                <span>账号</span>
+                <div class="yhlb_input_panel">
+                    <input type="text" ms-duplex="@account" class="form-control-input account" :keyup="@enter_search"
+                        :attr="{title: @account}" :focus="@input_focus('account')" :blur="@input_blur('account')">
+                    <span class="fa fa-close yhlb_close" :mousedown="@close_click('account')" :if="@accountX"></span>
+                </div>
+            </div>
+            <a :if="@opt_yhlb.authority.SEARCH" class="search_btn" :click="@searchBtn">查询</a>
+        </div>
+
+        <div class="yhlb_table" :if="@key_dep_switch">
+            <ms-comtable :widget="{id:'table-yhlb', loading: @tableLoading, data:@tableData, actions:@actions, panelCss:{position: 'absolute', width: '100%', bottom: '52px', top: '162px'}}">
+                <ms-comtable-header :widget="{title:'序号', dataIndex:'index', colwidth:'10%', popover:true}"></ms-comtable-header>
+                <!-- <ms-comtable-header :widget="{title:'所属部门', dataIndex:'orgName', colwidth:'30%', popover:true}"> -->
+                <ms-comtable-header :widget="{title:'所属部门', colwidth:'30%', popover:true}">
+                        <span :skip :attr="{'data-original-title':record.orgCode, 'dep':'dep_switch', 'fir':'true'}">{{record.orgName | isNull}}</span>
+                </ms-comtable-header>
+                <ms-comtable-header :widget="{title:'账号', dataIndex:'account', colwidth:'20%', popover:true}"></ms-comtable-header>
+                <ms-comtable-header :widget="{title:'姓名/警号', dataIndex:'nameId', colwidth:'30%', popover:true}"></ms-comtable-header>
+                <ms-comtable-header :widget="{title:'操作', dataIndex:'space', colwidth:'10%', popover:false}">
+                    <span :controller="opt_yhlb">
+                        <a :if="@authority.UNLOCK" title="解锁" class="action-btn" :click="handle('check')">解锁</a>
+                        <a :if="!@authority.UNLOCK">-</a>
+                    </span>
+                </ms-comtable-header>
+            </ms-comtable>
+        </div>
+        <div class="yhlb_table" :if="!@key_dep_switch">
+            <ms-comtable :widget="{id:'table-yhlb', loading: @tableLoading, data:@tableData, actions:@actions, panelCss:{position: 'absolute', width: '100%', bottom: '52px', top: '162px'}}">
+                <ms-comtable-header :widget="{title:'序号', dataIndex:'index', colwidth:'10%', popover:true}"></ms-comtable-header>
+                <!-- <ms-comtable-header :widget="{title:'所属部门', dataIndex:'orgName', colwidth:'30%', popover:true}"> -->
+                <ms-comtable-header :widget="{title:'所属部门', colwidth:'30%', popover:true}">
+                        <span :skip :attr="{'data-original-title':record.orgName}">{{record.orgName | isNull}}</span>
+                </ms-comtable-header>
+                <ms-comtable-header :widget="{title:'账号', dataIndex:'account', colwidth:'20%', popover:true}"></ms-comtable-header>
+                <ms-comtable-header :widget="{title:'姓名/警号', dataIndex:'nameId', colwidth:'30%', popover:true}"></ms-comtable-header>
+                <ms-comtable-header :widget="{title:'操作', dataIndex:'space', colwidth:'10%', popover:false}">
+                    <span :controller="opt_yhlb">
+                        <a :if="@authority.UNLOCK" title="解锁" class="action-btn" :click="handle('check')">解锁</a>
+                        <a :if="!@authority.UNLOCK">-</a>
+                    </span>
+                </ms-comtable-header>
+            </ms-comtable>
+        </div>
+        <ms-pages :widget="{total:@table_pagination.total, pageSize:@table_pagination.pageSize, current:@table_pagination.current, onChange:@handlePageChange, getCurrent:@getCurrent}"></ms-pages>
+
+        <!--弹窗-->
+        <div class="yhlb_dialog">
+            <ms-dialog :widget="{$innerVm: 'yhlb_dialog', okText: '确定', cancelText: '取消', className: 'yhlb_dialog_common', show: @yhlb_dialog_show, onCancel: @dialogCancel, onOk:@dialogOk, isMove:true, width: 440, height: 243}">
+                <div slot="body" ms-skip>
+                    <span class="loginPasswordTxt">登录密码</span>
+                    <div class="yhlb_input_panel" :class="[@loginPasswordNull ? 'loginPasswordNullInput' : '']">
+                        <input type="password" ms-duplex="@loginPassword" class="form-control-input loginPassword"
+                            :keyup="@enter_search" :attr="{title: @loginPassword}" :focus="@input_focus('loginPassword')"
+                            :blur="@input_blur('loginPassword')">
+                        <span class="fa fa-close yhlb_close" :mousedown="@close_click('loginPassword')" :if="@loginPasswordX"></span>
+                        <span class="passwordNull" :if="@loginPasswordNull">登录密码不能为空</span>
+                    </div>
+                </div>
+            </ms-dialog>
+        </div>
+    </div>
+</template>

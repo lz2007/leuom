@@ -1,0 +1,195 @@
+/*
+ * @Author: xuanyanqing 
+ * @Date: 2019-01-08 17:20:35 
+ * @Last Modified by: xuanyanqing
+ * @Last Modified time: 2019-03-15 14:43:09
+ */
+
+<template>
+    <div class="jdzxpt-dxcc-jq" :class="[@extra_class ? 'znsb_jq_en' : '']">
+        <div class="search_box">
+            <div class="hBox rowOne">
+                <div class="dataFormBox dataTreeBox">
+                    <span>{{@jq_language.dutyDepartment}}</span>
+                    <div class="dep_tree" :controller="dxcc_jq_tree">
+                        <ms-tree-selecting :widget="{tree: @tree_data, showSearch: true, wrapId: 'jq-tree-select', getSelected: @getSelected, selectedKey: @tree_key ? @tree_key : '', selectedTitle: @tree_title ? @tree_title : '', onChange: @select_change, extraExpandHandle: @extraExpandHandle, branchShow:true, clickBranchBack:@clickBranchBack, includedStatus:@included_status}"></ms-tree-selecting>
+                    </div>
+                </div>
+                <div class="dataFormBox">
+                    <span>{{@jq_language.nameId}}</span>
+                    <div class="jq_input_panel">
+                        <input type="text" ms-duplex="@police_id" class="form-control-input police_id" :keyup="@name_input_enter"
+                            id="police_id" :attr="{title: @police_id_title}" :focus="@input_focus('police_id')"
+                            :blur="@input_blur('police_id')">
+                        <span class="fa fa-close jq_right_close" :mousedown="@close_click('police_id')" :if="@police_id_close"></span>
+                    </div>
+                </div>
+                <div class="dataRadioBox" :controller="dxcc_jq_time_range">
+                    <span>{{@jq_language.alarmTime}}</span>
+                    <ms-select :widget="{col: 'con', options:@time_range_options, value: @time_range, onChange: @onChangeTR}"
+                        :class="['formInput']"></ms-select>
+                    <div class="dataTimeBox" :if="@select_time">
+                        <div class="jq-dataRight" :controller="dxcc_jq_startTime">
+                            <ms-datepicker :widget="{onChange:@handlerChange, placeholder:'请选择开始时间', value:@jq_startTime, showTime: false, endDate:@endDate, direction: 'down', languageSelect: @extra_class ? 'en' : ''}"></ms-datepicker>
+                        </div>
+                        <span>~</span>
+                        <div class="jq-dataRight" :controller="dxcc_jq_endTime">
+                            <ms-datepicker :widget="{onChange:@handlerChange, placeholder:'请选择结束时间', value:@jq_endTime, showTime: false, endDate:@endDate, direction: 'down', languageSelect: @extra_class ? 'en' : ''}"></ms-datepicker>
+                        </div>
+                    </div>
+                </div>
+                <a class="common_search_btn" :click="@searchBtn" :if="@opt_jq.authority.SEARCH">{{@jq_language.searchBtn}}</a>
+            </div>
+            <div class="hBox rowTwo">
+                <div class="dataFormBox colOne">
+                    <span>{{@jq_language.incidentPlace}}</span>
+                    <div class="jq_input_panel">
+                        <input type="text" ms-duplex="@sfdd" class="form-control-input sfdd" :keyup="@name_input_enter"
+                            id="sfdd" :attr="{title: @sfdd_title}" :focus="@input_focus('sfdd')"
+                            :blur="@input_blur('sfdd')">
+                        <span class="fa fa-close jq_right_close" :mousedown="@close_click('sfdd')" :if="@sfdd_close"></span>
+                    </div>
+                </div>
+                <div class="dataFormBox colTwo">
+                    <span>{{@jq_language.alarmMan}}</span>
+                    <div class="jq_input_panel">
+                        <input type="text" ms-duplex="@bjr" class="form-control-input bjr" :keyup="@name_input_enter"
+                            id="bjr" :attr="{title: @bjr_title}" :focus="@input_focus('bjr')"
+                            :blur="@input_blur('bjr')">
+                        <span class="fa fa-close jq_right_close" :mousedown="@close_click('bjr')" :if="@bjr_close"></span>
+                    </div>
+                </div>
+                <div class="dataFormBox colThree">
+                    <span>{{@jq_language.alarmPhone}}</span>
+                    <div class="jq_input_panel">
+                        <input type="text" ms-duplex="@bjdh" class="form-control-input bjdh" :keyup="@name_input_enter"
+                            id="bjdh" :attr="{title: @bjdh_title}" :focus="@input_focus('bjdh')"
+                            :blur="@input_blur('bjdh')">
+                        <span class="fa fa-close jq_right_close" :mousedown="@close_click('bjdh')" :if="@bjdh_close"></span>
+                    </div>
+                </div>
+                <div class="dataFormBox">
+                    <span>{{@jq_language.warningInstanceNumber}}</span>
+                    <div class="jq_input_panel">
+                        <input type="text" ms-duplex="@jqbh" class="form-control-input jqbh" :keyup="@name_input_enter"
+                            id="jqbh" :attr="{title: @jqbh_title}" :focus="@input_focus('jqbh')"
+                            :blur="@input_blur('jqbh')">
+                        <span class="fa fa-close jq_right_close" :mousedown="@close_click('jqbh')" :if="@jqbh_close"></span>
+                    </div>
+                </div>
+                    
+            </div>
+            <div class="hBox rowThree">
+                <div class="dataFormBox colOne" :controller="jdzxpt_dxcc_jq_glmt">
+                    <span>{{@jq_language.relatedMedia}}</span>
+                    <ms-select :widget="{col:'glmt', options:@glmt_options, value: @glmt, onChange: @onChangeglmt}" :class="['formInput']"></ms-select>
+                </div>
+                <div class="dataFormBox colTwo" :controller="jdzxpt_dxcc_jq_jqkpQjzb_kpjg">
+                    <span>{{@jq_language.evaluationResult}}</span>
+                    <ms-select :widget="{col:'evaResult', options:@evaResult_options, value: @evaResult, onChange: @onChangeevaResult}" :class="['formInput']"></ms-select>
+                </div>
+                <div class="dataFormBox colThree" :controller="jdzxpt_dxcc_jq_jqkpQjzb_hcjg">
+                    <span>{{@jq_language.checkResult}}</span>
+                    <ms-select :widget="{col:'reviewResult', options:@reviewResult_options, value: @reviewResult, onChange: @onChangereviewResult}" :class="['formInput']"></ms-select>
+                </div>
+                
+            </div>
+
+        </div>
+        <div class="jq-table" :if="@key_dep_switch">
+            <ms-comtable :widget="{id:'znsb-jq-table', loading:@loading, data:@table_list, actions:@actions, panelCss:{position: 'absolute',bottom: 60,top: 100,left: 0,right: 0}}">
+                <ms-comtable-header :widget="{title:@jq_language.tableNo, dataIndex:'table_index', colwidth:'6%', popover:true}"></ms-comtable-header>
+                <ms-comtable-header :widget="{title:@jq_language.warningInstanceNumber, popover:true, colwidth:'8%'}">
+                    <span :skip>{{record.jqbh | isNull}}</span>
+                </ms-comtable-header>
+                <ms-comtable-header :widget="{title:@jq_language.policeUnit, popover:true, colwidth:'8%'}">
+                    <span :skip :attr="{'data-original-title':record.cjdw,dep:'dep_switch',fir:'true',arr:'true'}">{{record.cjdwmc | isNull}}</span>
+                </ms-comtable-header>
+                <ms-comtable-header :widget="{title:@jq_language.nameId, popover:true, colwidth:'8%'}">
+                    <span :skip>{{record.jy | isNull}}</span>
+                </ms-comtable-header>
+                <ms-comtable-header :widget="{title:@jq_language.alarmMan, popover:true, colwidth:'8%'}">
+                    <span :skip>{{record.bjr | isNull}}</span>
+                </ms-comtable-header>
+                <ms-comtable-header :widget="{title:@jq_language.alarmTime, popover:true, colwidth:'8%'}">
+                    <span :skip>{{record.bjsj | isNull}}</span>
+                </ms-comtable-header>
+                <ms-comtable-header :widget="{title:@jq_language.alarmPhone, colwidth:'8%', popover:true}">
+                    <span :skip>{{record.bjdh | isNull}}</span>
+                </ms-comtable-header>
+                <ms-comtable-header :widget="{title:@jq_language.alarmCategories, colwidth:'8%', popover:true}">
+                    <span :skip>{{record.bjlb | isNull}}</span>
+                </ms-comtable-header>
+                <ms-comtable-header :widget="{title:@jq_language.incidentPlace, colwidth:'8%', popover:true}">
+                    <span :skip>{{record.sfdd | isNull}}</span>
+                </ms-comtable-header>
+                <ms-comtable-header :widget="{title:@jq_language.relatedMedia, colwidth:'8%', popover:true}">
+                    <span :skip>{{record.glmt | isNull}}</span>
+                </ms-comtable-header>
+                <ms-comtable-header :widget="{title:@jq_language.evaluationResult, colwidth:'8%', popover:true}">
+                    <span :skip>{{record.evaResult | isNull}}</span>
+                </ms-comtable-header>   
+                <ms-comtable-header :widget="{title:@jq_language.checkResult, colwidth:'8%', popover:true}">
+                    <span :skip>{{record.reviewResult | isNull}}</span>
+                </ms-comtable-header>  
+                <ms-comtable-header :widget="{title:@jq_language.tableOperation, colwidth:'6%', popover:true}">
+                    <span :controller="dxcc_jq_opt_look">
+                        <a :attr="{title: @lookTxt}" class="action-btn" :click="@onClick(record)" :if="@authority.SEARCH">
+                            <img src="/static/image/zfsypsjglpt/checkBtn.png">
+                        </a>  
+                        <a :if="!@authority.SEARCH">-</a>
+                    </span>
+                </ms-comtable-header>   
+            </ms-comtable>
+        </div>
+        <div class="jq-table" :if="!@key_dep_switch">
+                <ms-comtable :widget="{id:'znsb-jq-table', loading:@loading, data:@table_list, actions:@actions, panelCss:{position: 'absolute',bottom: 60,top: 100,left: 0,right: 0}}">
+                    <ms-comtable-header :widget="{title:@jq_language.tableNo, dataIndex:'table_index', colwidth:'6%', popover:true}"></ms-comtable-header>
+                    <ms-comtable-header :widget="{title:@jq_language.warningInstanceNumber, popover:true, colwidth:'8%'}">
+                        <span :skip>{{record.jqbh | isNull}}</span>
+                    </ms-comtable-header>
+                    <ms-comtable-header :widget="{title:@jq_language.policeUnit, popover:true, colwidth:'8%'}">
+                        <span :skip :attr="{'data-original-title':record.cjdwmc}">{{record.cjdwmc | isNull}}</span>
+                    </ms-comtable-header>
+                    <ms-comtable-header :widget="{title:@jq_language.nameId, popover:true, colwidth:'8%'}">
+                        <span :skip>{{record.jy | isNull}}</span>
+                    </ms-comtable-header>
+                    <ms-comtable-header :widget="{title:@jq_language.alarmMan, popover:true, colwidth:'8%'}">
+                        <span :skip>{{record.bjr | isNull}}</span>
+                    </ms-comtable-header>
+                    <ms-comtable-header :widget="{title:@jq_language.alarmTime, popover:true, colwidth:'8%'}">
+                        <span :skip>{{record.bjsj | isNull}}</span>
+                    </ms-comtable-header>
+                    <ms-comtable-header :widget="{title:@jq_language.alarmPhone, colwidth:'8%', popover:true}">
+                        <span :skip>{{record.bjdh | isNull}}</span>
+                    </ms-comtable-header>
+                    <ms-comtable-header :widget="{title:@jq_language.alarmCategories, colwidth:'8%', popover:true}">
+                        <span :skip>{{record.bjlb | isNull}}</span>
+                    </ms-comtable-header>
+                    <ms-comtable-header :widget="{title:@jq_language.incidentPlace, colwidth:'8%', popover:true}">
+                        <span :skip>{{record.sfdd | isNull}}</span>
+                    </ms-comtable-header>
+                    <ms-comtable-header :widget="{title:@jq_language.relatedMedia, colwidth:'8%', popover:true}">
+                        <span :skip>{{record.glmt | isNull}}</span>
+                    </ms-comtable-header>
+                    <ms-comtable-header :widget="{title:@jq_language.evaluationResult, colwidth:'8%', popover:true}">
+                        <span :skip>{{record.evaResult | isNull}}</span>
+                    </ms-comtable-header>   
+                    <ms-comtable-header :widget="{title:@jq_language.checkResult, colwidth:'8%', popover:true}">
+                        <span :skip>{{record.reviewResult | isNull}}</span>
+                    </ms-comtable-header>  
+                    <ms-comtable-header :widget="{title:@jq_language.tableOperation, colwidth:'6%', popover:true}">
+                        <span :controller="dxcc_jq_opt_look">
+                            <a :attr="{title: @lookTxt}" class="action-btn" :click="@onClick(record)" :if="@authority.SEARCH">
+                                <img src="/static/image/zfsypsjglpt/checkBtn.png">
+                            </a>  
+                            <a :if="!@authority.SEARCH">-</a>
+                        </span>
+                    </ms-comtable-header>   
+                </ms-comtable>
+            </div>
+
+        <ms-pages :widget="{total:@table_pagination.total, pageSize:@table_pagination.pageSize, current:@table_pagination.current, onChange:@handlePageChange, getCurrent:@getCurrent, overLimit:@page_type}"></ms-pages>
+
+    </div>
+</template>

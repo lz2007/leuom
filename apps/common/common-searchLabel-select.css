@@ -1,0 +1,70 @@
+.common-searchLabel-select {
+	position: relative;
+	display: inline-block;
+	color: #536b82;
+	cursor: pointer;
+	font-size: 14px;
+}
+
+.common-searchLabel-select .common-searchLabel-select-search {
+	height: 98%;
+}
+
+.common-searchLabel-select .fa {
+	position: absolute;
+	top: 5px;
+	right: 9px;
+	line-height: 20px;
+}
+
+.common-searchLabel-select .option-list {
+	position: absolute;
+	top: 30px;
+	max-height: 200px;
+	width: 100%;
+	background-color: #fff;
+	box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
+	box-sizing: border-box;
+	z-index: 10010;
+	overflow: auto;
+}
+
+.common-searchLabel-select .option-list .list-item {
+	position: relative;
+	display: block;
+	padding: 7px 13px;
+	cursor: pointer;
+	white-space: nowrap;
+	overflow: hidden;
+	user-select: none;
+}
+
+.common-searchLabel-select .list-item:focus,
+.common-searchLabel-select .list-item:hover {
+	background-color: #e0e7ec;
+}
+
+.common-searchLabel-select .list-item-selected,
+.common-searchLabel-select .list-item-selected:hover {
+	color: #536b82;
+	background-color: #eee;
+}
+
+.common-searchLabel-select .list-item-selected {
+	background-color: #eee;
+	font-weight: 700;
+	color: rgba(0, 0, 0, 0.65)
+}
+
+.common-searchLabel-select .no-data {
+	position: absolute;
+	top: 0px;
+	left: 0;
+	width: 100%;
+	height: 30px;
+	line-height: 30px;
+	font-size: 14px;
+	color: rgb(204, 204, 204);
+	padding-left: 12px;
+	cursor: not-allowed;
+}

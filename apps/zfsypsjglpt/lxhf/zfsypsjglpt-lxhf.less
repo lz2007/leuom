@@ -1,0 +1,464 @@
+@import '/apps/common/common-theme/common-variable.less';
+
+@rightWidth: 568px; // 右侧容器宽度
+@rightHeight: 630px; // 右侧容器高度
+@titleHeight: 50px; // 头部高度
+@inputWidth: 210px; // input 长度
+@inputHeight: 28px; // input 高度
+
+@searchBoxHeight: 60px;
+
+.common-lxhf-button {
+    width: 80px;
+    height: 30px;
+    line-height: 30px;
+    padding: 0;
+    border-radius: 0;
+    border: none;
+    color: #fff;
+    background: @primary-color;
+}
+
+.zfsypsjglpt-lxhf {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    color: @txt-main-color;
+    .lxhf-main-container {
+        width: 100%;
+        height: @rightHeight;
+        position: relative;
+        .left-container {
+            margin-right: @rightWidth;
+            height: 100%;
+            .lxhf-video-title {
+                height: 50px;
+                line-height: 50px;
+                background: #171717;
+                padding: 15px 20px;
+                color: #fff;
+                h4 {
+                    font-size: 16px;
+                    margin: 0;
+                }
+            }
+        }
+        .right-container {
+            width: @rightWidth;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            .map-toast {
+                position: absolute;
+                right: 0;
+                top: 0;
+                left: 0;
+                z-index: 1;
+                background: rgba(0, 0, 0,.5);
+                padding: 0 20px;
+                height: @rightHeight / 2;
+                line-height: @rightHeight / 2;
+                color: #fff;
+                font-size: 22px;
+                text-align: center;
+            }
+            .right-label-wrap {
+                margin-top: @rightHeight / 2 + 1;
+                position: relative;
+                .right-title {
+                    height: @titleHeight;
+                    line-height: @titleHeight;
+                    padding: 0 20px;
+                    background: @common-bg-title;
+                    font-weight: bold;
+                }
+                .right-content {
+                    padding: 12px 20px 16px;
+                    background: #e6edf7;
+                    height: @rightHeight / 2 - @titleHeight - 2;
+                    .label-infos {
+                        .label-info-item {
+                            margin: 2px 0;
+                            label {
+                                font-weight: normal;
+                                vertical-align: top;
+                            }
+                            .label-item-detail {
+                                display: inline-block;
+                                .describe-text {
+                                    width: 450px;
+                                    display: inline-block;
+                                    word-break: break-word;
+                                }
+                            }
+                        }
+                    }
+                    .label-form {
+                        .form-inline {
+                            .form-group {
+                                display: block;
+                                margin: 8px 0;
+                                .form-control {
+                                    // border: none;
+                                    border-radius: 0;
+                                    margin-left: 10px;
+                                    height: @inputHeight;
+                                    line-height: @inputHeight;
+                                    padding: 0 12px;
+                                    width: @inputWidth;
+                                }
+                            }
+                            .textarea-item {
+                                .has-icon {
+                                    display: inline-block;
+                                    position: relative;
+                                    textarea {
+                                        height: 116px;
+                                        width: 458px;
+                                        padding-right: 26px;
+                                    }
+                                    .fa.fa-close {
+                                        position: absolute;
+                                        top: 8px;
+                                        right: 18px;
+                                    }
+                                    .form-tip.invalid-tip {
+                                        display: inline-block;
+                                        margin-left: 70px;
+                                        color: @red-color;
+                                        &:hover {
+                                            cursor: pointer;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                .label-button {
+                    position: absolute;
+                    right: 20px;
+                    top: 10px;
+                    .btn {
+                        .common-lxhf-button;
+                    }
+                }
+            }
+        }
+    }
+    .lxhf-bottom-wrap {
+        position: absolute;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        top: @rightHeight;
+        .search-box {
+            width: 100%;
+            height: @searchBoxHeight;
+            line-height: @searchBoxHeight;
+            background: @common-bg-title;
+            padding: 0 30px;
+            .tree-select-wrap .tree-panel {
+                min-width: 165px;
+            }
+            .no-data {
+                padding: 16px 20px;
+            }
+            .form-inline {
+                .form-group {
+                    margin-right: 50px;
+                    .control-label {
+                        font-weight: normal;
+                        font-size: 16px;
+                    }
+                    .form-item {
+                        margin: 0;
+                    }
+                    .form-control {
+                        width: 165px;
+                        height: 28px;
+                        line-height: 28px;
+                        border: none;
+                        border-radius: 0;
+                        margin-left: 10px;
+                        position: relative;
+                        padding: 0px 12px;
+                    }
+                    .ane-datepicker {
+                        position: relative;
+                        .ane-datepicker-icon {
+                            z-index: 1;
+                        }
+                    }
+                    .has-icon-input-wrap {
+                        .fa.fa-close {
+                            top: 24px;
+                        }
+                    }
+                    input.key {
+                        &::-ms-clear {
+                            display: none;
+                        }
+                    }
+                }
+            }
+            .btn {
+                .common-lxhf-button;
+                position: absolute;
+                right: 20px;
+                top: 10px;
+                width: 80px;
+                height: 36px;
+                line-height: 36px;
+            }
+        }
+        .lxhf-table-wrap {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            top: @searchBoxHeight + 34;
+        }
+    }
+}
+
+.zfsypsjglpt-lxhf .video-tool-wrap {
+    height: 35px;
+    line-height: 35px;
+    background: #000;
+}
+
+.zfsypsjglpt-lxhf .video-tool-bar {
+    height: 30px;
+    line-height: 30px;
+    position: relative;
+    top: 5px;
+}
+
+.zfsypsjglpt-lxhf .video-tool-bar li {
+    display: inline-block;
+    margin: 0 10px;
+    font-size: 12px;
+    color: #358dcc;
+    cursor: pointer;
+}
+
+.zfsypsjglpt-lxhf .video-tool-bar li:hover {
+    color: #0078d7;
+}
+
+.zfsypsjglpt-lxhf .video-tool-bar.disabled li {
+    cursor: not-allowed;
+}
+
+.zfsypsjglpt-lxhf .video-tool-bar.disabled li:hover {
+    color: #666;
+}
+
+.zfsypsjglpt-lxhf .video-tool-bar .disabled {
+    cursor: not-allowed;
+    color: #d4d7d9;
+}
+.zfsypsjglpt-lxhf .video-tool-bar{
+    .fa {
+        display: inline-block;
+        width: 28px;
+        height: 23px;
+    }
+    .step-backward{
+        background: url(/static/image/zfsypsjglpt/lxhf_step-backward.png) 0 0 no-repeat;
+    }
+    .fast-backward {
+        position: relative;
+        top: 3px;
+        background: url(/static/image/zfsypsjglpt/lxhf_fast-backward.png) 0 0 no-repeat;
+    }
+    .pause {
+        background: url(/static/image/zfsypsjglpt/lxhf_pause.png) 0 0 no-repeat;
+    }
+    .play {
+        background: url(/static/image/zfsypsjglpt/lxhf_play.png) 0 0 no-repeat;
+    }
+    .stop {
+        background: url(/static/image/zfsypsjglpt/lxhf_stop.png) 0 0 no-repeat;
+    }
+    .fast-forward {
+        position: relative;
+        top: 3px;
+        background: url(/static/image/zfsypsjglpt/lxhf_fast-forward.png) 0 0 no-repeat;
+    }
+    .step-forward {
+        background: url(/static/image/zfsypsjglpt/lxhf_step-forward.png) 0 0 no-repeat;
+    }
+    .cut {
+        background:  url(/static/image/zfsypsjglpt/lxhf_cut.png) 0 0 no-repeat;
+    }
+    .full {
+        background: url(/static/image/zfsypsjglpt/lxhf_full.png) 0 0 no-repeat;
+    }
+    .video-speed {
+        display: inline-block;
+        border: 1px solid #fff;
+        height: 23px;
+        line-height: 33px;
+        margin-left: 15px;
+        cursor: not-allowed;
+        padding:  0 5px;
+        span {  
+            color: #fff;
+            position: relative;
+            top: -6px;
+        }
+    }
+     .video-full{
+        position: absolute;
+        right: -5px;
+        top: 2px;
+    }
+        /* 音量调节样式 */
+        .sound-bar-wrap{
+            margin-right: 40px;
+            margin-left: 5px;
+        }
+         .sound{
+            display: inline-block;
+            height: 22px;
+            width: 23px;
+        }
+        .openSound{
+            background: url(/static/image/zfsypsjglpt/lxhf_sound.png) 0 0 no-repeat;
+        }
+        .closeSound{
+             background: url(/static/image/zfsypsjglpt/lxhf_nosound.png) 0 0 no-repeat;
+        }
+         .sound-bar{
+            position: relative;
+            height: 6px;
+            width: 100px;
+            display: inline-block;
+            top: -7px;
+            left: 8px;
+            
+        }
+         .sound-level-wrap{
+            position: relative;
+            width: 100%;
+            height: 6px;
+            margin: 0 auto;
+            border-radius: 10px;
+            background: #aaa;
+        }
+         .sound-level{
+            position: absolute;
+            left: 0;
+            height: 6px;
+            background: #fff;
+            border-radius: 10px;
+        }
+         .sound-btn-wrap {
+            width: 90%;
+            position: relative;
+        }
+         .sound-btn{
+            width: 12px;
+            height: 12px;
+            background: #fff;
+            border-radius: 50%;
+            position: absolute;
+            top: -3px;
+            left: 0;
+        }
+}
+/*------------------ 针对ie8下字体图标不能及时更新的问题开始 -------------*/
+
+// .zfsypsjglpt-lxhf .video-tool-bar .disabled.fa-step-backward:before {
+//     content: "\f048 ";
+// }
+
+// .zfsypsjglpt-lxhf .video-tool-bar .disabled.fa-fast-backward:before {
+//     content: "\f049 ";
+// }
+
+// .zfsypsjglpt-lxhf .video-tool-bar .disabled.fa-pause:before {
+//     content: "\f04c ";
+// }
+
+// .zfsypsjglpt-lxhf .video-tool-bar .disabled.fa-play:before {
+//     content: "\f04b ";
+// }
+
+// .zfsypsjglpt-lxhf .video-tool-bar .disabled.fa-stop:before {
+//     content: "\f04d ";
+// }
+
+// .zfsypsjglpt-lxhf .video-tool-bar .disabled.fa-fast-forward:before {
+//     content: "\f050 ";
+// }
+
+// .zfsypsjglpt-lxhf .video-tool-bar .disabled.fa-step-forward:before {
+//     content: "\f051 ";
+// }
+
+// 地图位置
+.map-iframe-wrap.zfsypsjglpt-map.zfsypsjglpt-lxhf-map {
+    position: absolute;
+    top: 120px;
+    right: 20px;
+    width: @rightWidth !important;
+    height: @rightHeight / 2 !important;
+    visibility: visible;
+}
+
+.zfsypsjglpt-lxhf .has-icon-input-wrap {
+    display: inline-block;
+    position: relative;
+    .fa.fa-close {
+        position: absolute;
+        right: 6px;
+        top: 8px;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+// x 提示
+.zfsypsjglpt-lxhf .form-tip.invalid-tip {
+    display: inline-block;
+    margin-left: 10px;
+    color: @red-color;
+}
+
+// 分页样式
+.zfsypsjglpt-lxhf .com-pages {
+    bottom: 0;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    text-align: right;
+    left: 0;
+    background: #dfe9f7;
+    border-top: 1px solid #fff;
+    padding-right: 40px;
+}
+
+// 部门树样式
+.lxhf-bottom-wrap .tree-panel {
+    bottom: 44px;
+    left: 10px;
+}
+
+.lxhf-min-wrapper {
+    min-width: 1527px !important;
+    min-height: 1080px !important;
+}
+
+input::-ms-clear,
+[type=text]::-ms-clear,
+[type=input]::-ms-clear{
+    display: none;
+    width : 0;
+    height: 0;
+}

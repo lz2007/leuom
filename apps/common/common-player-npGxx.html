@@ -1,0 +1,93 @@
+<template>
+    <div id="gxx_ocx" :css="{width:@player_width, height:@player_height}">
+        <div class="ocx_fileTitle">
+            <span :if="@fileName" :attr="{title:@fileName}">当前正在播放：{{@fileName}}</span>
+        </div>
+        <div class="ocx_player" :if="@is_IE">
+            <object id="gxxPlayOcx" classid="clsid:455791d4-4095-4f70-b2b3-f5c424f25ad9" width="100%" height="100%"></object>
+        </div>
+        <div class="ocx_player" :if="!@is_IE">
+            <embed type="application/npGSVideoPlugin-plugin" name="npGSVideoPlugin" id="npGSVideoPlugin" width="100%"
+                height="100%">
+        </div>
+        <div class="gxx_player_controll" :controller="gxx_player_controll">
+            <!-- <div class="play_speed">当前播放速率：{{@cur_speed}}x</div> -->
+            <div class="volume_control">
+                <a class="voice" :click="@voice"></a>
+                <a class="mute" :click="@mute"></a>
+                <div class="volume_progress">
+                    <div class="v_white_line" id="v_white_line"></div>
+                    <div class="v_blue_line"></div>
+                    <span class="fa fa-circle circle_span" id="v_circle_span"></span>
+                </div>
+            </div>
+            <div id="ocx_playControll">
+                <!-- <a id="btn_backframe" title="单帧退">
+                    <i class="" aria-hidden="true">
+                        <img src="/static/image/zfsypsjglpt/frameQ_normal.png?__sprite">
+                    </i>d
+                </a> -->
+                <a id="btn_screenshot" title="截图">
+                    <i class="" aria-hidden="true">
+                        <img src="/static/image/zfsypsjglpt/screenShot.png?__sprite">
+                    </i>
+                </a>
+                <a id="btn_backward" title="后退">
+                    <i class="" aria-hidden="true">
+                        <img src="/static/image/zfsypsjglpt/rewind_normal.png?__sprite">
+                    </i>
+                </a>
+                <!-- <a id="btn_replay" title="重新播放">
+                    <i class="" aria-hidden="true">
+                        <img src="/static/image/zfsypsjglpt/cycle_normal.png?__sprite">
+                    </i>
+                </a> -->
+                <a id="btn_play" title="播放">
+                    <i class="" aria-hidden="true">
+                        <img src="/static/image/zfsypsjglpt/play_normal.png?__sprite">
+                    </i>
+                </a>
+                <a id="btn_pause" title="暂停">
+                    <i class="" aria-hidden="true">
+                        <img src="/static/image/zfsypsjglpt/stop_normal.png?__sprite">
+                    </i>
+                </a>
+                <a id="btn_stop" title="停止">
+                    <i class="" aria-hidden="true">
+                        <img src="/static/image/zfsypsjglpt/pause_normal.png?__sprite">
+                    </i>
+                </a>
+                <a id="btn_forward" title="快进">
+                    <i class="" aria-hidden="true">
+                        <img src="/static/image/zfsypsjglpt/forward_normal.png?__sprite">
+                    </i>
+                </a>
+                <a id="btn_forframe" title="单帧进">
+                    <i class="" aria-hidden="true">
+                        <img src="/static/image/zfsypsjglpt/frameH_normal.png?__sprite">
+                    </i>
+                </a>
+            </div>
+            <div class="btn_fullScreen">
+                <a title="全屏" :click="@full_screen">
+                    <i class="" aria-hidden="true">
+                        <img src="/static/image/zfsypsjglpt/full_screen.png?__sprite">
+                    </i>
+                </a>
+            </div>
+
+        </div>
+
+        <!--player弹窗-->
+        <div class="player_dialog_panel">
+            <ms-dialog :widget="{$innerVm: 'player_dialog', okText: '是', cancelText: @cancelText, className: 'player_dialog_class', show: @player_dialog_show, onCancel: @dialogCancel, onOk:@dialogOk, isMove:true, width: @dialog_width, height: @dialog_height, move_return: @move_return}">
+                <div slot="body" ms-skip>
+                    <span>{{@close_txt}}</span>
+                    <span class="tip-text" :if="@showTip">
+                        <i class="fa fa-info-circle"></i>安装完成后请重启浏览器
+                    </span>
+                </div>
+            </ms-dialog>
+        </div>
+    </div>
+</template>

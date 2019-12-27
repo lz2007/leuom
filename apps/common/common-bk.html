@@ -1,0 +1,33 @@
+<template>
+    <div :css="@css" class="common-bk-main" :if="@show">
+        <div class="divCenter">
+            <div class="pre" :click="@preBtn()">
+                <a class="preBtn"></a>
+            </div>    
+            <div class="picContentDIV">
+                <div :visible="@result_list.length==0" class="nocpbkData">
+                    <span>{{@noDataTitle}}</span>
+                </div>
+                <ul class="result_list" :visible="@result_list.length!=0">                    
+                    <li ms-for="el in @result_list" :class="[@type=='cpbk'?'result_li':'result_li_rl']">
+                        <div :click="@result_list_click(@el)" style="width:100%; height:100%;">                
+                            <img :attr="{src:@el.shootImgFilePath}" onerror="javascript:this.src='../../static/image/theme/default/car-list-404.png?__sprite';" :ms-on-error="@errorIMG404">
+                            <div class="picContent">
+                                <div :class="[@el.isNormal ? 'result_danger_normal' : 'result_danger']">
+                                        <span>异常</span>
+                                </div>
+                                <div :class="[@extra_class ? 'result_txt_en' : 'result_txt']">
+                                    <span>{{@el.userName}}({{@el.userCode}})</span>
+                                    <p>{{@el.shootTime | formatDate}}</p>
+                                </div>
+                            </div>                    
+                        </div>
+                    </li>
+                </ul> 
+            </div>
+            <div class="next" :click="@nextBtn()">
+                <a class="nextBtn"></a>
+            </div>
+        </div>
+    </div>
+</template>

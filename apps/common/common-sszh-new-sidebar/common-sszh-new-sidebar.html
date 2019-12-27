@@ -1,0 +1,80 @@
+<template>
+	<div class="common-sszhnew-side-bar" :class="[@extra_class ? 'sszhSideBar_en' : '']">
+		<div class="side-bar-main">
+			<div :if="@foldControlShow" :class="['fold-control', @foldControlClass]" :click="foldControl($event)"></div>
+			<div :if="!@extra_class">
+				<xmp is="ms-form" :widget="{$form:@$Form,type:'search',inline:true}">
+					<div class="search-box">
+						<ms-form-item :widget="{label: ''}" :class="['device-type-type']">
+							<ms-select
+									:widget="{col:'type', value:[@devType], options:typeOptions,onChange:@handledevTypeChange}">
+							</ms-select>
+						</ms-form-item>
+
+						<ms-form-item :widget="{label: ''}" :class="['device-type-search']">
+							<!-- <ms-input :widget="{col:'search',onChange:@handleTypeValue,placeholder:'姓名/警号/名称/国标'}" :keydown="onBindKeyDown"></ms-input> -->
+							<input type="text" class="form-control" :duplex="@searchText" :blur="@onBlur"
+								   :changed="@handleTypeValue" name="search" placeholder="姓名/警号/名称/国标"
+								   :keydown="onBindKeyDown">
+						</ms-form-item>
+
+						<ul class="searchInfo" :if="searchIng && !searchData.length">
+							<li class="text-center" :if="isLoading">
+								结果加载中...
+							</li>
+
+							<li class="text-center" :if="noData">
+								暂无数据
+							</li>
+						</ul>
+
+						<!-- 查询list -->
+						<ul class="searchInfo" :if="(searchData.length>0)" :scroll="@scrollItem">
+							<li :for="($index,item) in searchData">
+								<ms-tree :widget="{tree: [@item], onSelect: @onSelectTree}"></ms-tree>
+							</li>
+						</ul>
+
+						<div class="dev-type-wrap" :if="@devTypeToolShow">
+							<p>设备类型</p>
+							<ul>
+								<li class="type-dev" :class="!isTypeDSJ && 'disactive'" :click="handleType('DSJ')"></li>
+								<li class="type-car" :class="!isTypeCZSL && 'disactive'" :click="handleType('CZSL')">
+								</li>
+								<li class="type-fastDomeCameras" :class="!isTypeKSBK && 'disactive'"
+									:click="handleType('KSBK')"></li>
+								<li class="type-drone" :class="!isTypeWRJ && 'disactive'" :click="handleType('WRJ')">
+								</li>
+							</ul>
+						</div>
+					</div>
+				</xmp>
+			</div>
+
+			<div class="check-container" :if="@devTypeToolShow">
+				<label :attr="{'for':'just-online-checkbox'}"
+					   :class="[@isJustOnline ? 'check_selected' : 'check_unselected']"></label>
+				<input type="checkbox" :attr="{'id':'just-online-checkbox'}" :duplex-checked="@isJustOnline"
+					   data-duplex-changed="@handleCheckJustOnline">
+				<label :attr="{'for':'just-online-checkbox'}">{{@sidebar_txt.onlyLive}}</label>
+
+				<label :if="!isDSJ" style="margin-left: 15px;" :attr="{'for':'just-videography-checkbox'}"
+					   :class="[@isJustVideography ? 'check_selected' : 'check_unselected']"></label>
+				<input type="checkbox" :attr="{'id':'just-videography-checkbox'}" :duplex-checked="@isJustVideography"
+					   data-duplex-changed="@handleCheckJustVideography">
+				<label :if="!isDSJ" :attr="{'for':'just-videography-checkbox'}">摄录</label>
+
+				<label :if="!isDSJ" style="margin-left: 15px;" :attr="{'for':'just-Charge-checkbox'}"
+					   :class="[@isJustCharge ? 'check_selected' : 'check_unselected']"></label>
+				<input :if="!isDSJ" type="checkbox" :attr="{'id':'just-Charge-checkbox'}"
+					   :duplex-checked="@isJustCharge" data-duplex-changed="@handleCheckJustCharge">
+				<label :if="!isDSJ" :attr="{'for':'just-Charge-checkbox'}">未充电</label>
+			</div>
+
+			<div class="ztree-container">
+				<ul :attr="{id:owner}" class="ztree"></ul>
+			</div>
+
+		</div>
+	</div>
+</template>

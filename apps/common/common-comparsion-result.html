@@ -1,0 +1,27 @@
+<template>
+    <div :css="{width:@width}" class="common-comparsion-result">
+        <div class="comparison_result">
+            <!-- <span class="result_title">{{@rlbk_detail_txt.queryingResult}}</span> -->
+            <div class="control_bar">
+                <a class="next" :click="@onNext"></a>
+                <ul></ul>
+                <a class="prev" :click="@onPre"></a>
+                <span class="pageState"></span>
+            </div>
+            <ul class="result_list">
+                <li ms-for="el in @result_list" :class="['result_li']">
+                    <div :click="@result_list_click(@el.index)" style="width:100%; height:100%;">
+                        <img :attr="{src:@el.regImg}" onerror="javascript:this.src='../../static/image/sszhxt-znsb/rlbk_404.png';">
+                        <div :class="[@extra_class ? 'rresult_danger_en' : 'result_danger']">
+                            <span>识别内容</span>
+                        </div>
+                        <!-- <div :class="[@extra_class ? 'result_txt_en' : 'result_txt']">
+                            <span>{{@el.personTypeName}}({{@el.personType}})</span>
+                            <p>{{@el.regTime | formatDate}}</p>
+                        </div> -->
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</template>

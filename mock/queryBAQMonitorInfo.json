@@ -1,0 +1,36 @@
+{
+    "code": 0,
+    "msg": "成功！",
+    "data": [{
+        "ajbh": "qige",
+        "involvedPersonName": "qige",
+        "involvedPersonIdcard": "8xxxxxx",
+        "involvedPersonType": "受害人1",
+        "userCode": "9XXX",
+        "userName": "屎忽鸿",
+        "taskStratTime": "2019-10-10 00:00:00",
+        "taskEndTime": "2019-10-10 00:00:00",
+        "remark": "lalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalala"
+        },{
+        "ajbh": "qige",
+        "involvedPersonName": "qige",
+        "involvedPersonIdcard": "8xxx123xxx",
+        "involvedPersonType": "受害人2",
+        "userCode": "8XXX",
+        "userName": "狮虎熊",
+        "taskStratTime": "2019-10-10 00:00:00",
+        "taskEndTime": "2019-10-10 00:00:00",
+        "remark": "lalala"
+        },{
+            "ajbh": "qige",
+            "involvedPersonName": "qige",
+            "involvedPersonIdcard": "8x1xxxxx",
+            "involvedPersonType": "受害人2",
+            "userCode": "8XXX",
+            "userName": "狮虎熊",
+            "taskStratTime": "2019-10-10 00:00:00",
+            "taskEndTime": "2019-10-10 00:00:00",
+            "remark": "lalala"
+            }        
+    ]
+}

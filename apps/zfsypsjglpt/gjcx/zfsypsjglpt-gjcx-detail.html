@@ -1,0 +1,181 @@
+<template>
+    <div class="zfsypsjglpt-gjcx-detail">
+
+        <div class="detail-header">
+            <span class="tetx">正在查看：{{perInfoDetail.sosPerson}}</span>
+            <span class="tetx btn-return" :click="@back()">返回
+                <i></i>
+            </span>
+        </div>
+
+        <div class=" gjglcontrol-box">
+            <div class="left-box">
+                <div class="vedio-wrap">
+                    <div class="video" id="video-ocx" :visible="isNotIE">
+                        <!-- <img src="/static/image/sszhxt-gjgl/u230.png" alt=""> -->
+                        <span>该浏览器暂不支持ocx播放视频</span>
+                    </div>
+                    <!--<object id="video-ocxobject" classid="clsid:455791d4-4095-4f70-b2b3-f5c424f25ad9" width="100%" height="400px" :visible="!isNotIE"></object>-->
+                    <!--<object :if="!@isie" id="video-ocxobject"  CLSID="{455791d4-4095-4fz70-b2b3-f5c424f25ad9}"  TYPE="application/x-itst-activex" Event_OcxEventProxy="_onOcxEventProxy" width="100%" height="400px"></object>-->
+                    <embed :if="!@isie" id="video-ocxobject" type="application/npGSVideoPlugin-plugin" name="npGSVideoPlugin"
+                        width="100%" height="95%">
+                    <object :if="@isie" id="video-ocxobject" classid="clsid:455791d4-4095-4f70-b2b3-f5c424f25ad9" width="100%"
+                        height="95%"></object>
+                    <div class="video-tool-wrap" :visible="@showPlayToolbar">
+                        <ul class="video-tool-bar">
+                            <li>
+                                <div class="sound-bar-wrap">
+                                    <div class="sound openSound" :if="@soundLevel != 0" :attr="{title: @spjk_txt.soundVolume}"></div>
+                                    <div class="sound closeSound" :if="@soundLevel === 0 " :attr="{title: @spjk_txt.soundVolume}"></div>
+                                    <div class="sound-bar">
+                                        <div class="sound-level-wrap" :click="@handleSoundClick| prevent">
+                                            <span class="sound-level" :css="{'right':(100 - @soundLevel)+'%'}"></span>
+                                            <div class="sound-btn-wrap">
+                                                <span class="sound-btn" :mousedown="handleSoundMouseDown|prevent" :css="{'left': @soundLevel + '%'}"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="fa cut" :attr="{title:@sszhxt_language.cut}" :click="@handleCut"></span>
+                            </li>
+                            <li>
+                                <span class="fa step-backward" :attr="{title:@sszhxt_language.back}" :click="@handleStepPre"></span>
+                            </li>
+                            <li>
+                                <span class="fa fast-backward" :attr="{title:@sszhxt_language.slowPlay}" :click="@handleSlower"></span>
+                            </li>
+                            <li>
+                                <span class="fa" :class="@playing ? 'pause' : 'play'" :attr="{ 'title':@playing? @sszhxt_language.pause : @sszhxt_language.play}"
+                                    :click="@handlePlay"></span>
+                            </li>
+                            <li>
+                                <span class="fa stop" :attr="{title:@sszhxt_language.stop}" :click="@handleStop"></span>
+                            </li>
+                            <li>
+                                <span class="fa fast-forward" :attr="{title:@sszhxt_language.fastPlay}" :click="@handleFaster"></span>
+                            </li>
+                            <li>
+                                <span class="fa step-forward" :attr="{title:@sszhxt_language.forward}" :click="@handleStepNext"></span>
+                            </li>
+                            <!-- <li class="video-speed">
+                                        <span>{{@sszhxt_language.singlePlay}}</span>
+                                    </li> -->
+                            <li class="video-speed">
+                                <span>{{@speed}}x{{@sszhxt_language.currentRate}}</span>
+                            </li>
+                            <li class="video-full">
+                                <span class="fa full" :click="handleMaxView"></span>
+                            </li>
+                            <li :visible="@showPlayStatus" class="playStatusPos">
+                                <span>正在播放录像 <i>{{@vedioIndex}}&nbsp;</i><span>({{@vedioIndex + '/' + @vedioTotal}})</span></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div :controller="gjglMapVm">
+                    <button type="button" class="btn btn-primary diaoduBtn" :click="addFun" :visible="@diaoduBtnToggle">{{diaoduBtnText}}</button>
+                    <!-- 地图展示 begin -->
+                    <!--<div class="dzwl-map" id="gjgl-map"></div>-->
+
+                    <!-- 语音呼叫 -->
+                    <div :controller="sszhyyth" :visible="@sszhyytoggle">
+                        <div class="sszhyyth" id="sszhyyth" style="left: 50px;top: 45px;z-index:999;left: 50%;top: 200px;bottom: 0px;">
+                            <p class="sszhyythtitle" id="sszhyythtitle" style="cursor: unset">
+                                <span>{{@sszhthjy}}</span>
+                                <span class="fa fa-times sszhyythclose" :click="@closesszhhyyth"></span>
+                                <span class="fa fa-minus sszhyythminimize" :click="@hidesszhyythaction"></span>
+                            </p>
+                            <div class="sszhyythcontent">
+                                <div style="margin-right: 15px;text-align: right;">
+                                    <label :class="[@signal<50?(@signal<15?'xhbad':'xhbetter'):'xhgood']"></label>
+                                    <span :class="[@signal<50?(@signal<15?'sszhspxhwzbad':'sszhspxhwzbetter'):'sszhspxhwzgood']">{{xhword}}</span>
+                                </div>
+                                <div class="sszhyythimg">
+                                    <img src="../../static/image/sszhxt-sszh/u301.png">
+                                    <p></p>
+                                    <p>正在语音通话中</p>
+                                    <p class="sszhyythtimecount">{{@sszhyythtime}}</p>
+                                </div>
+                                <!--<button class="btn" :click="@slience">静音</button>-->
+                                <button class="btn btn-danger" :click="@closesszhhyyth">挂断</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 语音呼叫最小化 -->
+                    <div class="" :visible="@sszhyyMinToggle" :click="@expandYyhj()" ms-html="@sszhthperson" style="position:absolute;left: 50%;bottom: 0px;width: 250px;height: 35px;z-index: 100;top: 475px;">
+                    </div>
+                </div>
+            </div>
+            <div class="right-box">
+                <div class="right-info-wrap">
+                    <div class="map-toast" :if="@noTrack">无定位信息</div>
+                    <div class="titleInfo">
+                        详细信息
+                    </div>
+
+                    <div class="footer" :css="@isRealTimeView  ? {height:'200px'} : {height:''}">
+                        <ol class="sos-detail">
+                          
+                            <li>
+                                <h5>告警时间：</h5><span :attr="{title:@perInfoDetail.time} | formatTitleDate2">{{perInfoDetail.time
+                                    | date("yyyy-MM-dd HH:mm:ss")}}</span>
+                            </li>
+                            <li>
+                                <h5>告警类型：</h5><span :attr="{title:@perInfoDetail.type}">{{perInfoDetail.type}}</span>
+                            </li>
+                            <li>
+                                <h5>所属部门：</h5><span :attr="{title:@perInfoDetail.orgName}">{{perInfoDetail.orgName}}</span>
+                            </li>
+                            <li>
+                                <h5>姓名/警号：</h5><span :attr="{title:@perInfoDetail.sosPerson}">{{perInfoDetail.sosPerson}}</span>
+                            </li>
+                            <li>
+                                <h5>国标编号：</h5><span :attr="{title:@perInfoDetail.gbcode}">{{perInfoDetail.gbcode}}</span>
+                            </li>
+                            <!-- <li>
+                                <h5>经度：</h5><span :attr="{title:@perInfoDetail.longitude}">{{perInfoDetail.longitude}}</span>
+                            </li>
+                            <li>
+                                <h5>纬度：</h5><span :attr="{title:@perInfoDetail.latitude}">{{perInfoDetail.latitude}}</span>
+                            </li> -->
+                            <li class="deal-condition">
+                                <h5>处理情况：</h5><span :attr="{title:@perInfoDetail.handleStatus}">{{perInfoDetail.handleStatus}}</span>
+                            </li>
+                            <li class="deal-opinion">
+                                <h5>处理意见：</h5>
+                                <div :if="!@areadyHandle" class="text-area-box">
+                                    <textarea class="form-control" rows="2" ms-duplex="@handleSosContent"></textarea><br />
+                                    <button type="button" class="btn btn-primary common-bg" :click="dealWarning">处理告警</button>
+                                </div>
+                                <span :if="@areadyHandle" :class="[!@perInfoDetail.opinion && 'opionionSpanWidth']"
+                                    :attr="{title:@perInfoDetail.opinion || '暂无','data-toggle':'popover'}">{{perInfoDetail.opinion
+                                    || "暂无"}}</span>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!--<iframe style="width: 50%;height:400px;position: absolute;top: 118px;background-color: rgba(55, 55, 55, .6);"></iframe>-->
+
+        <!-- <iframe id='lala' src="about:blank" marginheight="0" marginwidth="0" style="display: none; position:absolute; visibility:inherit; top:257px;left:643px;width:450px; height:220px;z-index:992;opacity:1;filter:alpha(opacity=0);background: #fff;"
+            frameborder="0"></iframe> -->
+        <!--确定处理告警弹框 -->
+        <div class="deal-warning-dialog" :controller="gjgl-dealWarning-vm">
+            <xmp :widget="{is:'common-ms-modal', modalSelector:'#zfygl-modal-delete',title:@title, btnalign:'center',drag:@drag, withIframe: true, modalWidth:450, modalHeight: 100, show:@show, onOk:@handleOk, onCancel:@handleCancel,extraChromeHandle:@extraChromeHandle}">
+                <p class="tip-text" id="zfygl-modal-delete">是否确定处理该告警？</p>
+                <iframe src="about:blank" frameBorder="0" marginHeight="0" marginWidth="0" style="position:absolute; visibility:inherit; top:0px;left:0px;width:100%; height:100%;z-index:-1;opacity:0;filter:alpha(opacity=0);"></iframe>
+            </xmp>
+        </div>
+        <ms-download-tip :widget="{show:@downloadTipShow}">
+            <div>
+                <p>{{@tipText}}<br /><span :if="@showtip">您未安装该插件，是否下载？</span></p>
+                <p class="tip-text"><i class="fa fa-info-circle"></i>安装完成后请重启浏览器</p>
+            </div>
+        </ms-download-tip>
+    </div>
+</template>

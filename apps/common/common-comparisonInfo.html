@@ -1,0 +1,62 @@
+<template>
+    <div :css="@css" class="common-main">
+        <div class="sjzx_rl_dialog"  :class="@show ? 'show' : 'hidden'">
+            <div class="return_panel">
+                <a class="return_btn" :click="@clickDown">
+                    <i class="shrink"></i>
+                </a>            
+            </div>
+            <div class="scene">
+                <span>{{@rlbk_detail_txt.sceneImgTxt}}</span>
+                <img :attr="{src:@recognition_info.shootPersonImgFilePath}" >
+            </div>
+            <div class="percent">
+                <div id="show_percent" style="height:100%;"> </div>
+                <span class="percent_span" :class="@type=='rlsb' ? 'show' : 'hidden'">{{@rlbk_detail_txt.resemblance}}</span>
+            </div>
+            <div class="recognition_content">
+                <div class="recognition" :if="@type=='rlsb'?true:false">
+                    <span>{{@rlbk_detail_txt.recognitionImgTxt}}</span>
+                    <img :attr="{src:@recognition_info.personRegImgFilePath}" >
+                </div>
+                <div class="recognition" :if="@type=='rzhy'?true:false">
+                    <span>{{@rlbk_detail_txt.recognitionImgTxt}}</span>
+                    <img :attr="{src:@recognition_info.personIDcardImgFilePath}">
+                </div>
+                <div class="recognition_label" :if="@type=='rlsb'?true:false">
+                    <label style="width:80px;text-align:right;">{{@rlbk_detail_txt.name}}：</label>
+                    <label :attr="{'data-toggle':'tooltip'}">{{@recognition_info.personName|isNull}}</label><br>
+                    <label style="width:80px;text-align:right;">{{@rlbk_detail_txt.sex}}：</label>
+                    <label :attr="{'data-toggle':'tooltip'}">{{extra_class? (@recognition_info.personGender == 1?'Male':'Female'):(@recognition_info.personGender == 1? '男':'女')}}</label><br>
+                    <label style="width:80px;text-align:right;">{{@rlbk_detail_txt.identityCard}}：</label>
+                    <label :attr="{'data-toggle':'tooltip'}" :class="[@extra_class ? 'label_m' : '']">{{@recognition_info.personCertificateId|isNull}}</label><br>
+                    <label style="width:80px;text-align:right;">{{@rlbk_detail_txt.birthplace}}：</label>
+                    <label :attr="{'data-toggle':'tooltip'}" :class="[@extra_class ? 'label_b' : '']">{{@recognition_info.personBirthPlace|isNull}}</label><br>
+                    <div class="red_tips">
+                        <span>{{@recognition_info.isNormal ?'正常':'异常'}}</span>
+                    </div>
+                </div>
+                <div class="recognition_label" :if="@type=='rzhy'?true:false">
+                    <label style="width:80px;text-align:right;">被检查人：</label>
+                    <label :attr="{'data-toggle':'tooltip'}">{{@recognition_info.personName|isNull}}</label><br>
+                    
+                    <label style="width:80px;text-align:right;">身份证号：</label>
+                    <label :attr="{'data-toggle':'tooltip'}" :class="[@extra_class ? 'label_m' : '']">{{@recognition_info.personCertificateId|isNull}}</label><br>
+                    <label style="width:80px;text-align:right;">出生地：</label>
+                    <label :attr="{'data-toggle':'tooltip'}" :class="[@extra_class ? 'label_b' : '']">{{@recognition_info.personBirthPlace|isNull}}</label><br>
+                    <div class="red_tips" style="margin-top:80px;">
+                        <!-- <span>{{@recognition_info.personTypeName}}</span> -->
+                        <span>{{@recognition_info.personIsNormal ? '正常':'异常'}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <iframe src="about:blank" marginheight="0" marginwidth="0" style="position:absolute; visibility:inherit; top:0;left:0;width:100%; height:100%;z-index:-1;opacity:1;filter:alpha(opacity=0);" frameborder="0"></iframe>
+
+        <div class="open" :if="!@show" :click="@clickUp">
+            <img src="/static/image/zfsypsjglpt/open.png">
+            <span :class="@type=='rlsb' ? 'show' : 'hidden'">人脸识别结果</span>
+            <span :class="@type=='rzhy' ? 'show' : 'hidden'">人证核验结果</span>
+        </div>
+    </div>
+</template>

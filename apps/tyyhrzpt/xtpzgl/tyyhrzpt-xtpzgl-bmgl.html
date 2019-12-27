@@ -1,0 +1,120 @@
+<template>
+    <div class="tyyhrzpt-xtpzgl-bmgl">
+        <div class="search_box" :if="@authority.SEARCH">
+            <div class="hBox">
+                <div class="dataFormBox">
+                    <span class="hbox_span">{{@bmgl.department}}</span>
+                    <div class="dep_tree" :controller="bmgl_tree">
+                        <ms-tree-selecting
+                            :widget="{tree: @bmgl_data, showSearch: true, wrapId: 'bmgl-tree-select', initCallBack:@initCallBack, getSelected: @getSelected, selectedKey: @tree_key ? @tree_key : '', selectedTitle: @tree_title ? @tree_title : '', onChange: @select_change, extraExpandHandle: @extraExpandHandle}">
+                        </ms-tree-selecting>
+                    </div>
+                </div>
+                <a class="common_search_btn" :click="@searchBtn" :if="@authority.SEARCH">{{@bmgl.query}}</a>
+            </div>
+        </div>
+        <div class="functionBtnPanel">
+            <a class="common_fuc_btn" :if="@authority.CREATE" :click="@functionBtn('add')">{{@bmgl.addOrg}}</a>
+            <a class="common_fuc_btn" :class="[@checkedList.length >= 1 ? '' : 'common_fuc_btn_disable']"
+                :if="@authority.YC" :click="@functionBtn('hide')">{{@bmgl.hideOrg}}</a>
+            <a class="common_fuc_btn" :class="[@checkedList.length >= 1 ? '' : 'common_fuc_btn_disable']"
+                :if="@authority.XS" :click="@functionBtn('show')">{{@bmgl.showOrg}}</a>
+            <a class="common_fuc_btn" :class="[@checkedList.length == 1 ? '' : 'common_fuc_btn_disable']"
+                :if="@authority.EDIT" :click="@functionBtn('edit')">{{@bmgl.editOrg}}</a>
+            <a class="common_fuc_btn" :class="[@checkedList.length == 1 ? '' : 'common_fuc_btn_disable']"
+                :if="@authority.DELETE" :click="@functionBtn('delete')">{{@bmgl.deleteOrg}}</a>
+        </div>
+        <div class="bmgl_table">
+            <ms-comtable
+                :widget="{id:'table-bmgl', loading: @tableLoading, data:@tableData, actions:@actions, getCheckedList:@getCheckedList, panelCss:{position: 'absolute', width: '100%', bottom: '0', top: '34px'}}">
+                <ms-comtable-header :widget="{dataIndex:'id', type:'selection', colwidth:'5%'}">
+                </ms-comtable-header>
+                <ms-comtable-header :widget="{title:'序号', dataIndex:'index', colwidth:'5%', popover:true}">
+                </ms-comtable-header>
+                <ms-comtable-header :widget="{title:'部门名称', dataIndex:'orgName', colwidth:'30%', popover:true}">
+                </ms-comtable-header>
+                <ms-comtable-header :widget="{title:'部门编码', dataIndex:'orgCode', colwidth:'25%', popover:true}">
+                </ms-comtable-header>
+                <ms-comtable-header :widget="{title:'可见性', dataIndex:'switchStatus', colwidth:'10%', popover:true}">
+                </ms-comtable-header>
+                <ms-comtable-header :widget="{title:'业务类别', dataIndex:'businessType', colwidth:'25%', popover:true}">
+                </ms-comtable-header>
+            </ms-comtable>
+        </div>
+        <ms-pages
+            :widget="{total:@table_pagination.total, pageSize:@table_pagination.pageSize, current:@table_pagination.current, onChange:@handlePageChange, getCurrent:@getCurrent}">
+        </ms-pages>
+
+        <!--hide/show/delete弹窗-->
+        <div class="bmgl_dialog">
+            <ms-dialog
+                :widget="{$innerVm: 'bmgl_dialog', okText: '确定', cancelText: '取消', className: 'bmgl_dialog_common', show: @bmgl_dialog_show, onCancel: @dialogCancel, onOk:@dialogOk, isMove:true, width: 450, height: 220}">
+                <div slot="body" ms-skip>
+                    <span>是否确定{{@functionTxt}}选中的部门？</span>
+                </div>
+            </ms-dialog>
+        </div>
+
+        <!--add/edit弹窗-->
+        <div class="bmgl_dialog">
+            <ms-dialog
+                :widget="{$innerVm: 'add_edit_dialog', okText: '确定', cancelText: '取消', className: 'bmgl_dialog_common add_edit_dialog', show: @add_edit_dialog_show, onCancel: @addEditCancel, onOk:@addEditOk, isMove:true, width: 450, height: 440}">
+                <div slot="body" ms-skip>
+                    <div class="dataFormBox">
+                        <span class="form_span"><i class="fillIcon">* </i>{{@bmgl.orgName}}</span>
+                        <div class="bgml_input_panel" :class="[@orgNameError ? 'nullInputClass' : '']">
+                            <input type="text" ms-duplex="@orgName" class="form-control-input" :attr="{title: @orgName}"
+                                :focus="@input_focus('orgName')" :blur="@input_blur('orgName')"
+                                :class="[@orgNameClose ? 'closeInputWidth' : '']">
+                            <span class="fa fa-close bgml_close" :mousedown="@close_click('orgName')"
+                                :if="@orgNameClose"></span>
+                            <span class="tipsClass" :class="[@orgNameError ? 'tipsNullClass' : '']"
+                                :if="@orgNameFocus">{{@bmgl.nameTip}}</span>
+                        </div>
+                    </div>
+                    <div class="dataFormBox">
+                        <span class="form_span"><i class="fillIcon">* </i>{{@bmgl.orgNum}}</span>
+                        <div class="bgml_input_panel"
+                            :class="[@orgNumError ? 'nullInputClass' : '', @editType ? 'inputDisable' : '']">
+                            <input type="text" ms-duplex="@orgNum" class="form-control-input"
+                                :attr="{title: @orgNum, readonly: @editType}" :focus="@input_focus('orgNum')"
+                                :blur="@input_blur('orgNum')"
+                                :class="[@orgNumClose ? 'closeInputWidth' : '', @editType ? 'inputDisable' : '']">
+                            <span class="fa fa-close bgml_close" :mousedown="@close_click('orgNum')"
+                                :if="@orgNumClose"></span>
+                            <span class="tipsClass" :class="[@orgNumError ? 'tipsNullClass' : '']"
+                                :if="@orgNumFocus">{{@bmgl.numTip}}</span>
+                        </div>
+                    </div>
+                    <div class="dataFormBox dataList">
+                        <span class="form_span"><i class="fillIcon">* </i>{{@bmgl.businessType}}</span>
+                        <div class="checkboxCSS">
+                            <ul class="checkbox-group device-checkbox-group">
+                                <li :for="($index,el) in @businessTypeArr">
+                                    <input type="checkbox" :attr="{'id': 'bzlx'+$index, 'value': el.code}"
+                                        :duplex="@businessTypeCheckedArr"
+                                        data-duplex-changed="@handleDeviceCheck($event)">
+                                    <label :attr="{'for':'bzlx'+$index}"
+                                        :class="['select-label', @businessTypeCheckedArr.indexOf(el.code) > -1 ? 'check_selected' : 'check_unselected']"></label>
+                                    <label>{{el.name}}</label>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="dataFormBox">
+                        <span class="form_span"><i class="fillIcon">* </i>{{@bmgl.sort}}</span>
+                        <div class="bgml_input_panel" :class="[@sortError ? 'nullInputClass' : '']">
+                            <input type="text" ms-duplex="@sort" class="form-control-input" :attr="{title: @sort}"
+                                :focus="@input_focus('sort')" :blur="@input_blur('sort')"
+                                :class="[@sortClose ? 'closeInputWidth' : '']">
+                            <span class="fa fa-close bgml_close" :mousedown="@close_click('sort')"
+                                :if="@sortClose"></span>
+                            <span class="tipsClass" :class="[@sortError ? 'tipsNullClass' : '']"
+                                :if="@sortFocus">{{@bmgl.sortTip}}</span>
+                        </div>
+                    </div>
+                </div>
+            </ms-dialog>
+        </div>
+    </div>
+</template>

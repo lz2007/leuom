@@ -1,0 +1,750 @@
+.tyyhrzpt_jsgl {
+    margin: 0 auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    /* header begins*/
+    // .operationHbox {
+    //     width: 100%;
+    //     height: 60px;
+    //     line-height: 60px;
+    //     color: #fff;
+    //     background-color: #f3f5f7;
+    //     margin: 8px 0px;
+    //     border: 1px solid #E4e4e4;
+    //      /* 给li设置cursor:pointer不生效 */
+    //     ul{
+    //         li {
+    //             display: inline-block;
+    //             width: 100px;
+    //             height: 30px;
+    //             line-height: 30px;
+    //             margin: 0 10px;
+    //             background-color: #1c9bff;
+    //             text-align: center;
+    //             label {
+    //                 font-weight: normal;
+    //                 cursor: pointer;
+    //                 margin-bottom: 0px;
+    //             }
+    //         }
+    //         li:hover {
+    //             background-color: #107dda;
+    //         }
+    //         .jsMenuBg{
+    //             background-color: #D4D7D9 !important;
+    //             cursor: not-allowed;
+    //             label{
+    //                 cursor: not-allowed;
+    //             }
+    //         }
+    //     }
+    // }
+    /* header ends*/
+    /* contents begins*/
+    .contentBox {
+        width: 100%;
+        height: 100%;
+        top: 0;
+        bottom: 0;
+        border: none;
+        background: none;
+        position: absolute;
+
+        // position: absolute;
+        // top: 68px;
+        // bottom: 8px;
+        // border: 1px solid #D7D7D7;
+        .roleLists {
+            width: 360px;
+            display: inline-block;
+            height: 100%;
+            background: #e6edf7;
+            text-align: center;
+            float: left;
+            box-sizing: border-box;
+            position: relative;
+            padding-top: 50px;
+            border: none;
+
+            .common_header {
+                height: 50px;
+                line-height: 50px;
+                background: #1c2551;
+                position: absolute;
+                top: 0;
+                text-align: left;
+                width: 100%;
+                color: #fff;
+                font-size: 20px;
+                padding-left: 20px;
+                padding-right: 20px;
+
+                .add_role {
+                    position: absolute;
+                    right: 20px;
+                    height: 16px;
+                    width: 16px;
+                    top: 50%;
+                    margin-top: -8px;
+                }
+
+                .add_role:hover {
+                    cursor: pointer;
+                }
+            }
+
+            .roleLists_body {
+                height: 100%;
+                overflow-y: auto;
+                text-align: left;
+                padding-top: 20px;
+
+                li {
+                    height: 40px;
+                    line-height: 40px;
+                    cursor: pointer;
+                    position: relative;
+                    margin-left: 10px;
+                    margin-right: 10px;
+
+                    .role_div {
+                        height: 100%;
+                        width: 100%;
+                    }
+
+                    .role_div:hover {
+                        background: #d1e1f7;
+                        color: #1055b3;
+                    }
+
+                    span {
+                        display: inline-block;
+                        width: 100%;
+                        height: 100%;
+                        overflow: hidden;
+                        font-size: 16px;
+                        color: #33414f;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                        padding-left: 10px;
+                        padding-right: 72px;
+                    }
+
+                    .operate {
+                        position: absolute;
+                        right: 20px;
+                        top: 0;
+                    }
+
+                    .operate_lf {
+                        right: 56px;
+                    }
+                }
+
+                .item_select {
+                    background: #d1e1f7;
+                    color: #1055b3;
+                }
+
+                .move_index:hover {
+                    background: #d1e1f7;
+                    color: #1055b3;
+                }
+            }
+        }
+
+        .panel-default-mask::-webkit-scrollbar {
+            display: none;
+        }
+
+        .authority_tree_box {
+            margin-left: 370px;
+            height: 100%;
+            position: relative;
+            padding-top: 50px;
+            background: #e6edf7;
+
+            .common_header {
+                left: 0px;
+                right: 0px;
+                top: 0;
+                height: 50px;
+                line-height: 50px;
+                font-size: 20px;
+                color: #fff;
+                padding-left: 20px;
+                background: #1c2551;
+                position: absolute;
+
+                .tab {
+                    color: #a7ddff;
+                    background-color: #2c477a;
+                    width: 120px;
+                    text-align: center;
+                    float: left;
+                    cursor: pointer;
+
+                    &:hover,
+                    &.selectedtab {
+                        color: #fff;
+                        background-color: #1055b3;
+                    }
+                }
+            }
+
+            .tree_box {
+                padding: 40px;
+                padding-top: 30px;
+                position: absolute;
+                top: 50px;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                overflow-y: auto;
+
+                .checkall {
+                    position: relative;
+                    width: 100%;
+                    overflow: hidden;
+                    display: inline-block;
+                    margin-bottom: 30px;
+
+                    .read {
+                        position: absolute;
+                        top: 0;
+                        bottom: 0;
+                        left: 0;
+                        width: 20px;
+                        z-index: 1;
+                    }
+
+                    input {
+                        display: none;
+                    }
+
+                    label {
+                        height: 16px;
+                        width: 16px;
+                        vertical-align: sub;
+                        margin-bottom: 0;
+                    }
+
+                    .check_selected {
+                        background: url(/static/image/xtpzgl-gnqx/check_selected.png) center center no-repeat;
+                    }
+
+                    .check_unselected {
+                        background: url(/static/image/xtpzgl-gnqx/check_unselected.png) center center no-repeat;
+                    }
+
+                    .tree_title {
+                        font-size: 16px;
+                        margin-left: 10px;
+                    }
+                }
+
+                .tree_row_box {
+                    position: absolute;
+                    top: 84px;
+                    bottom: 0;
+                    left: 15px;
+                    right: 15px;
+
+                    .jsgl_card {
+                        border: 1px solid #ccdbf1;
+                        width: 380px;
+                        height: 100%;
+                        display: inline-block;
+
+                        p {
+                            background-color: #ccdbf1;
+                            color: #2c477a;
+                            font-size: 16px;
+                            height: 36px;
+                            line-height: 36px;
+                            margin: 0;
+                            padding-left: 20px;
+                        }
+
+                        .jsgl_tree {
+                            // height: 330px;
+                            position: absolute;
+                            top: 36px;
+                            bottom: 0;
+                            left: 0;
+                            right: 20px;
+
+                            .read {
+                                position: absolute;
+                                top: 0;
+                                bottom: 0;
+                                left: 20px;
+                                right: 255px;
+                                z-index: 1;
+                            }
+
+                            .authority_tree {
+                                margin-left: 20px;
+                                overflow-y: auto;
+                                height: 100%;
+                                width: 100%;
+
+                                .ztree {
+                                    span {
+                                        color: #536b82;
+                                    }
+
+                                    li {
+                                        a {
+                                            margin-top: 20px;
+                                        }
+
+                                        span.button.chk {
+                                            height: 16px;
+                                            width: 16px;
+                                            margin-top: 20px;
+                                            margin-right: 10px;
+                                        }
+
+                                        span.button.ico_open,
+                                        span.button.ico_close,
+                                        span.button.ico_docu,
+                                        span.button.switch {
+                                            display: none;
+                                        }
+
+                                        ul.line {
+                                            background: none;
+                                        }
+
+                                        span.button.chk.checkbox_true_full {
+                                            background: url(/static/image/xtpzgl-gnqx/check_selected.png) center center no-repeat;
+                                        }
+
+                                        span.button.chk.checkbox_true_full_focus {
+                                            background: url(/static/image/xtpzgl-gnqx/check_selected.png) center center no-repeat;
+                                        }
+
+                                        span.button.chk.checkbox_false_full {
+                                            background: url(/static/image/xtpzgl-gnqx/check_unselected.png) center center no-repeat;
+                                        }
+
+                                        span.button.chk.checkbox_false_full_focus {
+                                            background: url(/static/image/xtpzgl-gnqx/check_unselected.png) center center no-repeat;
+                                        }
+
+                                        span.button.chk.checkbox_true_part {
+                                            background: url(/static/image/xtpzgl-gnqx/check_unselected.png) center center no-repeat;
+                                        }
+
+                                        span.button.chk.checkbox_true_part_focus {
+                                            background: url(/static/image/xtpzgl-gnqx/check_unselected.png) center center no-repeat;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    .jsgl_tree_box {
+                        // position: absolute;
+                        // top: 0;
+                        // left: 0;
+                        position: relative;
+                        float: left;
+                        margin: 0 25px 40px 25px;
+                        height: 366px;
+                    }
+
+                    .first_card_row {
+                        // height: 366px;
+                        // margin-top: -5px;
+                        // position: relative;
+                        position: absolute;
+                        margin-bottom: 20px;
+                        top: 0;
+                        bottom: 50%;
+                        left: 0;
+                        right: 0;
+
+                        .jsgl_sjzx {
+                            position: absolute;
+                            top: 0;
+                            left: 430px;
+                        }
+
+                        .jsgl_jdzx {
+                            position: absolute;
+                            top: 0;
+                            left: 860px;
+                        }
+                    }
+
+                    .second_card_row {
+                        // margin-top: 40px;
+                        // height: 366px;
+                        // position: relative;
+                        position: absolute;
+                        margin-top: 20px;
+                        top: 50%;
+                        bottom: 0;
+                        left: 0;
+                        right: 0;
+
+                        .jsgl_ywzx {
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                        }
+
+                        .jsgl_pzzx {
+                            position: absolute;
+                            top: 0;
+                            left: 430px;
+                        }
+                    }
+                }
+            }
+
+            .panel-body {
+                padding: 15px 20px;
+                line-height: 2;
+                font-size: 16px;
+                color: #33414f;
+            }
+
+            .panel-body-default {
+                position: absolute;
+                width: 100%;
+                height: auto;
+                left: 0;
+                top: 50;
+                opacity: .5;
+                background: #e6edf7;
+                z-index: 999;
+                cursor: not-allowed;
+            }
+
+            .list-loading {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                z-index: 2;
+                background: url(/static/image/xtpzgl-gnqx/loading.gif) center center no-repeat;
+                background-color: rgba(0, 0, 0, .1);
+
+                span {
+                    width: 100%;
+                    text-align: center;
+                    position: absolute;
+                    top: 52%;
+                    left: 0;
+                }
+            }
+
+            .userRole {
+                width: 100%;
+                height: 100%;
+                position: relative;
+
+                .list-loading {
+                    background-color: #fff;
+                }
+
+                ul {
+                    overflow: auto;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 40px;
+
+                    li {
+                        float: left;
+                        width: 20%;
+                        height: 40px;
+                        line-height: 40px;
+                        padding: 0 5px;
+                        text-align: center;
+
+                        span {
+                            display: block;
+                            overflow: hidden;
+                            white-space: nowrap;
+                            text-overflow: ellipsis;
+                        }
+                    }
+
+                    .userRoleNull {
+                        display: block;
+                        width: 100%;
+                        height: 100%;
+                        text-align: center;
+                        padding-top: 20px;
+                        color: #33414f;
+                    }
+                }
+            }
+
+
+        }
+    }
+
+    /* contents ends */
+    .deleteRole_dialog {
+        .modal-body {
+            text-align: center;
+        }
+    }
+
+    .common_dialog .modal-footer button,
+    .authority_dialog .modal-footer a {
+        width: 120px;
+        height: 30px;
+        background-color: #0078D7;
+        color: #fff;
+        border-radius: 2px;
+        display: inline-block;
+        border: 1px solid #0078D7;
+        line-height: 10px;
+    }
+
+    .authority_dialog {
+        .modal-body {
+            text-align: center;
+            font-size: 16px;
+            padding: 31px 24px 31px 24px;
+        }
+
+        .modal-footer {
+            padding: 0px 24px 15px 24px;
+            text-align: center;
+
+            a {
+                line-height: 16px;
+            }
+
+            button:hover {
+                background-color: #0057a1;
+            }
+        }
+    }
+}
+
+/* 弹窗begin */
+
+.jsgl_common_dialog {
+    color: #536b82;
+
+    .modal-header {
+        height: 50px;
+        line-height: 50px;
+        background-color: #1c2551;
+        color: #fff;
+        border-color: #1c2551;
+        padding: 0 20px 0 20px;
+
+        h4 {
+            font-size: 20px;
+            height: 50px;
+            line-height: 50px;
+        }
+
+        .close {
+            height: 50px;
+            line-height: 50px;
+            margin-top: 0;
+        }
+    }
+
+    .modal-body {
+        height: 145px;
+        padding: 35px 0;
+        text-align: center;
+        background-color: #e6edf7;
+    }
+
+    .modal-footer {
+        height: 70px;
+        border-top: 0;
+        background-color: #ccdbf1;
+        padding: 0;
+        text-align: center;
+
+        .btn {
+            background-color: #1055b3;
+            margin-top: 15px;
+            height: 40px;
+            width: 130px;
+            font-size: 16px;
+            color: #fff;
+        }
+
+        .btn-default {
+            margin-left: 40px;
+        }
+    }
+}
+
+/* 弹窗end */
+
+/* 编辑弹窗begin */
+
+.jsgl_add_edit_dialog {
+    .common_input {
+        width: 100%;
+        height: 26px;
+        position: relative;
+        text-align: center;
+
+        .has-error {
+            border-color: #d2403d !important;
+        }
+
+        .disableEdit {
+            background-color: #b2b2b2 !important;
+            cursor: not-allowed;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .red_start {
+            width: 6px;
+            height: 16px;
+            line-height: 16px;
+            display: inline-block;
+            color: red;
+        }
+
+        label {
+            font-size: 16px;
+            color: #33414f;
+            margin: 0;
+            height: 26px;
+            line-height: 26px;
+            vertical-align: top;
+            margin-right: 10px;
+            font-weight: normal;
+            width: 85px;
+            text-align: right;
+        }
+
+        .xtpzgl-gnqx_input_panel {
+            color: #536b82;
+            border: 1px solid #ccc;
+            display: inline-block;
+            position: relative;
+            border-radius: 4px;
+            background-color: #fff;
+
+            input {
+                width: 200px;
+                padding-left: 10px;
+                padding-right: 26px;
+                float: left;
+                display: block;
+                height: 26px;
+                line-height: 26px;
+                font-size: 14px;
+                background-color: #fff;
+                color: #536b82;
+                border-radius: 2px;
+                border: 0;
+            }
+
+            input:focus {
+                outline: 0;
+            }
+
+            .jsgl_right_close {
+                position: absolute;
+                right: 0px;
+                display: inline-block;
+                width: 26px;
+                height: 26px;
+                vertical-align: middle;
+                line-height: 26px;
+                text-align: center;
+                cursor: pointer;
+                z-index: 2;
+                font-size: 16px;
+                color: #536b82;
+                top: 0;
+            }
+        }
+    }
+
+    .roleNameTips {
+        height: 20px;
+        line-height: 20px;
+        padding-left: 75px;
+
+        span {
+            i {
+                font-size: 12px;
+            }
+        }
+
+        .roleNameSpan {
+            font-size: 12px;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            float: left;
+            height: 20px;
+            padding-left: 94px;
+
+            i {
+                font-style: normal;
+                float: left;
+            }
+
+            .fa-exclamation-circle {
+                font-size: 12px;
+                padding-top: 6px;
+            }
+        }
+    }
+
+    .jsgl_tip {
+        color: #aaa;
+    }
+
+    .jsgl_null_tip {
+        color: #d2403d;
+    }
+
+    .jsgl_change_padding {
+        /* padding-right: 30px !important; */
+    }
+
+    /* 屏蔽输入框默认的x */
+    input::-ms-clear {
+        display: none;
+    }
+}
+
+/* 编辑弹窗end */
+
+/* 删除弹窗begin */
+
+.jsgl_deleteRole_dialog {
+    .bootbox-body {
+        p {
+            text-align: center;
+            margin: 0;
+            height: 26px;
+            line-height: 26px;
+            font-size: 16px;
+            color: #33414f;
+        }
+    }
+}
+
+/* 删除弹窗end */

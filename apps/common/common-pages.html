@@ -1,0 +1,69 @@
+<template>
+    <div>
+        <div class="com-pages" :if="@total!=0 && @languageSelect_pages">
+            <span class="cmp-pageSize">{{@commonLan.eachPage}}{{pageSize}}{{@commonLan.item}}</span>
+            <span class="cmp-total" :if="!@overLimit">{{@commonLan.total}}{{total}}{{@commonLan.records}}</span>
+            <!-- <span class="cmp-limit" :if="@overLimit">{{@commonLan.greater}}{{total}}{{@commonLan.records}}</span> -->
+             <!-- 非执法档案模块超数量应用 -->
+             <span class="cmp-limit" :if="@overLimit&&!@iszfda">{{@commonLan.greater}}{{total}}{{@commonLan.records}}</span> 
+             <!-- 执法档案模块超数量应用 -->
+             <div class="cmp-limit" :if="@overLimit&&@iszfda">
+                 <span>{{@commonLan.greater}}</span>
+                 <div class="cmp-limit-loading">
+                     <div class="bounce1"></div>
+                     <div class="bounce2"></div>
+                     <div class="bounce3"></div>
+                 </div>
+                 <span>{{@commonLan.records}}</span>
+             </div>
+            <span class="btn hp" :class="@current == 1 && 'disabeld'" :click="@homePage">{{@commonLan.home}}</span>
+            <span class="btn prev" :class="@current == 1 && 'disabeld'" :click="@prevPage">{{@commonLan.previousPage}}</span>
+            <!-- <a class="cmp-cp" href="javascript:void(0)">{{current}}/{{pageTotal}}</a> -->
+            <a class="cmp-cp" href="javascript:void(0)" :if="!@overLimit">{{current}}/{{pageTotal}}</a>
+            <!-- 非执法档案模块超数量应用 -->
+            <a class="cmp-cp" href="javascript:void(0)" :if="@overLimit&&!@iszfda">{{current}}/{{pageTotal}}</a>
+            <!-- 执法档案模块超数量应用 -->
+            <a class="cmp-cp pageloading" href="javascript:void(0)" :if="@overLimit&&@iszfda">{{current}}/</a>
+            <div class="spinner" :if="@overLimit&&@iszfda">
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
+            </div>
+            <span class="btn next" :class="@current == @pageTotal && 'disabeld'" :click="@nextPage">{{@commonLan.nextPage}}</span>
+            <span class="btn ep" :class="@current == @pageTotal && 'disabeld'" :click="@endPage">{{@commonLan.endPage}}</span>
+        </div>
+
+        <div class="com-pages" :if="@total!=0 && !@languageSelect_pages">
+            <span class="cmp-pageSize">{{pageSize}} {{@commonLan.enEachPage}}</span>
+            <span class="cmp-total" :if="!@overLimit">, {{total}}{{@commonLan.enRecords}}</span>
+            <!-- <span class="cmp-limit" :if="@overLimit">{{@commonLan.enGreater}}{{total}}{{@commonLan.enRecords}}</span> -->
+             <!-- 非执法档案模块超数量应用 -->
+             <span class="cmp-limit" :if="@overLimit&&!@iszfda">{{@commonLan.enGreater}}{{total}}{{@commonLan.enRecords}}</span> 
+             <!-- 执法档案模块超数量应用 -->
+             <div class="cmp-limit" :if="@overLimit&&@iszfda">
+                 <span>{{@commonLan.enGreater}}</span>
+                 <div class="cmp-limit-loading">
+                     <div class="bounce1"></div>
+                     <div class="bounce2"></div>
+                     <div class="bounce3"></div>
+                 </div>
+                 <span>{{@commonLan.enRecords}}</span>
+             </div>
+            <span class="btn hp" :class="@current == 1 && 'disabeld'" :click="@homePage">{{@commonLan.enHome}}</span>
+            <span class="btn prev" :class="@current == 1 && 'disabeld'" :click="@prevPage">{{@commonLan.enPreviousPage}}</span>
+            <!-- <a class="cmp-cp" href="javascript:void(0)">{{current}}/{{pageTotal}}</a> -->
+            <a class="cmp-cp" href="javascript:void(0)" :if="!@overLimit">{{current}}/{{pageTotal}}</a>
+            <!-- 非执法档案模块超数量应用 -->
+            <a class="cmp-cp" href="javascript:void(0)" :if="@overLimit&&!@iszfda">{{current}}/{{pageTotal}}</a>
+            <!-- 执法档案模块超数量应用 -->
+            <a class="cmp-cp pageloading" href="javascript:void(0)" :if="@overLimit&&@iszfda">{{current}}/</a>
+            <div class="spinner" :if="@overLimit&&@iszfda">
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
+            </div>
+            <span class="btn next" :class="@current == @pageTotal && 'disabeld'" :click="@nextPage">{{@commonLan.enNextPage}}</span>
+            <span class="btn ep" :class="@current == @pageTotal && 'disabeld'" :click="@endPage">{{@commonLan.enEndPage}}</span>
+        </div>
+    </div>
+</template>

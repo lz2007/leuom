@@ -1,0 +1,183 @@
+.xtpzgl_yhlb {
+    .searchBox {
+        width: 100%;
+        height: 68px;
+        padding: 20px 30px;
+        background-color: #b0c4e1;
+        color: #33414f;
+
+        .dataFormBox {
+            float: left;
+            width: auto;
+            margin-right: 60px;
+
+            & > span {
+                float: left;
+                height: 28px;
+                line-height: 28px;
+                max-width: 100%;
+                // margin-bottom: 5px;
+                color: #33414f;
+                font-size: 16px;
+                margin-right: 10px;
+            }
+
+            .dep_tree {
+                float: left;
+                width: 175px;
+
+                .form-control {
+                    height: 28px;
+                    line-height: 28px;
+                    overflow: hidden;
+                }
+
+                input {
+                    border: 0px;
+
+                    &:focus {
+                        outline: 0px;
+                    }
+                }
+            }
+        }
+
+        .search_btn {
+            float: right;
+            width: 110px;
+            height: 36px;
+            line-height: 36px;
+            text-align: center;
+            background-color: #074eb0;
+            color: #fff;
+            cursor: pointer;
+            margin-right: -10px;
+            margin-top: -4px;
+            font-size: 16px;
+            font-weight: bold;
+
+            &:hover {
+                background-color: #0067f3;
+            }
+        }
+    }
+
+    input::-ms-clear {
+        display: none;
+    }
+}
+
+.yhlb_dialog_common {
+    .modal-header {
+        cursor: move;
+        background-color: #1c2551;
+        color: #ffffff;
+
+        .modal-title {
+            font-size: 16px;
+        }
+    }
+
+    .modal-body {
+        height: 118px;
+        padding: 45px 80px;
+    }
+
+    .modal-footer {
+        background-color: #ccdbf1;
+
+        .btn {
+            width: 130px;
+            height: 40px;
+            line-height: 40px;
+            padding: 0;
+            color: #fff;
+            background-color: #0078d7;
+            border: 0;
+            border-radius: 0px;
+
+            &:hover {
+                background-color: #0057a1;
+            }
+
+            &:focus {
+                outline: 0px;
+            }
+        }
+
+        .btn-primary {
+            float: left;
+            margin-left: 55px;
+        }
+
+        .btn-default {
+            float: right;
+            margin-right: 55px;
+        }
+    }
+
+    .loginPasswordTxt {
+        float: left;
+        font-size: 16px;
+        color: #33414f;
+        height: 28px;
+        line-height: 28px;
+        margin-right: 10px;
+    }
+
+    .passwordNull {
+        position: absolute;
+        left: 0;
+        top: 27px;
+        color: #d2403d;
+        font-size: 12px;
+    }
+}
+
+.xtpzgl_yhlb,
+.yhlb_dialog_common {
+    .yhlb_input_panel {
+        position: relative;
+        float: left;
+        width: 175px;
+        border: 1px solid #ccc;
+        background-color: #fff;
+        border-radius: 4px;
+
+        &.loginPasswordNullInput {
+            border: 1px solid #d2403d;
+        }
+
+        .form-control-input {
+            float: left;
+            width: 151px;
+            height: 26px;
+            line-height: 26px;
+            margin-left: 11px;
+            font-size: 14px;
+            background-color: #fff;
+            border: none;
+            box-sizing: border-box;
+            outline: medium;
+        }
+
+        .yhlb_close {
+            position: absolute;
+            right: 0;
+            top: 0;
+            margin-bottom: 0;
+            display: inline-block;
+            width: 22px;
+            height: 26px;
+            line-height: 26px;
+            margin: 0;
+            vertical-align: middle;
+            text-align: center;
+            cursor: pointer;
+            z-index: 2;
+            font-size: 14px;
+            font-weight: normal;
+            color: #33414f;
+        }
+    }
+}

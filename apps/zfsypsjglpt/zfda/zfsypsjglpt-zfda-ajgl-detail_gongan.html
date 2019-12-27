@@ -1,0 +1,432 @@
+<!--
+ * @Author: 陈锦兴
+ * @Date: 2019-08-07 17:26:39
+ * @LastEditTime: 2019-09-05 11:07:02
+ * @Description: 
+ -->
+<template>
+    <div class="ajgl-container detailClass" :controller="zfdaDetail">
+        <div class="item_info">
+            <a class="return_btn" :click="@returnBtn">{{@zfda.back}}<i></i></a>
+        </div>
+        <div class="playerSize">
+            <!-- 视频音频播放 -->
+            <div class="ajgl-object" id="ocxPlayer" :if="@ocxPlayer">
+                <ms-player :widget="{src: @video_url, ajbh:@ajgl_ajbh, special_id:'ply', media_type:@media_type, player_width:@web_width, player_height:@web_height, player_left:@web_left, player_top:@web_top, play_status:@play_status,dialog_status:@dialog_status, fileName:@fileName}"></ms-player>
+            </div>
+            <!-- 图片播放 -->
+            <div class="media_img" :if="@show_img">
+                <img :attr="{src: @play_url}" :if="@media_no_img" />
+                <div class="media_img_show" >
+                    <ms-pic-player :widget="{src: @play_url, playerID:'zfyps', preview_w:'450', preview_h:'250'}"></ms-pic-player>
+                </div>
+                <!-- <div class="media_no_img" :if="!@media_no_img">
+                    <img src="/static/image/zfsypsjglpt/pic_img.png" />
+                    <span>抱歉，由于网络、数据等原因，图片暂时无法查看</span>
+                </div> -->
+            </div>
+        </div>
+        <!--轨迹定位-->
+        <div class="mapSize" :visible="!@isNingxia">
+            <div class="glmt-cj-content" :visible="@glmt_map_Show" style="height: 100%;">
+                <ms-gjdw-map :widget="{ajaxData: @mapAjaxData, mapShow: @glmt_map_Show, mapStyle: @mapStyle}"></ms-gjdw-map>
+            </div>
+        </div>
+        <div class="infoSize" :if="!@ajShow" :css="[@isNingxia && {top: 0}]">
+            <div class="infoTitle">
+                <div class="fontDiv">
+                    <span>{{rightInfoTitle}}</span>
+                </div>
+                <div class="uploadbtnSize" :click="@openUploadWindow" :if="!@isNingxia">
+                    <a class="uploadbtn"><img src="/static/image/zfsypsjglpt/uploadIcon.png" class="uploadbtnImg"><p>{{@zfda.upload}}</p></a>
+                </div>
+                <div class="uploadbtnSize relationSize" :if="!@isNingxia" :click="@openRelateWindow">
+                    <a class="uploadbtn"><img src="/static/image/zfsypsjglpt/relationIcon.png" class="uploadbtnImg"><p>{{@zfda.relatedMedia}}</p></a>
+                </div>
+            </div>
+            <div class="infoDetail" :css="[@isNingxia && {height: '680px'}]">
+                <div class="infoulSize">
+                    <ul>
+                        <li ms-for="el in @rightInfo" class="fontOverHidden">
+                            <span style="float:left;">{{el.title}}</span>
+                            <span class="txt" :attr="{'data-toggle':'tooltip'}" style="margin-left: 5px">{{el.data | checkNull}}</span></li>
+                    </ul>
+                </div>
+                <div class="btn-wrap-cont" :visible="@isNingxia">
+                    <div :class="['uploadbtnBigSize', @nodata && 'disabledBtn']" :click="@openUploadWindow">
+                        <a class="uploadbtn"><img src="/static/image/zfsypsjglpt/uploadIcon.png" class="uploadbtnImg"><p>{{@zfda.upload}}</p></a>
+                    </div>
+                    <div :class="['uploadbtnBigSize', 'relationSize', @nodata && 'disabledBtn']" :click="@openRelateWindow">
+                        <a class="uploadbtn"><img src="/static/image/zfsypsjglpt/relationIcon.png" class="uploadbtnImg"><p>{{@zfda.relatedMedia}}</p></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="aj_info" :if="@ajShow" :css="[@isNingxia && {top: 0, height: '720px'}]">
+            <div>
+                <span class="tab" :class="[@selectTab == '0' ? 'tabActive' : '']" :click="@selectClick(0)">{{@zfda.caseInformation}}</span>
+                <span class="tab" :class="[@selectTab == '1' ? 'tabActive' : '']" :click="@selectClick(1)">{{@zfda.pickPolice}}</span>
+                <span class="tab" :class="[@selectTab == '2' ? 'tabActive' : '']" :click="@selectClick(2)">{{@zfda.workingArea}}</span>
+                <div class="uploadbtnSize" :click="@openUploadWindow" :if="@zfda_opt.authority.UPLOAD&&!@isNingxia">
+                    <a class="uploadbtn"><img src="/static/image/zfsypsjglpt/uploadIcon.png" class="uploadbtnImg"><p>{{@zfda.upload}}</p></a>
+                </div>
+                <div class="uploadbtnSize relationSize" :click="@openRelateWindow" :if="@zfda_opt.authority.TJGL&&!@isNingxia">
+                    <a class="uploadbtn"><img src="/static/image/zfsypsjglpt/relationIcon.png" class="uploadbtnImg"><p>{{@zfda.relatedMedia}}</p></a>
+                </div>
+            </div>
+            <div class="ajContent">
+                <div class="infoPanel" ms-for="item in @ajShowInfo" :visible="@selectTab != '2'" :class="[@selectTab == '1' ? 'infoPanelHover' : '']">
+                    <div class="infoContent">
+                        <span :click="@infoClick(item)" class="contentTitle">{{@item.title}}</span>
+                        <ul >
+                            <li ms-for="el in @item.content" class="fontOverHidden">
+                                <span style="float:left;">{{el.title}}</span>
+                                <span class="txt" :attr="{'data-toggle':'tooltip'}" style="margin-left: 5px">{{el.data | checkNull}}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div :visible="@selectTab == '2'" class="caseArea" style="padding:0px;">
+                    <div :visible="!@isBZ" class="caseArea">
+                        <span class="tab" :class="[@dataSelectTab == '3' ? 'tabActive' : '']" :click="@dataSelectClick(3)">{{@zfda.interrogation}}</span>
+                        <span class="tab" :class="[@dataSelectTab == '4' ? 'tabActive' : '']" :click="@dataSelectClick(4)">{{@zfda.sceneInvestigate}}</span>
+                        <span class="tab" :class="[@dataSelectTab == '5' ? 'tabActive' : '']" :click="@dataSelectClick(5)">{{@zfda.sentJoab}}</span>
+                        <span class="tab" :class="[@dataSelectTab == '6' ? 'tabActive' : '']" :click="@dataSelectClick(6)">{{@zfda.identify}}</span>
+                        <span class="tab" :class="[@dataSelectTab == '7' ? 'tabActive' : '']" :click="@dataSelectClick(7)">{{@zfda.search}}</span>
+                        <span class="tab" :class="[@dataSelectTab == '8' ? 'tabActive' : '']" :click="@dataSelectClick(8)">{{@zfda.other}}</span>
+                    </div>
+                    <div :controller="baqAJTab" class="baqAJTab" id="baqAJTab" :visible="@isBZ">
+                        <div class="titleBtn">
+                            <label>{{@zfda.districtInformation}}</label>
+                            <input  type="button" value="添加监控视频" :click="@handleAddBtn" class="btn-tool addBtn" :class="[@isSary ? '':'addBtnHidden']" :visible="@zfda_opt.authority.TJJKSP">
+                        </div>
+                        <div class="saryInfo" :controller="baqSaryselect_vm">
+                            <span>{{@zfda.involvedPensonnel}}</span>
+                            <ms-select :widget="{onChange:@onChangeT, value:[@category_options.length > 0 ? @category_options[0].value: ''], displayValue:'暂无涉案人员', options:@category_options}"></ms-select>
+                        </div>
+                        <div class="baqAJTabContent">
+                            <div class="spjkxx"><label>{{@zfda.monitorVideoInformation}}</label></div>
+                            <div class="infoPanel" ms-for="item in @baqShowInfo">
+                                <div class="infoContent" :class="[@item.taskID]">
+                                    <span :click="@infoClick(item)" class="contentTitle">涉案人员:{{@item.involvedPeopleName}}(视频开始时间:{{@item.startTime}})  文件数量:{{@item.fileNum}}</span>
+                                    <ul >
+                                        <li class="fontOverHidden">
+                                            <span style="float:left;">{{@zfda.caseNumber}}:</span>
+                                            <span class="txt" :attr="{'data-toggle':'tooltip'}" style="margin-left: 5px">{{item.ajbh | checkNull}}</span>
+                                        </li>                                        
+                                        <li class="fontOverHidden">
+                                            <span style="float:left;">{{@zfda.involvedPensonnel}}:</span>
+                                            <span class="txt" :attr="{'data-toggle':'tooltip'}" style="margin-left: 5px">{{item.involvedPeopleName | checkNull}}</span>
+                                        </li>
+                                        <li class="fontOverHidden">
+                                            <span style="float:left;">{{@zfda.videoStartTime}}:</span>
+                                            <span class="txt" :attr="{'data-toggle':'tooltip'}" style="margin-left: 5px">{{item.startTime | checkNull}}</span>
+                                        </li>
+                                        <li class="fontOverHidden">
+                                            <span style="float:left;">{{@zfda.videoEndTime}}:</span>
+                                            <span class="txt" :attr="{'data-toggle':'tooltip'}" style="margin-left: 5px">{{item.endTime | checkNull}}</span>
+                                        </li>
+                                        <li class="fontOverHidden">
+                                            <span style="float:left;">{{@zfda.taskStatus}}:</span>
+                                            <span class="txt" :attr="{'data-toggle':'tooltip'}" style="margin-left: 5px">{{item.status | checkNull}}</span>
+                                        </li>
+                                        <li class="fontOverHidden">
+                                            <span style="float:left;">{{@zfda.policeNum}}:</span>
+                                            <span class="txt" :attr="{'data-toggle':'tooltip'}" style="margin-left: 5px">{{item.userCode | checkNull}}</span>
+                                        </li>
+                                        <li class="fontOverHidden">
+                                            <span style="float:left;">{{@zfda.policeName}}:</span>
+                                            <span class="txt" :attr="{'data-toggle':'tooltip'}" style="margin-left: 5px">{{item.userName | checkNull}}</span>
+                                        </li>
+                                        <li class="fontOverHidden">
+                                            <span style="float:left;">{{@zfda.note}}:</span>
+                                            <span class="txt" :attr="{'data-toggle':'tooltip'}" style="margin-left: 5px">{{item.mark | checkNull}}</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="btn-wrap-cont" :visible="@isNingxia">
+                <div :class="['uploadbtnBigSize', @nodata && 'disabledBtn']" :click="@openUploadWindow">
+                    <a class="uploadbtn"><img src="/static/image/zfsypsjglpt/uploadIcon.png" class="uploadbtnImg"><p>{{@zfda.upload}}</p></a>
+                </div>
+                <div :class="['uploadbtnBigSize', 'relationSize', @nodata && 'disabledBtn']" :click="@openRelateWindow">
+                    <a class="uploadbtn"><img src="/static/image/zfsypsjglpt/relationIcon.png" class="uploadbtnImg"><p>{{@zfda.relatedMedia}}</p></a>
+                </div>
+            </div>
+            
+        </div>
+        <!-- <div class="aj_info" :if="@ajShow">
+            <div class="infoBtn">
+                <div class="uploadbtnSize" :click="@openUploadWindow">
+                    <a class="uploadbtn" :click="@openUploadWindow"><img src="/static/image/zfsypsjglpt/uploadIcon.png" class="uploadbtnImg"><p>上传</p></a>
+                </div>
+                <div class="uploadbtnSize relationSize" :click="@openRelateWindow">
+                    <a class="uploadbtn" :click="@openRelateWindow"><img src="/static/image/zfsypsjglpt/relationIcon.png" class="uploadbtnImg"><p>关联媒体</p></a>
+                </div>
+            </div>
+            <div class="infoPanel" ms-for="item in @ajInfoArr">
+                <div class="infoContent">
+                    <span :click="@infoClick(item)" class="contentTitle">{{@item.title}}</span>
+                    <ul >
+                        <li ms-for="el in @item.content" class="fontOverHidden">
+                            <span>{{el.title}}</span>
+                            <span style="margin-left: 5px">{{el.data | checkNull}}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div> -->
+        <div class="tipSize">
+            <div class="pointCss" :if="@zfda_opt.authority.DOWNLOAD">
+                <div class="tipDownloadIcon" :click="@tipDownFile"><img src="/static/image/zfsypsjglpt/downloadIcon.png"></div>
+                <div :click="@tipDownFile"  ><span class="tipDownloadTxt">{{@zfda.download}}</span></div>
+            </div>
+            <div class="pointCss" :click="@biaozhuClick" :if="@biaozhuShow">
+                <div class="biaozhuSize">
+                    <div class="tipIcon"><img src="/static/image/zfsypsjglpt/biaozhuIcon.png"></div>
+                    <span class="tipIconTxt">{{@zfda.mark}}</span>
+                </div>
+            </div>
+            <div class="biaozhuDetail">
+                <div class="biaozhuTxtSize">
+                    <ul>
+                        <li><span>{{@zfda.markType}}：</span><span class="biaozhuSpan" :attr="{title: @labelTypeName}">{{labelTypeName | checkNull}}</span></li>
+                        <li><span>{{@zfda.markSubclass}}：</span><span class="biaozhuSpan" :attr="{title: @childLabelTypeName}">{{childLabelTypeName | checkNull}}</span></li>
+                        <li><span>{{@zfda.mark}}：</span><span class="biaozhuSpan" :attr="{title: @labelRemark}">{{labelRemark | checkNull}}</span></li>
+                        <li><span>{{@zfda.markPeople}}：</span><span class="biaozhuSpan" :attr="{title: @labelPersonnel}">{{labelPersonnel | checkNull}}</span></li>
+                        <li><span>{{@zfda.markTime}}：</span><span class="biaozhuSpan" :attr="{title: @labelTime}">{{labelTime | checkNull}}</span></li>
+                    </ul>
+                </div>
+
+            </div>
+ 
+            <div class="biaozhuSize daySize">
+                <div class="tipIcon"><img src="/static/image/zfsypsjglpt/dayIcon.png"></div>
+                <span class="tipIconTxt">{{@zfda.remainingStorageDays}}：{{saveTime}}</span>
+            </div>
+        </div>
+        <div class="glyw_panel">
+            <div class="glyw_title">
+                <span>{{@zfda.relatedMedia}}</span>
+            </div>
+            <div class="glmt_content">
+                <div class="control_bar">
+                    <a class="next" :click="@nextClick" :class="[@nextStopClass ? 'nextStop' : '']"></a>
+                    <a class="prev" :click="@prevClick" :class="[@prevStopClass ? 'prevStop' : '']"></a>
+                </div>
+                <div class="result_list_panel">
+                    <ul class="result_list">
+                        <li ms-for="el in @relateInfo" >
+                            <div class="result_title" >
+                                <span class="relatePointer"  :attr="{title:@el.fileName}" :click="@relateClick(el)">{{el.numberTxt}}{{el.fileName}}</span>
+                                <div class="jcgl relatePointer" :click="@openRelateCancelWindow(el)" :if="@zfda_opt.authority.SCGL&&!@el.outsideFile" title="取消关联"></div>
+                            </div>
+                            <div :click="@relateClick(el)" class="relatePointer">
+                                <span class="result_span">{{el.userName}}</span><span class="result_span result_span_num">（{{el.userCode}}）</span>
+                                <div class="result_auto" :if="el.relevanceType=='ZDGL'">AUTO</div>
+                                <label class="result_label">{{@zfda.takenDateandTime}}：</label>
+                                <div class="result_div_content">
+                                    <label class="result_label_content" :attr="{'data-toggle':'tooltip'}">{{el.startTime}}</label>
+                                </div>
+                                <label class="result_label">{{@zfda.videoLength}}：</label>
+                                <div class="result_div_content">
+                                    <label class="result_label_content" :attr="{'data-toggle':'tooltip'}">{{el.duration}}</label>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <!--上传弹框-->
+        <div :controller="uploadWindow" class="uploadWindow" >
+            <ms-uploadBtn :widget="{business:@businessInfo, dialog_show:@show, cancelFunction:@editCancel, width: 600, height: 400, move_return:@move_upload, getFileName:@getFileName}"></ms-uploadBtn>
+            <!--<xmp :widget="{title : @title,is: 'ms-dialog', className: 'uploadWindow',$innerVm:'upload-inner', isMove: true, show:@show, width: 600, height: 150, onCancel:@editCancel, onOk:@editOk, okText:'确认', cancelText:'', move_return:@move_return}">-->
+            <!--<div slot="body" ms-skip>-->
+            <!--<div class="centerContent">-->
+            <!--<div class="windowIcon videoPosition"><div class="videoIcon"></div><span class="windowTxt">视频</span></div>-->
+            <!--<div class="windowIcon soundPosition"><div class="soundIcon"></div><span class="windowTxt">音频</span></div>-->
+            <!--<div class="windowIcon picturePosition"><div class="pictureIcon"></div><span class="windowTxt">图片</span></div>-->
+            <!--<div class="windowIcon otherPosition"><div class="otherIcon"></div><span class="windowTxt">其他</span></div>-->
+            <!--&lt;!&ndash;<div class="windowIcon soundPosition"><div src="/static/image/zfsypsjglpt/soundIcon.png"><span class="windowTxt">音频</span></div>&ndash;&gt;-->
+            <!--&lt;!&ndash;<div class="windowIcon picturePosition"><div src="/static/image/zfsypsjglpt/pictureIcon.png"><span class="windowTxt">图片</span></div>&ndash;&gt;-->
+            <!--&lt;!&ndash;<div class="windowIcon otherPosition"><div src="/static/image/zfsypsjglpt/otherIcon.png"><span class="windowTxt">其他</span></div>&ndash;&gt;-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div slot="footer" class="modal-footer" ms-skip>-->
+            <!--<div class="centerFooter">-->
+
+            <!--</div>-->
+            <!--</div>-->
+            <!--</xmp>-->
+        </div>
+        <!--删除关联确认弹窗-->
+        <div :controller="relateCancelWindow" class="relateCancelWindow" >
+            <xmp :widget="{title : @title,is: 'ms-dialog', className: 'relateCancelWindow',$innerVm:'relateCancel-inner', isMove: true, show:@show, width: 300, height: 178, onCancel:@editCancel, onOk:@editOk, okText:'确认', cancelText:'' ,  move_return:@move_relateCancel}">
+                <div slot="body" ms-skip>
+                    <div class="fontSize">
+                        是否要解除该媒体的关联？
+                    </div>
+                </div>
+            </xmp>
+        </div>
+        <!--办案区 添加监控视频弹窗-->
+        <div :controller="addJKSP_vm" class="addJKSP_vm" >
+            <xmp :widget="{is:'common-ms-modal', title:@title, modalSelector:'#addJKSP_vm', modalWidth:450, modalHeight: 500, btnalign:'center',show:@show,withIframe: true, okBtnCss:@ifokBtn, onOk:@handleOKStatus, onCancel:@handleCancel}">
+                <div id="addJKSP_vm">
+                    <div class="row">
+                        <label><i style="color:red">* </i>{{@zfda.workingArea}}</label>
+                        <!-- <div class="dep_tree">
+                            <ms-select :widget="{onChange:@onChangeBAZX, value:[@BAZX_options.length > 0 ? @BAZX_options[0].value: ''], displayValue:'暂无办案区', options:@BAZX_options}"></ms-select>
+                        </div> -->
+                        <div class="dep_tree" :controller="tree_baq">
+                            <ms-tree-selecting :widget="{tree: @rdata, isDep: true,showSearch: true, width:220,wrapId: 'zfyps-tree-select', getSelected: @getSelected, selectedKey: @sjdw ? @sjdw : '', selectedTitle: @selectedTitle ? @selectedTitle : '', onChange: @select_change, extraExpandHandle: @extraExpandHandle}"></ms-tree-selecting>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class=""><i style="color:red">* </i>{{@zfda.deviceName}}</label>
+                        <ms-select :widget="{onChange:@onChangeSB, value:[@sb_options.length > 0 ? @sb_options[0].value: ''], displayValue:'暂无设备', options:@sb_options}">
+                        </ms-select>
+                    </div>
+                    <div class="row">
+                        <label class=""><i style="color:red">* </i>{{@zfda.camera}}</label>
+                        <ms-select :widget="{onChange:@onChangeSXT, value:[@sxt_options.length > 0 ? @sxt_options[0].value: ''], displayValue:'暂无摄像头', options:@sxt_options}">
+                        </ms-select>
+                    </div>
+                    <div class="row">
+                        <label class=""><i style="color:red">* </i>{{@zfda.involvedPensonnel}}</label>
+                        <ms-select :widget="{onChange:@onChangeT, value:[@category_options.length > 0 ? @category_options[0].value: ''], displayValue:'暂无涉案人员', options:@category_options}"></ms-select>
+                    </div>
+                    <div class="row">
+                        <label class=""><i style="color:red">* </i>{{@zfda.policeNum}}</label>
+                        <!-- <input type="text" class="form-control" :duplex="@inputJson.name" > -->
+                        <input class="form-control" ms-duplex='@inputJson.userCode' :change='@getPoliceName'>
+                    </div>
+                    <div class="row">
+                        <label class=""><i style="color:red">* </i>{{@zfda.policeName}}</label>
+                        <!-- <input type="text" class="form-control" :duplex="@inputJson.userName"> -->
+                        <ms-select :widget="{onChange:@onChangePolice, value:[@police_options.length > 0 ? @police_options[0].value: ''], displayValue:'无民警姓名', options:@police_options}"></ms-select>
+                    </div>
+                    <div class="row">
+                        <label class="">{{@zfda.queryStartDate}}</label>
+                        <ms-datepicker :widget="{
+                            placeholder:'开始时间',
+                            value: @topform_start_time,
+                            onChange:@startTimeHandleChange,
+                            endDate:@endDate,     
+                            showTime: true
+                        }"></ms-datepicker>
+                    </div>
+                    <div class="row">
+                        <label class="">{{@zfda.queryEndDate}}</label>
+                        <ms-datepicker :widget="{
+                            placeholder:'结束时间',
+                            value: @topform_end_time,
+                            onChange:@endTimeHandleChange,
+                            endDate:@endDate,     
+                            showTime: true
+                        }"></ms-datepicker>
+                    </div>
+                    <div class="row">
+                        <label class="">{{@zfda.note}}</label>
+                        <div class="has-icon">
+                            <textarea  maxlength="200" class="form-control" :attr="{title:@inputJson.mark}"
+                                :duplex="@inputJson.mark"
+                                :focus="@handleFocus('mark',$event)"
+                                :blur="@handleFormat('mark',@descriptionReg,$event)"></textarea>
+                            <i class="fa fa-close" :visible="false"
+                                :mousedown="@handleClear('mark',$event)|prevent"></i>
+                        </div>
+                        <!-- <div class="form-tip invalid-tip" :if="!@validJson.mark">请输入备注</div> -->
+                        <div class="form-tip" style="text-align: right;padding-right: 60px;">{{@inputJson.mark.length}}/200</div>
+                    </div>
+                </div>
+            </xmp>
+        </div>
+    </div>
+
+    <!--关联媒体弹窗-->
+    <div :controller="relateWindow" class="relateWindow" id="relateWindow">
+        <xmp :widget="{title : @title,is: 'ms-dialog', className: 'relateWindow',$innerVm:'relate-inner', isMove: true, show:@show, width: 930, height: 555, onCancel:@editCancel, onOk:@editOk, okText:'确认', cancelText:'' ,  move_return:@move_relate}">
+            <div slot="body" ms-skip>
+                <div class="listTitle">
+                    <div class="listTitleSize">
+                        <span>姓名/警号</span>
+                        <input class="relateWindowInput"  ms-attr="{title:userCode}" :duplex="@userCode" :focus="@input_focus" :blur="@input_blur" :keydown="@enterKeyBoard($event)" :keyup="@enter_click"/>
+                        <span class="fa fa-close ajgl-close" :mousedown="@mousedownRelate($event)"></span>
+                    </div>
+                    <span class="spanSize">拍摄时间</span>
+                    <div class="inline-component">
+                        <ms-select :widget="{
+                                        col:'timeMode',
+                                        value: @timeMode,
+                                        onChange:@time_Change
+                                    }">
+                            <ms-select-option :widget="{value:1}">本周</ms-select-option>
+                            <ms-select-option :widget="{value:2}">本月</ms-select-option>
+                            <ms-select-option :widget="{value:3}">自定义时间</ms-select-option>
+                        </ms-select>
+                    </div>
+
+                    <div class="inline-component timeCover" :if="@isDuration">
+                        <ms-datepicker :widget="{
+                                        placeholder:'请选择开始时间',
+                                        value: @wfStartTime,
+                                        onChange:@startTimeChange
+                                    }"></ms-datepicker>
+                        <span class="middleSize">-</span>
+                        <ms-datepicker :widget="{
+                                        placeholder:'请选择结束时间',
+                                        value: @wfEndTime,
+                                        onChange:@endTimeChange
+                                    }"></ms-datepicker>
+                    </div>
+                    <a class="searchWindow" :click="@searchBtn"><span>查询</span></a>
+                </div>
+                <div class="centerContent">
+                    <ul class="centerContentUl">
+                        <li class="list-null" :if="!@loading && !@currentElements.length">暂无数据</li>
+                        <li  class="centerContentLi" ms-for="el in @currentElements">
+                            <div  class="iconTxt">
+                                <div :if="el.type == 0"><img src="/static/image/zfsypsjglpt/videoWindow.png"><span>视频</span></div>
+                                <div :if="el.type == 1"><img src="/static/image/zfsypsjglpt/soudWindow.png"><span>音频</span></div>
+                                <div :if="el.type == 2"><img src="/static/image/zfsypsjglpt/pictureWindow.png"><span>图片</span></div>
+                            </div>
+                            <div class="titleTxt">
+                                <ul>
+                                    <li><span style="float:left;">执勤部门：</span><span class="titleTxt_span">{{el.orgName}}</span></li>
+                                    <li><span>姓名/警号：</span><span>{{el.userName}} ({{el.userCode}})</span></li>
+                                    <li><span>拍摄时间：</span><span>{{el.startTime}}</span></li>
+                                </ul>
+                            </div>
+                            <div class="checkboxCenter"><input  :duplex="@rids" type="checkbox" ms-attr="{value:el.rid,id:el.rid}"/>
+                                <label ms-attr="{for:el.rid}"></label>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="table-index-loading" :if="@loading">
+                        <span class="loadingSpan">结果加载中</span>
+                    </div>
+                </div>
+            </div>
+            <div slot="footer" class="modal-footer" ms-skip>
+                <div class="centerFooter">
+                    <div class="ajgl_page">
+                            <ms-pages :widget="{total:@table_pagination.total, pageSize:@table_pagination.pageSize, current:@table_pagination.current, onChange:@handlePageChange, getCurrent:@getCurrent, overLimit:@page_type}"></ms-pages>
+                    </div>
+                    <div class="btn addBtn btnSize" :click="addRelevance"><span>添加</span></div>
+                    <div class="btn cancelBtn btnSize" :click="cancelRelevance"><span>取消</span></div>
+                </div>
+            </div>
+        </xmp>
+    </div>
+
+</template>

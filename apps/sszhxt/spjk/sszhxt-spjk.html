@@ -1,0 +1,71 @@
+<!-- 实时指挥系统--视频监控 -->
+<!-- caojiacong -->
+<template>
+    <div class="spjk" :controller="spjk-vm" :mouseup="@handleSoundMouseUp" :keydown="@exitFull">
+        <ms-sszhnew-sidebar
+            :widget="{owner:'sszhxt-spjk-polltree',splitWinTotal:@splitWinTotal,onCheck:@handleTreeCheck,extraHandleWhenCheckOrg:@extraHandleWhenCheckOrg,foldControlShow:true,sidebarFoldChange:@sidebarFoldChange,extraProcessWhenPersonChange:@extraProcessWhenPersonChange}">
+        </ms-sszhnew-sidebar>
+        <div class="spjk-main-container" :css="{marginLeft:@videoMarginLeft}">
+            <div class="video-list" :css="{width:@videoWidth,height:@videoHeight}" style="overflow: hidden">
+                <!--<object :if="!@isie" id="video-ocx" CLSID="{455791d4-4095-4f70-b2b3-f5c424f25ad9}" TYPE="application/x-itst-activex" Event_OcxEventProxy="_onOcxEventProxy"-->
+                <!--width="100%" height="100%"></object>-->
+                <embed :if="!@isie" id="video-ocx" type="application/npGSVideoPlugin-plugin" name="npGSVideoPlugin"
+                    width="100%" height="100%">
+
+                <object :if="@isie" id="video-ocx" classid="clsid:455791d4-4095-4f70-b2b3-f5c424f25ad9" width="100%"
+                    height="100%"></object>
+                <!--<object id="video-ocx" classid="clsid:455791d4-4095-4f70-b2b3-f5c424f25ad9" width="100%" height="100%"></object>-->
+            </div>
+            <div class="main-title">
+                <ul class="ocx-tool-bar">
+                    <li>
+                        <div class="sound-bar-wrap" :mouseleave="handleSoundMouseLeave">
+                            <div class="sound" :attr="{title: @spjk_txt.soundVolume}" :click="@handleSound"></div>
+                            <div class="sound-bar" :visible="@soundShow" :on-mousewheel="handleSoundScroll" :mousemove="@handleSoundMouseMove|prevent">
+                                <div class="triangle outer-triangle"></div>
+                                <div class="triangle inner-triangle"></div>
+                                <div class="sound-level-wrap" :mousedown="@handleSoundMouseDown|prevent">
+                                    <span class="sound-level" :css="{'top':(100 - @soundLevel)+'%'}"></span>
+                                </div>
+                                <span class="sound-num">{{@soundLevel}}%</span>
+                            </div>
+                            <iframe :visible="@soundShow" src="about:blank" frameBorder="0" marginHeight="0"
+                                marginWidth="0" style="position:absolute; visibility:inherit; top:-90px;left:30px;width:100%; height:100%;z-index:5;opacity:1;filter:alpha(opacity=0);"></iframe>
+                        </div>
+                    </li>
+                    <li class="split1" :attr="{title: @spjk_txt.oneScreen}" :click="@handleSplit1"></li>
+                    <li class="split4" :attr="{title: @spjk_txt.fourScreen}" :click="@handleSplit4"></li>
+                    <li class="split6" :attr="{title: @spjk_txt.sixScreen}" :click="@handleSplit6"></li>
+                    <li class="split9" :attr="{title: @spjk_txt.nineScreen}" :click="@handleSplit9"></li>
+                    <li class="split" :attr="{title: @spjk_txt.customScreen}" :click="@handleSplit"></li>
+                    <li class="full" :attr="{title: @spjk_txt.fullScreen}" :click="@handleFull"></li>
+                    <!-- <li class="close-current" :attr="{title: @spjk_txt.closeOne}" :click="@handleClose"></li> -->
+                    <li class="closeall" :attr="{title: @spjk_txt.closeAll}" :click="@handleCloseAll"></li>
+                </ul>
+            </div>
+        </div>
+        <div :controller="spjk-split-vm" class="spjk-modal-split">
+            <xmp :widget="{is:'common-ms-modal', title:@spjk_txt.customScreen, btnalign:'center', modalSelector:'#spjk-modal-split', modalWidth:360, modalHeight: 100, show:@show, withIframe: true, onOk:@handleOk, onCancel:@handleCancel, okText: @spjk_txt.confirm, cancelText: @spjk_txt.cancel}">
+                <div id="spjk-modal-split">
+                    <div class="form-item">
+                        <label>{{@spjk_txt.row}}：</label>
+                        <ms-modal-select :widget="{show:@rowShow,getSelected:@getRowSelected}"></ms-modal-select>
+                    </div>
+                    <div class="form-item">
+                        <label>{{@spjk_txt.column}}：</label>
+                        <ms-modal-select :widget="{show:@columnShow,getSelected:@getColumnSelected}"></ms-modal-select>
+                    </div>
+                    <iframe src="about:blank" frameBorder="0" marginHeight="0" marginWidth="0" style="position:absolute; visibility:inherit; top:0px;left:0px;width:100%; height:100%;z-index:-1;opacity:0;filter:alpha(opacity=0);"></iframe>
+                </div>
+            </xmp>
+        </div>
+        <ms-download-tip :widget="{show:@downloadTipShow,getShowStatus:getShowStatus}">
+            <div>
+                <p>{{@tipText}}
+                    <br /><span :if="@showtip">{{@downloadTipTxt.downloadConfirm}}</span></p>
+                <p class="tip-text">
+                    <i class="fa fa-info-circle"></i>{{@downloadTipTxt.rebootBrowser}}</p>
+            </div>
+        </ms-download-tip>
+    </div>
+</template>

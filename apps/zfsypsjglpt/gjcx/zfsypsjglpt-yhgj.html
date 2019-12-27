@@ -1,0 +1,71 @@
+<template>
+    <div class="zfsypsjglpt-yhgj zfsypsjglpt-layout" :keyup="@handleEnter">
+        <!-- 左侧搜索内容 begin -->
+        <div class="left left-layout border zfsypsjglpt-search-box yhgj-search" :if="!@extra_class">
+            <xmp is="ms-form" :widget="{$form:@$searchForm,type:'search',inline:true}">
+                <div class="search-line" style="padding: 20px 0 0px 0;">
+                    <ms-form-item :widget="{label: '所属部门'}" :class="'form-item'" :controller="yhgj_tree">
+                        <ms-tree-selecting :widget="{tree: @yspk_data, showSearch: true, wrapId: 'yhgj-tree-select', getSelected: @getSelected, selectedKey: @orgId ? @orgId : '', selectedTitle: @selectedTitle ? @selectedTitle : '', onChange: @select_change, extraExpandHandle: @extraExpandHandle, branchShow:true, clickBranchBack:@clickBranchBack, includedStatus:@included_status}"></ms-tree-selecting>
+                    </ms-form-item>
+    
+                    <ms-form-item :widget="{label:'姓名/警号'}" :class="'form-item'">
+                        <ms-input :widget="{col:'userCode',onChange:@handleUsercodeChange,value:@json.userCode}" :focus="@handleInputFocus"
+                            :blur="@handleInputBlur" :keyup="@handleQuickSearch"></ms-input>
+                        <ul class="name-search-result">
+                            <li :for="item in @nameList" :attr="{'title': item.userName + '(' + item.userCode + ')'}" :click="nameClick(item)">{{item.userName + "(" + item.userCode + ")"}}</li>
+                        </ul>
+                        <i class="fa fa-close close-clear" :mousedown="@handleCloseClear"></i>
+                    </ms-form-item>
+    
+                    <ms-form-item :widget="{label: '开始时间'}" :class="'form-item'">
+                        <ms-datepicker :widget="{
+                            placeholder:'请选择开始时间',col:'beginTime',value: @beginTime,direction:'down',showTime: true,onChange:@handleBeginTimeChange
+                        }"></ms-datepicker>
+                    </ms-form-item>
+                    <ms-form-item :widget="{label: '结束时间'}" :class="'form-item'">
+                        <ms-datepicker :widget="{
+                            placeholder:'请选择结束时间',col:'endTime',value: @endTime,direction:'down',showTime: true,onChange:@handleEndTimeChange
+                        }"></ms-datepicker>
+                    </ms-form-item>
+                </div>            
+                <button type="button" class="btn btn-query yhgj-btn-query" :click="@querySearch" :if="@authority.SEARCH">查询</button>
+            </xmp>
+        </div>
+        <!-- 左侧搜索内容 end -->
+
+        <!-- 右侧表格主体内容 begin -->
+        <!-- 表格数据begin -->
+        <div class="right right-layout tyywglpt-list-panel">
+            <div :if="!@isChangeTable" style="height: 100%;">
+                <div class="tyywglpt-list-header-wrap">
+                    <ul class="tyywglpt-list-header">
+                        <li class="col-5 first-item">{{@sszhxt_language.tableNo}}</li>
+                        <li class="col-20">{{@sszhxt_language.Department}}</li>
+                        <li class="col-25">{{@sszhxt_language.PoliceNameID}}</li>
+                        <li class="col-20">{{@sszhxt_language.alarmModel}}</li>
+                        <li class="col-10">{{@sszhxt_language.alarmSource}}</li>
+                        <li class="col-20 last-item">{{@sszhxt_language.alarmTime}}</li>
+                    </ul>
+                </div>
+                <ul class="tyywglpt-list-content">
+                    <li :if="@loading" class="list-loading">
+                        <span>{{@sszhxt_language.loading}}</span>
+                    </li>
+                    <li :if="@list.length == 0" class="list-null">{{@sszhxt_language.noRecords}}</li>
+                    <li :for="($index, item) in @list">
+                        <div class="col-5 first-item">{{((@current - 1) * @json.pageSize) + $index+1}}</div>
+                        <div class="col-20" :attr="{'data-origin-title':item.orgName,'data-toggle': 'popover'}">{{item.orgName}}</div>
+                        <div class="col-25" :attr="{'data-toggle':'popover','data-origin-title':(item.userName + '(' + @item.userCode + ')') || ''}">{{(@item.userName || '-') + '(' + (@item.userCode || '-') + ')'}}</div>
+                        <div class="col-20" :attr="{'data-toggle':'popover','data-origin-title':item.alterType || ''}">{{@item.alterType}}</div>
+                        <div class="col-10" :attr="{'data-origin-title':item.alterSource}">{{@item.alterSource}}</div>
+                        <div class="col-20" :attr="{'data-origin-title':item.time,'data-toggle': 'popover' }">{{@item.time}}</div>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+        <!-- 页码 -->
+        <ms-pages :widget="{iszfda:@iszfda,overLimit:@overLimit,total:@total,onChange:@onChangePage,current:@current,getCurrent:@getCurrent}"></ms-pages>
+
+    </div>
+</template>

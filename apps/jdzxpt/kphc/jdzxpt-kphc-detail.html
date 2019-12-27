@@ -1,0 +1,277 @@
+<template>
+    <div class="jdzxpt_kphc_detail">
+        <div class="kphc_panel">
+            <a class="return_btn" :click="@returnBtn">返回<i></i></a>
+            <div class="kphc_content">
+                <div class="kphc_left">
+                    <div class="kphc_media" id="kphc_media">
+                        <div class="kphc_timeout" :if="@show_timeout">
+                            <div class="kphc_timeout_content">
+                                <img src="/static/image/zfsypsjglpt/other_img.png" />
+                                <span>文件已过期</span>
+                            </div>
+                        </div>
+                        <div class="kphc_video" :if="@show_GMPlayer">
+                            <ms-player :widget="{src: @playUrl, special_id:'kphc', player_width:@web_width, player_height:@web_height, play_status:@play_status, is_play:@is_play, dialog_status:@scheduleShow, fileName:@fileName}"></ms-player>
+                        </div>
+                        <div class="kphc_img" :if="@show_img">
+                            <div class="media_img_show" :if="@media_no_img">
+                                <ms-pic-player :widget="{src: @playUrl, playerID:'kphc'}"></ms-pic-player>
+                            </div>
+                            <div class="media_no_img" :if="!@media_no_img">
+                                <div class="media_no_img_content">
+                                    <img src="/static/image/zfsypsjglpt/pic_img.png" />
+                                    <span>抱歉，由于网络、数据等原因，图片暂时无法查看</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="media_other" :if="@show_other">
+                            <div class="media_other_content">
+                                <img src="/static/image/zfsypsjglpt/other_img.png" />
+                                <span>无法查看该类型文件，请下载到本地查看</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content_function">
+                        <a class="download_btn" :class="[@unClick_media ? 'disabled' : '']" :click="@download"><span></span>下载</a>
+                        <a class="content_btn ccts"><span></span>剩余储存天数：{{@mediaInfoItem.saveTime}}</a>
+                        <a class="content_btn bzxx" :click="@mediaInfo_click" :if="@mediaInfoItem.labelShow"><span></span>标注信息
+                            <div class="mediaInfo" :visible="@mediaInfoShow">
+                                <label class="label_title">标注类型：</label>
+                                <div class="label_div_content">
+                                    <label class="label_content" :attr="{'data-toggle':'tooltip'}">{{@mediaInfoItem.labelTypeName}}</label>
+                                </div>
+                                <label class="label_title">标注子类：</label>
+                                <div class="label_div_content">
+                                    <label class="label_content" :attr="{'data-toggle':'tooltip'}">{{@mediaInfoItem.childLabelTypeName}}</label>
+                                </div>
+                                <label class="label_title">标注信息：</label>
+                                <div class="label_div_content">
+                                    <label class="label_content" :attr="{'data-toggle':'tooltip'}">{{@mediaInfoItem.labelRemark}}</label>
+                                </div>
+                                <label class="label_title">标注人员：</label>
+                                <div class="label_div_content">
+                                    <label class="label_content" :attr="{'data-toggle':'tooltip'}">{{@mediaInfoItem.labelPersonnel}}</label>
+                                </div>
+                                <label class="label_title">标注时间：</label>
+                                <div class="label_div_content">
+                                    <label class="label_content" :attr="{'data-toggle':'tooltip'}">{{@mediaInfoItem.labelTime}}</label>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="kphc_right">
+                    <div class="kphc_map">
+                        <!-- <ms-gjdw-map :widget="{ajaxData: @mapAjaxData, mapShow: false, mapStyle: @mapStyle}"></ms-gjdw-map> -->
+                        <ms-gjdw-map :widget="{ajaxData: @mapAjaxData, mapShow: @mapShow, mapStyle: @mapStyle}"></ms-gjdw-map>
+                    </div>
+
+                    <div class="kphc_info">
+                        <div class="basicInfoTitlePanel" :class="[@ajglShow? 'ajglShowClass' : '']">
+                            <span class="infoFistTitle" :class="[(@kpTab || @hcTab ||@ajglShow) && @selectIndex == '0' ? 'tabActive' : '']"
+                                :click="selectTab(0)">{{@basicInfoTitle}}</span>
+                            <span :if="@ajglShow" :class="[@selectIndex == '3' ? 'tabActive' : '']" :click="selectTab(3)">接处警</span>
+                            <span :if="@ajglShow" :class="[@selectIndex == '4' ? 'tabActive' : '']" :click="selectTab(4)">办案区</span>
+                            <span :if="@kpTab && (@kphc_opt.authority.KP || (!@kphc_opt.authority.KP && @kphc_opt.authority.HC))"
+                                :class="[@selectIndex == '1' ? 'tabActive' : '']" :click="selectTab(1)">考评信息</span>
+                            <span :if="@hcTab && @kphc_opt.authority.HC" :class="[@selectIndex == '2' ? 'tabActive' : '']"
+                                :click="selectTab(2)">核查信息</span>
+                        </div>
+                        <div class="basicInfoPanel" :if="@selectIndex == '0'">
+                            <ul>
+                                <li ms-for="el in @basicInfo" class="basicInfoLi">
+                                    <span class="basicInfoSpanTitle">{{el.title}}</span>
+                                    <span class="basicInfoSpanContent" :attr="{'data-toggle':'tooltip'}">{{el.data |
+                                        checkNull}}</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="basicInfoPanel receivePanel" :if="@selectIndex == '3'">
+                            <div class="infoPanel" ms-for="item in @jcjInfoArr">
+                                <div class="infoContent" :click="@infoClick(item)">
+                                    <span class="contentTitle">{{@item.title}}</span>
+                                    <ul>
+                                        <li ms-for="el in @item.content" class="basicInfoLi">
+                                            <span class="basicInfoSpanTitle">{{el.title}}</span>
+                                            <span class="basicInfoSpanContent">{{el.data | checkNull}}</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="caseArea" :if="@selectIndex == '4'">
+                            <span class="tab" :class="[@dataSelectTab == '3' ? 'tabActive' : '']" :click="@dataSelectClick(3)">询讯问</span>
+                            <span class="tab" :class="[@dataSelectTab == '4' ? 'tabActive' : '']" :click="@dataSelectClick(4)">现场勘察</span>
+                            <span class="tab" :class="[@dataSelectTab == '5' ? 'tabActive' : '']" :click="@dataSelectClick(5)">送押</span>
+                            <span class="tab" :class="[@dataSelectTab == '6' ? 'tabActive' : '']" :click="@dataSelectClick(6)">辨认</span>
+                            <span class="tab" :class="[@dataSelectTab == '7' ? 'tabActive' : '']" :click="@dataSelectClick(7)">搜查</span>
+                            <span class="tab" :class="[@dataSelectTab == '8' ? 'tabActive' : '']" :click="@dataSelectClick(8)">其他</span>
+                        </div>
+                        <div class="evaluationContent" :if="@selectIndex == '1'">
+                            <label class="evaluationTitle">考评部门：</label>
+                            <div class="evaluationDiv">
+                                <label class="evaluationDivTxt" :attr="{title:@evaluationContent.orgName}">{{@evaluationContent.orgName
+                                    | checkNull}}</label>
+                            </div>
+                            <label class="evaluationTitle">考评人：</label>
+                            <div class="evaluationDiv">
+                                <label class="evaluationDivTxt" :attr="{title:@evaluationContent.userName}">{{@evaluationContent.userName
+                                    | checkNull}}</label>
+                            </div>
+                            <label class="evaluationTitle">考评时间：</label>
+                            <div class="evaluationDiv">
+                                <label class="evaluationDivTxt" :attr="{title:@evaluationContent.createTime}">{{@evaluationContent.createTime
+                                    | checkNull}}</label>
+                            </div>
+                            <div class="line"></div>
+                            <label class="evaluationTitle">考评结果：</label>
+                            <div class="evaluationDiv">
+                                <label class="evaluationDivTxt" :attr="{title:@evaluationContent.result}">{{@evaluationContent.result}}</label>
+                            </div>
+                            <label class="evaluationTitle">考评评语：</label>
+                            <div class="evaluationDiv">
+                                <label class="evaluationDivTxt" :attr="{title:@evaluationContent.comment}">{{@evaluationContent.comment
+                                    | checkNull}}</label>
+                            </div>
+                        </div>
+                        <div class="evaluationContent" :if="@selectIndex == '2'">
+                            <label class="evaluationTitle">核查部门：</label>
+                            <div class="evaluationDiv">
+                                <label class="evaluationDivTxt" :attr="{title:@checkContent.orgName}">{{@checkContent.orgName
+                                    | checkNull}}</label>
+                            </div>
+                            <label class="evaluationTitle">核查人：</label>
+                            <div class="evaluationDiv">
+                                <label class="evaluationDivTxt" :attr="{title:@checkContent.userName}">{{@checkContent.userName
+                                    | checkNull}}</label>
+                            </div>
+                            <label class="evaluationTitle">核查时间：</label>
+                            <div class="evaluationDiv">
+                                <label class="evaluationDivTxt" :attr="{title:@checkContent.createTime}">{{@checkContent.createTime
+                                    | checkNull}}</label>
+                            </div>
+                            <div class="line"></div>
+                            <label class="evaluationTitle">核查结果：</label>
+                            <div class="evaluationDiv">
+                                <label class="evaluationDivTxt" :attr="{title:@checkContent.real}">{{@checkContent.real
+                                    | checkNull}}</label>
+                            </div>
+                            <label class="evaluationTitle">扣分情况：</label>
+                            <div class="evaluationDiv">
+                                <label class="evaluationDivTxt" :attr="{title:@checkContent.deduction}">{{@checkContent.deduction
+                                    | checkNull}}</label>
+                            </div>
+                            <label class="evaluationTitle">核查意见：</label>
+                            <div class="evaluationDiv">
+                                <label class="evaluationDivTxt" :attr="{title:@checkContent.comment}">{{@checkContent.comment
+                                    | checkNull}}</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a :if="@kpBtn && @kphc_opt.authority.KP" class="functionBtn" :click="@kpBtnClick">考评</a>
+                    <a :if="@hcBtn && @kphc_opt.authority.HC" class="functionBtn" :click="@hcBtnClick">核查</a>
+                </div>
+
+                <div class="glmt_panel">
+                    <div class="glmt_title">
+                        <span>关联媒体</span>
+                    </div>
+                    <div class="glmt_content">
+                        <div class="control_bar">
+                            <a class="next" :click="@nextClick" :class="[@nextStopClass ? 'nextStop' : '']"></a>
+                            <a class="prev" :click="@prevClick" :class="[@prevStopClass ? 'prevStop' : '']"></a>
+                        </div>
+                        <div class="result_list_panel">
+                            <ul class="result_list">
+                                <li ms-for="el in @mediaInfoList" :class="['result_li']" :click="@resultLiClick(el)">
+                                    <div class="result_title">
+                                        <span :attr="{'data-toggle':'tooltip'}">{{@el.showFileName}}</span>
+                                    </div>
+                                    <div class="result_user">
+                                        <span :attr="{'data-toggle':'tooltip'}">{{@el.user}}</span>
+                                    </div>
+                                    <div class="result_auto" :if="@el.autoState">AUTO</div>
+                                    <label class="result_label">拍摄时间：</label>
+                                    <div class="result_div_content">
+                                        <label class="result_label_content" :attr="{'data-toggle':'tooltip'}">{{@el.startTime}}</label>
+                                    </div>
+                                    <label class="result_label">拍摄时长：</label>
+                                    <div class="result_div_content">
+                                        <label class="result_label_content" :attr="{'data-toggle':'tooltip'}">{{@el.duration}}</label>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--提示弹窗-->
+        <div class="kphc_detail_tips_dialog">
+            <ms-dialog :widget="{$innerVm: 'kphc_detail_tips_dialog', okText: '确认', cancelText: @cancelText, className: 'kphc_dialog_common', show: @kphc_dialog_show, onCancel: @dialogCancel, onOk:@dialogOk, isMove:true, width:@kphc_dialog_width, height:@kphc_dialog_height, move_return:@move_return}">
+                <div slot="body" ms-skip>
+                    <span :class="[@txt_rows ? 'rows_most' : 'rows_single']">{{@dialog_txt}}</span>
+                </div>
+            </ms-dialog>
+        </div>
+
+        <!--考评弹窗-->
+        <div class="kphc_kp_dialog">
+            <ms-dialog :widget="{$innerVm: 'kphc_kp_dialog', okText: '确定', cancelText: '取消', className: 'kphc_dialog_common evaluation-dialog', show: @kpShow, onCancel: @evaluationCancel, onOk:@evaluationOk, isMove:true, width:@kphc_dialog_width, height:@kphc_dialog_height, move_return:@move_return}">
+                <div slot="body" ms-skip>
+                    <div class="checkboxGroup">
+                        <ms-checkbox-group :widget="{options:@checkBoxOptions, onChange:@handleChange}"></ms-checkbox-group>
+                    </div>
+                    <div class="comment">
+                        <div class="commentTitle">评语</div>
+                        <textarea ms-duplex="@kpTxt" class="commentTxt" :attr="{title: @kpTxt}" :class="[@commentFormat == 'inline-block' ? 'formatClass' : '']"
+                            :keyup="@commentKeyUp"></textarea>
+                        <span class="kphc_comment" :css="{display:@commentFormat}">
+                            <i class="fa fa-exclamation-circle">通过考评时，评语不能为空</i>
+                        </span>
+                    </div>
+                </div>
+            </ms-dialog>
+        </div>
+
+        <!--核查弹窗-->
+        <div class="kphc_hc_dialog">
+            <ms-dialog :widget="{$innerVm: 'kphc_hc_dialog', okText: '确定', cancelText: '取消', className: 'kphc_dialog_common check-dialog', show: @hcShow, onCancel: @checkCancel, onOk:@checkOk, isMove:true, width:@kphc_dialog_width, height:@kphc_dialog_height, move_return:@move_return}">
+                <div slot="body" ms-skip>
+                    <div class="radioGroup">
+                        <ms-radio-group :widget="{options:@radioOptions, onChange:@handleChange, value:@radioState}"></ms-radio-group>
+                    </div>
+                    <div class="comment">
+                        <div class="commentTitle" style="margin-top: 10px;">扣分</div>
+                        <div class="hc-input-panel" :class="[@scoreFormat == 'inline-block' ? 'formatClass' : '', @scoreDisable? 'scoreDisable' : '']">
+                            <input type="text" ms-duplex="@score" class="score" :keyup="@scoreKeyUp" :if="!@scoreDisable">
+                            <input type="text" ms-duplex="@score" class="score" :keyup="@scoreKeyUp" :if="@scoreDisable"
+                                disabled>
+                        </div>
+                        <div class="txt">分</div>
+                        <div class="kphc_tip_box">
+                            <span class="kphc_tip" :css="{display:@scoreTip}">
+                                <i class="fa fa-exclamation-circle">仅支持输入不大于9999的正整数</i>
+                            </span>
+                            <span class="kphc_format" :css="{display:@scoreFormat}">
+                                <i class="fa fa-exclamation-circle">超出可输入范围</i>
+                            </span>
+                        </div>
+                        <div class="commentTitle" style="margin-top: 55px;">核查意见</div>
+                        <textarea ms-duplex="@hcTxt" class="commentTxt" :attr="{title: @hcTxt}" :keyup="@commentKeyUp"
+                            :class="[@commentFormat == 'inline-block' ? 'formatClass' : '']"></textarea>
+                        <span class="kphc_comment" :css="{display:@commentFormat}">
+                            <i class="fa fa-exclamation-circle">核查意见不能为空</i>
+                        </span>
+                    </div>
+                </div>
+            </ms-dialog>
+        </div>
+
+    </div>
+</template>

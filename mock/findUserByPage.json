@@ -1,0 +1,31 @@
+{
+	"code": 0,
+	"msg": "成功！",
+	"data": {
+		"totalPages": 1,
+		"totalElements": 3,
+		"currentPages": 0,
+		"perPages": 3,
+		"currentElements": [{
+			"orgName": "广州市公安局",
+			"account": "121212",
+			"userName": "张其1",
+			"userCode": "121212",
+			"uid": "GMU4401120020180831104651ffffffe6f"
+		},
+		{
+			"orgName": "宁夏公安",
+			"account": "370285199709090058",
+			"userName": "刘长青",
+			"userCode": "370285199709090058",
+			"uid": "GMU4401120020181118110004ffcffffec"
+		},
+		{
+			"orgName": "宁夏公安",
+			"account": "370214199112264339",
+			"userName": "张启超",
+			"userCode": "370214199112264339",
+			"uid": "GMU4401120020181118110027ffcffffac"
+		}]
+	}
+}

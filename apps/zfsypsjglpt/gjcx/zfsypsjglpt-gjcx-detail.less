@@ -1,0 +1,506 @@
+@import '/apps/common/common-theme/common-variable.less';
+
+.zfsypsjglpt-gjcx-detail .btn.common-bg {
+    position: relative;
+    top: -60px;
+    background: #1055b3;
+    right: -100%;
+    margin-left: 20px;
+    padding: 0;
+    border-radius: 0;
+    width: 130px;
+    height: 40px;
+    font-size: 16px;
+    outline: none;
+    &:hover {
+        opacity: 0.8;
+    }
+}
+
+.zfsypsjglpt-gjcx-detail {
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
+    color: @txt-main-color;
+    min-height: 550px;
+    height: 100%;
+}
+
+.zfsypsjglpt-gjcx-detail .detail-header {
+    width: 100%;
+    margin-bottom: 10px;
+    height: 40px;
+    line-height: 40px;
+    background: @common-bg-deep-color;
+    position: relative;
+    margin: auto;
+    font-size: 16px;
+    overflow: hidden;
+}
+
+.zfsypsjglpt-gjcx-detail .detail-header span {
+    display: inline-block;
+    padding: 0 20px;
+    font-family: "Microsoft YaHei", serif;
+    color: #fff;
+}
+
+.zfsypsjglpt-gjcx-detail .detail-header span.btn-return {
+    display: inline-block;
+    position: absolute;
+    right: 0;
+    top: 0;
+    text-align: center;
+    cursor: pointer;
+    color: @txt-primary-color;
+}
+
+.zfsypsjglpt-gjcx-detail .detail-header span.btn-return i {
+    float: right;
+    width: 28px;
+    height: 24px;
+    background: url(/static/image/zfsypsjglpt/back_icon_01.png?__sprite) no-repeat;
+    margin: 8px 20px 0 10px;
+}
+
+.zfsypsjglpt-gjcx-detail .detail-header span.btn-return:hover {
+    // background: #db7400;
+    opacity: 0.8;
+    filter: alpha(opacity=80);
+}
+
+.zfsypsjglpt-gjcx-detail .gjglcontrol-box {
+    width: 100%;
+    overflow: hidden;
+    margin: 0;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.zfsypsjglpt-gjcx-detail .left-box {
+    width: auto;
+    // display: inline-block;
+    height: 100%;
+    margin-right: 566px;
+}
+
+.zfsypsjglpt-gjcx-detail .right-box {
+    width: 568px;
+    height: 50%;
+    // display: inline-block;
+    vertical-align: bottom;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+.zfsypsjglpt-gjcx-detail .right-info-wrap {
+    margin-left: 2px;
+    position: relative;
+    height: 100%;
+}
+
+.zfsypsjglpt-gjcx-detail .right-info-wrap .map-toast {
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: -100%;
+    z-index: 1;
+    background: rgba(0, 0, 0,.5);
+    padding: 0 20px;
+    height: 100%;
+    color: #fff;
+    font-size: 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.zfsypsjglpt-gjcx-detail .gjglcontrol-box .vedio-wrap {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.zfsypsjglpt-gjcx-detail .vedio-wrap .video span {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    padding-top: 180px;
+    font-size: 20px;
+    display: inline-block;
+}
+
+.zfsypsjglpt-gjcx-detail .video-tool-wrap {
+    height: 30px;
+    line-height: 30px;
+    /* background: #000; */
+}
+
+.zfsypsjglpt-gjcx-detail .video-tool-bar {
+    height: 30px;
+    line-height: 30px;
+    position: relative;
+    top: 4px;
+    .fa {
+        display: inline-block;
+        width: 28px;
+        height: 23px;
+    }
+    .step-backward{
+        background: url(/static/image/zfsypsjglpt/lxhf_step-backward.png) 0 0 no-repeat;
+    }
+    .fast-backward {
+        position: relative;
+        top: 3px;
+        background: url(/static/image/zfsypsjglpt/lxhf_fast-backward.png) 0 0 no-repeat;
+    }
+    .pause {
+        background: url(/static/image/zfsypsjglpt/lxhf_pause.png) 0 0 no-repeat;
+    }
+    .play {
+        background: url(/static/image/zfsypsjglpt/lxhf_play.png) 0 0 no-repeat;
+    }
+    .stop {
+        background: url(/static/image/zfsypsjglpt/lxhf_stop.png) 0 0 no-repeat;
+    }
+    .fast-forward {
+        position: relative;
+        top: 3px;
+        background: url(/static/image/zfsypsjglpt/lxhf_fast-forward.png) 0 0 no-repeat;
+    }
+    .step-forward {
+        background: url(/static/image/zfsypsjglpt/lxhf_step-forward.png) 0 0 no-repeat;
+    }
+    .cut {
+        background:  url(/static/image/zfsypsjglpt/lxhf_cut.png) 0 0 no-repeat;
+    }
+    .full {
+        background: url(/static/image/zfsypsjglpt/lxhf_full.png) 0 0 no-repeat;
+    }
+    .video-speed {
+        display: inline-block;  
+        border: 1px solid #fff;
+        height: 22px;
+        line-height: 33px;
+        margin-left: 15px;
+        padding: 0 5px;
+        cursor: not-allowed;
+        span {  
+            color: #fff;
+            position: relative;
+            top: -7px;
+        }
+    }
+     .video-full{
+        position: absolute;
+        right: -5px;
+        top: 2px;
+    }
+        /* 音量调节样式 */
+        .sound-bar-wrap{
+            margin-right: 40px;
+            margin-left: 5px;
+        }
+         .sound{
+            display: inline-block;
+            height: 22px;
+            width: 23px;
+        }
+        .openSound{
+            background: url(/static/image/zfsypsjglpt/lxhf_sound.png) 0 0 no-repeat;
+        }
+        .closeSound{
+             background: url(/static/image/zfsypsjglpt/lxhf_nosound.png) 0 0 no-repeat;
+        }
+         .sound-bar{
+            position: relative;
+            height: 6px;
+            width: 100px;
+            display: inline-block;
+            top: -7px;
+            left: 8px;
+            
+        }
+         .sound-level-wrap{
+            position: relative;
+            width: 100%;
+            height: 6px;
+            margin: 0 auto;
+            border-radius: 10px;
+            background: #aaa;
+        }
+         .sound-level{
+            position: absolute;
+            left: 0;
+            height: 6px;
+            background: #fff;
+            border-radius: 10px;
+        }
+         .sound-btn-wrap {
+            width: 90%;
+            position: relative;
+        }
+         .sound-btn{
+            width: 12px;
+            height: 12px;
+            background: #fff;
+            border-radius: 50%;
+            position: absolute;
+            top: -3px;
+            left: 0;
+        }
+}
+
+.zfsypsjglpt-gjcx-detail .video-tool-bar li {
+    display: inline-block;
+    margin: 0 10px;
+    font-size: 12px;
+    color: #358dcc;
+    cursor: pointer;
+}
+
+.zfsypsjglpt-gjcx-detail .video-tool-bar li.playStatusPos {
+    color: #fff;
+    position: relative;
+    top: -7px;
+    cursor:not-allowed;
+}
+
+.zfsypsjglpt-gjcx-detail .video-tool-bar li:hover {
+    color: #0078d7;
+}
+
+.zfsypsjglpt-gjcx-detail .video-tool-bar.disabled li {
+    cursor: not-allowed;
+}
+
+.zfsypsjglpt-gjcx-detail .video-tool-bar.disabled li:hover {
+    color: #666;
+}
+
+.zfsypsjglpt-gjcx-detail .video,
+.zfsypsjglpt-gjcx-detail .map {
+    width: 100%;
+    max-height: 400px;
+}
+
+.zfsypsjglpt-gjcx-detail .video img {
+    width: 100%;
+    height: 398px;
+    display: inline-block;
+}
+
+.titleInfo {
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    margin: auto;
+    overflow: hidden;
+    background: @common-bg-title;
+    padding-left: 20px;
+    font-weight: bold;
+}
+
+.zfsypsjglpt-gjcx-detail .footer {
+    width: 100%;
+    background: #e6edf7;
+    padding: 12px;
+    overflow: auto;
+    bottom: 0;
+    top: 50px;
+    position: absolute;
+}
+
+/* 详细信息 */
+.zfsypsjglpt-gjcx-detail .sos-detail {
+    font-family: "Microsoft YaHei", serif;
+    color: @txt-main-color;
+    margin-left: 10px;
+}
+
+.zfsypsjglpt-gjcx-detail .sos-detail li {
+    float: left;
+    width: 300px;
+}
+
+.zfsypsjglpt-gjcx-detail .sos-detail li span {
+    display: inline-block;
+    width: 223px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+    margin-top: -4px;
+}
+
+.zfsypsjglpt-gjcx-detail .sos-detail h5 {
+    display: inline-block;
+    text-align: left;
+    color: @txt-main-color;
+    font-weight: normal;
+    font-family: "Microsoft YaHei", serif;
+}
+
+.zfsypsjglpt-gjcx-detail .sos-detail .deal-condition {
+    // position: relative;
+    // bottom: 120px;
+    // left: 22px;
+}
+
+.zfsypsjglpt-gjcx-detail .sos-detail .deal-opinion {
+    // position: absolute;
+    // bottom: -14px;
+    // left: 22px;
+    // margin-top: 28px;
+}
+
+.zfsypsjglpt-gjcx-detail .sos-detail .text-area-box{
+    float: right;
+    width: 100%;
+    padding-left: 72px;
+    margin-top: -25px;
+}
+
+/* 处理告警弹框 */
+.deal-warning-dialog {
+    position: relative;
+}
+
+.deal-warning-dialog .tip-text {
+    height: 60px;
+    line-height: 60px;
+    font-size: 16px;
+    text-align: center;
+    color: #536b82;
+    font-family: "Microsoft YaHei", serif;
+}
+
+/* 调度 */
+.diaoduBtn {
+    position: absolute;
+    z-index: 999;
+    right: 20px;
+    top: 125px;
+    width: 82px;
+}
+
+.zfsypsjglpt-gjcx-detail image {
+    cursor: pointer;
+}
+
+/*设备信息弹框*/
+.zfsypsjglpt-gjcx-detail .esriPopup .titlePane {
+    background: rgb(7, 124, 225);
+    line-height: 25px;
+}
+
+/* 语音呼叫按钮 */
+.zfsypsjglpt-gjcx-detail .callBtn {
+    padding: 3px 10px;
+    color: #fff;
+    background: rgb(7, 124, 225);
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+/* 语音最小化 */
+.sszhyyMincontianer {
+    display: inline-block;
+    padding: 2px 10px;
+    position: absolute;
+    bottom: 0;
+    color: #fff;
+    background: rgb(7, 124, 225);
+    cursor: pointer;
+}
+
+.sszhyyMincontianer p {
+    margin: 0;
+}
+
+.sszhxt-gjglcontrol-map {
+    position: absolute;
+    top: 118px;
+    right: 10px;
+    left: 50%;
+    /* bottom: -21px; */
+    height: 400px;
+    visibility: visible;
+}
+
+.sszhyythcontent .xhgood {
+    width: 13px;
+    height: 14px;
+    margin-right: 5px;
+    vertical-align: middle;
+    background: url("../../static/image/sszhxt-sszh/signalgood.png") no-repeat scroll;
+}
+
+.sszhspxhwzgood {
+    color: green;
+}
+
+.sszhyythcontent .xhbetter {
+    width: 13px;
+    height: 8px;
+    margin-right: 5px;
+    vertical-align: middle;
+    background: url("../../static/image/sszhxt-sszh/signalbetter.png") no-repeat scroll;
+}
+
+.sszhspxhwzbetter {
+    color: #FF7E00;
+}
+
+.sszhyythcontent .xhbad {
+    width: 13px;
+    height: 8px;
+    margin-right: 5px;
+    vertical-align: middle;
+    background: url("../../static/image/sszhxt-sszh/signalbad.png") no-repeat scroll;
+}
+
+.sszhspxhwzbad {
+    color: red;
+}
+
+.opionionSpanWidth {
+    width: 40px !important;
+}
+
+.sszhxt-gjglcontrol-sosBtn {
+    position: fixed;
+    bottom: 0px;
+    top: auto;
+    right: 0px;
+    left: auto;
+}
+
+.sszhxt-gjglcontrol-sos-info {
+    position: fixed;
+    bottom: 30px;
+    right: 0px;
+    left: auto;
+}
+
+// 分页样式
+.zfsypsjglpt-gjcx .com-pages {
+    bottom: 0;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    text-align: right;
+    left: 0;
+    background: #dfe9f7;
+    border-top: 1px solid #fff;
+    padding-right: 40px;
+}
+
+.gjcx-detail-minheight {
+    // min-width: 1920px;
+    // min-height: 969px;
+}

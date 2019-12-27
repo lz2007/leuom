@@ -1,0 +1,97 @@
+@import './common-theme/common-variable.less';
+
+.common-switch {
+    display: inline-block;
+    width: 56px;
+    height: 24px;
+    line-height: 22px;
+    border-radius: 24px;
+    vertical-align: middle;
+    background-color: @disable-btn-color;
+    border: 1px solid @disable-btn-color;
+    position: relative;
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+    &:before {
+        content: "";
+        display: none;
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background-color: transparent;
+        position: absolute;
+        left: 3px;
+        top: 4px;
+        z-index: 1;
+        border: 1px solid @green-color;
+        border-color: transparent transparent transparent @green-color;
+        -webkit-animation: switch-loading 1s linear;
+        -ms-animation: switch-loading 1s linear;
+        -moz-animation: switch-loading 1s linear;
+        animation: switch-loading 1s linear;
+        -webkit-animation-iteration-count: infinite;
+        animation-iteration-count: infinite;
+    }
+    &:after {
+        content: " ";
+        width: 18px;
+        height: 18px;
+        background-color: #fff;
+        border-radius: 50%;
+        position: absolute;
+        left: 2px;
+        top: 2px;
+        cursor: pointer;
+        transition: left .2s ease-in-out,width .2s ease-in-out;
+    }
+    .common-switch-inner {
+        color: #fff;
+        font-size: 14px;
+        font-weight: 500;
+        position: absolute;
+        left: 22px;
+        span {
+            -moz-user-select: none;
+            -ms-user-select: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+    }
+}
+.common-switch-on {
+    border-color: @green-color;
+    background-color: @green-color;
+    &:after {
+        left: 34px;
+    }
+    .common-switch-inner {
+        left: 6px;
+    }
+    &.common-switch-loading {
+        &:before {
+            left: 36px;
+        }
+    }
+}
+.common-switch-loading {
+    opacity: .8;
+    &:before {
+        display: block;
+    }
+}
+
+@keyframes switch-loading {
+    0% {
+        -webkit-transform: rotate(0);
+        -ms-transform: rotate(0);
+        -moz-transform: rotate(0);
+        transform: rotate(0)
+    }
+
+    to {
+        -webkit-transform: rotate(1turn);
+        -ms-transform: rotate(1turn);
+        -moz-transform: rotate(1turn);
+        transform: rotate(1turn)
+    }
+}

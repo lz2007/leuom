@@ -1,0 +1,78 @@
+<template>
+    <div class="sszhrlbk" :controller="sszhrlbk">
+        <div class="sszhrlbk-wrap" style="left: 50px; top: 100px; z-index: -1; width: 1px; height: 1px; position: absolute;"
+            :class="[@rlbkExtra_class ? 'sszhrlbk_en':'']">
+            <div class="sszh-rlbk-title" id="sszh-rlbk-title" :mousedown="@move($event)">
+                <span>{{@rlbk_txt.suspects}}<span :if="noLocaltionInfo != ''">（{{noLocaltionInfo}}）</span></span>
+                <span class="fa fa-times sszhspthclose" :click="@close_click"></span>
+            </div>
+            <div class="sszhrlbk-body">
+                <div class="sszhrlbk-content">
+                    <div class="scene">
+                        <span>{{@rlbk_txt.sceneImgTxt}}</span>
+                        <img :attr="{src:@scene_img}" onerror="javascript:this.src='../../static/image/sszhxt-znsb/rlbk_404.png';">
+                    </div>
+                    <div class="percent">
+                        <div id="show_percent" style="height:100%;"> </div>
+                        <span class="percent_span">{{@rlbk_txt.resemblance}}</span>
+                    </div>
+                    <div class="recognition_content">
+                        <div class="recognition">
+                            <span>{{@rlbk_txt.recognitionImgTxt}}</span>
+                            <img :attr="{src:@recognition_info.regImg}" onerror="javascript:this.src='../../static/image/sszhxt-znsb/rlbk_404.png';">
+                        </div>
+                        <div class="recognition_label">
+                            <label>{{@rlbk_txt.name}}：</label>
+                            <label class="label_content" :attr="{'data-toggle':'tooltip'}">{{@recognition_info.name|isNull}}</label><br>
+                            <label>{{@rlbk_txt.sex}}：</label>
+                            <label class="label_content" :attr="{'data-toggle':'tooltip'}">{{rlbkExtra_class?
+                                (@recognition_info.gender ==
+                                1?'Male':'Female'):(@recognition_info.gender == 1? '男':'女')}}</label><br>
+                            <label>{{@rlbk_txt.race}}：</label>
+                            <label class="label_content" :attr="{'data-toggle':'tooltip'}">{{@recognition_info.nation|isNull}}</label><br>
+                            <label>{{@rlbk_txt.identityCard}}：</label>
+                            <label class="label_content" :attr="{'data-toggle':'tooltip'}">{{@recognition_info.certificateId|isNull}}</label><br>
+                            <label>{{@rlbk_txt.birthplace}}：</label>
+                            <label class="label_content" :attr="{'data-toggle':'tooltip'}">{{@recognition_info.birthPlace|isNull}}</label><br>
+                            <label>{{@rlbk_txt.personType}}：</label>
+                            <label class="label_content" :attr="{'data-toggle':'tooltip'}">{{@recognition_info.personTypeName|isNull}}</label><br>
+                        </div>
+                    </div>
+                </div>
+                <div class="comparison_result">
+                    <span class="result_title">{{@rlbk_txt.queryingResult}}</span>
+                    <div class="control_bar">
+                        <a class="next"></a>
+                        <ul></ul>
+                        <a class="prev"></a>
+                        <span class="pageState"></span>
+                    </div>
+                    <ul class="result_list">
+                        <li ms-for="el in @result_list" :class="['result_li']">
+                            <div :click="@result_list_click(@el.index)" style="width:100%; height:100%;">
+                                <img :attr="{src:@el.regImg}" onerror="javascript:this.src='../../static/image/sszhxt-znsb/rlbk_404.png';">
+                                <div :class="['result_txt']">
+                                    <span style="padding-left: 5px;">{{@el.similarityTxt}}</span>
+                                    <span>{{@el.similarity | numberShowPercent}}</span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="sszhrlbk-footer">
+                    <div class="dl">
+                        <p style="position: relative">{{@rlbk_txt.power}}:
+                            <span style="display:inline-block;width: 34px;height: 28px;background:url(/static/image/sszhxt-sszh/battery.png) no-repeat scroll;vertical-align: middle;"></span>
+                            <span :css="{width:@width}" :class="[@battery > 45 ? 'green' : (@battery <=25? 'red':'orange')]"
+                                style="height: 16px;position:  relative;left: -32px;vertical-align:top; top: 6px;display: inline-block;"></span>
+                            <span style="position:  absolute;left: 45px;top:4px;font-size: 12px;color: #333;">{{@battery}}</span>
+                        </p>
+                    </div>
+                    <a class="common_btn bk" :click="@bk">{{@rlbk_txt.control}}</a>
+                    <a class="common_btn spjk" :click="@sphj">{{@rlbk_txt.videoCall}}</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</template>

@@ -1,0 +1,538 @@
+/*
+ * @Description: 运维中心-办案区管理-办案区管理
+ * @Author: chenjinxing
+ * @Date: 2019-07-09 11:46:19
+ * @LastEditTime: 2019-09-02 16:50:26
+ * @LastEditors: Please set LastEditors
+ */
+
+.tyywglpt-baqgl-sbdjgl {
+    .baqplsc{
+        width: 100%;
+        height: 40px;
+        position: absolute;
+        bottom: 8px;
+        background-color: #dfe9f7;
+        border-top: 1px solid #ffffff;
+        .btn-tool{
+            width: 100px;
+            height: 30px;
+            background: #1055b3;
+            position: absolute;
+            top: 12%;
+            left: 20px;
+            z-index: 99;
+            padding: 0;
+            color: #fff;
+            font-size: 16px;
+            border-radius: 0;
+            margin-right: 10px;
+        }
+        .disabled{
+            background: #d4d7d9;
+            opacity: 1;
+        }
+    } 
+    .tyywglpt-tool-bar{
+        .btn {
+            padding: 0;
+            color: #fff;
+            font-size: 16px;
+            border-radius: 0;
+        }
+    }
+    .search_box {
+        position: relative;
+        width: 100%;
+        z-index: 1;
+        border: 1px solid #b0c4e1;
+        background-color: #b0c4e1;
+        .hBox {
+            width: 100%;
+            height: 60px;
+            padding: 15px 0 0 13px;
+            margin-left: 16px;
+            .tree-select-wrap .tree-panel {
+                min-width: 150px;
+            }
+            .baqName{
+                input{
+                    width: 160px;
+                    height: 28px;
+                }
+            }
+            .dataFormBox {
+                float: left;
+                margin-left: 15px;
+                .formInput {
+                    float: left;
+                    width: 150px;
+                    height: 28px;
+                    line-height: 28px;
+                    padding: 0 12px;
+                    color: #536b82;
+                }
+                .jq_right_close {
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+                    margin-bottom: 0 !important;
+                    display: inline-block;
+                    width: 22px;
+                    height: 26px !important;
+                    margin: 0;
+                    vertical-align: middle;
+                    line-height: 26px !important;
+                    text-align: center;
+                    cursor: pointer;
+                    z-index: 2;
+                    font-size: 14px;
+                    font-weight: normal !important;
+                    color: #536b82;
+                }
+            }
+            .dataTreeBox {
+                float: left;
+                width: 250px;
+                .dep_tree {
+                    float: left;
+                    .form-control,
+                    span {
+                        height: 28px;
+                        line-height: 28px;
+                        color: #536b82;
+                    }
+                }
+                .tree-select-wrap {
+                    width: 150px;
+                    .ztree span {
+                        height: 21px;
+                        line-height: 21px;
+                    }
+                    .fa {
+                        top: 4px;
+                        color: #536b82;
+                    }
+                    .ztree li a.curSelectedNode {
+                        border: none;
+                    }
+                    .tree-select-search {
+                        width: 100%;
+                        padding-right: 7px;
+                        border: none;
+                        outline: none;
+                    }
+                }
+                .included_dep {
+                    width: 100px;
+                    display: inline-block;
+                    color: #536b82;
+                    height: 28px;
+                    line-height: 28px;
+                    margin-left: 5px;
+                    cursor: pointer;
+                    -moz-user-select: none;
+                    -webkit-user-select: none;
+                    -ms-user-select: none;
+                    -khtml-user-select: none;
+                    user-select: none;
+                    img {
+                        margin-right: 3px;
+                        margin-bottom: 2px;
+                    }
+                }
+            }
+            .dataTimeBox {
+                float: left;
+                .jq-dataRight {
+                    vertical-align: middle;
+                    width: 150px;
+                    height: 28px;
+                    float: left;
+                    .ane-datepicker .form-control {
+                        height: 28px;
+                        line-height: 14px;
+                    }
+                    .ane-datepicker-clear {
+                        display: none !important;
+                    }
+                }
+                .tilde {
+                    float: left;
+                    height: 28px;
+                    line-height: 28px;
+                    margin: 0 5px;
+                }
+            }
+            .dataFormBox>span,
+            .dataRadioBox>span {
+                margin-right: 5px;
+                float: left;
+                height: 28px;
+                line-height: 28px;
+                max-width: 100%;
+                margin-bottom: 5px;
+                color: #33414f;
+                font-size: 16px;
+            }
+            .dataRadioBox {
+                display: block;
+                float: left;
+                margin-left: 30px;
+                .formInput {
+                    float: left;
+                    width: 150px;
+                    height: 28px;
+                    line-height: 28px;
+                }
+                .time_range_label {
+                    width: 92px;
+                    height: 28px;
+                    line-height: 28px;
+                }
+            }
+            .dataFormBox,
+            .dataRadioBox {
+                input::-webkit-input-placeholder,
+                .ane-datepicker-icon {
+                    color: #536b82 !important;
+                }
+                .ane-tree-select .ane-tree-select-arrow,
+                .ane-select .ane-select-arrow {
+                    top: 4px;
+                    color: #536b82;
+                }
+                .ane-tree-select-selection .ane-tree-select-selected,
+                .ane-select-selection .ane-select-selected {
+                    top: 0px;
+                    height: 28px;
+                    line-height: 28px;
+                }
+            }
+            .jq_input_panel {
+                width: 150px;
+                position: relative;
+                display: inline-block;
+                color: #536b82;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                background-color: #fff;
+                .form-control-input {
+                    display: inline-block;
+                    color: #536b82;
+                    width: 120px;
+                    height: 26px;
+                    line-height: 26px;
+                    margin-left: 12px;
+                    font-size: 14px;
+                    background-color: transparent;
+                    border: none;
+                    box-sizing: border-box;
+                    outline: medium;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
+            }
+            .common_search_btn {
+                float: right;
+                width: 110px;
+                height: 36px;
+                line-height: 36px;
+                text-align: center;
+                background-color: #074eb0;
+                color: #fff;
+                cursor: pointer;
+                font-size: 16px;
+                font-weight: bold;
+                margin-right: 36px;
+                margin-top: -3px;
+                &:hover {
+                    background-color: #0067f3;
+                }
+            }
+            .formData {
+                float: left;
+                height: 28px;
+                line-height: 28px;
+                font-size: 16px;
+            }
+            .widthAuto {
+                width: auto;
+                >span {
+                    font-weight: bold;
+                }
+            }
+            .widthAutoMargin {
+                width: auto;
+                margin-left: 30px;
+                >span {
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+    .jq-table {
+        .common-list-panel {
+            top: 156px !important;
+            bottom: 60px !important;
+            .common-list-header-wrap {
+                width: 100%;
+                margin-top: -34px;
+                background: #e0e7ec;
+                overflow: hidden;
+                border: 1px solid #ffffff;
+                .common-list-header {
+                    li {
+                        display: inline-block;
+                        height: 44px;
+                        line-height: 44px;
+                        text-align: center;
+                        color: #151c40;
+                        background: #ccdbf1;
+                        border-right: 1px solid #ffffff;
+                        font-size: 16px;
+                        color: #2c477a;
+                        position: relative;
+                        min-width: 20px;
+                    }
+                }
+            }
+            .common-list-content {
+                li {
+                    height: 40px;
+                    line-height: 40px;
+                    border-bottom: 1px solid #fff;
+                }
+                div {
+                    min-width: 20px;
+                    display: inline-block;
+                    padding: 0 4px;
+                    text-align: center;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    font-size: 14px;
+                    color: #33414f;
+                    text-overflow: ellipsis;
+                    border-right: none;
+                    border-bottom: none;
+                }
+            }
+        }
+        .check_action {
+            color: #0419dc;
+            user-select: none;
+            &:hover {
+                cursor: pointer;
+                color: #0099ff;
+            }
+        }
+        .comparison_img {
+            cursor: pointer;
+            color: blue;
+        }
+    }
+    .com-pages {
+        bottom: 8px !important;
+    }
+    .formFlag {
+        margin: 0 15px 0 0 !important;
+    }
+    #sbdjglAddDialog{
+        width: 100%;
+        height: 100%;
+        .tree-select-wrap .tree-panel {
+            min-width: 220px;
+        }
+        .left-addDevice{
+            float:left;
+            height: 100%;
+            width: 360px;
+            border-right: 2px solid #b1b0b0;
+            // overflow-x: hidden;
+            // overflow-y: auto;
+            .row_btn{
+                text-align: center;
+                margin-top: 10px;
+                .notAllowBtn{
+                    background: #797979;
+                    border: 1px solid #8c9198;
+                    cursor: not-allowed;
+                    width: 200px;
+                    height: 40px;
+                    line-height: 14px;
+                    margin-right: 12px;
+                    vertical-align: top;
+                    padding: 0;
+                    color: #fff;
+                    font-size: 16px;
+                    border-radius: 0;
+                    outline: navajowhite;
+                }
+                .tjsbBtn{
+                    width: 200px;
+                    height: 40px;
+                    line-height: 14px;
+                    margin-right: 12px;
+                    background: #1055b3;
+                    vertical-align: top;
+                    padding: 0;
+                    color: #fff;
+                    font-size: 16px;
+                    border-radius: 0;
+                }
+                .tjsbBtn:hover {
+                    background: #107dda;
+                }
+            }
+            .row{
+                .has-icon{
+                    height: 35px;
+                }
+                .fa-close{
+                    position: relative;
+                    right: 20px;
+                    font-size: 16px;
+                    color: rgb(83, 107, 130);
+                    cursor: pointer;
+                }
+                .valid-tip{
+                    padding-left: 100px;
+                }
+                .invalid-tip{
+                    color: red;
+                    padding-left: 105px;
+                    text-align: left;
+                }
+                .fa-info-circle{
+                    color: #E09E1F;
+                    margin-right: 5px;
+                }
+                padding: 10px 20px 0px 20px;
+                .dep_tree{
+                    display: inline-block;
+                    width: 220px;
+                    .tree-select-wrap{
+                        width: 100%;
+                        .tree-select-form{
+                            line-height: 33px;
+                        }
+                    }
+                }
+                label{
+                    text-align: right;
+                    font-size: 16px;
+                    font-weight: normal;
+                    margin-right: 5px;
+                    margin-bottom: 0;
+                    vertical-align: middle;
+                    width: 100px;
+                    float: left;
+                    line-height: 31px;
+                }
+                
+                input{
+                    display: inline-block;
+                    width: 220px;
+                }
+                textarea{
+                    display: inline-block;
+                    width: 220px;
+                }
+            }
+        }
+        .right-addPassageway{
+            float: right;
+            height: 100%;
+            width: 750px;
+            padding: 0px 0px 0px 10px;
+            .leftTitle{
+                display: inline-block;
+            }
+            .tdBtn{
+                float: right;
+                height: 28px;
+                line-height: 14px;
+                color: white;
+                background: #797979;
+                border: 1px solid #8c9198;
+                margin-right: 10px;
+                cursor: not-allowed;
+            }
+            .enableBtn{
+                cursor: pointer;
+                background: #1055b3;
+                border: 1px solid #1055b3;
+            }
+            .notAllowBtn{
+                background: #797979;
+                border: 1px solid #8c9198;
+                cursor: not-allowed;
+                outline: navajowhite;
+            }
+        }
+
+    }
+    #sbdjglTDAddDialog{
+        .row{
+            .has-icon{
+                height: 35px;
+            }
+            .fa-close{
+                position: relative;
+                right: 20px;
+                // bottom: 35px;
+                font-size: 16px;
+                color: rgb(83, 107, 130);
+                cursor: pointer;
+            }
+            .valid-tip{
+                padding-left: 125px;
+            }
+            .invalid-tip{
+                color: red;
+                padding-left: 130px;
+                text-align: left;
+            }
+            .fa-close{
+                position: relative;
+                right: 20px;
+                font-size: 16px;
+                color: rgb(83, 107, 130);
+                cursor: pointer;
+            }
+            padding: 10px 20px 0px 20px;
+            .dep_tree{
+                display: inline-block;
+                width: 220px;
+                .tree-select-wrap{
+                    width: 100%;
+                    .tree-select-form{
+                        line-height: 33px;
+                    }
+                }
+            }
+            label{
+                text-align: right;
+                font-size: 16px;
+                font-weight: normal;
+                margin-right: 5px;
+                margin-bottom: 0;
+                vertical-align: middle;
+                width: 120px;
+                float: left;
+                line-height: 31px;
+            }
+            
+            input{
+                display: inline-block;
+                width: 220px;
+            }
+            textarea{
+                display: inline-block;
+                width: 220px;
+            }
+        }
+
+    }
+}

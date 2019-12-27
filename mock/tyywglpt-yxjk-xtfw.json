@@ -1,0 +1,17 @@
+[{
+    "port": "qpid(端口-1)",
+    "situation": "运行中",
+    "color":"#0fb516"
+  },{
+    "port": "qpid(端口-2)",
+    "situation": "运行中",
+    "color":"#0fb516"
+  },{
+    "port": "qpid(端口-3)",
+    "situation": "已停止",
+    "color":"#d72222"
+  },{
+    "port": "qpid(端口-4)",
+    "situation": "已停止",
+    "color":"#d72222"
+  }]

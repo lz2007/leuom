@@ -1,0 +1,98 @@
+<template>
+    <div class="zfsypsjglpt-gjhf gjhf" id="zfsypsjglpt-gjhf">
+        <div class="ant-layout-aside">
+            <div class="ant-layout-main">
+                <div class="noGPS" :visible="@showNoGPS">
+                    <span class='mes1'>{{@msgNoGPS}}</span>
+                    <span class='mes2'>暂无轨迹</span>
+                </div>
+                <!-- 播放、加速控件 
+                <div class='map-tool-wrap'>
+                    <ul class="map-tool-bar">
+                        <li>
+                            <span class="fa fa-fast-backward" :attr="{title:@sszhxt_language.slowPlay}" :click="@handleSlower"></span>
+                        </li>
+                        <li>
+                            <span class="fa" :class="@playing ? 'fa-pause' : 'fa-play'" :attr="{ 'title':@playing? @sszhxt_language.pause : @sszhxt_language.play}"
+                                    :click="@playBtnClick"></span>
+                        </li>
+                        <li>
+                            <span class="fa fa-stop" :attr="{title:@sszhxt_language.stop}" :click="@handleStop"></span>
+                        </li>
+                        <li>
+                            <span class="fa fa-fast-forward" :attr="{title:@sszhxt_language.fastPlay}" :click="@handleFaster"></span>
+                        </li>
+                        <li class="map-speed">
+                            <span>1x倍数</span>
+                        </li>
+                    </ul>
+                </div> -->
+                <div class="ant-layout-container">
+                    <div class="ant-layout-content">
+                        <div id="gjcx-map" :css="{height:@mapHeight}"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="ante-layout-sider">
+                <div class="sildeNav">
+                    <div class="gjhf-search">
+                        <div class="gjhf-search-box" :if="@authority.SEARCH">
+                            <xmp is="ms-form" :widget="{$form:@$form,type:'search',inline:true}">
+                                <ms-form-item :widget="{label:@sszhxt_language.department}" :class="[@extra_class_dialog ? 'form-item form-org en' : 'form-item form-org']">
+                                    <ms-tree-selecting :widget="{tree:@orgData, showSearch:true,selectedKey:@orgId,selectedTitle:@selectedTitle, wrapId: 'tree-select-gjcx',getSelected:@getSelected,onChange:@handleTreeChange,extraExpandHandle:@extraExpandHandle}"></ms-tree-selecting>
+                                </ms-form-item>
+                                <div :class="[@extra_class_dialog ? 'form-group has-feedback en' : 'form-group has-feedback']"
+                                    style="vertical-align: top;">
+                                    <label class="control-label">{{@sszhxt_language.police}}</label>
+                                    <div class="has-icon-input-wrap">
+                                        <input type="input" class="form-control key" :attr="{placeholder:@sszhxt_language.enterNameID || ''}"
+                                            :duplex="@key" :focus="@handleInputFocus" :blur="@handleInputBlur" :keyup="@handleQuickSearch">
+                                        <i class="fa fa-close close-clear" :mousedown="@handleCloseClear"></i>
+                                    </div>
+                                </div>
+                                <ms-form-item :widget="{label:@sszhxt_language.queryStartDate} " :class="[@extra_class_dialog ? 'en' : '']">
+                                    <ms-datepicker :widget="{
+                                                    placeholder:'',
+                                                    format:'YYYY-MM-DD',
+                                                    value:@searchdataTimeStart,
+                                                    onChange:startdatatimechange,
+                                                    languageSelect: @extra_class_dialog ? 'en' : ''
+                                                }"
+                                        :css="{width: @extra_class_dialog ? 153:165}"></ms-datepicker>
+                                </ms-form-item>
+                                <ms-form-item :widget="{label:@sszhxt_language.queryEndDate} " :class="[@extra_class_dialog ? 'en' : '']">
+                                    <ms-datepicker :widget="{
+                                                        placeholder:'',
+                                                        format:'YYYY-MM-DD',
+                                                        value:@searchdataTimeEnd,
+                                                        onChange:enddatatimechange,
+                                                        languageSelect: @extra_class_dialog ? 'en' : '',
+                                                    }"
+                                        :css="{width: @extra_class_dialog ? 153:165}"></ms-datepicker>
+                                </ms-form-item>
+                            </xmp>
+                            <button type="button" class="btn btn-sm form-search" :click="@clickSearch()" :if="@authority.SEARCH">{{@sszhxt_language.query}}</button>
+                        </div>
+                    </div>
+                    <div class="gjhf-table-wrap">
+                        <ms-comtable :widget="{id:'table-gjhf',loading: @tableLoading,data:@tableData,actions:@actions,panelCss:{position: 'absolute',width: '100%', bottom: 0,top: 0}}">
+                            <ms-comtable-header :widget="{title:'序号',dataIndex:'xh',colwidth:'10%',popover:true}"></ms-comtable-header>
+                            <ms-comtable-header :widget="{title:'归属部门',dataIndex:'orgName',colwidth:'25%',popover:true}"></ms-comtable-header>
+                            <ms-comtable-header :widget="{title:'姓名/警号',dataIndex:'nameAndCode',colwidth:'20%',popover:true}"></ms-comtable-header>
+                            <ms-comtable-header :widget="{title:'轨迹时长',dataIndex:'onlineDuration | formatSeconds',colwidth:'20%',popover:true}"></ms-comtable-header>
+                            <ms-comtable-header :widget="{title:'操作',dataIndex:'matchCount',colwidth:'25%',popover:true}">
+                                <span>
+                                    <a class="check_Btn" :click="handle('check')" :skip>
+                                        <img src="/static/image/zfsypsjglpt/checkBtn.png?__sprite" :visible="record.matchCount != 'run'">
+                                        <img src="/static/image/zfsypsjglpt/empty_cancel.png?__sprite" :visible="record.matchCount == 'run'">
+                                    </a>
+                                </span>
+                            </ms-comtable-header>
+                        </ms-comtable>
+                    </div>
+                    <ms-pages :widget="{total:@table_pagination.total, onChange:@handlePageChange, current:@table_pagination.current, getCurrent:@getCurrent, pageSize:@table_pagination.pageSize}"></ms-pages>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

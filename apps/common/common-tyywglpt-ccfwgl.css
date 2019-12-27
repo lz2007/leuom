@@ -1,0 +1,513 @@
+/* 统一运维管理平台--存储服务管理公共样式 */
+.ccfwgl-wrap .com-modal-modal-footer {
+    /* padding-right: 0; */
+    border-top: none;
+}
+
+.tyywglpt-tool-bar .btn-tool.width-130 {
+    width: 130px;
+}
+
+.cjzscfwgl .ccfwglAddDialog_add .tree-select-wrap {
+    top: 10px;
+}
+.cjzscfwgl .ccfwglAddDialog_add .tree-panel {
+    top: 30px;
+}
+
+/* 公共添加和修改弹窗取消图标 */
+.com-modal-modal-close-x.disabled {
+    cursor: not-allowed;
+}
+
+/* 公共弹框 */
+.commonDialog.ccfwgl {
+    font-size: 14px;
+    padding: 5px 10px;
+    text-align: center;
+}
+
+.commonDialog.ccfwgl .tree-select-wrap .tree-select-selected {
+    top: 5px;
+}
+
+.commonDialog.ccfwgl .clear {
+    clear: both;
+}
+
+.commonDialog.ccfwgl div.ccfwgl-row {
+    display: inline-block;
+    width: 282px;
+    /*float: left;*/
+    position: relative;
+    /* margin-bottom:16px; */
+    margin-bottom: 20px;
+    color: #536B82
+}
+
+.commonDialog.ccfwgl .close-clear {
+    position: absolute;
+    right: 12px;
+    top: 8px;
+    font-size: 14px;
+    display: none;
+    cursor: pointer;
+}
+
+.commonDialog.ccfwgl .ccfwgl-error-tips {
+    color: red;
+}
+
+.commonDialog.ccfwgl .ccfwgl-form-tips,
+.commonDialog.ccfwgl .ccfwgl-error-tips {
+    position: absolute;
+    top: 30px;
+    /* color:red; */
+    font-size: 12px;
+}
+
+.commonDialog.ccfwgl .ccfwgl-form-tips .fa-info-circle {
+    color: #E09E1F;
+}
+
+.commonDialog.ccfwgl div.double {
+    margin-left: 44px;
+}
+
+.commonDialog.ccfwgl .path {
+    float: left;
+    position: relative;
+    width: 91%;
+    margin: 0 0 20px 30px;
+    color: #536B82;
+}
+
+.commonDialog.ccfwgl .look {
+    float: left;
+    position: relative;
+    width: 100%;
+    margin-bottom: 20px;
+    color: #536B82;
+}
+
+.commonDialog.ccfwgl .look:nth-child(10) {
+    margin-bottom: 0;
+}
+
+.commonDialog.ccfwgl .warn i {
+    color: #E09E1F;
+    font-size: 16px;
+}
+
+.commonDialog.ccfwgl .warn {
+    text-indent: 4px;
+    float: left;
+    margin: 0 0 8px 0;
+    font-weight: 700;
+}
+
+.commonDialog.ccfwgl .path .form-control {
+    width: 523px;
+    height: 30px;
+    padding: 4px 12px;
+}
+
+.commonDialog.ccfwgl label {
+    display: inline-block;
+    width: 74px;
+    text-align: right;
+    font-weight: normal;
+    margin-right: 5px;
+}
+
+.commonDialog.ccfwgl label i {
+    color: red;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.commonDialog.ccfwgl .form-control {
+    display: inline-block;
+    width: 196px;
+    height: 30px;
+    padding: 4px 12px;
+}
+
+.commonDialog.ccfwgl .has-feedback {
+    margin-left: 17px;
+}
+
+.commonDialog.ccfwgl .form-inline .control-label {
+    display: inline;
+}
+
+.commonDialog.ccfwgl .ane-timepicker {
+    display: inline-block;
+    width: 197px;
+}
+
+.commonDialog.ccfwgl .methodDialog label {
+    width: 100%;
+    text-align: left;
+}
+
+.commonDialog.ccfwgl .methodDialog input {
+    width: 245px;
+}
+
+.commonDialog.ccfwgl div.test-btn-wrap .icon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    vertical-align: sub;
+    margin-left: 20px;
+}
+
+.commonDialog.ccfwgl div.test-btn-wrap .icon.success {
+    background: url(/static/image/tyywglpt-ccfwgl/icon_testSuccess.png) 0 0 no-repeat;
+}
+
+.commonDialog.ccfwgl div.test-btn-wrap .icon.error {
+    background: url(/static/image/tyywglpt-ccfwgl/icon_testError.png) 0 0 no-repeat;
+}
+
+/* 查看弹框 */
+.ccfwglLookDialog span {
+    display: inline-block;
+    padding: 0 0 0 6px;
+    width: 300px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.ccfwglLookDialog .path span {
+    width: 300px;
+    text-align: left;
+}
+
+.commonDialog.ccfwgl.ccfwglLookDialog label {
+    font-weight: bold;
+    display: inline-block;
+    vertical-align: top;
+}
+
+/* 添加弹框 */
+.ccfwglAddDialog.ccfwgl form .control-label {
+    display: inline;
+}
+
+.ccfwglAddDialog.ccfwgl form .form-group {
+    margin-bottom: 0;
+}
+
+.ccfwglAddDialog.ccfwgl .ccfwgl-form-tips,
+.ccfwglAddDialog.ccfwgl .ccfwgl-error-tips {
+    left: 84px;
+}
+
+.ccfwglAddDialog_add .com-modal-btn-ok.disabled,
+.ccfwglAddModify .com-modal-modal-footer .com-modal-btn-cancle.disabled {
+    background: #b2b2b2;
+    cursor: not-allowed;
+}
+
+/* 修改弹框 */
+.ccfwglModifyDialog.ccfwgl .ccfwgl-form-tips,
+.ccfwglModifyDialog.ccfwgl .ccfwgl-error-tips {
+    left: 84px;
+}
+
+
+/* 存储策略弹框 */
+.ccfwglMethodDialog {
+    height: 320px;
+    position: relative;
+}
+
+.ccfwglMethodDialog .ccfwgl-normalDay {
+    margin-top: 51px;
+}
+
+.ccfwglMethodDialog .ccfwgl-right {
+    display: inline-block;
+    width: 210px;
+    height: auto;
+    text-align: left;
+}
+
+.ccfwglMethodDialog.ccfwgl.commonDialog div.ccfwgl-row {
+    /* width:340px; */
+    width: 100%;
+}
+
+.ccfwglMethodDialog.ccfwgl.commonDialog div.ccfwgl-row .form-control {
+    width: 170px;
+    margin-right: 6px;
+}
+
+.ccfwglMethodDialog.ccfwgl.commonDialog label {
+    width: 165px;
+
+}
+
+.ccfwglMethodDialog.ccfwgl.commonDialog .modify {
+    display: inline-block;
+    width: 50px;
+    color: #fff;
+    cursor: pointer;
+    background: #1055b3;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.ccfwglMethodDialog.ccfwgl.commonDialog .confirm {
+    display: inline-block;
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    top: 6px;
+}
+
+.ccfwglMethodDialog.ccfwgl.commonDialog .confirm.save {
+    right: 110px;
+    background: url(/static/image/tyywglpt-ccfwgl/icon_modifySave.png) 0 0 no-repeat;
+}
+
+.ccfwglMethodDialog.ccfwgl.commonDialog .confirm.cancel {
+    right: 86px;
+    background: url(/static/image/tyywglpt-ccfwgl/icon_modifyCancel.png) 0 0 no-repeat;
+}
+
+.ccfwglMethodDialog.ccfwgl.commonDialog a {
+    font-family: "Microsoft YaHei", serif;
+    color: #536b82;
+    margin-right: 4px;
+}
+
+.ccfwglMethodDialog.ccfwgl.commonDialog .day {
+    font-weight: 700;
+    margin-right: 16px;
+}
+
+.ccfwglMethodDialog.ccfwgl.commonDialog .dayNumber {
+    margin: 0 20px 0 14px;
+}
+
+.ccfwglMethodDialog.ccfwgl.commonDialog .ccfwgl-form-tips,
+.ccfwglMethodDialog.ccfwgl.commonDialog .ccfwgl-error-tips {
+    left: 200px;
+}
+
+.ccfwglMethodDialog.ccfwgl.commonDialog .close-clear {
+    left: 294px;
+    width: 10px;
+}
+
+.ccfwglMethodDialog.ccfwgl.commonDialog .method-pie {
+    position: absolute;
+    top: -17px;
+    /* right: 0; */
+}
+
+.ccfwglMethodDialog_bottom {
+    position: absolute;
+    width: 440px;
+    height: 150px;
+    background: #ccdbf1;
+    left: -16px;
+    top: 186px;
+}
+
+/* 删除，配置测试弹框 */
+.commonDialog.ccfwgl .confirm-tip {
+    width: 100%;
+    text-align: center;
+    font-size: 16px;
+}
+
+.commonDialog.ccfwgl.deviceTest .yes {
+    text-align: center;
+    height: 30px;
+    border-top: 1px solid #e9e9e9;
+    padding: 10px 16px 10px 10px;
+    margin: 30px -26px 0 -22px;
+}
+
+.commonDialog.ccfwgl.deviceTest .yes button {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: 500;
+    text-align: center;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 4px 15px;
+    font-size: 12px;
+    border-radius: 6px;
+    position: relative;
+    width: 100px;
+    height: 30px;
+    background: #0078d7;
+    color: #fff;
+    font-size: 14px;
+    border-color: #0078d7
+}
+
+.commonDialog.ccfwgl div.test-btn-wrap {
+    margin-bottom: 0;
+    width: 120px;
+    height: 30px;
+    background: #1055b3;
+    line-height: 30px;
+}
+
+.commonDialog.ccfwgl div.test-btn-wrap.success {
+    background: #0fb516;
+}
+
+.commonDialog.ccfwgl div.test-btn-wrap.success:focus {
+    background: #13d31b;
+}
+
+.commonDialog.ccfwgl div.test-btn-wrap.error {
+    background: #d72222;
+}
+
+.commonDialog.ccfwgl div.test-btn-wrap.error:focus {
+    background: #ea4848;
+}
+
+.commonDialog.ccfwgl .ccfwgl-row .test-btn {
+    width: 100%;
+    height: 30px;
+    background: #1055b3;
+    border-color: #1055b3;
+    color: #fff;
+}
+
+.commonDialog.ccfwgl .ccfwgl-row .test-btn.testing {
+    background: #b2b2b2;
+    border-color: #b2b2b2;
+    cursor: not-allowed;
+}
+
+.commonDialog.ccfwgl .ccfwgl-row .test-btn.success {
+    width: 70%;
+    background: #0fb516;
+    border-color: #0fb516;
+    cursor: pointer;
+    text-align: left;
+    padding-left: 10px;
+}
+
+.commonDialog.ccfwgl .ccfwgl-row .test-btn.error {
+    width: 70%;
+    background: #d72222;
+    border-color: #d72222;
+    cursor: pointer;
+    text-align: left;
+    padding-left: 10px;
+}
+
+.commonDialog.ccfwgl .ccfwgl-row .test-btn.testing:hover {
+    background: #b2b2b2;
+}
+
+.commonDialog.ccfwgl.delete {
+    padding: 23px 0;
+}
+
+
+/* 文件上传服务 存储模式弹窗样式 */
+.commonDialog .radio_selected {
+    background: url(/static/image/tyywglpt-sbzygl/radio_selected.png?__sprite) no-repeat;
+}
+
+.commonDialog .radio_unselected {
+    background: url(/static/image/tyywglpt-sbzygl/radio_unselected.png?__sprite) no-repeat;
+}
+.commonDialog .radio-group {
+    margin: 10px 0;
+}
+
+.commonDialog.ccfwglModeDialog .select-label {
+    width: 16px;
+    height: 16px;
+    margin-bottom: -3px;
+    margin-right: 5px;
+}
+.commonDialog.ccfwglModeDialog input.radio-ipt {
+    width: 0;
+    display: none;
+    display: inline-block\0;
+}
+.commonDialog.ccfwglModeDialog p {
+    margin-bottom: 20px;
+}
+.commonDialog.ccfwglModeDialog div.item {
+    margin: 10px;
+}
+
+
+/* 存储分析弹框 */
+.ccfwglAnalysisDialog .time-form-wrap {
+    margin-top: 11px;
+}
+
+.ccfwglAnalysisDialog .has-feedback {
+    width: 253px;
+    display: inline-block;
+}
+
+.ccfwglAnalysisDialog .has-feedback label {
+    display: inline;
+    font-weight: normal;
+}
+
+.ccfwglAnalysisDialog .has-feedback .ane-datepicker {
+    display: inline-block;
+}
+
+.ccfwglAnalysisDialog .has-feedback .ane-datepicker input {
+    width: 178px !important;
+}
+
+.ccfwglAnalysisDialog .analysisQuery {
+    padding: 6px 12px;
+    color: #fff;
+    width: 120px;
+    height: 30px;
+    background: #fd8702;
+
+}
+
+.ccfwglAnalysisDialog .analysisQuery:hover {
+    background: #DB7400;
+}
+
+/* 存储分配弹窗 */
+.ccfwglAllocationDialog .left-wrap,
+.ccfwglAllocationDialog .right-wrap {
+    width: 340px;
+}
+
+.ccfwglAllocationDialog .search-input-wrap input {
+    width: 288px;
+}
+
+.ccfwglAllocationDialog .left-content .search-input-wrap,
+.ccfwglAllocationDialog .org-group {
+    width: 318px;
+}
+
+.ccfwgl-wrap.tyywglpt.cjzscfwgl .tyywglpt-search-box .tree-select-wrap .tree-panel {
+    min-width: 180px;
+}
+.ccfwgl-wrap.tyywglpt.cjzscfwgl .ccfwglAddModify .tree-select-wrap .tree-panel {
+    min-width: 196px;
+}

@@ -1,0 +1,63 @@
+{
+    "code": 0,
+    "msg": "Successfully!",
+    "data": {
+        "randomGenerateAble": false,
+        "criteria": {
+            "orgName": "广州市公安局",
+            "orgPath": "/44010000/",
+            "includeChild": true,
+            "startTime": 1541001600000,
+            "endTime": 1543507200000,
+            "generateNum": 1
+        },
+        "pageObject": {
+            "totalPages": 1,
+            "totalElements": 1,
+            "currentPages": 0,
+            "perPages": 10,
+            "currentElements": [{
+                "id": "SGCL8171020000021008453",
+                "className": "com.goldmsg.levam.base.datastruct.bean.audio.jj.TbGmvcsAccident",
+                "orgPath": "/44010000/44010000/44010000/817102000000/817102000002/",
+                "date": 1542353400000,
+                "relation": true,
+                "evaStatus": false,
+                "reviewStatus": false,
+                "data": {
+                    "rid": "SGCL8171020000021008453",
+                    "orgCode": "817102000002",
+                    "orgName": "武穴第2分局第2派出所",
+                    "orgPath": "/44010000/44010000/44010000/817102000000/817102000002/",
+                    "userCode": "100845",
+                    "userName": "李彦霖",
+                    "spellAbbr": "lyl",
+                    "spellFull": "liyanlin",
+                    "idCard": "640102197708222119",
+                    "hphm": "A1008453",
+                    "sgbh": "SGBH8171020000021008453",
+                    "sglx": "斗殴",
+                    "sgfssj": 1542353400000,
+                    "sgdd": "黄埔高速",
+                    "clsj": 1542353400000,
+                    "wfxw": "高速上打架",
+                    "wfxwmc": null,
+                    "bz": "为了一个美女",
+                    "relevanceType": null,
+                    "updateTime": 1544168610837,
+                    "evaInfo": null,
+                    "reviewInfo": null,
+                    "fileRelevanceType": null
+                },
+                "criteria": {
+                    "orgName": "广州市公安局",
+                    "orgPath": "/44010000/",
+                    "includeChild": true,
+                    "startTime": 1541001600000,
+                    "endTime": 1543507200000,
+                    "generateNum": 1
+                }
+            }]
+        }
+    }
+}

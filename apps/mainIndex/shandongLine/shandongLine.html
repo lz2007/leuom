@@ -1,0 +1,64 @@
+<template>
+    <div class="shandongLine">
+
+        <div class="pic_ocx" :if="is_IE">
+            <object id="gxxPlayOcx" classid="clsid:455791d4-4095-4f70-b2b3-f5c424f25ad9" width="100%" height="100%"></object>
+        </div>
+        <div class="pic_ocx" :if="!is_IE">
+            <embed type="application/npGSVideoPlugin-plugin" name="npGSVideoPlugin" id="npGSVideoPlugin_pic" width="100%" height="100%">
+        </div>
+
+        <ul class="list-box" id="list-box" :css="{marginLeft: marginLeft,marginTop: marginTop}">
+            <li :for="item in lists" :click="actions(item)">
+                <div class="img">
+                    <img :attr="{src: item.img}">
+                </div>
+                <div class="desc">
+                    {{item.title}}
+                </div>
+            </li>
+        </ul>
+
+        <div class="download-center">
+            <div class="title">
+                下载中心
+            </div>
+
+            <div class="must-plug">
+                <div class="label">
+                    必装插件 ：
+                </div>
+                <div class="plugins">
+                    <div class="plugin">
+                        <span class="icon"></span>
+                        <a class="plug" href="/static/flash_player.zip">Flash 插件</a>
+                    </div>
+                    <div class="plugin need-left">
+                        <span class="icon"></span>
+                        <a class="plug" :attr="{href: @version}">高新兴媒体播放插件</a>
+                    </div>
+                </div>
+
+                <p></p>
+
+                <div class="label">
+                    选装浏览器 ：
+                </div>
+                <div class="plugins">
+                    <div class="plugin">
+                        <span class="icon"></span>
+                        <a class="plug" :attr="{href: @defaultDownloadUrl}">高新兴国迈安全浏览器</a>
+                    </div>
+                    <div class="plugin need-left">
+                        <span class="icon"></span>
+                        <a class="plug" href="/static/eie11_zh-cn_wol_win7.exe">IE11 浏览器（win7 32位）</a>
+                    </div>
+                    <div class="plugin need-left">
+                        <span class="icon"></span>
+                        <a class="plug" href="/static/eie11_zh-cn_wol_win764.exe">IE11 浏览器（win7 64位）</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

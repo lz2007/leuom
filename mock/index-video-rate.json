@@ -1,0 +1,10 @@
+{
+    "code": 0,
+    "msg": "成功！",
+    "data": {
+        "before24h": 0,
+        "after24h": 10000,
+        "videoCount": 0,
+        "videoRate": 100
+    }
+}

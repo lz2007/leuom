@@ -1,0 +1,129 @@
+@import url("./common-variable.less");
+
+.btn-mixin(@txtColor:#fff,@bgcolor,@bordercolor:@bgcolor) {
+    color: @txtColor;
+    outline: none;
+    &:not(:disabled) {
+        background-color: @bgcolor;
+        border-color: @bordercolor;
+    }
+    &:not(:disabled):focus {
+        color: @txtColor;
+        outline: none;
+    }
+    &:disabled {
+        background-color: @disable-btn-color;
+        opacity: 1;
+    }
+}
+
+.btn-hover-mixin(@txtColor:#fff,@bgcolor,@bordercolor:@bgcolor) {
+    &:not(:disabled):hover {
+        color: @txtColor;
+        background-color: @bgcolor;
+        border-color: @bordercolor;
+    }
+}
+
+.btn-active-mixin(@txtColor:#fff,@bgcolor,@bordercolor:@bgcolor) {
+    &:not(:disabled):active,
+    &:not(:disabled):active:hover {
+        color: @txtColor;
+        background-color: @bgcolor;
+        border-color: @bordercolor;
+    }
+}
+
+// 用法
+
+/*
+*.btn{
+*    .btn-com-del
+*}
+*/
+
+.box-sizing-mixin(@boxsizing) {
+    -moz-box-sizing: @boxsizing;
+    -webkit-box-sizing: @boxsizing;
+    -o-box-sizing: @boxsizing;
+    -ms-box-sizing: @boxsizing;
+    box-sizing: @boxsizing;
+}
+.btn-padding-mixin(@top:6px;@right:0;@bottom:6px;@left:0) {
+    padding-top: @top;
+    padding-right: @right;
+    padding-bottom: @bottom;
+    padding-left: @left;
+}
+
+.btn-com-set(@width,@height) {
+    width: @width;
+    text-align: center;
+    height: @height;
+    line-height: @height;
+    padding: 0;
+}
+
+.btn-com-default(@width: 130px, @height: 40px) {
+    .btn-com-set(@width, @height);
+    .box-sizing-mixin(border-box);
+    .btn-mixin(@bgcolor: @primary-color);
+    .btn-hover-mixin(@bgcolor:#4785F4);
+    .btn-active-mixin(@bgcolor:#4785F4);
+}
+
+.btn-com-success() {
+    .btn-com-set(100px, 36px);
+    .box-sizing-mixin(border-box);
+    .btn-mixin(@bgcolor: @green-color);
+    .btn-hover-mixin(@bgcolor:#47E25A);
+    .btn-active-mixin(@bgcolor:#00A513);
+}
+
+.btn-com-warning() {
+    .btn-com-set(100px, 36px);
+    .box-sizing-mixin(border-box);
+    .btn-mixin(@bgcolor: @orange-colo);
+    .btn-hover-mixin(@bgcolor:#FFC13E);
+    .btn-active-mixin(@bgcolor:#FF9600);
+}
+
+// 查询按钮
+.btn-com-search() {
+    .btn-com-default(100px, 36px);
+}
+
+// 查询按钮 plus
+.btn-com-search-big() {
+    .btn-com-default(100px, 68px);
+}
+
+.btn-com-normal {
+    .btn-com-set(80px, 26px);
+    @media screen and (max-width: 1366px) {
+        .btn-com-set(68px, 26px);
+    }
+    .btn-mixin(
+        @txtColor: @primary-color; @bgcolor:transparent; @bordercolor:
+            @primary-color
+    );
+    .btn-hover-mixin(
+        @txtColor: #ffffff; @bgcolor:#47E25A; @bordercolor:#47E25A
+    );
+    .btn-active-mixin(
+        @txtColor: #ffffff; @bgcolor:#47E25A; @bordercolor:#47E25A
+    );
+}
+
+.input-status-change() {
+    padding-left: 10px;
+    border: 1px solid @border-color;
+    &:focus {
+        border: 1px solid @border-focus-color;
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),
+            0 0 8px rgba(102, 175, 233, 0.6);
+    }
+    &:disabled {
+        border: 1px solid @border-diabled-color;
+    }
+}

@@ -1,0 +1,173 @@
+/*
+ * @Author: xuanyanqing 
+ * @Date: 2019-01-08 17:21:29 
+ * @Last Modified by:   xuanyanqing 
+ * @Last Modified time: 2019-01-08 17:21:29 
+ */
+
+<template>
+    <div class="jdzxpt-dxcc-sgcl" :class="[@extra_class ? 'znsb_sgcl_en' : '']">
+        <div class="search_box">
+            <div class="hBox rowOne">
+                <div class="dataFormBox dataTreeBox">
+                    <span>{{@sgcl_language.dutyDepartment}}</span>
+                    <div class="dep_tree" :controller="dxcc_sgcl_tree">
+                        <ms-tree-selecting :widget="{tree: @tree_data, showSearch: true, wrapId: 'sgcl-tree-select', getSelected: @getSelected, selectedKey: @tree_key ? @tree_key : '', selectedTitle: @tree_title ? @tree_title : '', onChange: @select_change, extraExpandHandle: @extraExpandHandle, branchShow:true, clickBranchBack:@clickBranchBack, includedStatus:@included_status}"></ms-tree-selecting>
+                    </div>
+                </div>
+                <div class="dataFormBox">
+                    <span>{{@sgcl_language.nameId}}</span>
+                    <div class="sgcl_input_panel">
+                        <input type="text" ms-duplex="@police_id" class="form-control-input police_id" :keyup="@name_input_enter"
+                            id="police_id" :attr="{title: @police_id_title}" :focus="@input_focus('police_id')"
+                            :blur="@input_blur('police_id')">
+                        <span class="fa fa-close sgcl_right_close" :mousedown="@close_click('police_id')" :if="@police_id_close"></span>
+                    </div>
+                </div>
+                <div class="dataRadioBox" :controller="dxcc_sgcl_time_range">
+                    <span>{{@sgcl_language.timeRange}}</span>
+                    <ms-select :widget="{col: 'con', options:@time_range_options, value: @time_range, onChange: @onChangeTR}"
+                        :class="['formInput']"></ms-select>
+                    <div class="dataTimeBox" :if="@select_time">
+                        <div class="sgcl-dataRight" :controller="dxcc_sgcl_startTime">
+                            <ms-datepicker :widget="{onChange:@handlerChange, placeholder:'请选择开始时间', value:@sgcl_startTime, showTime: false, endDate:@endDate, direction: 'down', languageSelect: @extra_class ? 'en' : ''}"></ms-datepicker>
+                        </div>
+                        <span>~</span>
+                        <div class="sgcl-dataRight" :controller="dxcc_sgcl_endTime">
+                            <ms-datepicker :widget="{onChange:@handlerChange, placeholder:'请选择结束时间', value:@sgcl_endTime, showTime: false, endDate:@endDate, direction: 'down', languageSelect: @extra_class ? 'en' : ''}"></ms-datepicker>
+                        </div>
+                    </div>
+                </div>
+                <a class="common_search_btn" :click="@searchBtn" :if="@opt_sgcl.authority.SEARCH">{{@sgcl_language.searchBtn}}</a>
+            </div>
+            <div class="hBox rowTwo">
+                <div class="dataFormBox colOne">
+                    <span>{{@sgcl_language.accidentPlace}}</span>
+                    <div class="sgcl_input_panel">
+                        <input type="text" ms-duplex="@sgdd" class="form-control-input sgdd" :keyup="@name_input_enter"
+                            id="sgdd" :attr="{title: @sgdd_title}" :focus="@input_focus('sgdd')"
+                            :blur="@input_blur('sgdd')">
+                        <span class="fa fa-close sgcl_right_close" :mousedown="@close_click('sgdd')" :if="@sgdd_close"></span>
+                    </div>
+                </div>
+                <div class="dataFormBox colTwo">
+                    <span>{{@sgcl_language.accidentNumber}}</span>
+                    <div class="sgcl_input_panel">
+                        <input type="text" ms-duplex="@sgbh" class="form-control-input sgbh" :keyup="@name_input_enter"
+                            id="sgbh" :attr="{title: @sgbh_title}" :focus="@input_focus('sgbh')"
+                            :blur="@input_blur('sgbh')">
+                        <span class="fa fa-close sgcl_right_close" :mousedown="@close_click('sgbh')" :if="@sgbh_close"></span>
+                    </div>
+                </div>
+                <div class="dataFormBox colThree">
+                    <span>{{@sgcl_language.drivingLicenceNumber}}</span>
+                    <div class="sgcl_input_panel">
+                        <input type="text" ms-duplex="@cphm" class="form-control-input cphm" :keyup="@name_input_enter"
+                            id="cphm" :attr="{title: @cphm_title}" :focus="@input_focus('cphm')"
+                            :blur="@input_blur('cphm')">
+                        <span class="fa fa-close sgcl_right_close" :mousedown="@close_click('cphm')" :if="@cphm_close"></span>
+                    </div>
+                </div>
+                <div class="dataFormBox">
+                    <div class="dataFormBox colFour" :controller="jdzxpt_dxcc_sgcl_glmt">
+                        <span>{{@sgcl_language.relatedMedia}}</span>
+                        <ms-select :widget="{col:'glmt', options:@glmt_options, value: @glmt, onChange: @onChangeglmt}" :class="['formInput']"></ms-select>
+                    </div>
+                </div>                    
+            </div>
+            <div class="hBox rowThree">
+                <div class="dataFormBox colOne" :controller="jdzxpt_dxcc_sgcl_sgclkpQjzb_kpjg">
+                    <span>{{@sgcl_language.evaluationResult}}</span>
+                    <ms-select :widget="{col:'evaResult', options:@evaResult_options, value: @evaResult, onChange: @onChangeevaResult}" :class="['formInput']"></ms-select>
+                </div>
+                <div class="dataFormBox colTwo" :controller="jdzxpt_dxcc_sgcl_sgclkpQjzb_hcjg">
+                    <span>{{@sgcl_language.checkResult}}</span>
+                    <ms-select :widget="{col:'reviewResult', options:@reviewResult_options, value: @reviewResult, onChange: @onChangereviewResult}" :class="['formInput']"></ms-select>
+                </div>
+            </div>
+        </div>
+        <div class="sgcl-table" :if="@key_dep_switch">
+            <ms-comtable :widget="{id:'znsb-sgcl-table', loading:@loading, data:@table_list, actions:@actions, panelCss:{position: 'absolute',bottom: 60,top: 100,left: 0,right: 0}}">
+                <ms-comtable-header :widget="{title:@sgcl_language.tableNo, dataIndex:'table_index', colwidth:'5%', popover:true}"></ms-comtable-header>
+                <ms-comtable-header :widget="{title:@sgcl_language.dutyDepartment, popover:true, colwidth:'10%'}">
+                    <span :skip :attr="{'data-original-title':record.orgCode,dep:'dep_switch',fir:'true'}">{{record.zqbm | isNull}}</span>
+                </ms-comtable-header>
+                <ms-comtable-header :widget="{title:@sgcl_language.nameId, popover:true, colwidth:'10%'}">
+                    <span :skip>{{record.jy | isNull}}</span>
+                </ms-comtable-header>
+                <ms-comtable-header :widget="{title:@sgcl_language.accidentTime, popover:true, colwidth:'10%'}">
+                    <span :skip>{{record.sgsj | isNull}}</span>
+                </ms-comtable-header>
+                <ms-comtable-header :widget="{title:@sgcl_language.accidentNumber, popover:true, colwidth:'10%'}">
+                    <span :skip>{{record.sgbh | isNull}}</span>
+                </ms-comtable-header>
+                <ms-comtable-header :widget="{title:@sgcl_language.drivingLicenceNumber, popover:true, colwidth:'10%'}">
+                    <span :skip>{{record.cphm | isNull}}</span>
+                </ms-comtable-header>
+                <ms-comtable-header :widget="{title:@sgcl_language.accidentPlace, popover:true, colwidth:'10%'}">
+                    <span :skip>{{record.sgdd | isNull}}</span>
+                </ms-comtable-header>
+                <ms-comtable-header :widget="{title:@sgcl_language.relatedMedia, colwidth:'10%', popover:true}">
+                    <span :skip>{{record.glmt | isNull}}</span>
+                </ms-comtable-header>
+                <ms-comtable-header :widget="{title:@sgcl_language.evaluationResult, colwidth:'10%', popover:true}">
+                    <span :skip>{{record.evaResult | isNull}}</span>
+                </ms-comtable-header>
+                <ms-comtable-header :widget="{title:@sgcl_language.checkResult, colwidth:'10%', popover:true}">
+                    <span :skip>{{record.reviewResult | isNull}}</span>
+                </ms-comtable-header>  
+                <ms-comtable-header :widget="{title:@sgcl_language.tableOperation, colwidth:'5%', popover:true}">
+                    <span :controller="dxcc_sgcl_opt_look">
+                        <a :attr="{title: @lookTxt}" class="action-btn" :click="@onClick(record)" :if="@authority.SEARCH">
+                            <img src="/static/image/zfsypsjglpt/checkBtn.png">
+                        </a> 
+                        <a :if="!@authority.SEARCH">-</a> 
+                    </span>
+                </ms-comtable-header>   
+            </ms-comtable>
+        </div>
+        <div class="sgcl-table" :if="!@key_dep_switch">
+                <ms-comtable :widget="{id:'znsb-sgcl-table', loading:@loading, data:@table_list, actions:@actions, panelCss:{position: 'absolute',bottom: 60,top: 100,left: 0,right: 0}}">
+                    <ms-comtable-header :widget="{title:@sgcl_language.tableNo, dataIndex:'table_index', colwidth:'5%', popover:true}"></ms-comtable-header>
+                    <ms-comtable-header :widget="{title:@sgcl_language.dutyDepartment, popover:true, colwidth:'10%'}">
+                        <span :skip :attr="{'data-original-title':record.zqbm}">{{record.zqbm | isNull}}</span>
+                    </ms-comtable-header>
+                    <ms-comtable-header :widget="{title:@sgcl_language.nameId, popover:true, colwidth:'10%'}">
+                        <span :skip>{{record.jy | isNull}}</span>
+                    </ms-comtable-header>
+                    <ms-comtable-header :widget="{title:@sgcl_language.accidentTime, popover:true, colwidth:'10%'}">
+                        <span :skip>{{record.sgsj | isNull}}</span>
+                    </ms-comtable-header>
+                    <ms-comtable-header :widget="{title:@sgcl_language.accidentNumber, popover:true, colwidth:'10%'}">
+                        <span :skip>{{record.sgbh | isNull}}</span>
+                    </ms-comtable-header>
+                    <ms-comtable-header :widget="{title:@sgcl_language.drivingLicenceNumber, popover:true, colwidth:'10%'}">
+                        <span :skip>{{record.cphm | isNull}}</span>
+                    </ms-comtable-header>
+                    <ms-comtable-header :widget="{title:@sgcl_language.accidentPlace, popover:true, colwidth:'10%'}">
+                        <span :skip>{{record.sgdd | isNull}}</span>
+                    </ms-comtable-header>
+                    <ms-comtable-header :widget="{title:@sgcl_language.relatedMedia, colwidth:'10%', popover:true}">
+                        <span :skip>{{record.glmt | isNull}}</span>
+                    </ms-comtable-header>
+                    <ms-comtable-header :widget="{title:@sgcl_language.evaluationResult, colwidth:'10%', popover:true}">
+                        <span :skip>{{record.evaResult | isNull}}</span>
+                    </ms-comtable-header>
+                    <ms-comtable-header :widget="{title:@sgcl_language.checkResult, colwidth:'10%', popover:true}">
+                        <span :skip>{{record.reviewResult | isNull}}</span>
+                    </ms-comtable-header>  
+                    <ms-comtable-header :widget="{title:@sgcl_language.tableOperation, colwidth:'5%', popover:true}">
+                        <span :controller="dxcc_sgcl_opt_look">
+                            <a :attr="{title: @lookTxt}" class="action-btn" :click="@onClick(record)" :if="@authority.SEARCH">
+                                <img src="/static/image/zfsypsjglpt/checkBtn.png">
+                            </a> 
+                            <a :if="!@authority.SEARCH">-</a> 
+                        </span>
+                    </ms-comtable-header>   
+                </ms-comtable>
+            </div>
+
+        <ms-pages :widget="{total:@table_pagination.total, pageSize:@table_pagination.pageSize, current:@table_pagination.current, onChange:@handlePageChange, getCurrent:@getCurrent, overLimit:@page_type}"></ms-pages>
+
+    </div>
+</template>

@@ -1,0 +1,176 @@
+/* 公共分页 */
+.com-pages{
+    position: absolute;
+    right: 0;
+    bottom: 0px;
+    color: #536b82;
+    left: 0;
+    text-align: right;
+    background: #DFE9F7;
+    height: 40px;
+    line-height: 40px;
+    border-top: 1px solid #fff;
+}
+.com-pages  span.btn{
+    /* background:#0078d7; */
+    color: #536b82;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 0;
+}
+.com-pages  span.btn:hover{
+    color: #0057a1;
+}
+.com-pages  .btn.disabeld{
+    cursor: not-allowed;
+    /* background: #DFE9F7; */
+}
+.com-pages  .btn.disabeld:hover{
+    /* background: #DFE9F7; */
+}
+.com-pages  button:hover,.com-pages  button:focus{
+    color: #fff;
+    background: #0A5DA5;
+}
+.com-pages  .prev{
+    margin:0 8px;
+}
+.com-pages  .ep{
+    margin: 0 0 0 8px;
+}
+.com-pages  .hp{
+    margin: 0 0 0 8px;
+}
+.com-pages  a{
+    margin-right:8px;
+    color:#0A5DA5;
+}
+
+.cmp-limit, .cmp-limit-loading {
+    /* margin: 100px auto 0;
+    width: 150px;
+    text-align: center; */
+    display: inline-block;
+}
+.cmp-limit-loading {
+    width: 30px;
+    text-align: center;
+}
+.cmp-limit-loading > div {
+    width: 7px;
+    height: 7px;
+    background-color: #536b82;
+    border-radius: 100%;
+    display: inline-block;
+    -webkit-animation: bouncedelay 1.4s infinite ease-in-out;
+    -moz-animation: bouncedelay 1.4s infinite ease-in-out;
+    animation: bouncedelay 1.4s infinite ease-in-out;
+    /* Prevent first frame from flickering when animation starts */
+    
+    -webkit-animation-fill-mode: both;
+    -moz-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+.cmp-limit-loading .bounce1 {
+    -webkit-animation-delay: -0.32s;
+    -moz-animation-delay: -0.32s;
+    animation-delay: -0.32s;
+}
+.cmp-limit-loading .bounce2 {
+    -webkit-animation-delay: -0.16s;
+    -moz-animation-delay: -0.16s;
+    animation-delay: -0.16s;
+}
+@-webkit-keyframes bouncedelay {
+    0%, 80%, 100% {
+        -webkit-transform: scale(0.0)
+    }
+    40% {
+        -webkit-transform: scale(1.0)
+    }
+}
+@-moz-keyframes bouncedelay {
+    0%, 80%, 100% {
+        -moz-transform: scale(0.0)
+    }
+    40% {
+        -moz-transform: scale(1.0)
+    }
+}
+@keyframes bouncedelay {
+    0%, 80%, 100% {
+        transform: scale(0.0);
+        -webkit-transform: scale(0.0);
+        -moz-transform: scale(0.0);
+    }
+    40% {
+        transform: scale(1.0);
+        -webkit-transform: scale(1.0);
+        -moz-transform: scale(1.0);
+    }
+}
+
+
+.spinner {
+    /* margin: 100px auto 0;
+    width: 150px;
+    text-align: center; */
+    display: inline-block;
+}
+.spinner > div {
+    width: 7px;
+    height: 7px;
+    background-color: #536b82;
+    border-radius: 100%;
+    display: inline-block;
+    -webkit-animation: pagebouncedelay 1.4s infinite ease-in-out;
+    -moz-animation: pagebouncedelay 1.4s infinite ease-in-out;
+    animation: pagebouncedelay 1.4s infinite ease-in-out;
+    /* Prevent first frame from flickering when animation starts */
+    
+    -webkit-animation-fill-mode: both;
+    -moz-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+.spinner .bounce1 {
+    -webkit-animation-delay: -0.32s;
+    -moz-animation-delay: -0.32s;
+    animation-delay: -0.32s;
+}
+.spinner .bounce2 {
+    -webkit-animation-delay: -0.16s;
+    -moz-animation-delay: -0.16s;
+    animation-delay: -0.16s;
+}
+@-webkit-keyframes pagebouncedelay {
+    0%, 80%, 100% {
+        -webkit-transform: scale(0.0)
+    }
+    40% {
+        -webkit-transform: scale(1.0)
+    }
+}
+@-moz-keyframes pagebouncedelay {
+    0%, 80%, 100% {
+        -moz-transform: scale(0.0)
+    }
+    40% {
+        -moz-transform: scale(1.0)
+    }
+}
+@keyframes pagebouncedelay {
+    0%, 80%, 100% {
+        transform: scale(0.0);
+        -webkit-transform: scale(0.0);
+        -moz-transform: scale(0.0);
+    }
+    40% {
+        transform: scale(1.0);
+        -webkit-transform: scale(1.0);
+        -moz-transform: scale(1.0);
+    }
+}
+
+.pageloading {
+    margin-right: 0px !important;
+}

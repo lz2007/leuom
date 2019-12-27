@@ -1,0 +1,256 @@
+@import '/apps/common/common-theme/common-variable.less';
+
+@searchBoxHeight: 66px;
+
+.zfsypsjglpt-gjgl-yhgj-map {
+    width: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+.zfsypsjglpt-gjgl-yhgj-sosBtn {
+    bottom: 1px;
+    top: auto;
+    left: 270px;
+}
+
+.zfsypsjglpt-gjgl-yhgj-sos-info {
+    left: 270px;
+    bottom: 30px;
+}
+
+/*------------------------ 左侧搜索栏开始----------------------------- */
+
+.zfsypsjglpt-layout {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    z-index: 0;
+    height: 100%;
+    color: #333;
+}
+
+.zfsypsjglpt-yhgj .left.left-layout {
+    background: @common-bg-title;
+    height: @searchBoxHeight;
+    padding: 0 30px;
+    border: none;
+}
+
+.zfsypsjglpt-layout .right.right-layout {
+    background: #fff;
+    min-width: 1040px;
+}
+
+.zfsypsjglpt-search-box .tree-select-wrap .tree-panel {
+    min-width: 200px;
+}
+
+.zfsypsjglpt-search-box {
+    position: relative;
+    padding: 9px;
+    background: #f3f5f7;
+    border: 1px solid #e4e4e4;
+}
+
+.zfsypsjglpt-search-box .form-inline .form-item {
+    display: inline-block;
+    margin-bottom: 10px;
+    margin-right: 60px;
+}
+
+.zfsypsjglpt-search-box .form-item label {
+    /*该宽度适用于五个字的以下label，特殊情况请在自己的页面内覆盖*/
+    width: 72px;
+    display: inline-block;
+    margin-right: 5px;
+    text-align: right;
+    font-family: "Microsoft YaHei", serif;
+    color: @txt-main-color;
+    font-size: 16px;
+    font-weight: normal;
+    margin-right: 10px;
+}
+
+.zfsypsjglpt-search-box.yhgj_en .form-item label {
+    width: 100px;
+}
+
+.zfsypsjglpt-search-box.yhgj_en .form-item.time_label label {
+    width: 78px;
+}
+
+.zfsypsjglpt-search-box .form-item .close-clear {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    font-size: 15px;
+    color: @txt-main-color;
+    display: none;
+}
+
+.zfsypsjglpt-search-box .form-item .form-control {
+    display: inline-block;
+    width: 200px;
+    height: 26px;
+    line-height: 26px;
+    color: @txt-main-color;
+    padding: 0 10px;
+    border: none;
+    border-radius: 0;
+}
+
+.zfsypsjglpt-search-box.yhgj_en .form-item .form-control {
+    width: 135px;
+}
+
+.zfsypsjglpt-search-box .ane-select-selected {
+    /*为了在ie中垂直居中*/
+    padding: 0;
+    top: -1px;
+}
+
+.zfsypsjglpt-search-box .ane-select-arrow,
+.zfsypsjglpt-search-box .ane-tree-select-arrow {
+    top: 4px;
+}
+
+.zfsypsjglpt-search-box .form-inline .ane-datepicker {
+    width: 170px;
+    display: inline-block;
+}
+
+.zfsypsjglpt-search-box.yhgj_en .form-inline .ane-datepicker {
+    width: 157px;
+}
+
+.zfsypsjglpt-search-box .btn-query {
+    width: 110px;
+    height: 36px;
+    color: #fff;
+    background: @primary-color;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    border: none;
+    border-radius: 0;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.zfsypsjglpt-layout .zfsypsjglpt-search-box .yhgj-btn-query{
+    height: 36px;
+    top: 16px;
+}
+
+.zfsypsjglpt-search-box .btn-query:hover {
+    opacity: 0.8;
+    filter: alpha(opacity=80);
+}
+
+.zfsypsjglpt-yhgj .search-line {
+    width: 100%;
+}
+
+.zfsypsjglpt-yhgj .form-group {
+    display: inline-block;
+}
+
+.zfsypsjglpt-search-box ul.name-search-result {
+    position: absolute;
+    width: 71%;
+    background: #fff;
+    margin-top: 2px;
+    margin-left: 81px;
+    max-height: 400px;
+    overflow: auto;
+    z-index: 999;
+}
+
+.zfsypsjglpt-search-box ul.name-search-result li{
+    height: 28px;
+    line-height: 28px;
+    padding: 0 8px;
+    word-break: keep-all;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+}
+
+.zfsypsjglpt-search-box ul.name-search-result li:last-child {
+    border-bottom: 1px solid #ccc;
+}
+
+.zfsypsjglpt-search-box ul.name-search-result li:hover{
+    background-color: #e0e7ec;
+    cursor: pointer;
+}
+
+
+/*------------------------ 左侧搜索栏结束----------------------------- */
+
+/*表格*/
+
+.zfsypsjglpt-yhgj .tyywglpt-list-panel {
+    top: @searchBoxHeight + 44;
+    bottom: 40px;
+    right: 0;
+    left: 0;
+}
+
+.zfsypsjglpt-yhgj .com-pages {
+    bottom: 0;
+}
+
+.zfsypsjglpt-yhgj .look {
+    color: #0419dc;
+    cursor: pointer;
+}
+
+.zfsypsjglpt-yhgj .waitDeal {
+    color: @red-color;
+}
+
+/* .zfsypsjglpt-yhgj  .gjglDetail{
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    background: #fff;
+    z-index:999;
+} */
+
+.zfsypsjglpt-yhgj .URGENT,
+.zfsypsjglpt-yhgj .IMPORTANT,
+.zfsypsjglpt-yhgj .GENERAL,
+.zfsypsjglpt-yhgj .PROMPT {
+    display: inline-block;
+    margin-left: 5px;
+    padding: 0px 5px;
+    color: #fff;
+    border-radius: 4px;
+    line-height: 25px;
+}
+
+.zfsypsjglpt-yhgj .URGENT {
+    background: @red-color;
+}
+
+.zfsypsjglpt-yhgj .IMPORTANT {
+    background: @orange-color;
+}
+
+.zfsypsjglpt-yhgj .GENERAL {
+    background: @green-color;
+}
+
+.zfsypsjglpt-yhgj .PROMPT {
+    background: #3399ff;
+}
+
+.zfsypsjglpt-yhgj .ane-datepicker input {
+    padding: 0 5px !important;
+}

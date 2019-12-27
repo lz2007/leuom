@@ -1,0 +1,53 @@
+{   "code":"0",
+    "msg":"成功！",
+    "data":{
+        "count":2,
+        "storageInfos":[{
+            "serviceName":"fw1",
+            "ip": "192.168.55.155",
+            "orgCode":"1",
+            "port": "50001",
+            "startTime":"00:00:00",
+            "endTime":"23:59:59",
+            "account": "123456",
+            "pwd":"mima1",
+            "uploadPath":"ftp://192.168.55.155",
+            "downloadPath":"http://192.168.55.155",
+            "orgPath": "",
+            "totalCapacity": 7000,
+            "orgName":"一级部门",
+            "remainCapacity": 6000,
+            "onlineStatus": 0,
+            "serviceId": "GM0000000020190715144940ff5ffffff",
+            "storageTime": 361,
+
+            "orgRid":1,
+            "source": "",
+            "caseAreaId": "GM0000000020190715144940ff5ffffff",
+            "updateTime": null
+        },{
+            "serviceName":"fw2",
+            "ip": "192.168.55.156",
+            "orgCode":"1",
+            "port": "50002",
+            "startTime":"00:00:00",
+            "endTime":"23:59:59",
+            "account": "111111",
+            "pwd":"mima2",
+            "uploadPath":"ftp://192.168.55.155",
+            "downloadPath":"http://192.168.55.155",
+            "orgPath": "",
+            "totalCapacity": 7123,
+            "orgName":"一级部门",
+            "remainCapacity": 6123,
+            "onlineStatus": 1,
+            "serviceId": "GM0000000020190620211636ffefffffe",
+            "storageTime": 362,
+
+            "orgRid":1,
+            "source": "",
+            "caseAreaId": "GM0000000020190620211636ffefffffe",
+            "updateTime": null
+        }]
+    }
+}

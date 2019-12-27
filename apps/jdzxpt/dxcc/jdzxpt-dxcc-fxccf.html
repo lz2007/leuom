@@ -1,0 +1,169 @@
+/*
+ * @Author: xuanyanqing 
+ * @Date: 2019-01-08 17:20:15 
+ * @Last Modified by:   xuanyanqing 
+ * @Last Modified time: 2019-01-08 17:20:15 
+ */
+
+<template>
+    <div class="jdzxpt-dxcc-fxccf" :class="[@extra_class ? 'znsb_fxccf_en' : '']">
+        <div class="search_box">
+            <div class="hBox rowOne">
+                <div class="dataFormBox dataTreeBox">
+                    <span>{{@fxccf_language.dutyDepartment}}</span>
+                    <div class="dep_tree" :controller="dxcc_fxccf_tree">
+                        <ms-tree-selecting :widget="{tree: @tree_data, showSearch: true, wrapId: 'fxccf-tree-select', getSelected: @getSelected, selectedKey: @tree_key ? @tree_key : '', selectedTitle: @tree_title ? @tree_title : '', onChange: @select_change, extraExpandHandle: @extraExpandHandle, branchShow:true, clickBranchBack:@clickBranchBack, includedStatus:@included_status}"></ms-tree-selecting>
+                    </div>
+                </div>
+                <div class="dataFormBox">
+                    <span>{{@fxccf_language.nameId}}</span>
+                    <div class="fxccf_input_panel">
+                        <input type="text" ms-duplex="@police_id" class="form-control-input police_id" :keyup="@name_input_enter"
+                            id="police_id" :attr="{title: @police_id_title}" :focus="@input_focus('police_id')" :blur="@input_blur('police_id')">
+                        <span class="fa fa-close fxccf_right_close" :mousedown="@close_click('police_id')" :if="@police_id_close"></span>
+                    </div>
+                </div>
+                <div class="dataRadioBox" :controller="dxcc_fxccf_time_range">
+                    <span>{{@fxccf_language.timeRange}}</span>
+                    <ms-select :widget="{col: 'con', options:@time_range_options, value: @time_range, onChange: @onChangeTR}"
+                        :class="['formInput']"></ms-select>
+                    <div class="dataTimeBox" :if="@select_time">
+                        <div class="fxccf-dataRight" :controller="dxcc_fxccf_startTime">
+                            <ms-datepicker :widget="{onChange:@handlerChange, placeholder:'请选择开始时间', value:@fxccf_startTime, showTime: false, endDate:@endDate, direction: 'down', languageSelect: @extra_class ? 'en' : ''}"></ms-datepicker>
+                        </div>
+                        <span>~</span>
+                        <div class="fxccf-dataRight" :controller="dxcc_fxccf_endTime">
+                            <ms-datepicker :widget="{onChange:@handlerChange, placeholder:'请选择结束时间', value:@fxccf_endTime, showTime: false, endDate:@endDate, direction: 'down', languageSelect: @extra_class ? 'en' : ''}"></ms-datepicker>
+                        </div>
+                    </div>
+                </div>
+                <a class="common_search_btn" :click="@searchBtn" :if="@opt_fxccf.authority.SEARCH">{{@fxccf_language.searchBtn}}</a>
+            </div>
+            <div class="hBox rowTwo">
+                <div class="dataFormBox colOne">
+                    <span>{{@fxccf_language.illegalPlace}}</span>
+                    <div class="fxccf_input_panel">
+                        <input type="text" ms-duplex="@wfdz" class="form-control-input wfdz" :keyup="@name_input_enter"
+                            id="wfdz" :attr="{title: @wfdz_title}" :focus="@input_focus('wfdz')" :blur="@input_blur('wfdz')">
+                        <span class="fa fa-close fxccf_right_close" :mousedown="@close_click('wfdz')" :if="@wfdz_close"></span>
+                    </div>
+                </div>
+                <div class="dataFormBox colTwo">
+                    <span>{{@fxccf_language.drivingLicenceNumber}}</span>
+                    <div class="fxccf_input_panel">
+                        <input type="text" ms-duplex="@hphm" class="form-control-input hphm" :keyup="@name_input_enter"
+                            id="hphm" :attr="{title: @hphm_title}" :focus="@input_focus('hphm')" :blur="@input_blur('hphm')">
+                        <span class="fa fa-close fxccf_right_close" :mousedown="@close_click('hphm')" :if="@hphm_close"></span>
+                    </div>
+                </div>
+                <div class="dataFormBox colThree">
+                    <span>{{@fxccf_language.decisionNo}}</span>
+                    <div class="fxccf_input_panel">
+                        <input type="text" ms-duplex="@jdsbh" class="form-control-input jdsbh" :keyup="@name_input_enter"
+                            id="jdsbh" :attr="{title: @jdsbh_title}" :focus="@input_focus('jdsbh')" :blur="@input_blur('jdsbh')">
+                        <span class="fa fa-close fxccf_right_close" :mousedown="@close_click('jdsbh')" :if="@jdsbh_close"></span>
+                    </div>
+                </div>
+                <div class="dataFormBox" :controller="jdzxpt_dxcc_fxccf_glmt">
+                    <span>{{@fxccf_language.relatedMedia}}</span>
+                    <ms-select :widget="{col:'glmt', options:@glmt_options, value: @glmt, onChange: @onChangeglmt}" :class="['formInput']"></ms-select>
+                </div>
+            </div>
+            <div class="hBox rowThree" style="padding-top: 0px;">
+                <div class="dataFormBox colOne" :controller="jdzxpt_dxcc_fxccf_fxccfkpQjzb_kpjg">
+                    <span>{{@fxccf_language.evaluationResult}}</span>
+                    <ms-select :widget="{col:'evaResult', options:@evaResult_options, value: @evaResult, onChange: @onChangeevaResult}" :class="['formInput']"></ms-select>
+                </div>
+                <div class="dataFormBox colTwo" :controller="jdzxpt_dxcc_fxccf_fxccfkpQjzb_hcjg">
+                    <span>{{@fxccf_language.checkResult}}</span>
+                    <ms-select :widget="{col:'reviewResult', options:@reviewResult_options, value: @reviewResult, onChange: @onChangereviewResult}"
+                        :class="['formInput']"></ms-select>
+                </div>
+            </div>
+
+        </div>
+        <div class="fxccf-table" :if="@key_dep_switch">
+            <ms-comtable :widget="{id:'znsb-fxccf-table', loading:@loading, data:@table_list, actions:@actions, panelCss:{position: 'absolute',bottom: 60,top: 100,left: 0,right: 0}}">
+                <ms-comtable-header :widget="{title:@fxccf_language.tableNo, dataIndex:'table_index', colwidth:'5%', popover:true}"></ms-comtable-header>
+                <ms-comtable-header :widget="{title:@fxccf_language.dutyDepartment, popover:true, colwidth:'10%'}">
+                    <span :skip :attr="{'data-original-title':record.orgCode,dep:'dep_switch',fir:'true'}">{{record.zqbm | isNull}}</span>
+                </ms-comtable-header>
+                <ms-comtable-header :widget="{title:@fxccf_language.illegalTime, popover:true, colwidth:'10%'}">
+                    <span :skip>{{record.wfsj | isNull}}</span>
+                </ms-comtable-header>
+                <ms-comtable-header :widget="{title:@fxccf_language.nameId, popover:true, colwidth:'10%'}">
+                    <span :skip>{{record.jy | isNull}}</span>
+                </ms-comtable-header>
+                <ms-comtable-header :widget="{title:@fxccf_language.drivingLicenceNumber, popover:true, colwidth:'7%'}">
+                    <span :skip>{{record.cphm | isNull}}</span>
+                </ms-comtable-header>
+                <ms-comtable-header :widget="{title:@fxccf_language.decisionNo, popover:true, colwidth:'10%'}">
+                    <span :skip>{{record.jdsbh | isNull}}</span>
+                </ms-comtable-header>
+                <ms-comtable-header :widget="{title:@fxccf_language.illegalPlace, colwidth:'8%', popover:true}">
+                    <span :skip>{{record.wfdd | isNull}}</span>
+                </ms-comtable-header>
+                <ms-comtable-header :widget="{title:@fxccf_language.relatedMedia, colwidth:'10%', popover:true}">
+                    <span :skip>{{record.glmt | isNull}}</span>
+                </ms-comtable-header>
+                <ms-comtable-header :widget="{title:@fxccf_language.evaluationResult, colwidth:'10%', popover:true}">
+                    <span :skip>{{record.evaResult | isNull}}</span>
+                </ms-comtable-header>
+                <ms-comtable-header :widget="{title:@fxccf_language.checkResult, colwidth:'10%', popover:true}">
+                    <span :skip>{{record.reviewResult | isNull}}</span>
+                </ms-comtable-header>
+                <ms-comtable-header :widget="{title:@fxccf_language.tableOperation, colwidth:'10%', popover:true}">
+                    <span :controller="dxcc_fxccf_opt_look">
+                        <a :attr="{title: @lookTxt}" class="action-btn" :click="@onClick(record)" :if="@authority.SEARCH">
+                            <img src="/static/image/zfsypsjglpt/checkBtn.png">
+                        </a>
+                        <a :if="!@authority.SEARCH">-</a>
+                    </span>
+                </ms-comtable-header>
+            </ms-comtable>
+        </div>
+        <div class="fxccf-table" :if="!@key_dep_switch">
+                <ms-comtable :widget="{id:'znsb-fxccf-table', loading:@loading, data:@table_list, actions:@actions, panelCss:{position: 'absolute',bottom: 60,top: 100,left: 0,right: 0}}">
+                    <ms-comtable-header :widget="{title:@fxccf_language.tableNo, dataIndex:'table_index', colwidth:'5%', popover:true}"></ms-comtable-header>
+                    <ms-comtable-header :widget="{title:@fxccf_language.dutyDepartment, popover:true, colwidth:'10%'}">
+                        <span :skip :attr="{'data-original-title':record.zqbm}">{{record.zqbm | isNull}}</span>
+                    </ms-comtable-header>
+                    <ms-comtable-header :widget="{title:@fxccf_language.illegalTime, popover:true, colwidth:'10%'}">
+                        <span :skip>{{record.wfsj | isNull}}</span>
+                    </ms-comtable-header>
+                    <ms-comtable-header :widget="{title:@fxccf_language.nameId, popover:true, colwidth:'10%'}">
+                        <span :skip>{{record.jy | isNull}}</span>
+                    </ms-comtable-header>
+                    <ms-comtable-header :widget="{title:@fxccf_language.drivingLicenceNumber, popover:true, colwidth:'7%'}">
+                        <span :skip>{{record.cphm | isNull}}</span>
+                    </ms-comtable-header>
+                    <ms-comtable-header :widget="{title:@fxccf_language.decisionNo, popover:true, colwidth:'10%'}">
+                        <span :skip>{{record.jdsbh | isNull}}</span>
+                    </ms-comtable-header>
+                    <ms-comtable-header :widget="{title:@fxccf_language.illegalPlace, colwidth:'8%', popover:true}">
+                        <span :skip>{{record.wfdd | isNull}}</span>
+                    </ms-comtable-header>
+                    <ms-comtable-header :widget="{title:@fxccf_language.relatedMedia, colwidth:'10%', popover:true}">
+                        <span :skip>{{record.glmt | isNull}}</span>
+                    </ms-comtable-header>
+                    <ms-comtable-header :widget="{title:@fxccf_language.evaluationResult, colwidth:'10%', popover:true}">
+                        <span :skip>{{record.evaResult | isNull}}</span>
+                    </ms-comtable-header>
+                    <ms-comtable-header :widget="{title:@fxccf_language.checkResult, colwidth:'10%', popover:true}">
+                        <span :skip>{{record.reviewResult | isNull}}</span>
+                    </ms-comtable-header>
+                    <ms-comtable-header :widget="{title:@fxccf_language.tableOperation, colwidth:'10%', popover:true}">
+                        <span :controller="dxcc_fxccf_opt_look">
+                            <a :attr="{title: @lookTxt}" class="action-btn" :click="@onClick(record)" :if="@authority.SEARCH">
+                                <img src="/static/image/zfsypsjglpt/checkBtn.png">
+                            </a>
+                            <a :if="!@authority.SEARCH">-</a>
+                        </span>
+                    </ms-comtable-header>
+                </ms-comtable>
+            </div>
+
+        <ms-pages :widget="{total:@table_pagination.total, pageSize:@table_pagination.pageSize, current:@table_pagination.current, onChange:@handlePageChange, getCurrent:@getCurrent, overLimit:@page_type}"></ms-pages>
+
+    </div>
+</template>

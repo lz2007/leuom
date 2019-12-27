@@ -1,0 +1,10 @@
+{
+    "code": 0,
+    "data": {
+        "checkNum": 688,
+        "checkRate": 12,
+        "passNum": 188,
+        "passRate": 88
+    },
+    "msg": "string"
+}

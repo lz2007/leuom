@@ -1,0 +1,10 @@
+<template>
+    <div :if="!@show_player" :css="{width:@player_width, height:@player_height}">
+        <div :if="!@play_status" :css="{width:@player_width, height:@player_height}">
+            <img src="/static/image/zfsypsjglpt/gm_webPlayer.png" width="100%" height="100%">
+        </div>
+        <div :if="@play_status" :css="{width:@player_width, height:@player_height}">
+            <ms-video :widget="{src: @src, special_id: @special_id, media_type: @media_type}"></ms-video>
+        </div>
+    </div>
+</template>

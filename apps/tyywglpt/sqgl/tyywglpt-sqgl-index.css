@@ -1,0 +1,219 @@
+/* header begin */
+
+.tyywglpt_sqgl .headerHbox {
+    width: 100%;
+    height: 280px;
+    /* line-height: 60px; */
+    position: relative;
+    background-color: #fff;
+}
+
+.tyywglpt_sqgl .authorizedContent {
+    position: absolute;
+    width: 470px;
+    height: 150px;
+    top: 77px;
+    left: 50%;
+    margin-left: -235px;
+}
+
+.tyywglpt_sqgl .authorizedContent img {
+    float: left;
+}
+
+.tyywglpt_sqgl .updateBtn {
+    width: 120px;
+    height: 30px;
+    line-height: 30px;
+    margin-left: 50px;
+    margin-top: 46px;
+    background: #1055b3;
+    color: #ffffff;
+    float: left;
+}
+
+.tyywglpt_sqgl .updateBtn:hover {
+    background: #107dda;
+}
+
+.tyywglpt_sqgl .alreadyLic {
+    float: left;
+    color: #5ece3c;
+    margin-top: 43px;
+    margin-left: 50px;
+}
+
+.tyywglpt_sqgl .noneLic {
+    float: left;
+    color: #ffb400;
+    margin-top: 43px;
+    margin-left: 50px;
+}
+
+.tyywglpt_sqgl .none {
+    display: none;
+}
+
+/* header end */
+
+/* tables begin */
+
+.tyywglpt_sqgl .tyywglpt_sqgl_panel {
+    position: absolute;
+    bottom: 40px;
+    left: 8px;
+    right: 20px;
+    top: 177px;
+    font-size: 14px;
+    color: #536b82;
+    text-align: center;
+}
+
+.tyywglpt_sqgl .licenseInfo {
+    position: relative;
+    height: 100%;
+    margin-bottom: 5px;
+    background-color: #F7F7F7;
+}
+
+.tyywglpt_sqgl .tyywglpt-list-header {
+    width: 100%;
+    background: #e0e7ed;
+    padding-right: 0;
+}
+
+.tyywglpt_sqgl .tyywglpt-list-header li {
+    display: inline-block;
+    height: 32px;
+    background: #e0e7ec;
+}
+
+.tyywglpt_sqgl .tyywglpt-list-content {
+    height: 100%;
+    min-height: 34px;
+    background: #f7f7f7;
+    border: 1px solid #e0e7ec;
+    border-top: none;
+}
+
+.tyywglpt_sqgl .tyywglpt-list-content li {
+    height: 34px;
+    line-height: 34px;
+    /* border-bottom: 1px solid #e0e7ec; */
+}
+
+.tyywglpt_sqgl .tyywglpt-list-content div {
+    display: inline-block;
+    padding: 0 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border-left: 1px solid #e0e7ec;
+    cursor: default;
+}
+
+.tyywglpt_sqgl .tyywglpt-list-header li:first-child,
+.tyywglpt_sqgl .tyywglpt-list-header li+li+li,
+.tyywglpt_sqgl .tyywglpt-list-content .name {
+    width: 13%;
+}
+
+.tyywglpt_sqgl .tyywglpt-list-header li+li,
+.tyywglpt_sqgl .tyywglpt-list-header li+li+li+li,
+.tyywglpt_sqgl .tyywglpt-list-content .value {
+    width: 37%;
+}
+
+.tyywglpt_sqgl .tyywglpt-list-header li:first-child,
+.tyywglpt_sqgl .tyywglpt-list-content li .first {
+    border-left: 0px;
+}
+
+.tyywglpt_sqgl .tyywglpt-list-content .lastLiSecond {
+    display: none;
+}
+
+.tyywglpt_sqgl .tyywglpt-list-content .lastLiValue1 {
+    width: 87%;
+    text-align: left;
+}
+
+/* table end */
+
+/* dialog begin */
+
+.inputHbox textarea {
+    height: 262px;
+    outline: none;
+    resize: none;
+    color: #33414f;
+}
+
+.machineBox {
+    font-size: 16px;
+    padding-bottom: 5px;
+    color: #33414f;
+}
+
+/* dialog end */
+
+.tyywglpt_sqgl .tyywglpt_sqgl_content {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 282px;
+    background-color: #e6edf7;
+    overflow: auto;
+    padding: 50px;
+}
+
+.tyywglpt_sqgl .tyywglpt_sqgl_content .contentLeft,
+.tyywglpt_sqgl .tyywglpt_sqgl_content .contentRight {
+    float: left;
+    width: 50%;
+    height: 36px;
+    line-height: 36px;
+}
+
+.tyywglpt_sqgl .tyywglpt_sqgl_content .contentLeft .key,
+.tyywglpt_sqgl .tyywglpt_sqgl_content .contentRight .key {
+    float: left;
+    width: 88px;
+    height: 36px;
+    line-height: 36px;
+    text-align: right;
+}
+
+.tyywglpt_sqgl .tyywglpt_sqgl_content .contentLeft .value,
+.tyywglpt_sqgl .tyywglpt_sqgl_content .contentRight .value {
+    float: left;
+    max-width: 84%;
+    height: 36px;
+    line-height: 36px;
+    text-align: left;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.tyywglpt_sqgl .tyywglpt_sqgl_content .contentRight {
+    margin-left: 25px;
+    padding-left: 25px;
+    border-left: 2px solid #fff;
+    width: 45%;
+}
+
+.tyywglpt_sqgl .tyywglpt_sqgl_content .contentRight .value {
+    max-width: 80%;
+}
+
+.updateLicenseBox .com-modal-btn-ok {
+    float: left;
+    margin-left: 80px;
+}
+
+.updateLicenseBox .com-modal-btn-cancle {
+    float: right;
+    margin-right: 80px;
+}

@@ -1,0 +1,71 @@
+/* 统一运维管理平台--平台级联管理 */
+
+.xtfw .tyywglpt-list-panel {
+    top: 100px;
+    bottom: 0;
+}
+
+.xtfw-modal .com-modal-modal-body {
+    padding: 0;
+}
+
+.xtfw-modal .form-inline .form-item-lg {
+    width: 100%;
+}
+
+.xtfw-modal .form-item-lg .has-icon .form-control {
+    width: 485px;
+}
+
+.xtfw-modal .textarea-item .has-icon textarea {
+    height: 100px;
+    white-space: pre-wrap;
+    overflow: auto;
+    line-height: 1.5;
+}
+
+.xtfw-modal .form-item .form-tip.tip-md {
+    width: 140%;
+}
+
+#xtfw-modal-account {
+    margin: 20px 0px;
+}
+
+#xtfw-modal-account .form-group {
+    text-align: center;
+}
+
+#xtfw-modal-account .form-item .form-tip {
+    padding-left: 310px;
+}
+
+.xtfw .sbzygl-modal label {
+    width: 98px;
+    margin-right: 10px;
+}
+
+.xtfw-modal .line-title {
+    width: 100%;
+    background-color: #ccdbf1;
+    left: 0px;
+    top: 0px;
+    padding: 4px 14px;
+    color: #33414f;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.xtfw .line-panel .echart-class canvas {
+    top: 17px !important;
+}
+
+.xtfw .line-panel .echart-class {
+    left: 20px;
+    width: 540px;
+    height: 278px;
+}
+
+.xtfw .line-panel {
+    height: 278px;
+}

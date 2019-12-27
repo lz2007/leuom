@@ -1,0 +1,274 @@
+/*公共按钮*/
+
+.sjbgl .tyywglpt-search-box .label-lg {
+    width: 265px;
+}
+
+.sjbgl .tyywglpt-search-box .label-lg label {
+    width: 80px;
+}
+
+.sjbgl .tyywglpt-search-box .time-item {
+    width: 500px;
+}
+
+.sjbgl .tyywglpt-search-box .mt-16 {
+    margin-top: 16px
+}
+.zfysjrw .tyywglpt-search-box .mt-16 {
+    margin-top: 16px
+}
+.sjbgl .tyywglpt-search-box .date-line {
+    margin: 0 8px;
+}
+
+.sjbgl .tyywglpt-list-panel {
+    top: 214px;
+}
+
+.sjbgl .tyywglpt-list-panel .fa-check-square {
+    color: #0078d7;
+    font-size: 14px;
+}
+
+.sjbgl .tyywglpt-list-panel .fa-square-o {
+    color: #a7aaac;
+    font-size: 14px;
+}
+
+.sjbgl .fa-check-circle.success {
+    color: #00CC66;
+    font-size: 40px;
+    display: block;
+    width: 40px;
+    margin: 0 auto;
+}
+
+/*按钮组*/
+
+.sjgl-sjbgl .ane-checkbox input[type="checkbox"]:checked+.text::before {
+    display: inline-block;
+    content: "\F00C";
+    background-color: #f5f8fc;
+    border-color: #c8c8c8;
+}
+
+.sjbgl .ane-upload-container {
+    float: left;
+    width: 100px;
+}
+
+/*按钮组 -end*/
+
+.sjbgl .ane-upload-list-info,
+.sjbgl .ane-upload-btn-close {
+    display: none !important;
+}
+
+.sjgbptgl-table table {
+    margin-bottom: 0;
+}
+
+.sjbgl .fa {
+    cursor: pointer
+}
+
+.sjbgl .form-control {
+    padding-right: 12px;
+}
+
+.sjbgl-progress {
+    display: none
+}
+
+/* 上传 */
+
+.sjbgl .progress {
+    margin-top: 20px;
+}
+
+.sjbgl .uploadstatetext {
+    font-size: 14px;
+    padding: 20px 0;
+    text-align: right;
+}
+
+.sjbgl .uploadstateprogress {
+    padding-left: 0;
+    padding-right: 0;
+    width: 80%;
+}
+
+.sjbgl .waittext {
+    text-align: center;
+    font-size: 14px;
+}
+
+.sjbgl .uploadfinish {
+    margin: 0 auto;
+    width: 71px;
+    height: 71px;
+    background: url(/static/image/tyywglpt/uploadfinish.png?__sprite) no-repeat;
+}
+
+.sjbgl .uploadfinishtext {
+    color: #5BA91F;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 8px;
+}
+
+.sjbgl .btn.fileinput-button {
+    line-height: 30px;
+    padding: 0 10px;
+    overflow: hidden;
+}
+
+/* 删除 */
+
+.sjbgl-del-body .tip-text {
+    height: 80px;
+    line-height: 80px;
+    font-size: 16px;
+    color: #536b82;
+    text-align: center;
+    margin-top: -16px;
+    margin-bottom: 0;
+}
+
+/* 上传信息弹窗 */
+
+.sjbgl-modal-upload-info {
+    font-size: 14px;
+}
+
+.sjbgl-modal-upload-info label {
+    width: 103px;
+    text-align: right;
+    font-size: 16px;
+    font-weight: normal;
+    margin-right: 10px;
+    margin-bottom: 0;
+    vertical-align: middle;
+}
+
+.sjbgl-modal-upload-info label i {
+    color: red;
+}
+
+.sjbgl-modal-upload-info .form-inline .form-item {
+    display: inline-block;
+    width: 296px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+.sjbgl-modal-upload-info .form-item .form-control {
+    display: inline-block;
+    width: 180px;
+    height: 30px;
+    padding: 0 12px;
+    line-height: 30px;
+    color: #536b82;
+    vertical-align: middle;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.sjbgl-modal-upload-info .form-item input.form-control,
+.sjbgl-modal-upload-info .form-item textarea.form-control {
+    padding: 0 20px 0 12px;
+}
+
+.sjbgl-modal-upload-info .form-item textarea.form-control {
+    height: 100px;
+    resize: none;
+    white-space: pre-wrap;
+    overflow: auto;
+    line-height: 1.5;
+}
+
+.sjbgl-modal-upload-info .form-item .has-icon {
+    display: inline-block;
+    position: relative;
+    background: #fff;
+}
+
+.sjbgl-modal-upload-info .form-item .has-icon-input-wrap {
+    padding: 0 20px 0 12px;
+    border: 1px solid #d1d0d0;
+    border-radius: 4px;
+    background: #fff;
+}
+
+.sjbgl-modal-upload-info .form-item .has-icon-input-wrap input {
+    width: 146px;
+    height: 28px;
+    padding: 0;
+    border: none;
+}
+
+.sjbgl-modal-upload-info .form-item .has-icon-disabled,
+.sjbgl-modal-upload-info .form-item input[disabled] {
+    color: #536b82;
+    background: #ddd;
+    cursor: not-allowed;
+}
+
+.sjbgl-modal-upload-info .form-item .has-icon .fa-close {
+    position: absolute;
+    top: 6px;
+    right: 5px;
+    font-size: 16px;
+    color: #536b82;
+    cursor: pointer;
+}
+
+.sjbgl-modal-upload-info .form-inline .textarea-item .fa-close {
+    top: 0;
+}
+
+.sjbgl-modal-upload-info .has-error .has-icon {
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    border-color: #a94442;
+}
+
+.sjbgl-modal-upload-info .form-item .form-tip {
+    position: absolute;
+    width: 100%;
+    padding-left: 110px;
+    text-align: left;
+}
+
+.sjbgl-modal-upload-info .form-item .form-tip.tip-md {
+    width: 140%;
+}
+
+.sjbgl-modal-upload-info .form-item .fa-info-circle {
+    color: #E09E1F;
+    margin-right: 5px;
+}
+
+.sjbgl-modal-upload-info .form-item .invalid-tip {
+    color: #d2403d;
+}
+
+.sjbgl-modal-upload-info .ane-select-selection .ane-select-selected {
+    padding: 0;
+}
+
+.sjbgl-modal-upload-info .ane-select-arrow,
+.sjbgl-modal-upload-info .ane-tree-select-arrow {
+    top: 4px;
+}
+
+.sjbgl-modal-upload-info .form-item .btn {
+    position: absolute;
+    width: 60px;
+    right: -70px;
+}
+
+.tyywglpt.zfysjrw  .tyywglpt-search-box .tree-select-wrap .tree-panel {
+    min-width: 180px;
+}

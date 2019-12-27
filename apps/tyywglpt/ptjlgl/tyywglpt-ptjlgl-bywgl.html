@@ -1,0 +1,316 @@
+<!-- 统一运维管理平台--平台级联管理-上联管理 -->
+<template>
+    <div class="tyywglpt tyywglpt-ptjlgl-bywgl" :controller="ptjlgl-bywgl-vm">
+        <!-- 按钮 -->
+        <div class="tyywglpt-search-box">
+            <div class="tyywglpt-tool-bar">
+                <div class="tyywglpt-tool-bar-inner">
+                    <input type="button" value="业务分组" :class="ywfzatcive" :click-1="ywfzatciveClass"
+                        :click-2="@switchView('ywfz')" class="btn btn-tool">
+                    <input type="button" value="行政区划" :class="xzqhatcive" :click-1="xzqhatciveClass"
+                        :click-2="@switchView('xzqh')" class="btn btn-tool">
+                    <input type="button" :if="authority.STGL" value="视图管理" :click-2="@handleView" class="btn btn-tool">
+                </div>
+            </div>
+        </div>
+        <!-- 重构 -->
+
+        <div class="tyywglpt-bywgl-box">
+            <div class="tyywglpt-bywgl-ywfz-xzqh">
+                <div class="input-group">
+                    <input type="text" class="form-control" ms-duplex="@name" :keypress="@handlePress"
+                        :attr="{placeholder:(@switchType == 'ywfz'?'可根据部门、国标编号搜索':'可根据部门、区划编号搜索')}">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" :click="query">搜索</button>
+                    </span>
+                </div>
+
+                <div class="tyywglpt-bywgl-ywfz-content row">
+                    <div class="tyywglpt-bywgl-ywfz-department col-md-6" :css="{height: @Treeheight}"
+                        :visible="(@switchType=='ywfz')">
+                        <ms-tree-bygl
+                            :widget="{treeId:'tyywglpt-bywgl-ywfz-department', treeData:@orgData,zTreeOnClick:@zTreeOnClick,async:@async,onAsyncSuccess:@onAsyncSuccess,addHoverDom:@addHoverDom,removeHoverDom:@removeHoverDom}">
+                        </ms-tree-bygl>
+                    </div>
+                    <div class="tyywglpt-bywgl-ywfz-department col-md-6" :css="{height: @Treeheight}"
+                        :visible="(@switchType=='xzqh')">
+                        <ms-tree-bygl
+                            :widget="{treeId:'tyywglpt-bywgl-xzqh-department', treeData:@orgData2,zTreeOnClick:@zTreeOnClick,async:@async,onAsyncSuccess:@onAsyncSuccess,addHoverDom:@addHoverDom,removeHoverDom:@removeHoverDom}">
+                        </ms-tree-bygl>
+                    </div>
+                    <div class="tyywglpt-bywgl-ywfz-equipment col-md-6" :css="{height: @Treeheight}"
+                        :visible="(@switchType=='ywfz')">
+                        <p class="tyywglpt-bywgl-ywfz-equipment-text text-center">
+                            <ms-tree-bygl
+                                :widget="{treeId:'tyywglpt-bywgl-ywfz-equipment-text',treeData:@deviceTreeData,async:@async,onAsyncSuccess:@onAsyncSuccess,zTreeOnClick:@zTreeOnClick,addHoverDom:@addHoverDom,removeHoverDom:@removeHoverDom}">
+                            </ms-tree-bygl>
+                        </p>
+                    </div>
+                    <div class="tyywglpt-bywgl-ywfz-equipment col-md-6" :css="{height: @Treeheight}"
+                        :visible="(@switchType=='xzqh')">
+                        <p class="tyywglpt-bywgl-ywfz-equipment-text text-center">
+                            <ms-tree-bygl
+                                :widget="{treeId:'tyywglpt-bywgl-xzqh-equipment-text',treeData:@deviceTreeData2,async:@async,onAsyncSuccess:@onAsyncSuccess,zTreeOnClick:@zTreeOnClick,addHoverDom:@addHoverDom,removeHoverDom:@removeHoverDom}">
+                            </ms-tree-bygl>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tyywglpt-bywgl-Jurisdiction" :if="authority.QXGL">
+                <div class="tyywglpt-bywgl-Jurisdiction-info">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <span class="labelName">
+                                名称：
+                            </span>
+                            <span class="labelValue">
+                                {{JurisdictionData.oldName}}
+                            </span>
+                        </div>
+                        <div class="col-md-6">
+                            <span class="labelName">
+                                {{(@switchType == 'ywfz'?'国标编号：':'区划编号：')}}
+                            </span>
+                            <span class="labelValue">
+                                {{JurisdictionData.deviceId}}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row margin-top">
+                        <div class="col-md-6">
+                            <span class="labelName">
+                                创建人：
+                            </span>
+                            <span class="labelValue">
+                                {{JurisdictionData.createUser}}
+                            </span>
+                        </div>
+                        <div class="col-md-6">
+                            <span class="labelName">
+                                创建时间：
+                            </span>
+                            <span class="labelValue">
+                                <span :if="JurisdictionData.createTime=='-'">
+                                    {{JurisdictionData.createTime}}
+                                </span>
+                                <span :if="JurisdictionData.createTime!='-'">
+                                    {{JurisdictionData.createTime | date("yyyy-MM-dd HH:mm:ss")}}
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bottom-tool-bar" style="margin-top:8px;">
+                    <input class="btn btn-tool JurisdictionBtn" :class="[(!@JurisdictionData.deviceId && 'disabled')]"
+                        :attr="{disabled:!@JurisdictionData.deviceId}" type="button" :click="jurisdiction" value="权限管理">
+                </div>
+
+                <!-- 表格 -->
+                <div class="ptjlgl-bywgl-table">
+                    <ms-comtable :widget="{loading:@loading,data:@list,actions:@actionsRoleByOrgPath,panelCss:{marginTop: 42,position: 'absolute',
+                          width: '100%',
+                          height: '75%',
+                          paddingRight:10}}">
+                        <ms-comtable-header
+                            :widget="{title:'姓名',dataIndex:'userName',colwidth:'33.33333%',isHide:false,popover:true}">
+                        </ms-comtable-header>
+                        <ms-comtable-header
+                            :widget="{title:'警号',dataIndex:'userCode',colwidth:'33.33333%',isHide:false,popover:true}">
+                        </ms-comtable-header>
+                        <ms-comtable-header :widget="{title:'操作',colwidth:'33.33333%'}">
+                            <a style=" color: #175ab5;
+                          cursor: pointer;padding: 4px;" :click="handle('delete')">删除</a>
+                        </ms-comtable-header>
+                    </ms-comtable>
+                </div>
+            </div>
+        </div>
+
+        <!-- 选择弹窗 -->
+        <div :controller="ptjlgl-bywgl-select-vm" class="sbzygl-modal sbzygl-modal-tip ptjlgl-modal-select">
+            <xmp
+                :widget="{is:'common-ms-modal', title:'提示', modalSelector:'#ptjlgl-bywgl-select-body', drag:true, btnalign:'center', modalWidth:520, show:@show,onOk:@handleOk,onCancel:@handleCancel}">
+                <div id="ptjlgl-bywgl-select-body" :scroll="selectScroll">
+                    <ms-tree-bygl
+                        :widget="{treeId:'tyywglpt-bywgl-ywfz-equipment-select',treeData:@selectData,zTreeOnClick:@zTreeOnClick}">
+                    </ms-tree-bygl>
+                </div>
+            </xmp>
+        </div>
+
+        <!-- 删除弹窗 -->
+        <div :controller="ptjlgl-bywgl-delete-vm" class="sbzygl-modal sbzygl-modal-tip ptjlgl-modal-delete">
+            <xmp
+                :widget="{is:'common-ms-modal', title:'确定删除', modalSelector:'#ptjlgl-bywgl-del-body', drag:true, btnalign:'center', modalWidth:400, modalHeight:100, show:@show,onOk:@handleOk,onCancel:@handleCancel}">
+                <div id="ptjlgl-bywgl-del-body">
+                    <p class="tip-text">
+                        <p class="text">是否确定删除该条数据？</p>
+                    </p>
+                </div>
+            </xmp>
+        </div>
+
+        <!-- 新增弹窗 -->
+        <div :controller="ptjlgl-bywgl-add-vm" class="sbzygl-modal sbxhgl-model cjzxhgl-bywgl-modal-add">
+            <xmp
+                :widget="{is:'common-ms-modal', title:@title, modalSelector:'#cjzxhgl-bywgl-modal-add', modalWidth:400, modalHeight: auto, btnalign:'center',show:@show, onOk:@handleOk, onCancel:@handleCancel}">
+                <div id="cjzxhgl-bywgl-modal-add">
+                    <ms-form :widget="{$form:@$form,inline:true}">
+
+                        <ms-form-item :class="['form-item',!@validJson.manufacturerName && 'has-error']">
+                            <label>
+                                <i>* </i>名称:</label>
+                            <div class="has-icon">
+                                <input type="text" class="form-control" :attr="{title:@inputJson.manufacturerName}"
+                                    :duplex="@inputJson.manufacturerName"
+                                    :focus="@handleFocus('manufacturerName',$event)"
+                                    :blur="@handleFormat('manufacturerName',@modelReg,$event)">
+                                <i class="fa fa-close" :visible="false"
+                                    :mousedown="@handleClear('manufacturerName',$event)|prevent"></i>
+                            </div>
+                            <div class="form-tip valid-tip" :if="@showJson.manufacturerName">
+                                <i class="fa fa-info-circle"></i>支持中英文，数字及 - 的组合</div>
+                            <div class="form-tip invalid-tip" :if="!@validJson.manufacturerName">{{@inputJson.manufacturerName.length
+                              > 32 ? '最多只可输入32位字符' : '请输入正确的名称'}}</div>
+                        </ms-form-item>
+
+                        <ms-form-item :class="['form-item',!@validJson.workstationCode && 'has-error']">
+                            <label>
+                                <i>* </i>{{typeName}}:</label>
+                            <div class="has-icon" :class="[(@type=='modify' && 'has-icon-disabled')]">
+                                <input type="text" class="form-control"
+                                    :attr="{title:@inputJson.workstationCode,disabled:(@type=='modify' && 'disabled')}"
+                                    :duplex="@inputJson.workstationCode" :focus="@handleFocus('workstationCode',$event)"
+                                    :blur="@handleFormat('workstationCode',@modelReg,$event)">
+                                <i class="fa fa-close" :visible="false"
+                                    :mousedown="@handleClear('workstationCode',$event)|prevent"></i>
+                            </div>
+                            <div class="form-tip valid-tip" :if="@showJson.workstationCode">
+                                <i class="fa fa-info-circle"
+                                    :if="handleAddType=='ywfz'">只支持20位数字组合，参考值：44020000902150000011</i>
+                                <i class="fa fa-info-circle"
+                                    :if="handleAddType=='xnzz'">只支持20位数字组合，参考值：44020000902160000011</i>
+                                <i class="fa fa-info-circle" :if="handleAddType=='xzqh'">最多可输入20位数字组合</i>
+                            </div>
+                            <div class="form-tip invalid-tip"
+                                :if="!@validJson.workstationCode && handleAddType!='xzqh'">
+                                {{@inputJson.workstationCode.length
+                              > 20 ? '最多可输入20位数字' : '请输入正确的国标编号'}}</div>
+                            <div class="form-tip invalid-tip"
+                                :if="!@validJson.workstationCode && handleAddType=='xzqh'">
+                                {{@inputJson.workstationCode.length
+                              > 20 ? '最多可输入20位数字' : '请输入正确的区划编号'}}</div>
+                        </ms-form-item>
+                    </ms-form>
+                </div>
+            </xmp>
+        </div>
+
+        <!-- 新增设备 -->
+        <div :controller="ptjlgl-bywgl-equipment-vm" class="sbzygl-modal sbxhgl-model cjzxhgl-bywgl-modal-equipment">
+            <xmp
+                :widget="{is:'common-ms-modal', title:@title, modalSelector:'#cjzxhgl-bywgl-modal-equipment', modalWidth:720, modalHeight: 400, btnalign:'center',show:@show, onOk:@handleOk, onCancel:@handleCancel}">
+                <div id="cjzxhgl-bywgl-modal-equipment">
+                    <div class="form-inline" style="margin: 18px 0;">
+                        <div class="form-group has-feedback form-item label-lg" style="width: auto;
+                      padding-top: 7px;
+                      vertical-align: top;"></div>
+
+                        <div class="searchInputBox">
+                            <input type="text" class="searchInput form-control" style="width: 314px;"
+                                :keydown="keydownQuery" :duplex="gbcodeList" placeholder="支持模糊搜索所选部门下设备名称与国标编号">
+                            <button class="btn btn-default searchBtn" type="button" :click="query">搜索</button>
+                        </div>
+                    </div>
+
+                    <div class="search-from">
+                        <ms-tree-bygl
+                            :widget="{treeId:@bywglEquipmentTreeId,treeData:@equipmentTreeData,async:@async,onAsyncSuccess:@onAsyncSuccess,onAsyncError:@onAsyncError,zTreeOnClick:@zTreeOnClick,zTreeOnCheck:@zTreeOnCheck,enable:@enable}">
+                        </ms-tree-bygl>
+                    </div>
+
+                </div>
+            </xmp>
+        </div>
+
+        <!-- 权限管理 -->
+        <div :controller="ptjlgl-bywgl-Jurisdiction-vm"
+            class="sbzygl-modal sbxhgl-model cjzxhgl-bywgl-modal-Jurisdiction">
+            <xmp
+                :widget="{is:'common-ms-modal', title:@title, modalSelector:'#cjzxhgl-bywgl-modal-Jurisdiction', modalWidth:720, modalHeight: 400, btnalign:'center',show:@show, onOk:@handleOk, onCancel:@handleCancel}">
+                <div id="cjzxhgl-bywgl-modal-Jurisdiction">
+                    <div class="form-inline" style="margin: 18px 0;" :if="@show">
+                        <div class="form-group has-feedback form-item label-lg" style="width: auto;
+                          padding-top: 7px;
+                          vertical-align: top;"></div>
+                        <div class="searchInputBox" style="height: 34px;">
+                            <input type="text" class="searchInput form-control" style="width: 314px; float: left;"
+                                :keydown="keydownQuery" :duplex="gbcodeList" placeholder="可根据姓名、警号搜索">
+                            <button class="btn btn-default searchBtn" type="button" style="float: left;"
+                                :click="query">搜索</button>
+                        </div>
+
+                    </div>
+
+                    <div class="Jurisdiction-user">
+                        <div class="row text-center">
+                            <div class="col-sm-4 Jurisdiction-user-item" :for="($index,item) in Jurisdiction">
+                                <button class="btn btn-default" type="button" :click="JurisdictionClick(item)"
+                                    :class="(item.isClick?'btn-success':'btn-default')"
+                                    :attr="{title: @item.userName + '(' + @item.userCode + ')'}">
+                                    {{item.userName}}({{item.userCode}})
+                                </button>
+                            </div>
+                        </div>
+                        <div class="text-center" :if="noResultData">
+                            无匹配数据
+                        </div>
+                    </div>
+                </div>
+            </xmp>
+        </div>
+
+        <!-- 视图管理弹窗 -->
+        <div :controller="ptjlgl-bywgl-view-vm" class="sbzygl-modal ptjlgl-modal ptjlgl-modal-view">
+            <xmp
+                :widget="{is:'common-ms-modal', title:'视图管理', modalSelector:'#bywgl-modal-view', modalWidth:720, modalHeight: auto, btnalign:'center',show:@show, onOk:@handleOk, onCancel:@handleCancel}">
+                <div id="bywgl-modal-view">
+                    <div class="view-box" id="ptjlgl-bywgl-modal-view">
+
+                        <div class="view-tabs">
+                            <div class="view-tab view-tab1">
+
+                                <div class="fz">
+                                    <div class="tyywglpt-tool-bar">
+                                        <div class="tyywglpt-tool-bar-inner">
+                                            <input type="button" value="业务分组" :click="handleView('ywfz')"
+                                                :class="@viewSelected?'':'noselect'" class="btn btn-tool ywfzBtn">
+                                            <input type="button" value="行政区划" :click="handleView('xzqh')"
+                                                :class="@viewSelected?'noselect':''" class="btn btn-tool">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="tree-panel" :visible="@viewSelected">
+                                    <ms-ztree
+                                        :widget="{treeId:'bywgl-ywfz-View',switchType:'ywfz', checkable: true,treeData: @data,setChkDisabled:@setChkDisabled}">
+                                    </ms-ztree>
+                                </div>
+
+                                <div class="tree-panel" :visible="!@viewSelected">
+                                    <ms-ztree
+                                        :widget="{treeId:'bywgl-xzqh-View',switchType:'xzqh',checkable: true,treeData: @data2,setChkDisabled:@setChkDisabled2}">
+                                    </ms-ztree>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </xmp>
+        </div>
+    </div>
+</template>

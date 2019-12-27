@@ -1,0 +1,43 @@
+  .ol-control {
+    /*隐藏地图左上角的+-号*/
+    display: none;
+  }
+
+  .markerDiv {
+    text-align: center;
+    margin: 0 auto;
+    width: 70px;
+    position: relative;
+  }
+
+  .markerDiv .imgOlanchor {
+    margin: 0 auto;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .markerDiv .nameDevice {
+    display: block;
+    height: 22px;
+    width: 86px;
+    margin-left: -7px;
+  }
+
+  .markerDiv .nameSpan {
+    position: absolute;
+    bottom: 0px;
+    left: -8px;
+    height: 22px;
+    width: 86px;
+    color: #2696ff;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+    overflow: hidden;
+  }
+
+  .nameSpanCheck {
+    color: #12dc97 !important;
+  }
+  .markerDzIndex{
+    z-index: 20 !important;
+  }

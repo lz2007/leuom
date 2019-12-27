@@ -1,0 +1,319 @@
+/*
+ * @Description: 监督中心-随机抽查-强制措施
+ * @Author: liujunlue
+ * @Date: 2019-01-02 11:46:19
+ * @LastEditTime: 2019-01-08 14:08:05
+ * @LastEditors: liujunlue
+ */
+
+.jdzxpt-sjcc-qzcs {
+    .search_box {
+        position: absolute;
+        width: 100%;
+        z-index: 1;
+        border: 1px solid #b0c4e1;
+        background-color: #b0c4e1;
+        .hBox {
+            width: 100%;
+            height: 60px;
+            padding: 15px 0 0 13px;
+            margin-left: 16px;
+            .tree-select-wrap .tree-panel {
+                min-width: 150px;
+              }
+            .dataFormBox {
+                float: left;
+                margin-left: 15px;
+                .formInput {
+                    float: left;
+                    width: 150px;
+                    height: 28px;
+                    line-height: 28px;
+                    padding: 0 12px;
+                    color: #536b82;
+                }
+                .qzcs_right_close {
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+                    margin-bottom: 0 !important;
+                    display: inline-block;
+                    width: 22px;
+                    height: 26px !important;
+                    margin: 0;
+                    vertical-align: middle;
+                    line-height: 26px !important;
+                    text-align: center;
+                    cursor: pointer;
+                    z-index: 2;
+                    font-size: 14px;
+                    font-weight: normal !important;
+                    color: #536b82;
+                }
+            }
+            .dataTreeBox {
+                float: left;
+                width: 220px;
+                margin: 0;
+                .dep_tree {
+                    float: left;
+                    .form-control,
+                    span {
+                        height: 28px;
+                        line-height: 28px;
+                        color: #536b82;
+                    }
+                }
+                .tree-select-wrap {
+                    width: 150px;
+                    .ztree span {
+                        height: 21px;
+                        line-height: 21px;
+                    }
+                    .fa {
+                        top: 4px;
+                        color: #536b82;
+                    }
+                    .ztree li a.curSelectedNode {
+                        border: none;
+                    }
+                    .tree-select-search {
+                        width: 100%;
+                        padding-right: 7px;
+                        border: none;
+                        outline: none;
+                    }
+                }
+                .included_dep {
+                    width: 100px;
+                    display: inline-block;
+                    color: #536b82;
+                    height: 28px;
+                    line-height: 28px;
+                    margin-left: 5px;
+                    cursor: pointer;
+                    -moz-user-select: none;
+                    -webkit-user-select: none;
+                    -ms-user-select: none;
+                    -khtml-user-select: none;
+                    user-select: none;
+                    img {
+                        margin-right: 3px;
+                        margin-bottom: 2px;
+                    }
+                }
+            }
+            .dataTimeBox {
+                float: left;
+                .qzcs-dataRight {
+                    vertical-align: middle;
+                    width: 150px;
+                    height: 28px;
+                    float: left;
+                    .ane-datepicker .form-control {
+                        height: 28px;
+                        line-height: 14px;
+                    }
+                    .ane-datepicker-clear {
+                        display: none !important;
+                    }
+                }
+                .tilde {
+                    float: left;
+                    height: 28px;
+                    line-height: 28px;
+                    margin: 0 5px;
+                }
+            }
+            .dataFormBox>span,
+            .dataRadioBox>span {
+                margin-right: 5px;
+                float: left;
+                height: 28px;
+                line-height: 28px;
+                max-width: 100%;
+                margin-bottom: 5px;
+                color: #33414f;
+                font-size: 16px;
+            }
+            .dataRadioBox {
+                display: block;
+                float: left;
+                margin-left: 30px;
+                .formInput {
+                    float: left;
+                    width: 150px;
+                    height: 28px;
+                    line-height: 28px;
+                }
+                .time_range_label {
+                    width: 92px;
+                    height: 28px;
+                    line-height: 28px;
+                }
+            }
+            .dataFormBox,
+            .dataRadioBox {
+                input::-webkit-input-placeholder,
+                .ane-datepicker-icon {
+                    color: #536b82 !important;
+                }
+                .ane-tree-select .ane-tree-select-arrow,
+                .ane-select .ane-select-arrow {
+                    top: 4px;
+                    color: #536b82;
+                }
+                .ane-tree-select-selection .ane-tree-select-selected,
+                .ane-select-selection .ane-select-selected {
+                    top: 0px;
+                    height: 28px;
+                    line-height: 28px;
+                }
+            }
+            .qzcs_input_panel {
+                width: 150px;
+                position: relative;
+                display: inline-block;
+                color: #536b82;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                background-color: #fff;
+                .form-control-input {
+                    display: inline-block;
+                    color: #536b82;
+                    width: 120px;
+                    height: 26px;
+                    line-height: 26px;
+                    margin-left: 12px;
+                    font-size: 14px;
+                    background-color: transparent;
+                    border: none;
+                    box-sizing: border-box;
+                    outline: medium;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
+            }
+            .common_search_btn {
+                float: right;
+                width: 110px;
+                height: 36px;
+                line-height: 36px;
+                text-align: center;
+                background-color: #074eb0;
+                color: #fff;
+                cursor: pointer;
+                font-size: 16px;
+                font-weight: bold;
+                margin-right: 36px;
+                margin-top: -3px;
+                &:hover {
+                    background-color: #0067f3;
+                }
+            }
+            .formData {
+                float: left;
+                height: 28px;
+                line-height: 28px;
+                font-size: 16px;
+            }
+            .widthAuto {
+                width: auto;
+                >span {
+                    font-weight: bold;
+                }
+            }
+            .widthAutoMargin {
+                width: auto;
+                margin-left: 30px;
+                >span {
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+    .qzcs-table {
+        .common-list-panel {
+            top: 156px !important;
+            bottom: 60px !important;
+            .common-list-header-wrap {
+                width: 100%;
+                margin-top: -34px;
+                background: #e0e7ec;
+                overflow: hidden;
+                border: 1px solid #ffffff;
+                .common-list-header {
+                    li {
+                        display: inline-block;
+                        height: 44px;
+                        line-height: 44px;
+                        text-align: center;
+                        color: #151c40;
+                        background: #ccdbf1;
+                        border-right: 1px solid #ffffff;
+                        font-size: 16px;
+                        color: #2c477a;
+                        position: relative;
+                        min-width: 20px;
+                    }
+                }
+            }
+            .common-list-content {
+                li {
+                    height: 40px;
+                    line-height: 40px;
+                    border-bottom: 1px solid #fff;
+                }
+                div {
+                    min-width: 20px;
+                    display: inline-block;
+                    padding: 0 4px;
+                    text-align: center;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    font-size: 14px;
+                    color: #33414f;
+                    text-overflow: ellipsis;
+                    border-right: none;
+                    border-bottom: none;
+                }
+            }
+        }
+        .check_action {
+            color: #0419dc;
+            user-select: none;
+            &:hover {
+                cursor: pointer;
+                color: #0099ff;
+            }
+        }
+        .comparison_img {
+            cursor: pointer;
+            color: blue;
+        }
+    }
+    .com-pages {
+        bottom: 8px !important;
+    }
+    .formFlag {
+        margin: 0 15px 0 0 !important;
+    }
+}
+
+.znsb_qzcs_en {
+    .tree-select-wrap,
+    .formInput,
+    .qzcs-dataRight {
+        width: 140px !important;
+    }
+    .search_box .hBox .qzcs_input_panel {
+        width: 140px;
+    }
+    .search_box .hBox .qzcs_input_panel .form-control-input {
+        width: 115px;
+    }
+    .formFlag {
+        margin: 0 47px 0 0 !important;
+    }
+}

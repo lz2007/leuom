@@ -1,0 +1,61 @@
+<template>
+    <div :css="@css" class="common-main-cp">
+        <div class="comparison_info"  :class="@show ? 'show' : 'hidden'">
+            <a class="shrinkBtn" :click="@clickDown">
+                <i class="shrink"></i>
+            </a> 
+            <div class="recognition_pic">
+                <div class="scene">
+                    <span>现场图片</span>
+                    <img :attr="{src:@scene_img}">
+                </div>
+                <div class="cp_status">
+                    <div class="cp_status_info" :class="@recognition_info.isNormal?'normal':'red'">
+                        <span>{{@recognition_info.isNormal ?'正常':'异常'}}</span>
+                    </div>
+                </div>
+                <div class="recognition_content">
+                    <div class="recognition">
+                        <span>识别内容</span>
+                        <img :attr="{src:@recognition_info.carRegImgFilePath}">
+                    </div>                
+                </div>
+            </div>
+            
+            <div class="recognition_panel">                    
+                <label class="label_title" :attr="{'data-toggle':'tooltip'}">{{@recognition_info.carDbName|isNull}}</label>
+                <div class="recognition_label">
+                    <div class="label_left">
+                        <label>所有人：</label>
+                        <label style="max-width:160px !important;" :attr="{'data-toggle':'tooltip'}" :class="['label_text']">{{@recognition_info.carOwner|isNull}}</label><br>
+                        <label>车牌号码：</label>
+                        <label :attr="{'data-toggle':'tooltip'}" :class="['label_text']">{{@recognition_info.carNumber|isNull}}</label><br>
+                        <label>车辆类型：</label>
+                        <label :attr="{'data-toggle':'tooltip'}" :class="['label_text']">{{@recognition_info.carTypeName|isNull}}</label><br>
+                    </div>
+                    <div class="label_right">
+                        <label>品牌型号：</label>
+                        <label :attr="{'data-toggle':'tooltip'}" :class="['label_text']">{{@recognition_info.carBrand|isNull}}</label><br>
+                        <label>发动机号码：</label>
+                        <label style="max-width:130px !important;" :attr="{'data-toggle':'tooltip'}" :class="['label_text']">{{@recognition_info.carEngineNo|isNull}}</label><br>
+                        <label>车辆识别代号：</label>
+                        <label style="max-width:118px !important;" :attr="{'data-toggle':'tooltip'}" :class="['label_text']">{{@recognition_info.carIdCard|isNull}}</label><br>
+                    </div>
+                    <div class="label_right">
+                        <label >住址：</label>
+                        <label style="max-width:160px !important;" :attr="{'data-toggle':'tooltip'}" :class="['label_text']">{{@recognition_info.carOwnerAddress|isNull}}</label>
+                        <label>有效期：</label>
+                        <label style="max-width:160px !important;" :attr="{'data-toggle':'tooltip'}" :class="['label_text']">{{@recognition_info.carValid|isNull}}</label><br>
+                        <label>使用性质：</label>
+                        <label :attr="{'data-toggle':'tooltip'}" :class="['label_text']">{{@recognition_info.carUse|isNull}}</label><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="open" :if="!@show" :click="@clickUp">
+            <img src="/static/image/zfsypsjglpt/open.png">
+            <span>车牌识别结果</span>
+        </div>
+        <iframe src="about:blank" marginheight="0" marginwidth="0" style="position:absolute; visibility:inherit; top:0;left:0;width:100%; height:100%;z-index:-1;opacity:1;filter:alpha(opacity=0);" frameborder="0"></iframe>
+    </div>
+</template>

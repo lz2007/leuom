@@ -1,0 +1,70 @@
+{
+    "code": 0,
+    "msg": "成功！",
+    "data": [
+        {
+            "model": "G4",
+            "name": "国迈",
+            "desc": ["问题修复以及性能提升", "修改升级包管理流程", "新增更新内容的显示"],
+            "version": "V1.4.6",
+            "createdTime": 1514169646000,
+            "createBy": "admin"
+        }, {
+            "model": "G4",
+            "name": "国迈",
+            "desc": ["问题修复以及性能提升", "修改升级包管理流程", "新增更新内容的显示"],
+            "version": "V1.4.7",
+            "createdTime": 1514169646000,
+            "createBy": "admin"
+        }, {
+            "model": "G4",
+            "name": "国迈",
+            "desc": ["问题修复以及性能提升", "修改升级包管理流程", "新增更新内容的显示"],
+            "version": "V1.4.8",
+            "createdTime": 1514169646000,
+            "createBy": "admin"
+        }, {
+            "model": "G4",
+            "name": "国迈",
+            "desc": ["问题修复以及性能提升", "修改升级包管理流程", "新增更新内容的显示"],
+            "version": "V1.4.9",
+            "createdTime": 1514169646000,
+            "createBy": "admin"
+        }, {
+            "model": "G4",
+            "name": "国迈",
+            "desc": ["问题修复以及性能提升", "修改升级包管理流程", "新增更新内容的显示"],
+            "version": "V1.5.6",
+            "createdTime": 1517800220000,
+            "createBy": "admin"
+        }, {
+            "model": "G4",
+            "name": "国迈",
+            "desc": ["问题修复以及性能提升", "修改升级包管理流程", "新增更新内容的显示"],
+            "version": "V1.5.7",
+            "createdTime": 1517800220000,
+            "createBy": "admin"
+        }, {
+            "model": "G4",
+            "name": "国迈",
+            "desc": ["问题修复以及性能提升", "修改升级包管理流程", "新增更新内容的显示"],
+            "version": "V1.5.7",
+            "createdTime": 1517800220000,
+            "createBy": "admin"
+        }, {
+            "model": "G4",
+            "name": "国迈",
+            "desc": ["问题修复以及性能提升", "修改升级包管理流程", "新增更新内容的显示"],
+            "version": "V1.5.7",
+            "createdTime": 1517800220000,
+            "createBy": "admin"
+        }, {
+            "model": "G4",
+            "name": "国迈",
+            "desc": ["问题修复以及性能提升", "修改升级包管理流程", "新增更新内容的显示"],
+            "version": "V1.5.7",
+            "createdTime": 1517800220000,
+            "createBy": "admin"
+        }
+    ]
+}

@@ -1,0 +1,31 @@
+<template>
+	<div class="uploadBtn_panel">
+		<div :if="@is_IE">
+			<object id="ocxIE" classid="clsid:455791d4-4095-4f70-b2b3-f5c424f25ad9" width="1" height="1"></object>
+		</div>
+		<div :if="!@is_IE">
+			<embed type="application/npGSVideoPlugin-plugin" name="npGSVideoPlugin" id="ocxFirefox" width="1" height="1">
+		</div>
+
+		<ms-dialog :widget="{$innerVm: 'upload_dialog', okText: '确认', cancelText: @cancelText, className: 'upload_dialog', show: @dialog_show, onCancel: @dialogCancel, onOk:@dialogOk, isMove:true, width: 600, height: 400, move_return: @move_return}">
+			<div slot="body" ms-skip>
+				<ul class="uploadList">
+					<li ms-for="el in @list">
+						<span :attr="{title: @el.fileName}">{{@el.fileName}}</span>
+						<div class="progressbarPanel" :attr="{id: 'progressbar'+@el.index}"></div>
+					</li>
+				</ul>
+				<a class="btn uploadDialogBtn" :click="uploadClick(0)">视频</a>
+				<a class="btn uploadDialogBtn" :click="uploadClick(1)">音频</a>
+				<a class="btn uploadDialogBtn" :click="uploadClick(2)">图片</a>
+				<a class="btn uploadDialogBtn" :click="uploadClick(3)">其他</a>
+			</div>
+		</ms-dialog>
+
+		<ms-dialog :widget="{$innerVm: 'dialog_radio', okText: '上传', cancelText: @cancelText, className: 'dialog_radio', show: @radio_dialog_show, onCancel: @radioCancel, onOk:@radioOk, isMove:true, width: 450, height: 220, move_return: @selectReturn}">
+			<div slot="body" ms-skip>
+				<ms-radio-group :widget="{options: @radio_options, onChange: @radioChange, value: @checked}"></ms-radio-group>
+			</div>
+		</ms-dialog>
+	</div>
+</template>

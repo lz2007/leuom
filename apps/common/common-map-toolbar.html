@@ -1,0 +1,25 @@
+<template>
+    <div :class="['sszhmaptool', @extra_class ? 'sszhmap_en' : '', @toobarClass]">
+        <div class="sszhmaptoolhead city" :click="@showcitylist">
+            <span :click="@citylocate" data-toggle='popover'>{{@showcityName}}</span>
+            <i class="angle-down-icon"></i>
+        </div>
+        <span style="padding: 0 15px;">|</span>
+        <div class="sszhmaptoolhead tool" :click="@showtool">
+            <label class="tool-box-icon"></label>
+            <span>{{@sszhmap_txt.tool}}</span>
+            <i class="angle-down-icon"></i>
+            <div class="sszhmaptoolcontent">
+                <div class="mapcljl">
+                    <label></label>
+                    <span :click="@mearsurelength" style="font-size: 12px">{{@sszhmap_txt.measuredRange}}</span>
+                </div>
+                <div class="mapcljl">
+                    <label class="bkfw-ico"></label>
+                    <span :click="@showBkfw" style="font-size: 12px">布控范围</span>
+                </div>
+            </div>
+        </div>
+        <slot></slot>
+    </div>
+</template>

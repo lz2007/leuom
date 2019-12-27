@@ -1,0 +1,14 @@
+{
+    "code": 0,
+    "msg": "Successfully!",
+    "data": {
+        "randomGenerateAble": true,
+        "pageObject": {
+            "totalPages": 10,
+            "totalElements": 10,
+            "currentPages": 0,
+            "perPages": 1,
+            "currentElements": []
+        }
+    }
+}

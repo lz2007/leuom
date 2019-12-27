@@ -1,0 +1,72 @@
+<template>
+    <div class="common-orgtree-control" :attr="{id:@wrapId}" :visible="@show">
+        <div :visible="@treeData.length === 0" class="no-data">暂无部门信息</div>
+        <!-- <xmp is="ms-tree" :widget="{checkable: false,tree: @treeData, expandedKeys: @expandedKeys,onSelect:@onSelect,beforeExpand:@beforeExpand}"></xmp> -->
+        <ul id="common-orgtree" class="ztree"></ul>
+
+        <!-- 弹窗 -->
+        <div :controller="orgtree-control-dialog" class="sbzygl-modal orgtree-control-modal">
+            <xmp :widget="{is:'common-ms-modal', title:@titleName, modalSelector:'#orgtree-control-modal', modalWidth:450, modalHeight: auto, btnalign:'center',okText:'确定' ,show:@dialogShow,  onOk:@handleOk, onCancel:@handleCancel}">
+                <div id="orgtree-control-modal" :if="@isDelete" class="delete-content">
+                    是否确定删除该部门？
+                </div>
+                <div id="orgtree-control-modal" :if="!@isDelete">
+                    <ms-form :widget="{$form:@$form,inline:false}">
+                        <ms-form-item :class="['form-item',!@validJson.orgName && 'has-error']">
+                            <label class="form-label">
+                                <i>* </i>部门名称:</label>
+                            <div class="has-icon">
+                                <input type="text" class="form-control" :attr="{title:@inputJson.orgName}" :duplex="@inputJson.orgName"
+                                    :focus="@handleFocus('orgName',$event)" :blur="@handleFormat('orgName',@orgNameReg,$event)">
+                                <i class="fa fa-close" :visible="false" :mousedown="@handleClear('orgName',$event)|prevent"></i>
+                            </div>
+                            <div class="form-tip valid-tip" :if="@showJson.orgName">
+                                <i class="fa fa-info-circle"></i>部门名称不能为空</div>
+                            <div class="form-tip invalid-tip" :if="!@validJson.orgName">请输入部门名称</div>
+                        </ms-form-item>
+                        <ms-form-item :class="['form-item',!@validJson.orgCode && 'has-error']">
+                            <label class="form-label">
+                                <i>* </i>部门编号:</label>
+                            <div class="has-icon" :class="[@isEdit && 'has-icon-disabled']">
+                                <input type="text" :if="!@isEdit" :class="['form-control']" :attr="{title:@inputJson.orgCode}"
+                                    :duplex="@inputJson.orgCode" :focus="@handleFocus('orgCode',$event)" :blur="@handleFormat('orgCode',@orgCodeReg,$event)">
+                                <input :if="@isEdit" disabled type="text" :class="['form-control']" :attr="{title:@inputJson.orgCode}"
+                                    :duplex="@inputJson.orgCode">
+                                <i class="fa fa-close" :visible="false" :mousedown="@handleClear('orgCode',$event)|prevent"></i>
+                            </div>
+                            <div class="form-tip valid-tip tip-md" :if="@showJson.orgCode">
+                                <i class="fa fa-info-circle"></i>建议部门编号大于8位的数字或者字母组合</div>
+                            <div class="form-tip invalid-tip" :if="!@validJson.orgCode">建议部门编号大于8位的数字或者字母组合</div>
+                        </ms-form-item>
+                        <ms-form-item :class="['form-item',!@validJson.orderNo && 'has-error']">
+                            <label class="form-label" style="vertical-align:top;">
+                                <i>* </i>业务类别:</label>
+                            <div class="checkboxCSS">
+                                <ul class="checkbox-group device-checkbox-group">
+                                    <li :for="($index,el) in @ywlb_arr">
+                                        <input type="checkbox" :attr="{'id': 'bzlx'+$index, 'value': el.code}" :duplex="@ywlbCheck"
+                                            data-duplex-changed="@handleDeviceCheck($event)">
+                                        <label :attr="{'for':'bzlx'+$index}" :class="['select-label', @ywlbCheck.indexOf(el.code) > -1 ? 'check_selected' : 'check_unselected']"></label>
+                                        <label>{{el.name}}</label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </ms-form-item>
+                        <ms-form-item :class="['form-item',!@validJson.orderNo && 'has-error']">
+                            <label class="form-label" style="width: 78px;">
+                                <i>* </i>排序:</label>
+                            <div class="has-icon">
+                                <input type="text" class="form-control" :attr="{title:@inputJson.orderNo}" :duplex="@inputJson.orderNo"
+                                    :focus="@handleFocus('orderNo',$event)" :blur="@handleFormat('orderNo',@orderNoReg,$event)">
+                                <i class="fa fa-close" :visible="false" :mousedown="@handleClear('orderNo',$event)|prevent"></i>
+                            </div>
+                            <div class="form-tip valid-tip tip-md" :if="@showJson.orderNo">
+                                <i class="fa fa-info-circle"></i>排序只能输入小于9999的正整数</div>
+                            <div class="form-tip invalid-tip" :if="!@validJson.orderNo">排序只能输入小于9999的正整数</div>
+                        </ms-form-item>
+                    </ms-form>
+                </div>
+            </xmp>
+        </div>
+    </div>
+</template>

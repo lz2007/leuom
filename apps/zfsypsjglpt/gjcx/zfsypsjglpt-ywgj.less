@@ -1,0 +1,224 @@
+@import '/apps/common/common-theme/common-variable.less';
+
+@searchBoxHeight: 66px;
+
+.zfsypsjglpt-gjgl-ywgj-map {
+    width: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+.zfsypsjglpt-gjgl-ywgj-sosBtn {
+    bottom: 1px;
+    top: auto;
+    left: 270px;
+}
+
+.zfsypsjglpt-gjgl-ywgj-sos-info {
+    left: 270px;
+    bottom: 30px;
+}
+
+/*------------------------ 左侧搜索栏开始----------------------------- */
+
+.zfsypsjglpt-layout {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    z-index: 0;
+    height: 100%;
+    color: #333;
+}
+
+.zfsypsjglpt-ywgj .left.left-layout {
+    background: @common-bg-title;
+    height: @searchBoxHeight;
+    padding: 0 30px;
+    border: none;
+}
+
+.zfsypsjglpt-layout .right.right-layout {
+    background: #fff;
+    min-width: 1040px;
+}
+
+.zfsypsjglpt-search-box .tree-select-wrap .tree-panel {
+    min-width: 200px;
+}
+
+.zfsypsjglpt-search-box {
+    position: relative;
+    padding: 9px;
+    background: #f3f5f7;
+    border: 1px solid #e4e4e4;
+}
+
+.zfsypsjglpt-search-box .form-inline .form-item {
+    display: inline-block;
+    margin-bottom: 10px;
+    margin-right: 60px;
+}
+
+.zfsypsjglpt-search-box .form-item label {
+    /*该宽度适用于五个字的以下label，特殊情况请在自己的页面内覆盖*/
+    width: 72px;
+    display: inline-block;
+    margin-right: 5px;
+    text-align: right;
+    font-family: "Microsoft YaHei", serif;
+    color: @txt-main-color;
+    font-size: 16px;
+    font-weight: normal;
+    margin-right: 10px;
+}
+
+.zfsypsjglpt-search-box.ywgj_en .form-item label {
+    width: 100px;
+}
+
+.zfsypsjglpt-search-box.ywgj_en .form-item.time_label label {
+    width: 78px;
+}
+
+.zfsypsjglpt-search-box .form-item .close-clear {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    font-size: 15px;
+    color: @txt-main-color;
+    display: none;
+}
+
+.zfsypsjglpt-search-box .form-item .form-control {
+    display: inline-block;
+    width: 200px;
+    height: 26px;
+    line-height: 26px;
+    color: @txt-main-color;
+    padding: 0 10px;
+    border: none;
+    border-radius: 0;
+}
+
+.zfsypsjglpt-search-box.ywgj_en .form-item .form-control {
+    width: 135px;
+}
+
+.zfsypsjglpt-search-box .ane-select-selected {
+    /*为了在ie中垂直居中*/
+    padding: 0;
+    top: -1px;
+}
+
+.zfsypsjglpt-search-box .ane-select-arrow,
+.zfsypsjglpt-search-box .ane-tree-select-arrow {
+    top: 4px;
+}
+
+.zfsypsjglpt-search-box .form-inline .ane-datepicker {
+    width: 170px;
+    display: inline-block;
+}
+
+.zfsypsjglpt-search-box.ywgj_en .form-inline .ane-datepicker {
+    width: 157px;
+}
+
+.zfsypsjglpt-search-box .btn-query {
+    width: 110px;
+    height: 68px;
+    color: #fff;
+    background: @primary-color;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    border: none;
+    border-radius: 0;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.zfsypsjglpt-search-box .btn-query:hover {
+    opacity: 0.8;
+    filter: alpha(opacity=80);
+}
+
+.zfsypsjglpt-layout .zfsypsjglpt-search-box .ywgj-btn-query{
+    height: 36px;
+    top: 16px;
+}
+
+.zfsypsjglpt-ywgj .search-line {
+    width: 100%;
+}
+
+.zfsypsjglpt-ywgj .form-group {
+    display: inline-block;
+}
+
+
+/*------------------------ 左侧搜索栏结束----------------------------- */
+
+/*表格*/
+
+.zfsypsjglpt-ywgj .tyywglpt-list-panel {
+    top: @searchBoxHeight + 44;
+    bottom: 40px;
+    right: 0;
+    left: 0;
+}
+
+.zfsypsjglpt-ywgj .com-pages {
+    bottom: 0;
+}
+
+.zfsypsjglpt-ywgj .look {
+    color: #0419dc;
+    cursor: pointer;
+}
+
+.zfsypsjglpt-ywgj .waitDeal {
+    color: @red-color;
+}
+
+/* .zfsypsjglpt-ywgj  .gjglDetail{
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    background: #fff;
+    z-index:999;
+} */
+
+.zfsypsjglpt-ywgj .URGENT,
+.zfsypsjglpt-ywgj .IMPORTANT,
+.zfsypsjglpt-ywgj .GENERAL,
+.zfsypsjglpt-ywgj .PROMPT {
+    display: inline-block;
+    margin-left: 5px;
+    padding: 0px 5px;
+    color: #fff;
+    border-radius: 4px;
+    line-height: 25px;
+}
+
+.zfsypsjglpt-ywgj .URGENT {
+    background: @red-color;
+}
+
+.zfsypsjglpt-ywgj .IMPORTANT {
+    background: @orange-color;
+}
+
+.zfsypsjglpt-ywgj .GENERAL {
+    background: @green-color;
+}
+
+.zfsypsjglpt-ywgj .PROMPT {
+    background: #3399ff;
+}
+
+.zfsypsjglpt-ywgj .ane-datepicker input {
+    padding: 0 5px !important;
+}

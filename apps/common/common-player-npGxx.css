@@ -1,0 +1,242 @@
+#gxx_ocx {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.ocx_player {
+    width: 100%;
+    height: 100%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+#gxx_ocx .update_web {
+    color: #fff;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    padding: 8px;
+}
+
+.gxx_player_controll {
+    width: 100%;
+    height: 50px;
+    background-color: #000000;
+    position: absolute;
+    bottom: 0;
+}
+
+.gxx_player_controll a {
+    cursor: pointer;
+}
+
+.gxx_player_controll .play_speed {
+    float: left;
+    height: 30px;
+    line-height: 30px;
+    color: #358dcc;
+    padding-left: 5px;
+    font-size: 12px;
+}
+
+#ocx_playControll {
+    width: 450px;
+    height: 50%;
+    margin: 0 auto;
+    padding-top: 13px;
+}
+
+#ocx_playControll>a {
+    margin-right: 40px;
+}
+
+#btn_pause {
+    display: none;
+}
+
+.gxx_player_controll .volume_control {
+    width: 145px;
+    height: 30px;
+    float: left;
+    margin-left: 5px;
+    padding-top: 10px;
+}
+
+.gxx_player_controll .volume_control .volume_progress {
+    width: 100px;
+    height: 30px;
+    margin-left: 10px;
+    float: left;
+    position: relative;
+}
+
+.gxx_player_controll .volume_control .v_white_line {
+    width: 95px;
+    height: 6px;
+    margin: 15px 0;
+    background-color: #676767;
+    position: absolute;
+    z-index: 1;
+    border-radius: 10px;
+}
+
+.gxx_player_controll .volume_control .v_blue_line {
+    width: 42px;
+    height: 6px;
+    margin: 15px 0;
+    background-color: #ffffff;
+    position: absolute;
+    z-index: 2;
+    border-radius: 10px;
+}
+
+.gxx_player_controll .volume_control .circle_span {
+    cursor: pointer;
+    color: #ffffff;
+    position: absolute;
+    top: 11px;
+    left: -6px;
+    z-index: 2;
+}
+
+.gxx_player_controll .volume_control .voice,
+.gxx_player_controll .volume_control .mute {
+    cursor: pointer;
+    display: block;
+    width: 30px;
+    height: 30px;
+    float: left;
+}
+
+.gxx_player_controll .volume_control .voice {
+    display: block;
+    background: url(/static/image/zfsypsjglpt/voice_blue.png) no-repeat;
+    margin-top: 5px;
+}
+
+.gxx_player_controll .volume_control .mute {
+    display: none;
+    background: url(/static/image/zfsypsjglpt/mute_blue.png) no-repeat;
+    margin-top: 5px;
+}
+
+.gxx_player_controll .volume_control .circle_span {
+    left: 42px;
+}
+
+.gxx_player_controll .btn_fullScreen {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    right: 5px;
+    bottom: 8px;
+}
+
+.player_dialog_class .modal-body {
+    color: #33414f;
+}
+
+.player_dialog_class .modal-footer {
+    /* padding-top: 0 !important; */
+    border-top: 0 !important;
+    background-color: #ccdbf1;
+}
+
+.player_dialog_class .bootbox-body span {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    font-size: 16px;
+}
+
+.player_dialog_class .modal-footer .btn-primary {
+    float: left;
+}
+
+.player_dialog_class .modal-footer .btn-default {
+    float: right;
+}
+
+.player_dialog_class .modal-footer .btn-primary,
+.player_dialog_class .modal-footer .btn-default {
+    width: 130px;
+    height: 40px;
+    line-height: 38px;
+    color: #ffffff;
+    font-size: 16px;
+    background-color: #1055b3;
+    border: 1px solid #1055b3;
+    border-radius: 2px;
+    outline: none;
+    padding: 0 !important;
+}
+
+.player_dialog_class .modal-footer .btn-primary:hover,
+.player_dialog_class .modal-footer .btn-default:hover {
+    color: #fff;
+    background-color: #107dda;
+    border: 1px solid #107dda;
+}
+
+.player_dialog_class.dialog_small .modal-footer .btn-primary {
+    display: none;
+}
+
+.player_dialog_class.dialog_small .modal-footer .btn-default {
+    margin-right: 140px;
+}
+
+.player_dialog_class.dialog_big .bootbox-body span {
+    text-align: left;
+    font-size: 14px;
+    margin: 4px 0;
+}
+
+.player_dialog_class.dialog_big .bootbox-body .tip-text {
+    font-size: 12px;
+}
+
+.player_dialog_class.dialog_big .bootbox-body .tip-text .fa-info-circle {
+    color: #E09E1F;
+    margin-right: 5px;
+}
+
+.player_dialog_class.dialog_big .modal-footer .btn-primary {
+    /* display: none; */
+    margin-left: 50px !important;
+}
+
+.player_dialog_class.dialog_big .modal-footer .btn-default {
+    margin-right: 50px !important;
+}
+
+.player_dialog_class .modal-header {
+    background-color: #0A1238;
+    color: #fff;
+}
+
+.player_dialog_class.dialog_small .modal-body {
+    padding: 45px 0;
+}
+
+.ocx_fileTitle {
+    position: absolute;
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    padding-left: 20px;
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.ocx_fileTitle span{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    display: block;
+}

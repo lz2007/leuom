@@ -1,0 +1,118 @@
+@import '/apps/common/common-theme/common-variable.less';
+.sszhmaptool {
+    position: absolute;
+    top: 20px;
+    left: 70px;
+    background: #ffffff;
+    padding: 7px 10px 4px 10px;
+    // width: 202px;
+    text-align: center;
+    cursor: pointer;
+    z-index: 1;
+    box-shadow: 2px 2px 5px #D0D0D0;
+    border: 1px solid #D0D0D0;
+    .sszhmaptoolhead {
+        display: inline-block;
+        label {
+            margin-right: 4px !important;
+            width: 26px !important;
+            height: 24px !important;
+            vertical-align: middle;
+            &.tool-box-icon {
+                background: url(/static/image/theme/sszhxt/mapIcon/tool-box-icon.png?__sprite) no-repeat scroll !important;
+            }
+        }
+        span {
+            font-size: 14px;
+            margin-right: 8px !important;
+            color: @deepBlue-color;
+            &:hover {
+                color: @primary-color;
+            }
+        }
+        i.angle-down-icon {
+            display: inline-block;
+            width: 12px;
+            height: 8px;
+            background: url(/static/image/theme/sszhxt/mapIcon/dropdown-icon.png) no-repeat;
+        }
+        &.city {
+            width: 80px;
+            span{
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: inline-block;
+                width: 60px;
+                vertical-align: middle;
+                padding-bottom: 4px;
+            }
+        }
+        &.tool {
+            position: relative;
+            width: 80px;
+        }
+        &:hover>label {
+            background: url(../../static/image/sszhxt-sszh/u469.png?__sprite) no-repeat scroll;
+            margin-right: 5px;
+            width: 18px;
+            height: 18px;
+            vertical-align: middle;
+        }
+    }
+    .sszhmaptoolcontent {
+        position: absolute;
+        right: -10px;
+        background: #ffffff;
+        width: 110px;
+        top: 43px;
+        .mapcljl {
+            padding: 9px 5px;
+            display: none;
+            span {
+                color: @deepBlue-color;
+                &:hover {
+                    color: @primary-color;
+                }
+            }
+            >label {
+                background: url(../../static/image/sszhxt-sszh/ceju.png?__sprite) no-repeat scroll;
+                margin-right: 5px;
+                width: 18px;
+                height: 18px;
+                vertical-align: middle;
+                &.bkfw-ico {
+                    background: url(../../static/image/sszhxt-sszh/u1102.png?__sprite) no-repeat scroll;
+                    margin-right: 5px;
+                    width: 18px;
+                    height: 18px;
+                    vertical-align: middle;
+                }
+            }
+            &:hover>label {
+                background: url(../../static/image/sszhxt-sszh/cejuhover.png?__sprite) no-repeat scroll;
+                margin-right: 5px;
+                width: 18px;
+                height: 18px;
+                vertical-align: middle;
+                &.bkfw-ico {
+                    background: url(../../static/image/sszhxt-sszh/u1107.png?__sprite) no-repeat scroll;
+                    margin-right: 5px;
+                    width: 18px;
+                    height: 18px;
+                    vertical-align: middle;
+                }
+            }
+        }
+    }
+    &.sszhmap_en{
+        width: 250px;
+        .sszhmaptoolhead.city {
+            width: 100px;
+        }
+        .sszhmaptoolcontent {
+            left: 150px;
+            width: 140px;
+        }
+    }
+}

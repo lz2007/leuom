@@ -1,0 +1,364 @@
+.spjk {
+    width: 100%;
+    overflow: hidden;
+    height: 100%;
+    /* min-height: 600px; */
+}
+
+.spjk .spjk-main-container {
+    padding: 0px 0 8px 8px;
+    height: 100%;
+    /* padding-top: 74px;
+    margin-top: -66px; */
+    /* min-height: 600px; */
+    margin-left: 260px;
+}
+
+.spjk .main-title {
+    height: 40px;
+    margin-bottom: 8px;
+    line-height: 40px;
+    /* background: #eff4f8; */
+    color: #0078d7;
+}
+
+.spjk .main-title h3 {
+    float: left;
+    height: 40px;
+    line-height: 40px;
+    font-size: 14px;
+    margin: 0;
+    text-indent: 1em;
+}
+
+.spjk .main-title .ocx-tool-bar {
+    /* float: right; */
+    height: 40px;
+    line-height: 40px;
+    padding-top: 5px;
+    margin: 0 auto;
+    width: 750px;
+}
+
+.spjk .main-title .ocx-tool-bar li {
+    display: inline-block;
+    width: 80px;
+    height: 54px;
+    margin: 0 5px;
+    position: relative;
+}
+
+.spjk .main-title .sound {
+    background: url(/static/image/theme/sszhxt/monitorIcon/sound.png?__sprite) 0 0 no-repeat;
+}
+
+.spjk .main-title .split1 {
+    background: url(/static/image/theme/sszhxt/monitorIcon/split1.png?__sprite) 0 0 no-repeat;
+}
+
+.spjk .main-title .split4 {
+    background: url(/static/image/theme/sszhxt/monitorIcon/split4.png?__sprite) 0 0 no-repeat;
+}
+
+.spjk .main-title .split6 {
+    background: url(/static/image/theme/sszhxt/monitorIcon/split6.png?__sprite) 0 0 no-repeat;
+}
+
+.spjk .main-title .split9 {
+    background: url(/static/image/theme/sszhxt/monitorIcon/split9.png?__sprite) 0 0 no-repeat;
+}
+
+.spjk .main-title .split {
+    background: url(/static/image/theme/sszhxt/monitorIcon/split.png?__sprite) 0 0 no-repeat;
+}
+
+.spjk .main-title .full {
+    background: url(/static/image/theme/sszhxt/monitorIcon/full.png?__sprite) 0 0 no-repeat;
+}
+
+.spjk .main-title .close-current {
+    background: url(/static/image/theme/sszhxt/monitorIcon/close.png?__sprite) 0 0 no-repeat;
+}
+
+.spjk .main-title .closeall {
+    background: url(/static/image/theme/sszhxt/monitorIcon/closeall.png?__sprite) 0 0 no-repeat;
+}
+
+.spjk .main-title .sound:hover {
+    background: url(/static/image/theme/sszhxt/monitorIcon/soundhover.png?__sprite) 0 0 no-repeat;
+}
+
+.spjk .main-title .split1:hover {
+    background: url(/static/image/theme/sszhxt/monitorIcon/split1hover.png?__sprite) 0 0 no-repeat;
+}
+
+.spjk .main-title .split4:hover {
+    background: url(/static/image/theme/sszhxt/monitorIcon/split4hover.png?__sprite) 0 0 no-repeat;
+}
+
+.spjk .main-title .split6:hover {
+    background: url(/static/image/theme/sszhxt/monitorIcon/split6hover.png?__sprite) 0 0 no-repeat;
+}
+
+.spjk .main-title .split9:hover {
+    background: url(/static/image/theme/sszhxt/monitorIcon/split9hover.png?__sprite) 0 0 no-repeat;
+}
+
+.spjk .main-title .split:hover {
+    background: url(/static/image/theme/sszhxt/monitorIcon/splithover.png?__sprite) 0 0 no-repeat;
+}
+
+.spjk .main-title .full:hover {
+    background: url(/static/image/theme/sszhxt/monitorIcon/fullhover.png?__sprite) 0 0 no-repeat;
+}
+
+.spjk .main-title .close-current:hover {
+    background: url(/static/image/theme/sszhxt/monitorIcon/closehover.png?__sprite) 0 0 no-repeat;
+}
+
+.spjk .main-title .closeall:hover {
+    background: url(/static/image/theme/sszhxt/monitorIcon/closeallhover.png?__sprite) 0 0 no-repeat;
+}
+
+.spjk .video-list {
+    height: 95%;
+    /* min-height: 560px; */
+    overflow: auto;
+    background: #000;
+    /* background: url(/static/image/sszhxt/ocx.png?__sprite) -70px -110px repeat; */
+}
+
+.spjk .spjk-modal-split {
+    text-align: center;
+}
+
+.spjk .spjk-modal-split .form-item {
+    display: inline-block;
+    width: 110px;
+    margin-right: 10px;
+    vertical-align: top;
+}
+
+.spjk .spjk-modal-split .form-item label {
+    vertical-align: top;
+}
+
+.spjk .sound {
+    position: relative;
+}
+
+.spjk .sound-bar-wrap {
+    position: absolute;
+    top: -10px;
+    left: -5px;
+    width: 32px;
+    height: 140px;
+    padding-top: 38px;
+    z-index: 10;
+}
+
+.spjk .sound-bar-wrap .sound {
+    position: absolute;
+    width: 80px;
+    height: 54px;
+    top: 10px;
+    left: 5px;
+}
+
+.spjk .sound-bar {
+    position: relative;
+    height: 100%;
+    padding: 10px 0 20px;
+    margin-left: 1px;
+    font-size: 12px;
+    text-align: center;
+    color: #536b82;
+    background: #fff;
+    border: 1px solid #dfe4e7;
+    border-radius: 3px;
+    z-index: 10;
+    left: 29px;
+    top: -127px;
+}
+
+.spjk .sound-bar .triangle {
+    position: absolute;
+    left: 50%;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    border-style: solid;
+    border-color: transparent;
+}
+
+.spjk .sound-bar .outer-triangle {
+    top: 103px;
+    margin-left: -6px;
+    border-width: 6px;
+    border-top-color: #dfe4e7;
+}
+
+.spjk .sound-bar .inner-triangle {
+    top: 102px;
+    margin-left: -5px;
+    border-width: 5px;
+    border-top-color: #fff;
+}
+
+.spjk .sound-level-wrap {
+    position: relative;
+    width: 8px;
+    height: 100%;
+    margin: 0 auto;
+    border-radius: 10px;
+    background: #eff4f8;
+}
+
+.spjk .sound-level {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background: #33cc00;
+    border-radius: 10px;
+}
+
+.spjk .sound-bar .sound-num {
+    position: absolute;
+    width: 100%;
+    height: 18px;
+    line-height: 18px;
+    left: 0;
+    bottom: 0;
+    font-size: 10px;
+    text-align: center;
+}
+
+/* 弹窗里的下拉框 */
+
+.modal-select-dropdown {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 22px;
+    line-height: 22px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background: #fff;
+}
+
+.modal-select-dropdown .modal-selected {
+    cursor: pointer;
+    padding-right: 6px;
+}
+
+.modal-select-dropdown .modal-selected:before {
+    cursor: pointer;
+    position: absolute;
+    right: 5px;
+}
+
+.modal-select-dropdown .modal-select-options {
+    position: absolute;
+    left: 0;
+    top: 22px;
+    width: 48px;
+    color: #536b82;
+    border-radius: 5px;
+    background: #fff;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
+    z-index: 10000;
+}
+
+.modal-select-dropdown .modal-select-options li {
+    cursor: pointer;
+    padding: 2px 5px;
+}
+
+.modal-select-dropdown .modal-select-options li:hover {
+    background: #e0e7ec;
+}
+
+.modal-select-dropdown .modal-select-options li.active {
+    background: #eee;
+    color: #536b82;
+    font-weight: 700;
+}
+
+.sszhxt-spjk-map {
+    width: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+.sszhxt-spjk-sosBtn {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    top: auto;
+    left: auto;
+    z-index: 10000;
+}
+.sszhxt-spjk-sos-info {
+    /* right:20px;
+    left: auto;
+    z-index: 1000; */
+}
+
+/* 注意：在OCX上时，背景色决不能有透明度 */
+.sszhxt-spjk-sos .sos-info {
+    background: rgb(32,59,109) !important; 
+}
+
+.sszhxt-spjk-sos-info .sos-info-menu {
+    position: relative;
+    z-index: 1000;
+}
+
+/* .sszhxt-spjk-sos {
+    position: absolute;
+    right: 100px;
+    bottom: 50px;
+} */
+/* 自定义分屏样式 */
+.spjk .com-modal-modal{
+    z-index: 9999;
+}
+.spjk .com-modal-modal-header {
+    background-color: #1c2551;
+    border-radius: 0;
+    padding: 14px 20px;
+    font-weight: bold;
+}
+.spjk .com-modal-modal-title {
+    text-align: left;
+}
+.spjk .com-modal-modal-close-x {
+    background: url('/static/image/theme/sszhxt/mapIcon/close.png') no-repeat; 
+    width: 20px;
+    height: 20px;
+}
+.spjk .fa-remove::before, .spjk .fa-times::before{
+    content: '';
+}
+.spjk .com-modal-modal-body{
+    background-color: #E6EDF7;
+}
+.spjk .com-modal-modal-footer{
+    background-color: #E6EDF7;
+    height: 70px;
+    border-radius: 0;
+}
+.spjk .com-modal-modal-footer button {
+     width: 130px;
+     height: 40px;
+     background-color: #1055b3;
+     color:#fff;
+     font-size: 16px;
+}
+.spjk .com-modal-modal-footer .com-modal-btn-ok{
+    margin-right: 20px;
+}
+.spjk .com-modal-modal-footer .com-modal-btn-cancle{
+    margin-left: 20px;
+}

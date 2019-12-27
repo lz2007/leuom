@@ -1,0 +1,111 @@
+.uploadBtn_panel {
+    .com-modal-modal-header {
+        background: #0078d7 !important;
+    }
+    .com-modal-modal-footer {
+        display: none !important;
+    }
+}
+
+.upload_dialog {
+    .modal-header {
+        background-color: #1c2551 !important;
+    }
+    .uploadList {
+        width: 100%;
+        height: 282px;
+        overflow: auto;
+        color: #536b82;
+
+        li {
+            width: 100%;
+            height: 50px;
+            line-height: 50px;
+
+            span {
+                text-align: right;
+                width: 90px;
+                margin-right: 10px;
+                display: inline-block;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+        }
+
+        .progressbarPanel {
+            float: right;
+            height: 50px;
+            line-height: 50px;
+            width: 450px;
+            padding-top: 10px;
+
+            .progressbar {
+                width: 100%;
+                position: relative;
+                background-color: #eeeeee;
+                box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.1);
+            }
+
+            .proggress {
+                height: 30px;
+                width: 0px;
+                background-color: #eeeeee;
+            }
+
+            .percentCount {
+                float: right;
+                margin-top: -40px;
+                margin-right: 10px;
+                clear: both;
+                font-weight: bold;
+                font-family: Arial;
+                color: #333333;
+            }
+        }
+    }
+
+    .uploadDialogBtn {
+        cursor: pointer;
+        width: 120px;
+        color: #fff;
+        background-color: #0078d7;
+        margin-left: 18px;
+        border: 1px solid #0078d7;
+        border-radius: 2px;
+        outline: none;
+        float: left;
+
+        &:hover {
+            background: #0057a1;
+        }
+    }
+    .modal-footer {
+        display: none;
+    }
+}
+
+.dialog_radio {
+    .modal-header {
+        background-color: #1c2551 !important;
+    }
+
+    .checkbox-group .ane-radio {
+        width: 100px !important;
+        margin-bottom: 18px !important;
+        display: inline-block !important;
+    }
+
+    .modal-footer{
+        padding: 0px !important;
+        border-top: none !important;
+
+        .btn{
+            margin-right: 160px;
+        }
+
+        .btn-default{
+            display: none !important;
+        }
+    }
+}

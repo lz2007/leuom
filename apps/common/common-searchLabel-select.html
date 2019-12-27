@@ -1,0 +1,16 @@
+<template>
+	<div :class="['common-searchLabel-select','common-searchLabel-select-'+@owner]">
+		<div class="form-control" :click="@handleTrigger">
+			<input type="text" class="common-searchLabel-select-search" :attr="{title:@searchLabel,name:'search'}" :duplex="@searchLabel"
+			    :focus="@handleFocus" :blur="@handleBlur">
+			<input type="text" style="display:none" />
+			<i class="fa" :if="isIcon" :click="handleFocus" :class="getTriangleDir(visible, searchLabel, searchOptions)"></i>
+		</div>
+		<ul :visible="isAllVisible(visible, searchLabel)" class="option-list all-list" :click="@handleSelect">
+			<li :for="($index, item) in @options" class="list-item" :attr="{'data-label':item.label,'data-value':item.value}">{{item.label}}</li>
+		</ul>
+		<ul :visible="isSearchVisible(visible, searchLabel)" class="option-list search-list" :click="@handleSelect">
+			<li :for="($index, item) in @searchOptions" class="list-item" :attr="{'data-label':item.label,'data-value':item.value}">{{item.label}}</li>
+		</ul>
+	</div>
+</template>

@@ -1,0 +1,148 @@
+<template>
+	<div class="tyyhrzpt_jsgl">
+		<!-- <div class="operationHbox">
+			<ul class="optList" :controller='gnqx_opt'>
+				<li :click='@addRole' :if="@authority.CREATE">
+					<label>新增角色</label>
+				</li>
+				<li :click='@editRole' :if="@authority.EDIT" :class="[@jsMenuBg]">
+					<label>编辑角色</label>
+				</li>
+				<li :click='@deleteRole' :if="@authority.DELETE" :class="[@jsMenuBg]">
+					<label>停用角色</label>
+				</li>
+				<li :click='@saveAuthority' :if='@authority.BCQX' :class="[@jsMenuBg]">
+					<label>保存权限</label>
+				</li>
+			</ul>
+		</div> -->
+		<div class="contentBox" :controller='gnqx_opt'>
+			<div class="roleLists">
+				<div class="common_header" >角色列表
+					<img class="add_role" :if='@gnqx_opt.authority.CREATE' :click='@addRole' src="/static/image/xtpzgl-gnqx/add.png?__sprite" >
+				</div>
+				
+				<ul class="roleLists_body" :controller='roleItem_cont' id="scrollBox">
+					<li ms-for='item in roleItemsLists' :attr="{title: item.roleName}" class="move_index">
+						<!-- click事件和class绑定在li上渲染有问题,传递item拿不到当前数据信息-avalon解析问题 -->
+						<span class="title" :click='@clickRoleItem(this,$event)' :attr='{id:item.id}'>{{item.roleName}} ({{item.userNumber}}人)</span>
+						<div class="operate operate_lf" :if='(item.edit||item.check) && @gnqx_opt.authority.EDIT'>
+							<img :click='@editRole(this,$event)' src="/static/image/xtpzgl-gnqx/edit.png?__sprite" >
+						</div>
+						<div class="operate" :if='(item.delete||item.check) && @gnqx_opt.authority.DELETE'>
+							<img :click='@deleteRole(this,$event)' src="/static/image/xtpzgl-gnqx/delete.png?__sprite" >
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="authority_tree_box">
+				<div class="common_header" style="padding-left:0px">
+					<div class="tab" :click="@setTabClick('1')" :if='@gnqx_opt.authority.JSGN' :class="[@setTab == '1' ? 'selectedtab' : '']">角色功能</div>
+					<div class="tab" :click="@setTabClick('2')" :if='@gnqx_opt.authority.JSYH' :class="[@setTab == '2' ? 'selectedtab' : '']">角色用户</div>
+				</div>
+				<div class="tree_box" id="tree_box_id" :visible="@setTab == '1'">
+					<div :if="@loading" class="list-loading">
+						<span>结果加载中</span>
+					</div>
+					<div class="checkall">
+						<!-- <input type="checkbox" :attr="{'id':$index}" :duplex-checked="item.checked" data-duplex-changed="@handleCheck($index,item,$event)"> -->
+						<label :attr="{'for':$index}" :class="[@allcheck ? 'check_selected' : 'check_unselected']" :click="@fun_allCheck" :if="@readOnly"></label>
+						<span class="tree_title">全部功能</span>
+					</div>
+					<div class="tree_row_box">
+						<div class="jsgl_tree_box jsgl_card" :controller='authority_tree'  ms-for='item in authority_data' >
+							<p>{{item.name}}</p>
+							<div class="jsgl_tree">
+								<div :attr='{id:item.sid}' class="authority_tree" >
+									<ms-tree :widget="{tree: @item.treeData, onCheck:@commitTree,checkable: @checkable,checkedKeys:@checkedKeys, expandedKeys: @expandedKeys,beforeCollapse:@handleBeforeCollapse,beforeExpand:@handleBeforeExpand}"></ms-tree>
+								</div>
+							</div>
+							<div class="panel-body panel-body-default" :if="false"> </div>
+						</div>
+					</div>
+				</div>
+				<div class="userRole" :visible="@setTab == '2'">
+					<div :if="@loadingRole" class="list-loading">
+						<span>结果加载中</span>
+					</div>
+					<ul>
+						<li ms-for='item in userRoleList' :attr="{title: item.userName + '(' + item.userCode + ')'}"
+							class="userRoleItem">
+							<span>{{@item.userName}}({{@item.userCode}})</span>
+						</li>
+						<span class="userRoleNull" :if="@userRoleList && @userRoleList.length == 0">该角色暂无用户</span>
+					</ul>
+					<ms-pages
+						:widget="{total:@table_pagination.total, pageSize:@table_pagination.pageSize, current:@table_pagination.current, onChange:@handlePageChange, getCurrent:@getCurrent}">
+					</ms-pages>
+				</div>
+			</div>
+		</div>
+
+		<!-- 新增 and 编辑角色 !@authority_edit-->
+		<div class="add_edit" :controller='add_edit_cont'>
+			<ms-dialog :widget="{$innerVm:'add_editVm', show:@add_editShow,onCancel:@add_editCancel,className:'jsgl_add_edit_dialog jsgl_common_dialog', onOk:@add_editOk,height:267,width:440,isMove:true}">
+				<div slot="body" ms-skip>
+					<div class="common_input">
+						<label><span class="red_start">*</span>角色名称</label>
+						<div class="xtpzgl-gnqx_input_panel" :class="[(@roleNameTips == 'block' || @name_isNull == 'block')? 'has-error':'']">
+							<input type="text" ms-duplex="@roleName" class="roleName_input" :attr='{title:@roleName}' :keyup="@roleNameEvt" :focus="@focusRoleName('name')"
+							    :blur="@blurRoleName('name')">
+							<span class="fa fa-close jsgl_right_close input_name" :mousedown="@close_click('name')" :if="@jsgl_close_name"></span>
+						</div>
+					</div>
+					<div class="roleNameTips">
+						<span class="roleNameSpan" :class="['jsgl_tip']" :css="{display:@name_display}">
+							<i class="fa fa-exclamation-circle">支持中文、字母、数字</i>
+						</span>
+						<span class="roleNameSpan" :class="['jsgl_null_tip']" :css="{display:@name_isNull}">
+							<i class="fa fa-exclamation-circle">角色名称不能为空</i>
+						</span>
+						<span class="roleNameSpan" :class="['jsgl_null_tip']" :css="{display:@roleNameTips}">
+							<i class="fa fa-exclamation-circle">请输入正确的格式</i>
+						</span>
+					</div>
+					<div class="common_input">
+						<label><span class="red_start">*</span>排序</label>
+						<div class="xtpzgl-gnqx_input_panel"
+							:class="[@orderNo_format ? 'has-error':'', @isAdmin ? '' : 'disableEdit']">
+							<input type="text" ms-duplex="@orderNo" class="orderNo_input" :attr='{title:@orderNo, readonly:!@isAdmin}' :class="[@isAdmin ? '' : 'disableEdit']"
+								:keyup="@roleNameEvt" :focus="@focusRoleName('orderNo')" :blur="@blurRoleName('orderNo')">
+							<span class="fa fa-close jsgl_right_close input_name" :mousedown="@close_click('orderNo')"
+								:if="@orderNo_close"></span>
+						</div>
+					</div>
+					<div class="roleNameTips">
+						<span class="roleNameSpan" :class="[@orderNo_format ? 'jsgl_null_tip' : 'jsgl_tip']" :css="{display:@orderNo_display}">
+							<i class="fa fa-exclamation-circle">排序只能输入小于9999的正整数</i>
+						</span>
+					</div>
+				</div>
+			</ms-dialog>
+		</div>
+
+
+		<!-- 停用角色 -->
+		<div class="deleteRole" :controller='deleteRole_cont'>
+			<ms-dialog :widget="{$innerVm:'deleteRoleVm', show:@deleteRoleShow,okText:'确定',onCancel:@deleteRoleCancel,className:'jsgl_deleteRole_dialog jsgl_common_dialog', onOk:@deleteRoleOk,height:188,width:383,isMove:true}">
+				<div slot="body" ms-skip>
+					<!-- <p>停用该角色将重置拥有该角色用户的权限。</p>
+					<p>确定要停用该角色吗？</p> -->
+					<p>确定停用该角色吗？</p>
+				</div>
+			</ms-dialog>
+		</div>
+
+		<!-- 权限保存成功提示 -->
+		<div class="saveAuthority" :controller='saveAuthority_cont'>
+			<ms-dialog :widget="{$innerVm:'saveAuthorityVm', show:@saveAuthorityShow,className:'authority_dialog common_dialog',onCancel:@saveAuthorityCancel,height:180,width:300,isMove:true}">
+				<div slot="body" ms-skip>
+					保存权限成功!
+				</div>
+				<div slot='footer' class="modal-footer" ms-skip>
+					<a class="btn btn-primary" :click="@saveAuthorityOk">确定</a>
+				</div>
+			</ms-dialog>
+		</div>
+	</div>
+</template>

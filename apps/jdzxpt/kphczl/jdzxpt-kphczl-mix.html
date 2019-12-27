@@ -1,0 +1,47 @@
+<template>
+    <div :class="['jdzxpt-kphczl-ccqk', @loading && 'jdzxpt-kpcczl-for-loading']">
+        <div class="tyywglpt-search-box" :if="@authority.SEARCH">
+            <ms-form :widget="{$form:@$form,inline:true}">
+                <div class="search-box-bottom">
+                    <ms-form-item :widget="{label: '执勤部门'}" :class="'form-item'">
+                        <ms-tree-selecting :widget="{tree:@orgData, showSearch:true, wrapId: 'ccqk-tree-select-1', getSelected:@getSelected, selectedKey:@orgId || '', selectedTitle:@orgName || '', onChange:@handleTreeChange, extraExpandHandle:@extraExpandHandle,branchShow:true,clickBranchBack:@clickBranchBack, includedStatus:@included_status}"></ms-tree-selecting>
+                    </ms-form-item>
+                    <div class="duration-wrap">
+                        <ms-form-item :widget="{label:'时间范围'}" :class="'form-item duration-item'">
+                            <ms-select :widget="{col:'time', value:[@dataJson ? @dataJson.timeMode : 1], onChange:@handleTimeChange}">
+                                <ms-select-option :widget="{value:1}">本周</ms-select-option>
+                                <ms-select-option :widget="{value:2}">本月</ms-select-option>
+                                <ms-select-option :widget="{value:3}">自定义时间</ms-select-option>
+                            </ms-select>
+                        </ms-form-item>
+                        <div :visible="@isDuration" class="duration-container">
+                            <ms-form-item>
+                                <ms-datepicker :widget="{
+                                            col:'beginTime',
+                                            placeholder:'请选择开始日期',
+                                            value: @beginTime,
+                                        }"></ms-datepicker>
+                            </ms-form-item>
+                            <span class="date-line">-</span>
+                            <ms-form-item>
+                                <ms-datepicker :widget="{
+                                            col:'endTime',
+                                            placeholder:'请选择结束日期',
+                                            value: @endTime
+                                        }"></ms-datepicker>
+                            </ms-form-item>
+                        </div>
+                    </div>
+                </div>
+                
+                <button type="button" class="btn btn-query" :click="@query">查询</button>
+            </ms-form>
+        </div>
+        <div class="echart-box" :if="!@loading">
+            <ms-piechart :if="@echartData.length > 0" :for="($index, item) in @echartData" :widget="{data: item}"></ms-piechart>
+        </div>
+        <div class="loading-wrap" :if="@loading">
+            <span class="loading-text">结果加载中</span>
+        </div>
+    </div>
+</template>

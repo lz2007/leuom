@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>player</title>
+    <link href="/node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="/node_modules/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="/node_modules/ane/dist/ane.css" rel="stylesheet" />
+    <script src="/static/mod.js"></script>
+    <!--[if lt IE 9]>
+    <script src="/static/polyfill/html5shiv.js"></script>
+    <script src="/static/polyfill/respond.src.js"></script>
+    <![endif]-->
+</head>
+
+<body :controller="ocxplayer_vm" class="ms-controller" id="ocxplayer">
+    <div class="ocxplayer-video" style="position:relative;" :if="@toggleShow">
+        <div class="video-ocx-wrap">
+            <embed :if="!@isie" id="video-ocx" type="application/npGSVideoPlugin-plugin" name="npGSVideoPlugin" width="100%" height="100%">
+            <object :if="@isie" id="video-ocx" classid="clsid:455791d4-4095-4f70-b2b3-f5c424f25ad9" width="100%" height="100%"></object>
+        </div>
+        <div class="video-tool-wrap">
+            <ul class="video-tool-bar" :visible="@activeVideo !==''">
+                <li class="video-speed">
+                    <span>{{@sszhxt_language.currentRate}}{{@speed}}x</span>
+                </li>
+                <li>
+                    <span class="fa fa-step-backward" :attr="{title:@sszhxt_language.back}" :click="@handleStepPre"></span>
+                </li>
+                <li>
+                    <span class="fa fa-fast-backward" :attr="{title:@sszhxt_language.slowPlay}" :click="@handleSlower"></span>
+                </li>
+                <li>
+                    <span class="fa" :class="@playing ? 'fa-pause' : 'fa-play'" :attr="{ 'title':@playing? @sszhxt_language.pause : @sszhxt_language.play}"
+                        :click="@handlePlay"></span>
+                </li>
+                <li>
+                    <span class="fa fa-stop" :attr="{title:@sszhxt_language.stop}" :click="@handleStop"></span>
+                </li>
+                <li>
+                    <span class="fa fa-fast-forward" :attr="{title:@sszhxt_language.fastPlay}" :click="@handleFaster"></span>
+                </li>
+                <li>
+                    <span class="fa fa-step-forward" :attr="{title:@sszhxt_language.forward}" :click="@handleStepNext"></span>
+                </li>
+            </ul>
+        </div>
+        <div class="deleteBtn">
+            <span class="fa fa-trash-o" :attr="{title:'删除文件'}" :click="@deleteClick"></span>
+        </div>
+    </div>
+    <div class="ocxplayer-video" style="position:relative;" :if="!@toggleShow">
+        <ms-player :widget="{src: @play_url, special_id:'ocxplayer', player_width:@web_width, player_height:@web_height, player_left:@web_left, player_top:@web_top, play_status:@play_status, dialog_status:@dialog_status}"></ms-player>
+        <div class="deleteBtn">
+            <span class="playerDeleteBtnIcon" :attr="{title:'删除文件'}" :click="@deleteClick"></span>
+        </div>
+    </div>
+    <div class="ocxplayer-video-dialog">
+        <ms-dialog :widget="{$innerVm: 'ocxplayerDialog', okText: '确认', cancelText: '取消', className: 'zfyps_dialog_common', show: @dialogShow, onCancel: @dialogCancel, onOk:@dialogOk, isMove:true, width:@dialogWidth, height:@dialogHeight, move_return:@move_return}">
+            <div slot="body" ms-skip>
+                <span :class="">{{@dialogTxt}}</span>
+            </div>
+        </ms-dialog>
+    </div>
+    <iframe id="iframe_zfsyps" src="about:blank" marginheight="0" marginwidth="0" style="display:none; position:absolute; visibility:inherit; top:0;left:0;width:0; height:0;z-index:992;opacity:1;filter:alpha(opacity=0);background: #fff;"
+            frameborder="0"></iframe>
+    <script>
+        require(['./ocxplayer']);
+        document.body.style.height = document.body.style.minHeight = window.document.documentElement.clientHeight + 'px';
+    </script>
+</body>
+
+</html>

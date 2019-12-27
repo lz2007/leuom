@@ -1,0 +1,139 @@
+<template>
+    <div class="tyywglpt-sbzygl-zdsbgl">
+        <a class="return_btn" :click="@returnBtn" :if="@crumbsArr.length > 1"><i class="back_icon"></i>返回</a>
+        <div class="search_box" :if="@authority.SEARCH">
+            <div class="hBox">
+                <div class="dataFormBox" :if="@authority.SEARCH">
+                    <span>所属部门</span>
+                    <div class="dep_tree" :controller="zdsbgl_tree_jjb">
+                        <ms-tree-selecting :widget="{tree: @yspk_data, showSearch: true, wrapId: 'zfyps-tree-select', getSelected: @getSelected, selectedKey: @tree_key ? @tree_key : '', selectedTitle: @tree_title ? @tree_title : '', onChange: @select_change, extraExpandHandle: @extraExpandHandle}"></ms-tree-selecting>
+                    </div>
+                </div>
+                <div class="dataFormBox" :controller="zdsbgl_count_type_jjb">
+                    <span style="margin-right: 10px;">统计对象</span>
+                    <ms-select :widget="{col: 'con', options:@count_type_options, value: @count_type, onChange: @onChangeT}" :class="['formInput']"></ms-select>
+                </div>
+            </div>
+            <div class="zdsbgl_btnClass">
+                <a :if="@authority.SEARCH" class="search_btn" :click="@searchBtn(0)">查询</a>
+            </div>
+        </div>
+        <div :controller="tyywglpt_sbzygl_zdsbgl_table_jjb">
+            <div :class="['sbzygl_zdsbgl_tabCont']" :css="{top:@sbzygl_zdsbgl_tabCont_top}">
+                <div :controller="sbzygl_zdsbgl_table" :class="['table-index']" id="sbzygl_zdsbgl_table">
+                    <div class="table-index-thead-fixed">
+                        <ul class="zdsbgl_table_parent" :css="{paddingRight:@paddingRight}">
+                            <li parent="1" class="col-4">
+                                <span style="visibility: hidden;">序号</span>
+                            </li>
+                            <li parent="2" class="col-20">
+                                <span style="visibility: hidden;">所属部门</span>
+                            </li>
+                            <li parent="3" :class="[@showBeiji ? 'col-6' : 'col-14']">
+                                <span style="visibility: hidden;">人数</span>
+                            </li>
+                            <li parent="4" :class="[@showBeiji ? 'col-70' : 'col-62']">
+                                <span>执法记录仪</span>
+                            </li>
+                        </ul>
+                        <ul class="table-index-thead zdsbgljj_table_son" :css="{paddingRight:@paddingRight}">
+                            <li data-order="1" son="1" class="col-4" style="border-top: none">
+                                <span class="zdsbgljj_table_son_span">序号</span>
+                            </li>
+                            <li data-order="2" son="2" class="col-20">
+                                <span class="zdsbgljj_table_son_span">所属部门</span>
+                            </li>
+                            <li data-order="3" son="3" :class="[@showBeiji ? 'col-6' : 'col-14']">
+                                <span class="zdsbgljj_table_son_span">执法人数</span>
+                            </li>
+                            <li data-order="4" son="4" :class="[@showBeiji ? 'col-8' : 'col-18', 'zdsbgljj_table_down']"> 总台数 </li>
+                            <li data-order="5" son="4" class="col-8 zdsbgljj_table_down"> 正常 </li>
+                            <li data-order="6" son="4" class="col-8 zdsbgljj_table_down"> 维修 </li>
+                            <li data-order="7" son="4" class="col-8 zdsbgljj_table_down"> 停用 </li>
+                            <li data-order="8" son="4" class="col-8 zdsbgljj_table_down"> 注销 </li>
+                            <li data-order="9" son="4" class="col-12 zdsbgljj_table_down" id="zdsbgl-jjb-pfl"> 执法仪配发率
+                                <span class="hint_Pfl" :click="@hint_Pfl">
+                                    <div :if="@hintPfl_flag" class="zdsbgl-hint-content1">
+                                        <div class="zdsbgl-hint-triangle1"></div>
+                                        <div style="text-align: left">执法记录仪配发率=（部门正常使用执法记录仪总数量 / 总执法人数）*100%</div>
+                                    </div>
+                                </span>
+                            </li>
+                            <li data-order="10" son="4" class="col-8 zdsbgljj_table_down" :if="@showBeiji"> 备机数 </li>
+                            <li data-order="11" son="4" class="col-10 zdsbgljj_table_down" :if="@showBeiji"> 备机配备率 
+                                <span class="hint_Pfl" :click="@hint_Pbl">
+                                    <div :if="@hintPbl_flag" class="zdsbgl-hint-content2">
+                                        <div class="zdsbgl-hint-triangle1"></div>
+                                        <div style="text-align: left">备机配备率 = 备机数量 ÷（总台数-备机数量）× 100%</div>
+                                    </div>
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                    <ul class="table-index-tbody">
+                        <li class="list-null" :if="!@data.length && !@loading">暂无数据</li>
+                        <li :for="($index, record) in @data">
+                            <div class="tbody col-4">
+                                <div class="table-cont">{{(@currentPage - 1) * @prePageSize + $index + 1}}</div>
+                            </div>
+                            <div class="tbody col-20">
+                                <div class="table-cont" :click="@searchBtn(1,record)" style="color: #0419dc;cursor: pointer;" :attr="record['orgName'] && (record['orgName'] != '-') ? {rel:'drevil',dep:'dep_switch',fir:'true',tdval:key_dep_switch ? record['orgPath'] : record['orgName']}:''">
+                                    {{record['orgName']}}
+                                </div>
+                            </div>
+                            <div :class="['tbody', @showBeiji ? 'col-6' : 'col-14']">
+                                <div class="table-cont" :attr="record['orgUserTotal'] && (record['orgUserTotal'] != '-') ? {rel:'drevil',tdval:record['orgUserTotal']}:''">
+                                    {{record['orgUserTotal']}}
+                                </div>
+                            </div>
+                            <div :class="['tbody', @showBeiji ? 'col-8' : 'col-18']">
+                                <div class="table-cont" :attr="record['countTotal'] && (record['countTotal'] != '-') ? {rel:'drevil',tdval:record['countTotal']}:''" :click="@gTo(record)" style="color: #0979d0;cursor: pointer;">
+                                    {{record['countTotal']}}
+                                </div>
+                            </div>
+                            <div class="tbody col-8">
+                                <div class="table-cont" :attr="record['normalTotal'] && (record['normalTotal'] != '-') ? {rel:'drevil',tdval:record['normalTotal']}:''" :click="@gTo(record,'normal')" style="color: #0979d0;cursor: pointer;">
+                                    {{record['normalTotal']}}
+                                </div>
+                            </div>
+                            <div class="tbody col-8">
+                                <div class="table-cont" :attr="record['repairTotal'] && (record['repairTotal'] != '-') ? {rel:'drevil',tdval:record['repairTotal']}:''" :click="@gTo(record,'maintenance')" style="color: #0979d0;cursor: pointer;">
+                                    {{record['repairTotal']}}
+                                </div>
+                            </div>
+                            <div class="tbody col-8">
+                                <div class="table-cont" :attr="record['deactiveTotal'] && (record['deactiveTotal'] != '-') ? {rel:'drevil',tdval:record['deactiveTotal']}:''" :click="@gTo(record,'disable')" style="color: #0979d0;cursor: pointer;">
+                                    {{record['deactiveTotal']}}
+                                </div>
+                            </div>
+                            <div class="tbody col-8">
+                                <div class="table-cont" :attr="record['scrapTotal'] && (record['scrapTotal'] != '-') ? {rel:'drevil',tdval:record['scrapTotal']}:''" :click="@gTo(record,'cancellation')" style="color: #0979d0;cursor: pointer;">
+                                    {{record['scrapTotal']}}
+                                </div>
+                            </div>
+                            <div class="tbody col-12">
+                                <div class="table-cont" :attr="record['allotRatio'] && (record['allotRatio'] != '-') ? {rel:'drevil',tdval:record['allotRatio']}:''">
+                                    {{record['allotRatio']}}
+                                </div>
+                            </div>
+                            <div class="tbody col-8" :if="@showBeiji">
+                                <div class="table-cont" :attr="record['standbyMachineTotalNum'] && (record['standbyMachineTotalNum'] != '-') ? {rel:'drevil',tdval:record['standbyMachineTotalNum']}:''">
+                                    {{record['standbyMachineTotalNum']}}
+                                </div>
+                            </div>
+                            <div class="tbody col-10" :if="@showBeiji">
+                                <div class="table-cont" :attr="record['standbyMachineAllotRatio'] && (record['standbyMachineAllotRatio'] != '-') ? {rel:'drevil',tdval:record['standbyMachineAllotRatio']}:''">
+                                    {{record['standbyMachineAllotRatio']}}
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="table-index-loading" :if="@loading">
+                        <span class="loadingSpan">结果加载中</span>
+                    </div>
+                </div>
+            </div>
+            <ms-pages :widget="{total:@total,pageSize:@pageSize,current:@current,onChange:@pageChange,getCurrent:@getCurrent,getPageSize:@getPageSize}"></ms-pages>
+        </div>
+    </div>
+</template>

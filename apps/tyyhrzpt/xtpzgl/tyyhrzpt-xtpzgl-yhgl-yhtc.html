@@ -1,0 +1,354 @@
+<template>
+    <div>
+        <div class="userStep1-total">
+            <div class="userStep1-prompt">
+                <span>基础信息</span>
+            </div>
+            <div :controller="userStep1Vm" class="userStep1-cont">
+                    <!-- :controller="userStep1-left" -->
+                <div class="userStep1-left">
+                    <ms-form :widget="{$form:@$left_form,inline:true}">
+                        <span class="yhgl-spanForm-star">* </span>
+                        <ms-form-item :widget="{label:'姓名：'}">
+                            <ms-input :focus="@yhtc_left_focus('name')" :blur="@yhtc_left_blur('name')" :widget="{col:'name',value:@name_value,isClear:@isClear_name,onChange:@handleChange_name}"></ms-input>
+                        </ms-form-item>
+                        <div class="yhgl-yhtc-prompt">
+                            <span :css="{display:@name_display}">
+                                <span>
+                                    <i :if="@addShow" class="fa fa-times yhtc-left-clear yhtc-nameIsTrue" :mousedown="@handleClear('name')"></i>
+                                </span>
+                                <i class="fa fa-exclamation-circle" :html="@name_html"></i>
+                            </span>
+                            <span :class="['yhtc-isNull']" :css="{display:@name_isNull}">
+                                <span>
+                                    <i class="fa fa-times yhtc-left-clear yhtc-nameIsTrue yhtc-error" :mousedown="@handleClear('name')"></i>
+                                </span>
+                                <i class="">请输入姓名</i>
+                            </span>
+                            <span :class="['yhtc-isNull']" :css="{display:@name_isTrue}">
+                                <span>
+                                    <i class="fa fa-times yhtc-left-clear yhtc-nameIsTrue yhtc-error" :mousedown="@handleClear('name')"></i>
+                                </span>
+                                <i class="" :html="@name_isTrue_html"></i>
+                            </span>
+                        </div>
+                        <span class="yhgl-spanNum-star">* </span>
+                        <ms-form-item :widget="{label:'账号：'}">
+                            <ms-input :focus="@yhtc_right_focus('num')" :blur="@yhtc_right_blur('num')" :widget="{col:'num',value:@num_value,onChange:@handleChange_num,isClear:@isClear_num}"></ms-input>
+                        </ms-form-item>
+                        <div class="yhgl-yhtc-prompt">
+                            <span :css="{display:@num_display}">
+                                <span :if="@addShow">
+                                    <i class="fa fa-times yhtc-right-clear yhtc-numIsTrue" :mousedown="@handleClear('num')"></i>
+                                </span>
+                                <i class="fa fa-exclamation-circle" :html="@num_html"></i>
+                            </span>
+                            <span :class="['yhtc-isNull']" :css="{display:@num_isNull}">
+                                <span>
+                                    <i class="fa fa-times yhtc-right-clear yhtc-numIsTrue yhtc-error" :mousedown="@handleClear('num')"></i>
+                                </span>
+                                <i class="">请输入账号</i>
+                            </span>
+                            <span :class="['yhtc-isNull']" :css="{display:@num_isTrue}">
+                                <span>
+                                    <i class="fa fa-times yhtc-right-clear yhtc-numIsTrue yhtc-error" :mousedown="@handleClear('num')"></i>
+                                </span>
+                                <i class="" :html="@num_isTrue_html"></i>
+                            </span>
+                            <span :class="['yhtc-isNull']" :css="{display:@num_check}">
+                                <span>
+                                    <i class="fa fa-times yhtc-right-clear yhtc-numIsTrue yhtc-error" :mousedown="@handleClear('num')"></i>
+                                </span>
+                                <i class="">该账号已存在</i>
+                            </span>
+                        </div>
+                        <span class="yhgl-spanIdCard-star">* </span>
+                        <ms-form-item :widget="{label:'身份证：'}">
+                            <ms-input :focus="@yhtc_right_focus('idCard')" :blur="@yhtc_right_blur('idCard')" :widget="{col:'idCard',value:@idCard_value,onChange:@handleChange_idCard,isClear:@isClear_idCard}"></ms-input>
+                        </ms-form-item>
+                        <div class="yhgl-yhtc-prompt">
+                            <span :css="{display:@idCard_display}">
+                                <span :if="@addShow">
+                                    <i class="fa fa-times yhtc-right-clear yhtc-idCardIsTrue" :mousedown="@handleClear('idCard')"></i>
+                                </span>
+                                <i class="fa fa-exclamation-circle" :html="@idCard_html"></i>
+                            </span>
+                            <span :class="['yhtc-isNull']" :css="{display:@idCard_isNull}">
+                                <span>
+                                    <i class="fa fa-times yhtc-right-clear yhtc-idCardIsTrue yhtc-error" :mousedown="@handleClear('idCard')"></i>
+                                </span>
+                                <i class="">请输入身份证</i>
+                            </span>
+                            <span :class="['yhtc-isNull']" :css="{display:@idCard_isTrue}">
+                                <span>
+                                    <i class="fa fa-times yhtc-right-clear yhtc-idCardIsTrue yhtc-error" :mousedown="@handleClear('idCard')"></i>
+                                </span>
+                                <i class="">请输入正确的身份证</i>
+                            </span>
+                            <span :class="['yhtc-isNull']" :css="{display:@idCard_check}">
+                                <span>
+                                    <i class="fa fa-times yhtc-right-clear yhtc-idCardIsTrue yhtc-error" :mousedown="@handleClear('idCard')"></i>
+                                </span>
+                                <i class="">该身份证已存在</i>
+                            </span>
+                        </div>
+                        <div :controller="userStep1-role-select" class="userStep1-role-select" :class="@role_isNull ? 'role-select':''">
+                            <label class="control-label">
+                                <span class="yhgl-span-star">* </span>用户角色：</label>
+                            <ms-select :widget="{value:@selValue, options:@options,onChange:@handleChange,disabledSelect:@disabledSelect}"></ms-select>
+                        </div>
+                        <div class="yhgl-yhtc-prompt">
+                            <span :class="['yhtc-isNull']" :if="@role_isNull">
+                                <i class="">请选择用户角色</i>
+                            </span>
+                        </div>
+                        <div class="orgTree" :controller="userStep1-dep-tree">
+                            <label class="control-label">
+                                <span class="yhgl-span-star">* </span>所属部门：</label>
+                            <ms-tree-selecting :widget="{tree:@dataTree, showSearch:true, wrapId: 'tree-select-wrap-yhgl', getSelected:@getSelected,selectedKey:@yhtc_depId,selectedTitle:@yhtc_depName,extraExpandHandle:@extraExpandHandle}"></ms-tree-selecting>
+                            <!-- <ms-tree-select :widget ="{treeData:@dataTree,multiple:false,value:@depName,expandedKeys: @expandedKeys,onChange:@selectfunc} "></ms-tree-select> -->
+                        </div>
+                        <ms-form-item :widget="{label:'邮箱：'}">
+                            <ms-input :focus="@yhtc_right_focus('email')" :blur="@yhtc_right_blur('email')" :widget="{col:'Email',value:@email_value,isClear:@isClear_email,onChange:@handleChange_email}"></ms-input>
+                        </ms-form-item>
+                        <div class="yhgl-yhtc-prompt">
+                            <span :css="{display:@email_display}">
+                                <span>
+                                    <i class="fa fa-times yhtc-right-clear yhtc-emailIsTrue" :mousedown="@handleClear('email')"></i>
+                                </span>
+                                <i class="fa fa-exclamation-circle">支持邮箱格式:xxx@xx.xx</i>
+                            </span>
+                            <span :class="['yhtc-isNull']" :css="{display:@email_isTrue}">
+                                <span>
+                                    <i class="fa fa-times yhtc-right-clear yhtc-emailIsTrue yhtc-error" :mousedown="@handleClear('email')"></i>
+                                </span>
+                                <i class="">请输入正确的邮箱</i>
+                            </span>
+                        </div>
+                        <div :controller="userStep1-dlsbcs-select" class="userStep1-select">
+                            <label class="control-label">
+                                <span class="yhgl-span-star"> </span>登录失败次数：</label>
+                            <ms-select :widget="{value:@selValue,options:@options,onChange:@handleChange}"></ms-select>
+                        </div>
+                        <div :controller="userStep1-loginRadio" class="radioCls">
+                            <label for="" class="control-label">登录控制：</label>
+                            <ms-radio-group :widget="{
+                                options:@options,
+                                value:@value,
+                                onChange:@handleChange
+                            }">
+                            </ms-radio-group>
+                        </div>
+                        <div class="datepicker-cls" id="user_outTime">
+                            <label for="" class="control-label ">允许时间段：</label>
+                            <div class="timepicker-cls">
+                                <ms-timepicker :widget="{value:@startTime_value,onChange:@startTimeHandleChange,placeholder:'请选择有效时间',format:'HH:mm'}"></ms-timepicker>
+                                <span style="margin: 0 5px;">~</span>
+                                <ms-timepicker :widget="{value:@endTime_value,onChange:@endTimeHandleChange,placeholder:'请选择有效时间',format:'HH:mm'}"></ms-timepicker>
+                            </div>
+                        </div>
+                        <div class="yhgl-yhtc-prompt">
+                            <span :class="['yhtc-isNull']" :css="{display:@time_isNull}">
+                                <i class="">请选择有效时间段</i>
+                            </span>
+                        </div>
+                        <!-- <div :controller="userStep1-numRadio" class="radioCls">
+                            <label for="" class="control-label">账户类型：</label>
+                            <ms-radio-group :widget="{
+                                options:[
+                                    { label: '永久用户', value: 'permanent' },
+                                    { label: '临时用户', value: 'temporary' }
+                                ],
+                                value:@num_value,
+                                onChange:@handleChange
+                            }">
+                            </ms-radio-group>
+                        </div> -->
+                        <span class="yhgl-spanValidDate-star">* </span>
+                        <ms-form-item :widget="{label:'账号有效天数：'}">
+                            <ms-input :focus="@yhtc_right_focus('validDate')" :blur="@yhtc_right_blur('validDate')" :widget="{col:'validDate',value:@validDate_value,isClear:@isClear_validDate,onChange:@handleChange_validDate}"></ms-input>
+                        </ms-form-item>
+                        <div class="yhgl-yhtc-prompt">
+                            <span :css="{display:@validDate_display}">
+                                <span>
+                                    <i class="fa fa-times yhtc-right-clear yhtc-validDateIsTrue" :mousedown="@handleClear('validDate')"></i>
+                                </span>
+                                <i class="fa fa-exclamation-circle">支持1~9999天</i>
+                            </span>
+                            <span :class="['yhtc-isNull']" :css="{display:@validDate_isTrue}">
+                                <span>
+                                    <i class="fa fa-times yhtc-right-clear yhtc-validDateIsTrue yhtc-error" :mousedown="@handleClear('validDate')"></i>
+                                </span>
+                                <i class="">请输入正确的天数</i>
+                            </span>
+                        </div>
+                    </ms-form>
+                </div>
+                <!-- :controller="userStep1-right" -->
+                <div class="userStep1-right">
+                    <ms-form :widget="{$form:@$right_form,inline:true}">
+                        <span class="yhgl-span2word-star">* </span>
+                        <ms-form-item :widget="{label:'警号：'}">
+                            <ms-input :focus="@yhtc_left_focus('policeNum')" :blur="@yhtc_left_blur('policeNum')" :widget="{col:'policeNum',value:@policeNum_value,isClear:@isClear_policeNum,onChange:@handleChange_policeNum}"></ms-input>
+                        </ms-form-item>
+                        <div class="yhgl-yhtc-prompt">
+                            <span :css="{display:@policeNum_display}">
+                                <span>
+                                    <i :if="@addShow" class="fa fa-times yhtc-left-clear yhtc-policeNumIsTrue" :mousedown="@handleClear('policeNum')"></i>
+                                </span>
+                                <i class="fa fa-exclamation-circle" :html="@policeNum_html"></i>
+                            </span>
+                            <span :class="['yhtc-isNull']" :css="{display:@policeNum_isNull}">
+                                <i class="">请输入警号</i>
+                            </span>
+                            <span :class="['yhtc-isNull']" :css="{display:@policeNum_isTrue}">
+                                <span>
+                                    <i class="fa fa-times yhtc-left-clear yhtc-policeNumIsTrue yhtc-error" :mousedown="@handleClear('policeNum')"></i>
+                                </span>
+                                <i class="" :html="@policeNum_isTrue_html"></i>
+                            </span>
+                            <span :class="['yhtc-isNull']" :css="{display:@policeNum_check}">
+                                <span>
+                                    <i class="fa fa-times yhtc-left-clear yhtc-policeNumIsTrue yhtc-error" :mousedown="@handleClear('policeNum')"></i>
+                                </span>
+                                <i class="">该警号已存在</i>
+                            </span>
+                        </div>
+                        <div :controller="userStep1-sexRadio" class="radioCls">
+                            <label class="control-label" for="">
+                                <span class="yhgl-span-star">* </span> 性别：</label>
+                            <ms-radio-group :widget="{
+                                options:[
+                                    { label: '男', value: 'male' },
+                                    { label: '女', value: 'female' }
+                                ],
+                                value:@sex_value,
+                                onChange:@handleChange
+                            }">
+                            </ms-radio-group>
+                        </div>
+                        
+                        <!-- <span class="yhgl-spanPsw-star">* </span>
+                        <ms-form-item :widget="{label:'密码：'}">
+                            <ms-input :css="{display: @iptPsw}" :focus="@yhtc_right_focus('psw')" :blur="@yhtc_right_blur('psw')" :widget="{col:'psw',type:'password',value:@psw_value,onChange:@handleChange_psw,isClear:@isClear_psw_edit}"></ms-input>
+                            <ms-input :css="{display: @iptText}" :focus="@yhtc_right_focus('psw')" :blur="@yhtc_right_blur('psw')" :widget="{col:'psw',value:@psw_value,onChange:@handleChange_text,isClear:@isClear_psw}"></ms-input>
+                        </ms-form-item>
+                        <div class="yhgl-yhtc-prompt">
+                            <span :css="{display:@psw_display}">
+                                <span>
+                                    <i class="fa fa-times yhtc-right-clear yhtc-pswIsTrue" :mousedown="@handleClear('psw')"></i>
+                                </span>
+                                <i class="fa fa-exclamation-circle">支持6位及6位以上字符</i>
+                            </span>
+                            <span :class="['yhtc-isNull']" :css="{display:@psw_isTrue}">
+                                <span>
+                                    <i class="fa fa-times yhtc-right-clear yhtc-pswIsTrue yhtc-error" :mousedown="@handleClear('psw')"></i>
+                                </span>
+                                <i class="">请输入6位及6位以上字符的密码</i>
+                            </span>
+                            <span :class="['yhtc-isNull']" :css="{display:@psw_isNull}">
+                                <span>
+                                    <i class="fa fa-times yhtc-right-clear yhtc-pswIsTrue yhtc-error" :mousedown="@handleClear('psw')"></i>
+                                </span>
+                                <i class="">请输入密码</i>
+                            </span>
+                        </div> -->
+                        <!-- <i class="psw-showHide"  title="密码显隐" :click="@pswShowHide"><img src="/static/image/xtpzgl-yhgl/psw-icon.png?__sprite"></i> -->
+                        <div :controller="userStep1-job-select" class="userStep1-right-select" :class="@job_isNull ? ['job-select']:''">
+                            <label class="control-label"><span class="yhgl-span-star">* </span>岗位名称：</label>
+                            <ms-select :widget="{value:@selValue, options:@options,onChange:@handleChange}"></ms-select>
+                        </div>
+                        <div class="yhgl-yhtc-prompt">
+                            <span :class="['yhtc-isNull']" :if="@job_isNull">
+                                <i class="">请选择岗位名称</i>
+                            </span>
+                        </div>
+                        <div :controller="userStep1-policeType-select" class="userStep1-right-select" :class="@policeType_isNull ? ['policeType-select']:''">
+                            <label class="control-label"><span class="yhgl-span-star">* </span>人员类别：</label>
+                            <ms-select :widget="{value:@selValue,options:@options,onChange:@handleChange}"></ms-select>
+                        </div>
+                        <div class="yhgl-yhtc-prompt">
+                            <span :class="['yhtc-isNull']" :if="@policeType_isNull">
+                                <i class="">请选择人员类别</i>
+                            </span>
+                        </div>
+                        <div :controller="userStep1-yhlx-select" class="userStep1-select">
+                            <label class="control-label">
+                                <span class="yhgl-span-star">* </span>用户类型：</label>
+                            <ms-select :widget="{value:@selValue,options:@options,onChange:@handleChange}"></ms-select>
+                        </div>
+                        <ms-form-item :widget="{label:'手机：'}">
+                            <ms-input :focus="@yhtc_left_focus('mPhone')" :blur="@yhtc_left_blur('mPhone')" :widget="{col:'mPhone',value:@mPhone_value,isClear:@isClear_mPhone,onChange:@handleChange_mPhone}"></ms-input>
+                        </ms-form-item>
+                        <div class="yhgl-yhtc-prompt">
+                            <span :css="{display:@mPhone_display}">
+                                <span>
+                                    <i class="fa fa-times yhtc-left-clear yhtc-mPhoneIsTrue" :mousedown="@handleClear('mPhone')"></i>
+                                </span>
+                                <i class="fa fa-exclamation-circle">支持由11位数字组成的手机号</i>
+                            </span>
+                            <span :class="['yhtc-isNull']" :css="{display:@mPhone_isTrue}">
+                                <span>
+                                    <i class="fa fa-times yhtc-left-clear yhtc-mPhoneIsTrue yhtc-error" :mousedown="@handleClear('mPhone')"></i>
+                                </span>
+                                <i class="">请输入正确的手机</i>
+                            </span>
+                        </div>
+                        <div :controller="userStep1-mmyxq-select" class="userStep1-select">
+                            <label class="control-label">
+                                <span class="yhgl-span-star"></span>密码有效期：</label>
+                            <ms-select :widget="{value:@selValue,options:@options,onChange:@handleChange}"></ms-select>
+                        </div>
+                        <div :controller="userStep1-ipControl" class="radioCls">
+                            <label for="" class="control-label">IP控制：</label>
+                            <ms-radio-group :widget="{
+                                options:@options,
+                                value:@value,
+                                onChange:@handleChange
+                            }">
+                            </ms-radio-group>
+                        </div>
+                        <ms-form-item :widget="{label:'IP地址：'}" :class="'ipControl-label'">
+                            <ms-input :focus="@yhtc_left_focus('mIp')" :blur="@yhtc_left_blur('mIp')" :widget="{col:'mIp',value:@mIp_value,isClear:@isClear_mIp,onChange:@handleChange_mIp}"></ms-input>
+                        </ms-form-item>
+                        <div class="yhgl-yhtc-prompt">
+                            <span :css="{display:@mIp_display}">
+                                <span>
+                                    <i class="fa fa-times yhtc-left-clear yhtc-mIpIsTrue" :mousedown="@handleClear('mIp')"></i>
+                                </span>
+                                <i class="fa fa-exclamation-circle hide">请输入正确的IP地址</i>
+                            </span>
+                            <span :class="['yhtc-isNull']" :css="{display:@mIp_isTrue}">
+                                <span>
+                                    <i class="fa fa-times yhtc-left-clear yhtc-mIpIsTrue yhtc-error" :mousedown="@handleClear('mIp')"></i>
+                                </span>
+                                <i class="">请输入正确的IP地址</i>
+                            </span>
+                        </div>
+                        <!-- <div class="datepicker-cls" id="user_outTime-">
+                            <label for="" class="control-label ">有效时间：</label>
+                            <ms-datepicker :widget="{
+                                onChange:@outTimeHandleChange,
+                                placeholder:'请选择有效时间',
+                                value:@outTime_value
+                            }"></ms-datepicker>
+                        </div>
+                        <div class="yhgl-yhtc-prompt">
+                            <span :class="['yhtc-isNull']" :css="{display:@time_isNull}">
+                                <i class="">请选择临时用户的有效时间</i>
+                            </span>
+                        </div> -->
+                    </ms-form>
+                </div>
+            </div>
+        </div>
+        <div class="userStep2-total">
+            <div class="userStep2-bodyTitle">
+                <span>管理范围</span>
+            </div>
+            <div class="userStep2-tree" :controller="userStep2-dep-tree">
+                <ms-tree :widget="{checkable:@checkable,tree:@dataTree,halfCheckable:@halfCheckable,onCheck:@handleCheck, expandedKeys:@expandedKeys,checkedKeys:@checkedKeys,beforeExpand:@beforeExpand} "></ms-tree>
+            </div>
+        </div>
+    </div>
+</template>

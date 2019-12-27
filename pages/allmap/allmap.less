@@ -1,0 +1,263 @@
+@popup-width: 460px;
+@popup-bg-color: #0A1238;
+@close-icon: '../../static/image/theme/sszhxt/mapIcon/close.png';
+@close-button: {
+    background: url('@{close-icon}') no-repeat;
+    width: 20px;
+    height: 20px;
+    right: 30px;
+    top: 20px;
+    opacity: 1;
+};
+@close-button-hover: {
+    width: 20px;
+    height: 20px;
+    right: 30px;
+    top: 20px;
+    background: url('@{close-icon}') no-repeat;
+    opacity: 0.8;
+};
+
+body,
+html,
+#allmap {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    font-family: "微软雅黑";
+
+
+    // ---------------- baidu 样式 start ---------------------
+    .BMap_bubble_content {
+        margin-top: 20px;
+        position: absolute;
+        left: 0;
+        right: 0;
+        background: @popup-bg-color;
+        .popup-title {
+            margin-top: 0px;
+        }
+    }
+    .BMapLabel {
+        max-width: none;
+    }
+    /* 去除百度地图logo */
+    .anchorBL{  
+        display:none;  
+    }
+    // ---------------- baidu 样式 end -----------------------
+
+    // ---------------- maplite 样式 start -------------------
+    .info-window-container {
+        top: -278px !important;
+        width: @popup-width !important;
+        .info-window-box {
+            border: none;
+            box-shadow: none;
+            border-radius: 0;
+            background-color: @popup-bg-color;
+            width: 100% !important;
+            .info-window-content{
+                padding: 0;
+                overflow: auto !important;
+                width: 100% !important;
+                height: auto !important;
+                .popup-title {
+                    margin-top: 0px;
+                }
+            }
+        }
+        .info-window-cusp {
+            background-image: none;
+            position: absolute;
+            border-left: 0px solid transparent;
+            border-right: 51px solid transparent;
+            border-top: 31px solid @popup-bg-color;
+            padding-top: 1px;
+        }
+        .info-window-close {
+            @close-button();
+        }
+        .info-window-close-cover {
+            @close-button-hover();
+        }
+    }
+    // ---------------- maplite 样式 end ---------------------
+
+    // ---------------- minemap 样式 start -------------------
+    .minemap-popup{
+        width: @popup-width;
+        .minemap-ctrl-logo {
+            display: none;
+        }
+        .minemap-popup-content {
+            padding: 0;
+            background: @popup-bg-color;
+            h5.measure-length {
+                color: #fff;
+                margin: 0;
+                margin-right: 44px;
+            }
+            .popup-title {
+                margin-top: 0px;
+            }
+        }
+        // 关闭按钮样式
+        .minemap-popup-close-button {
+            @close-button();
+        }
+        .minemap-popup-close-button:hover {
+            @close-button-hover();
+        }
+    }
+    // title 样式
+    .popup-title {
+        color: #fff;
+        line-height: 50px;
+        height: 50px;
+        border-bottom: 1px solid #ffffff;
+        margin: -20px 0 20px 0;
+    }
+    // 角标样式
+    .minemap-popup-anchor-top .minemap-popup-tip ,
+    .minemap-popup-anchor-top-right .minemap-popup-tip ,
+    .minemap-popup-anchor-top-left .minemap-popup-tip {
+        border-bottom-color: @popup-bg-color;
+    }
+    .minemap-popup-anchor-bottom .minemap-popup-tip,
+    .minemap-popup-anchor-bottom-right .minemap-popup-tip,
+    .minemap-popup-anchor-bottom-left .minemap-popup-tip {
+        border-top-color: @popup-bg-color;
+    }
+    // ---------------- minemap 样式 end -------------------
+
+    // ---------------- PGIS 样式 start --------------------
+    .leaflet-popup-content-wrapper, 
+    .leaflet-popup-tip {
+        background: @popup-bg-color;
+        width: 460px;
+        box-shadow: 0 3px 14px rgba(0,0,0,0.4);
+    }
+    .EzServerClient-Title{
+        width:82px;
+        margin-left:-5px;
+    }
+    // ---------------- PGIS 样式 end ----------------------
+    
+    // ---------------- ol 样式 end ------------------------
+    .ol-mouse-position {
+        right: 40px;
+        font-weight: 600;
+    }
+    .ol-zoom-extent {
+        display: none;
+    }
+    // 定位控件样式
+    #ol-locate {
+        position: absolute;
+        top: 40px;
+        right: 7px;
+    }
+    // 弹窗样式
+    .ol-popup {
+        position: absolute;
+        background-color: @popup-bg-color;
+        bottom: 12px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    // title 样式
+    .popup-title {
+        color: #fff;
+        line-height: 50px;
+        height: 50px;
+        border-bottom: 1px solid #ffffff;
+        margin: -20px 0 20px 0;
+        padding: 0 30px;
+    }
+    .ol-popup:after, .ol-popup:before {
+        top: 100%;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+    }
+    .ol-popup:after {
+        border-top-color: @popup-bg-color;
+        border-width: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .ol-popup-content {
+        position: relative;
+        min-width: 460px;
+        height: 100%;
+        min-height: 250px;
+        white-space: normal;        
+        background-color: @popup-bg-color;
+    }
+    .ol-popup-closer {
+        background: url('../../static/image/theme/sszhxt/mapIcon/close.png?__sprite') no-repeat;
+        width: 20px;
+        height: 20px;
+        right: 30px;
+        top: -6px;
+        opacity: 1;
+        z-index: 10;
+        position: absolute;
+    }
+    a.ol-popup-closer:hover{
+        background: url('../../static/image/theme/sszhxt/mapIcon/close.png?__sprite') no-repeat;
+        opacity: 0.8;
+    }
+    .infowindowcontainer {
+        padding: 0 30px 30px;
+    }
+
+    // 测距tooltips样式
+    .tooltip {
+        position: relative;
+        background: rgba(0, 0, 0, 0.5);
+        border-radius: 4px;
+        color: white;
+        padding: 4px 8px;
+        opacity: 0.7;
+        white-space: nowrap;
+      }
+    .tooltip-measure {
+        opacity: 1;
+        font-weight: bold;
+    }
+    .tooltip-static {
+        background-color: #009BFF;
+        color: white;
+        border: 1px solid white;
+    }
+    .tooltip-measure:before,
+    .tooltip-static:before {
+        border-top: 6px solid rgba(0, 0, 0, 0.5);
+        border-right: 6px solid transparent;
+        border-left: 6px solid transparent;
+        content: "";
+        position: absolute;
+        bottom: -6px;
+        margin-left: -7px;
+        left: 50%;
+    }
+    .tooltip-static:before {
+        border-top-color: #009BFF;
+    }
+    // 初始化定位按钮样式
+    .ol-attribution.ol-uncollapsible {
+        bottom: 10px;
+        right: 30px;
+        height: 1.1em;
+        line-height: 1.1em;
+    }
+    // ---------------- ol 样式 end ------------------------
+    
+}

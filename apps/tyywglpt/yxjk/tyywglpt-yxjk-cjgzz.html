@@ -1,0 +1,80 @@
+<template>
+    <div class="tyywglpt-yxjk-cjgzz">
+        <div class="org-tree" :controller="cjgzzOrgTree">
+            <ms-orgtree-control :widget="{tree:@cjgzzOrgData, selectedKey:@cjgzzOrgId, selectedTitle:@cjgzzOrgName, wrapId:'cjgzz-orgTree', getSelected:@getSelected}"></ms-orgtree-control>
+        </div>
+        <div class="cjgzz-list">
+            <div class="list-title">
+                <span :attr="{title: @cjgzzOrgTreeVm.cjgzzOrgName}">{{@cjgzzOrgTreeVm.cjgzzOrgName}}</span>
+            </div>
+            <div class="list-content">
+                <div class="list-content-loading" :if="@listLoading">
+                    <span>加载中...</span>
+                </div>
+                <div class="list-content-none" :if="@infoList.length == 0">暂无采集工作站</div>
+                <ul>
+                    <li ms-for="el in @infoList" class="list-li" :css="{'height':@versionSelection?230:200}">
+                        <div :class="[@el.online ? '' : 'offline']" class="background-color">
+                            <div class="info-title">
+                                <span :attr="{title:@el.wsName}">{{@el.wsName}}</span>
+                            </div>
+                            <div style="width:100%; height:30px; float:left;">
+                                <label class="list-label-title">CPU使用率：</label>
+                                <div class="list-label-panel">
+                                    <label class="list-label">{{@el.cpu | checkNull}}</label>
+                                </div>
+                            </div>
+                            <div style="width:100%; height:30px; float:left;">
+                                <label class="list-label-title">内存占用率：</label>
+                                <div class="list-label-panel">
+                                    <label class="list-label">{{@el.memory | checkNull}}</label>
+                                </div>
+                            </div>
+                            <div style="width:100%; height:30px; float:left;">
+                                <label class="list-label-title">存储容量：</label>
+                                <div class="SC-total">
+                                    <div class="SC-used" :css="{'width':@el.SCRate}"></div>
+                                    <span class="SC-used-txt">{{@el.used}}</span>
+                                </div>
+                                <div class="list-label-panel fixWidth">
+                                    <label data-toggle='popover' class="list-label" :attr="{title:@el.total}">{{@el.total}}</label>
+                                </div>
+                            </div>
+                            <div style="width:100%; height:30px; float:left;">
+                                <label class="list-label-title">IP地址：</label>
+                                <div class="list-label-panel">
+                                    <label class="list-label">{{@el.ip | checkNull}}</label>
+                                </div>
+                            </div>
+                            <div style="width:100%; height:30px; float:left;" :visible="@versionSelection">
+                                <label class="list-label-title">文件数量：</label>
+                                <div class="list-label-panel">
+                                    <label class="list-label">{{@el.fileCounter | checkNull}}</label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+        <div class="cjgzz-statistics">
+            <div class="statistics-title">
+                <span :attr="{title: '工作站实时统计'}">工作站实时统计</span>
+            </div>
+            <div class="statistics-content">
+                <div class="online-rate">
+                    <ms-pie :widget="{pieObject:@onlineRatePie, pieChangeData:@pieChangeData}"></ms-pie>
+                </div>
+                <div class="use-rate">
+                    <ms-pie :widget="{pieObject:@useRatePie, pieChangeData:@pieChangeData}"></ms-pie>
+                </div>
+                <div class="growth-curve">
+                    <ms-line :widget="{lineObject:@growthCurveLine, lineChangeData:@lineChangeData}"></ms-line>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</template>

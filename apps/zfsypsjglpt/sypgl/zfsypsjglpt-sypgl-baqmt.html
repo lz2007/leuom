@@ -1,0 +1,205 @@
+<template>
+    <div class="zfsypsjglpt_sypgl_baqmt">
+        <div class="search_box" :if="@opt_baqmt.authority.SEARCH">
+            <div class="hBox" style="padding-top:10px;">
+                <div class="dataFormBox dataTreeBox">
+                    <span>{{zfsypsjglpt.centerHandlingCase}}</span>
+                    <ms-select
+                        :widget="{col: 'filejj_logo', options:@mediaSources, displayValue:'暂无办案中心', value: @mediaSelect, onChange: @onChangeS}"
+                        :class="['formInput']"></ms-select>
+                </div>
+                <div class="dataFormBox">
+                    <span class="span_large">{{zfsypsjglpt.involvedPensonnel}}</span>
+                    <div class="zfyps_input_panel">
+                        <input type="text" ms-duplex="@police_check" class="form-control-input policeId"
+                            :keyup="@name_input_enter" :attr="{title: @search_policeId_title}" placeholder="支持姓名查询"
+                            :focus="@input_focus('policeId')" :blur="@input_blur('policeId')">
+                        <span class="fa fa-close zfyps_right_close" :mousedown="@close_click('policeId')"
+                            :if="@zfyps_close_policeId"></span>
+                    </div>
+                </div>
+                <a class="common_search_btn" :if="@opt_baqmt.authority.SEARCH" :click="@searchBtn">{{zfsypsjglpt.query}}</a>
+            </div>
+
+            <div class="hBox" style="padding-top:6px;">
+                <div class="dataFormBox" :controller="filejj_logo">
+                    <span>{{zfsypsjglpt.keyTag}}</span>
+                    <ms-select
+                        :widget="{col: 'filejj_logo', options:@file_options, value: @file_type, onChange: @onChangeF}"
+                        :class="['formInput']"></ms-select>
+                </div>
+                <div class="dataRadioBox" :controller="baqmt_time_range">
+                    <!-- <span class="span_large">拍摄时间</span> -->
+                    <ms-select
+                        :widget="{col: 'con', options:@time_range_arr, value: @timeTypeSelect, onChange: @onChangeL}"
+                        :class="['formInput','timeTypeSelect']"></ms-select>
+                    <ms-time-datepicker
+                        :widget="{currentSelect: @currentSelect, timeCallback: @timeCallback, initTime:@initTime}">
+                    </ms-time-datepicker>
+                </div>
+            </div>
+
+        </div>
+        <div class="tableType">
+            <a class="tableStatus_btn view" title="图表模式" :click="@tableStatusBtn"
+                :class="[!@table_status_flag ? 'tableStatus_btn_active' : '']">
+                <span></span>
+            </a>
+            <a class="tableStatus_btn list" title="列表模式" :click="@tableStatusBtn"
+                :class="[@table_status_flag ? 'tableStatus_btn_active' : '']">
+                <span></span>
+            </a>
+        </div>
+
+        <div class="zfsypsjglpt_sypgl_baqmt_list" :visible="@table_status_flag">
+            <ul class="baqmt_list_ul">
+                <div class="baqmt_loading" :if="@list_loading">
+                    <span class="loadingSpan">{{zfsypsjglpt.loading}}</span>
+                </div>
+                <li class="list-null" :if="!@list_loading && !@baqmtListData.length">{{zfsypsjglpt.noRecords}}</li>
+                <li :for="record in @baqmtListData" :click="@list_click(record)" :class="['baqmt_list_li']">
+                    <div class="list_num">{{@record.index}}</div>
+                    <div class="list_img">
+                        <img class="screenshot" :visible="@record.type == '视频'" :attr="{src: @record.screenshot_small}"
+                            onerror="javascript:this.src='/static/image/zfsypsjglpt/video_abnormal_small.png';" />
+                        <img class="screenshot" :visible="@record.type == '音频'" :attr="{src: @record.screenshot_small}"
+                            onerror="javascript:this.src='/static/image/zfsypsjglpt/audio_abnormal_small.png';" />
+                        <img class="screenshot" :visible="@record.type == '图片'" :attr="{src: @record.screenshot_small}"
+                            onerror="javascript:this.src='/static/image/zfsypsjglpt/image_abnormal_small.png';" />
+                        <a class="delete_btn" title="删除" :click="@delete_click(record)"
+                            :if="@opt_baqmt.authority.DELETE"></a>
+                    </div>
+                    <div class="list_panel">
+                        <span class="fileName" :attr="{'data-toggle':'tooltip'}">{{@record.fileName}}</span>
+                        <div class="list_left">
+                            <label>{{zfsypsjglpt.centerHandlingCase}}：</label>
+                            <div class="list_li_content">
+                                <label class="list_content"
+                                    :attr="{'data-toggle':'tooltip'}">{{@record.baqName}}</label>
+                            </div>
+                            <label>{{zfsypsjglpt.involvedPensonnel}}：</label>
+                            <div class="list_li_content">
+                                <label class="list_content"
+                                    :attr="{'data-toggle':'tooltip'}">{{@record.involvedPerson}}</label>
+                            </div>
+                            <label>{{zfsypsjglpt.videoAudioType}}：</label>
+                            <div class="list_li_content">
+                                <label class="list_content"
+                                    :attr="{'data-toggle':'tooltip'}">{{@record.type}}</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="list_panel list_right">
+                        <label :visible="!@record.isPicture">{{zfsypsjglpt.filmingDuration}}：</label>
+                        <div class="list_li_content" :visible="!@record.isPicture">
+                            <label class="list_content" :attr="{'data-toggle':'tooltip'}">{{@record.duration}}</label>
+                        </div>
+                        <label :visible="@record.isPicture">{{zfsypsjglpt.imageSize}}：</label>
+                        <div class="list_li_content" :visible="@record.isPicture">
+                            <label class="list_content" :attr="{'data-toggle':'tooltip'}">{{@record.size}}</label>
+                        </div>
+                        <label>{{zfsypsjglpt.takenDateandTime}}：</label>
+                        <div class="list_li_content">
+                            <label class="list_content" :attr="{'data-toggle':'tooltip'}">{{@record.captureTime}}</label>
+                        </div>
+                        <label>{{zfsypsjglpt.importTime}}：</label>
+                        <div class="list_li_content">
+                            <label class="list_content" :attr="{'data-toggle':'tooltip'}">{{@record.importTime}}</label>
+                        </div>
+                    </div>
+                    <div class="list_flag">
+                        <div class="ywgl" :visible="@record.is_rel">
+                            <span></span>
+                            {{zfsypsjglpt.businessAssociation}}
+                        </div>
+                        <div class="bzwj" :visible="@record.is_tag">
+                            <span></span>
+                            {{zfsypsjglpt.AnnotationsFile}}
+                        </div>
+                        <div class="zfybj" :visible="@record.is_imp">
+                            <span></span>
+                            {{zfsypsjglpt.zfyMarking}}
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="zfsypsjglpt_sypgl_baqmt_chart" :visible="!@table_status_flag">
+            <ul class="baqmt_chart_ul">
+                <div class="baqmt_loading" :if="@list_loading">
+                    <span class="loadingSpan">{{zfsypsjglpt.loading}}</span>
+                </div>
+                <li class="list-null" :if="!@list_loading && !@baqmtListData.length">{{zfsypsjglpt.noRecords}}</li>
+                <li :for="record in @baqmtListData" :click="@list_click(record)" :class="['baqmt_chart_li']">
+                    <div class="img_panel">
+                        <div class="chart_num">{{@record.index}}</div>
+                        <div class="chart_img">
+                            <img class="screenshot" :visible="@record.type == '视频'"
+                                :attr="{src: @record.screenshot_big}"
+                                onerror="javascript:this.src='/static/image/zfsypsjglpt/video_abnormal_big.png';" />
+                            <img class="screenshot" :visible="@record.type == '音频'"
+                                :attr="{src: @record.screenshot_big}"
+                                onerror="javascript:this.src='/static/image/zfsypsjglpt/audio_abnormal_big.png';" />
+                            <img class="screenshot" :visible="@record.type == '图片'"
+                                :attr="{src: @record.screenshot_big}"
+                                onerror="javascript:this.src='/static/image/zfsypsjglpt/image_abnormal_big.png';" />
+                            <a class="chart_delete" title="删除" :click="@delete_click(record)"
+                                :if="@opt_baqmt.authority.DELETE">
+                                <img src="/static/image/zfsypsjglpt/delete_icon.png"></a>
+                        </div>
+                    </div>
+                    <div class="chart_panel">
+                        <span class="fileName" :attr="{'data-toggle':'tooltip'}">{{@record.fileName}}</span>
+                        <label>{{zfsypsjglpt.centerHandlingCase}}：</label>
+                        <div class="chart_li_content">
+                            <label class="chart_content" :attr="{'data-toggle':'tooltip'}">{{@record.baqName}}</label>
+                        </div>
+                        <label>{{zfsypsjglpt.takenDateandTime}}：</label>
+                        <div class="chart_li_content">
+                            <label class="chart_content" :attr="{'data-toggle':'tooltip'}">{{@record.captureTime}}</label>
+                        </div>
+                        <label>{{zfsypsjglpt.importTime}}：</label>
+                        <div class="chart_li_content">
+                            <label class="chart_content"
+                                :attr="{'data-toggle':'tooltip'}">{{@record.importTime}}</label>
+                        </div>
+                        <label>{{zfsypsjglpt.involvedPensonnel}}：</label>
+                        <div class="chart_li_content">
+                            <label class="chart_content" :attr="{'data-toggle':'tooltip'}">{{@record.involvedPerson}}</label>
+                        </div>
+                    </div>
+                    <div class="chart_flag">
+                        <div class="icon ywgl" :visible="@record.is_rel">
+                            <img src="/static/image/zfsypsjglpt/ywgl.png" title="业务关联">
+                        </div>
+                        <div class="icon bzwj" :visible="@record.is_tag">
+                            <img src="/static/image/zfsypsjglpt/bzwj.png" title="标注信息">
+                        </div>
+                        <div class="icon zfybj" :visible="@record.is_imp">
+                            <img src="/static/image/zfsypsjglpt/zfybj.png" title="执法仪标记">
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="yspk_page">
+            <ms-pages
+                :widget="{total:@table_pagination.total, pageSize:@table_pagination.pageSize, current:@table_pagination.current, onChange:@handlePageChange, getCurrent:@getCurrent, overLimit:@page_type}">
+            </ms-pages>
+        </div>
+
+        <!--zfyps公共弹窗-->
+        <div class="zfypsjj_common_dialog">
+            <ms-dialog
+                :widget="{$innerVm: 'zfypsjj_common_dialog', okText: '确认', cancelText: @cancelText, className: 'zfyps_dialog_common', show: @zfyps_dialog_show, onCancel: @dialogCancel, onOk:@dialogOk, isMove:true, width:@zfyps_dialog_width, height:@zfyps_dialog_height}">
+                <div slot="body" ms-skip>
+                    <!-- <iframe id="iframe_zfyps" src="about:blank" frameBorder="0" marginHeight="0" marginWidth="0" style="position:absolute; visibility:inherit; top:-53px;left:0px;width:100%; height:218px;z-index:-1; filter:alpha(opacity=0);"></iframe> -->
+                    <span :class="[@txt_rows ? 'rows_most' : 'rows_single']">{{@dialog_txt}}</span>
+                </div>
+            </ms-dialog>
+        </div>
+
+    </div>
+</template>

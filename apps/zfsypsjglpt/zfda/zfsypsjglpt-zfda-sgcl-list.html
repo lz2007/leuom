@@ -1,0 +1,89 @@
+<template>
+    <div class="zfda-sgcl-list">
+
+        <div :class="['ajgl-tabCont']">
+            <div :controller="zfdn-sgcl-table2" :class="['table-index']" id="zfdn-sgcl-table">
+                <div class="table-index-thead-fixed">
+
+                    <ul class="table-index-thead" :css="{paddingRight:@paddingRight}">
+                        <li data-order='1' class="col-5">{{@zfda.tableNo}}</li>
+                        <li data-order='2' class="col-14">{{@zfda.dutyDepartment}}</li>
+                        <li data-order='3' class="col-13">{{@zfda.police}}</li>
+                        <li data-order='4' class="col-14">{{@zfda.accidentNumber}}</li>
+                        <li data-order='5' class="col-14">{{@zfda.accidentTime}}</li>
+                        <li data-order='6' class="col-14">{{@zfda.accidentPlace}}</li>
+                        <li data-order='7' class="col-9">{{@zfda.processingTime}}</li>
+                        <li data-order='8' class="col-7">{{@zfda.drivingLicenceNumber}}</li>
+                        <li data-order='9' class="col-5">{{@zfda.relatedMedia}}</li>
+                        <li data-order='10' class="col-5">{{@zfda.tableOperation}}</li>
+                    </ul>
+                </div>
+                <ul class="table-index-tbody">
+                    <li :if="!@loading && !@data.length" class="list-null">{{@zfda.noRecords}}</li>
+
+                    <li :for="($index, record) in @data">
+                        <div class="tbody col-5">
+                            <div class="table-cont">{{(current-1)*pageSize+$index+1}}</div>
+                        </div>
+                        <div class="tbody col-14">
+                            <div class="table-cont" :attr="record['orgName'] && (record['orgName'] != '-') ? {rel:'drevil',dep:'dep_switch',fir:'true',tdval:key_dep_switch ? record['orgCode'] : record['orgName']}:''">
+                                {{record['orgName'] | nullFilter}}
+                            </div>
+                        </div>
+                        <div class="tbody col-13">
+                            <div class="table-cont" :attr="record['userCode'] && (record['userCode'] != '-') ? {rel:'drevil',tdval:(record['userName']+'('+record['userCode']+')')}:''">
+                                {{record['userName'] | nullFilter}} ({{record['userCode'] | nullFilter}})
+                            </div>
+                        </div>
+                        <div class="tbody col-14">
+                            <div class="table-cont" :attr="record['sgbh'] && (record['sgbh'] != '-') ? {rel:'drevil',tdval:record['sgbh']}:''">
+                                {{record['sgbh'] | nullFilter}}
+                            </div>
+                        </div>
+                        <div class="tbody col-14">
+                            <div class="table-cont" :attr="record['sgfssj'] && (record['sgfssj'] != '-') ? {rel:'drevil',tdval:record['sgfssj']}:''">
+                                {{record['sgfssj'] | nullFilter}}
+                            </div>
+                        </div>
+                        <div class="tbody col-14">
+                            <div class="table-cont" :attr="record['sgdd'] && (record['sgdd'] != '-') ? {rel:'drevil',tdval:record['sgdd']}:''">
+                                {{record['sgdd'] | nullFilter}}
+                            </div>
+                        </div>
+                        <div class="tbody col-9">
+                            <div class="table-cont" :attr="record['clsj'] && (record['clsj'] != '-') ? {rel:'drevil',tdval:record['clsj']}:''">
+                                {{record['clsj'] | nullFilter}}
+                            </div>
+                        </div>
+                        <div class="tbody col-7">
+                            <div class="table-cont" :attr="record['hphm'] && (record['hphm'] != '-') ? {rel:'drevil',tdval:record['hphm']}:''">
+                                {{record['hphm'] | nullFilter}}
+                            </div>
+                        </div>
+                        <div class="tbody col-5">
+                            <div class="table-cont">
+                                <!-- {{record['relStatus']?'已关联':'未关联'}} -->
+                                <span :if="@record['relStatus']" class="relationTure">{{@zfda.associated}}</span>
+                                <span :if="!@record['relStatus']" class="relationFalse">{{@zfda.unrelated}}</span>
+                            </div>
+                        </div>
+                        <div class="tbody col-5">
+                            <div class="table-cont">
+                                <span>
+                                    <a class="checkLook" :click="@handle('sgcl',record)"><img src="/static/image/zfda-ajgl-ck/check.png"></a>
+                                </span>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="table-index-loading" :if="@loading">
+                    <span class="loadingSpan">{{@zfda.loading}}</span>
+                </div>
+                <!-- <div :if="(!@loading && !@data.length)" class="noData">暂无数据</div> -->
+
+
+            </div>
+        </div>
+    </div>
+
+</template>

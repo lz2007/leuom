@@ -1,0 +1,23 @@
+<template>
+	<div class="pie-panel">
+		<span class="pie-title">{{@pieObject.pieTitle}}</span>
+		<div class="echart-class"></div>
+		<div class="explain-content">
+			<div class="info-panel" style="margin-bottom: 10px;">
+				<i class="total-color" :css="{'background-color':@pieObject.topColor}"></i>
+				<span class="title-class">{{@pieObject.topLabel}}</span>
+				<br>
+				<span class="content-class" :attr="{title:@pieObject.topTotal+@pieObject.unit}">{{@pieObject.topTotal | numFilter}}</span>
+				<span class="unit-class">{{@pieObject.unit}}</span>
+			</div>
+			<div class="info-panel">
+				<i class="total-color" :css="{'background-color':@pieObject.bottomColor}"></i>
+				<span class="title-class">{{@pieObject.bottomLabel}}</span>
+				<br>
+				<span class="content-class" :attr="{title:@pieObject.unitBackup ? @pieObject.bottomTotal+@pieObject.unitBackup : @pieObject.bottomTotal+@pieObject.unit}">
+					{{@pieObject.bottomTotal | numFilter}}</span>
+				<span class="unit-class">{{@pieObject.unitBackup ? @pieObject.unitBackup : @pieObject.unit}}</span>
+			</div>
+		</div>
+	</div>
+</template>

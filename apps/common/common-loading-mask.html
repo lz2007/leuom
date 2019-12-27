@@ -1,0 +1,5 @@
+<template>
+    <div :if="@loading" :class="['loading-mask', @loadingClass]" :css="@loadingStyle">
+        <span class="loading-text">{{@text}}</span>
+    </div>
+</template>

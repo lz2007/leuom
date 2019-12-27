@@ -1,0 +1,262 @@
+@import "../common-theme/common-variable.less";
+@import "../common-theme/common-images-sty.less";
+.common-layout {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: #151c40;
+    .layout-header {
+        height: 100px;
+        width: 100%;
+        background: url("/static/image/theme/header/header-bg.png?__sprite") no-repeat;
+        line-height: 100px;
+        .logo {
+            float: left;
+            margin-left: 40px;
+            line-height: inherit;
+            h4 {
+                display: inline-block;
+                margin-left: 16px;
+                color: #fff;
+                font-size: 30px;
+                vertical-align: middle;
+            }
+        }
+        .nav {
+            position: absolute;
+            right: 184px;
+            white-space: nowrap;
+            ul>li {
+                width: 120px;
+                height: 100px;
+                color: @txt-primary-color;
+                position: relative;
+                float: left;
+                list-style: none;
+                &:hover {
+                    cursor: pointer;
+                }
+                h4 {
+                    position: absolute;
+                    bottom: 20px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    margin: 0;
+                }
+            }
+        }
+        .user-info {
+            float: right;
+            position: relative;
+            >span {
+                position: absolute;
+                left: 70px;
+                display: inline-block;
+                color: @txt-primary-color;
+                font-size: 16px;
+                cursor: pointer;
+                width: 84px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+            .user-drop-down {
+                width: 152px;
+                position: absolute;
+                top: 100px;
+                right: 0;
+                z-index: 1050;
+                background: @deepBlue-color;
+                .white-line {
+                    width: 76px;
+                    background: #fff;
+                    height: 2px;
+                    margin: 0 auto;
+                    margin-bottom: 10px;
+                }
+                ul {
+                    >li {
+                        height: 40px;
+                        line-height: 40px;
+                        text-align: center;
+                        color: @txt-primary-color;
+                        font-size: 18px;
+                        cursor: pointer;
+                        list-style: none;
+                        &:hover {
+                            background: @primary-color;
+                            color: @txt-active-color;
+                        }
+                    }
+                    .tip {
+                        display: none;
+                        position: absolute;
+                        width: 8px;
+                        height: 8px;
+                        top: 20px;
+                        right: 32px;
+                        background: #f00;
+                        border-radius: 50%;
+                    }
+                }
+            }
+        }
+    }
+    .layout-sider {
+        position: absolute;
+        top: 120px;
+        left: 20px;
+        width: 170px;
+        bottom: 20px;
+        .toPrev {
+            width: 100%;
+            height: 18px;
+            display: inline-block;
+            margin-top: 4px;
+            position: absolute;
+            top: -23px;
+            left: 0;
+            cursor: pointer;
+            .toSiderPrev;
+        }
+        .toNext {
+            width: 100%;
+            height: 18px;
+            display: inline-block;
+            cursor: pointer;
+            margin-bottom: 4px;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            .toSiderNext;
+        }
+        .sider-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 170px;
+            bottom: 50px;
+            background: -webkit-linear-gradient(#203b6d, #151c40);
+            background: -o-linear-gradient(#203b6d, #151c40);
+            background: -moz-linear-gradient(#203b6d, #151c40);
+            background: linear-gradient(#203b6d, #151c40);
+            overflow: hidden;
+            ul {
+                position: relative;
+                >li {
+                    width: 170px;
+                    height: 111px;
+                    position: relative;
+                    border-bottom: 1px solid #151c40;
+                    cursor: pointer;
+                    >h4 {
+                        margin: 0;
+                        position: absolute;
+                        bottom: 20px;
+                        text-align: center;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        font-size: 20px;
+                        white-space: nowrap;
+                    }
+                }
+            }
+        }
+    }
+    .layout-container {
+        position: absolute;
+        top: 120px;
+        bottom: 20px;
+        left: 210px;
+        right: 20px;
+        .tree-level-nav {
+            width: 100%;
+            height: 50px;
+            background-color: @common-bg-deep-color;
+            margin-bottom: 10px;
+            >ul {
+                li {
+                    &.active-tag {
+                        background-color: @primary-color;
+                        color: @txt-active-color;
+                        i.drop-icon {
+                            background: url("/static/image/theme/default/drop-down-selected.png?__sprite") no-repeat;
+                        }
+                    }
+                }
+                >li {
+                    display: inline-block;
+                    padding: 0 40px;
+                    height: 50px;
+                    line-height: 50px;
+                    background-color: @common-bg-light-color;
+                    color: @lightBlue-color;
+                    font-size: 20px;
+                    cursor: pointer;
+                    float: left;
+                    position: relative;
+                    i.drop-icon {
+                        display: inline-block;
+                        width: 13px;
+                        height: 7px;
+                        margin-left: 20px;
+                        padding-top: 10px;
+                        background: url("/static/image/theme/default/drop-down.png?__sprite") no-repeat;
+                    }
+                    &.treeLevelNavLi:hover {
+                        background-color: @primary-color;
+                        color: @txt-active-color;
+                        .treeLevelNavChildUl {
+                            display: block;
+                        }
+                        i.drop-icon {
+                            background: url("/static/image/theme/default/drop-up.png?__sprite") no-repeat;
+                        }
+                    }
+                    .treeLevelNavChildUl {
+                        position: absolute;
+                        top: 50px;
+                        left: 0;
+                        right: 0;
+                        z-index: 100;
+                        text-align: center;
+                        background: #1c2551;
+                        color: @lightBlue-color;
+                        display: none;
+                        >li {
+                            &:hover {
+                                background-color: @primary-color;
+                                color: @txt-active-color;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .active-item {
+        color: @txt-active-color;
+        background: @primary-color;
+    }
+    .active-txt {
+        color: @txt-active-color;
+    }
+}
+
+.modal-footer {
+    border-top: 0px;
+}
+
+.modal-header {
+    background: #006CB7;
+    height: 50px;
+    line-height: 50px;
+}
+
+input::-ms-clear,
+[type=text]::-ms-clear,
+[type=input]::-ms-clear{
+    display: none;
+    width : 0;
+    height: 0;
+}

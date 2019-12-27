@@ -1,0 +1,58 @@
+<template>
+    <div class="xtpzgl_zdlb">
+        <div class="searchBox">
+            <div class="dataFormBox">
+                <span>终端IP</span>
+                <div class="zdlb_input_panel" :class="[@terminalFormat ? 'inputPanelError' : '']">
+                    <input type="text" ms-duplex="@terminal" class="form-control-input terminal" :keyup="@enter_search"
+                        :attr="{title: @terminal}" :focus="@input_focus('terminal')" :blur="@input_blur('terminal')">
+                    <span class="fa fa-close zdlb_close" :mousedown="@close_click('terminal')" :if="@terminalX"></span>
+                    <span class="formatError" :if="@terminalFormat">请输入正确格式的ip</span>
+                </div>
+            </div>
+            <div class="dataFormBox">
+                <span>最后登录时间</span>
+                <div class="zdlb-dataRight" :controller="zdlb_startTime">
+                    <ms-datepicker :widget="{onChange:@handlerChange, value:@zdlb_startTime, showTime: false, endDate:@endDate, direction:'down'}"></ms-datepicker>
+                </div>
+                <span style="margin: 0 5px;">-</span>
+                <div class="zdlb-dataRight" :controller="zdlb_endTime">
+                    <ms-datepicker :widget="{onChange:@handlerChange, value:@zdlb_endTime, showTime: false, endDate:@endDate, direction:'down'}"></ms-datepicker>
+                </div>
+            </div>
+            <a :if="@opt_zdlb.authority.SEARCH" class="search_btn" :click="@searchBtn">查询</a>
+        </div>
+
+        <div class="zdlb_table">
+            <ms-comtable :widget="{id:'table-zdlb', loading: @tableLoading, data:@tableData, actions:@actions, panelCss:{position: 'absolute', width: '100%', bottom: '52px', top: '162px'}}">
+                <ms-comtable-header :widget="{title:'序号', dataIndex:'index', colwidth:'10%', popover:true}"></ms-comtable-header>
+                <ms-comtable-header :widget="{title:'终端IP', dataIndex:'ip', colwidth:'30%', popover:true}"></ms-comtable-header>
+                <ms-comtable-header :widget="{title:'最后登录账号', dataIndex:'lastLoginAccount', colwidth:'20%', popover:true}"></ms-comtable-header>
+                <ms-comtable-header :widget="{title:'最后登录时间', dataIndex:'lastLoginTime', colwidth:'30%', popover:true}"></ms-comtable-header>
+                <ms-comtable-header :widget="{title:'操作', dataIndex:'space', colwidth:'10%', popover:false}">
+                    <span :controller="opt_zdlb">
+                        <a :if="@authority.UNLOCK" title="解锁" class="action-btn" :click="handle('check')">解锁</a>
+                        <a :if="!@authority.UNLOCK">-</a>
+                    </span>
+                </ms-comtable-header>
+            </ms-comtable>
+        </div>
+        <ms-pages :widget="{total:@table_pagination.total, pageSize:@table_pagination.pageSize, current:@table_pagination.current, onChange:@handlePageChange, getCurrent:@getCurrent}"></ms-pages>
+
+        <!--弹窗-->
+        <div class="zdlb_dialog">
+            <ms-dialog :widget="{$innerVm: 'zdlb_dialog', okText: '确定', cancelText: '取消', className: 'zdlb_dialog_common', show: @zdlb_dialog_show, onCancel: @dialogCancel, onOk:@dialogOk, isMove:true, width: 440, height: 243}">
+                <div slot="body" ms-skip>
+                    <span class="loginPasswordTxt">登录密码</span>
+                    <div class="zdlb_input_panel" :class="[@loginPasswordNull ? 'inputPanelError' : '']">
+                        <input type="password" ms-duplex="@loginPassword" class="form-control-input loginPassword"
+                            :keyup="@enter_search" :attr="{title: @loginPassword}" :focus="@input_focus('loginPassword')"
+                            :blur="@input_blur('loginPassword')">
+                        <span class="fa fa-close zdlb_close" :mousedown="@close_click('loginPassword')" :if="@loginPasswordX"></span>
+                        <span class="formatError" :if="@loginPasswordNull">登录密码不能为空</span>
+                    </div>
+                </div>
+            </ms-dialog>
+        </div>
+    </div>
+</template>

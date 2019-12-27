@@ -1,0 +1,38 @@
+{
+    "code": 0,
+    "msg": "成功！",
+    "data": {
+        "totalPages": 5,
+        "totalElements": 100,
+        "currentPages": 0,
+        "perPages": 20,
+        "currentElements": [{
+            "name": "XXX市YY分局ZZ派出所",
+            "orgCode": "7758258",
+            "orgPath": "/XXX/7758258",
+            "chargeName": "child",
+      "contactNum": "96955995",
+      "description": "一顿操作"
+      
+            },
+            {
+                "name": "XXX市YY分局ZZ派出所",
+      "orgCode": "7758258",
+      "orgPath": "/XXX/7758258",
+      "chargeName": "child",
+"contactNum": "96955995",
+"description": "一顿操作"
+
+            },
+            {
+                "name": "XXX市YY分局ZZ派出所",
+      "orgCode": "7758258",
+      "orgPath": "/XXX/7758258",
+      "chargeName": "child",
+"contactNum": "96955995",
+"description": "一顿操作"
+
+            }
+        ]
+    }
+}

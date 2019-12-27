@@ -1,0 +1,240 @@
+/*
+* @Author: chenjinxing
+* @Date: 2019-01-08 17:56:29
+ * @Last Modified by: mikey.zhaopeng
+ * @Last Modified time: 2019-12-26 19:00:35
+*/
+
+<template>
+    <div class="tyywglpt-gjgl-gjsz gjgl-gjsz">
+        <div class="panel panel-default panel-switch">
+            <div class="panel-body panel-head">
+                <div class="search_checkbox">告警总开关：
+                    <span class="switch-off" id="sosSwitch"></span>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default panel-total">
+            <!-- <div class="panel-body panel-head">
+                <div class="search_checkbox">告警总开关：
+                    <span class="switch-off" id="sosSwitch"></span>
+                </div>
+            </div> -->
+            <div class="panel-heading">
+                <h3 class="panel-title">拍摄时长告警</h3>
+            </div>
+            <div class="panel-body">
+                <div class="params-wrap">
+                    <div class="checkbox-inline">
+                        <input type="checkbox" value='DURATION_THRESHOLD' :duplex="@deviceSOS" data-duplex-changed="@handleCheckboxChange">
+                        <span class="checkImage"></span>
+                        <span>拍摄时长低于</span>
+                        <div class="user-define shoot-define">
+                            <span></span>
+                            <input type="input" value='DURATION_THRESHOLD' :duplex="@customThreshold.DURATION_THRESHOLD" :keyup="@regNum('DURATION_THRESHOLD', @customThreshold.DURATION_THRESHOLD)"
+                                :attr="{disabled: @customThreshold.DURATION_THRESHOLD > 0 ? false : 'disabled'}">小时/每天
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-heading">
+                <h3 class="panel-title">业务关联告警</h3>
+            </div>
+            <div class="panel-body">
+                <div class="params-wrap">
+                    <div class="checkbox-inline">
+                        <input type="checkbox" value='MATCH_THRESHOLD' :duplex="@deviceSOS" data-duplex-changed="@handleCheckboxChange">
+                        <span class="checkImage"></span>
+                        <span>执法业务信息超过</span>
+                        <div class="user-define business-define">
+                            <span></span>
+                            <input type="input" value='MATCH_THRESHOLD' :duplex="@customThreshold.MATCH_THRESHOLD" :keyup="@regNum('MATCH_THRESHOLD', @customThreshold.MATCH_THRESHOLD)"
+                                :attr="{disabled: @customThreshold.MATCH_THRESHOLD > 0 ? false : 'disabled'}">天未进行关联
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-heading">
+                <h3 class="panel-title">采集工作站告警设置</h3>
+            </div>
+            <div class="panel-body">
+                <div class="params-wrap">
+                    <div class="checkbox-inline">
+                        <input type="checkbox" value='OFFLINE_SOS' :duplex="@deviceSOS" data-duplex-changed="@handleCheckboxChange">
+                        <span class="checkImage"></span>
+                        <span>离线告警</span>
+                        <div class="user-define offline-define">
+                            <span>自定义阀值：</span>
+                            <input type="input" value='OFFLINE_SOS' :duplex="@customThreshold.OFFLINE_SOS" :keyup="@regNum('OFFLINE_SOS', @customThreshold.OFFLINE_SOS)"
+                                :attr="{disabled: @customThreshold.OFFLINE_SOS > 0 ? false : 'disabled'}">小时
+                        </div>
+                    </div>
+                    <br>
+                    <div class="checkbox-inline">
+                        <input type="checkbox" value='STORAGE_SOS' :duplex="@deviceSOS" data-duplex-changed="@handleCheckboxChange">
+                        <span class="checkImage"></span>
+                        <span>存储阀值告警</span>
+                        <div class="user-define">
+                            <span>自定义阀值：</span>
+                            <input type="input" value='STORAGE_SOS' :duplex="@customThreshold.STORAGE_SOS" :keyup="@regNum('STORAGE_SOS', @customThreshold.STORAGE_SOS)"
+                                :attr="{disabled: @customThreshold.STORAGE_SOS > 0 ? false : 'disabled'}">%
+                        </div>
+                    </div>
+                    <div class="dep_tree" :controller="tyywglpt_gjsz_tree_ws">
+                        <div>
+                            <ms-tree-selecting :widget="{tree: @tree_data, showSearch: true, wrapId: 'gjsz-tree-select', getSelected: @getSelected, selectedKey: @tree_key ? @tree_key : '', selectedTitle: @tree_title ? @tree_title : '', onChange: @select_change, extraExpandHandle: @extraExpandHandle, branchShow:false, clickBranchBack:@clickBranchBack, includedStatus:@included_status}"></ms-tree-selecting>
+                        </div>
+                    </div>
+                    <div :controller="gjgl_gjsz_person_ws" class="dep_tree_person">
+                        <div>
+                            <ms-select :widget="{value:@selValue,options:@options,onChange:@halderChange}"></ms-select>
+                        </div>
+                    </div>
+                    <br>
+                    <!-- :attr="{disabled: @customThreshold.CPU_SOS > 0 ? false : 'disabled'}" -->
+                    <div class="checkbox-inline">
+                        <input type="checkbox" value='CPU_SOS' :duplex="@deviceSOS" data-duplex-changed="@handleCheckboxChange">
+                        <span class="checkImage"></span>
+                        <span>CPU阀值告警</span>
+                        <div class="user-define">
+                            <span>自定义阀值：</span>
+                            <input type="input" value='CPU_SOS' :duplex="@customThreshold.CPU_SOS" :keyup="@regNum('CPU_SOS', @customThreshold.CPU_SOS)"
+                                >%
+                        </div>
+                    </div>
+                    <br>
+                    <!-- :attr="{disabled: @customThreshold.MEMORY_SOS > 0 ? false : 'disabled'}" -->
+                    <div class="checkbox-inline marginTop16">
+                        <input type="checkbox" value='MEMORY_SOS' :duplex="@deviceSOS" data-duplex-changed="@handleCheckboxChange">
+                        <span class="checkImage"></span>
+                        <span>内存阀值告警</span>
+                        <div class="user-define">
+                            <span>自定义阀值：</span>
+                            <input type="input" value='MEMORY_SOS' :duplex="@customThreshold.MEMORY_SOS" :keyup="@regNum('MEMORY_SOS', @customThreshold.MEMORY_SOS)"
+                                >%
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-heading">
+                <h3 class="panel-title">存储服务器告警设置</h3>
+            </div>
+            <div class="panel-body">
+                <div class="params-wrap">
+                    <div class="checkbox-inline">
+                        <input type="checkbox" value='TS_OFFLINE_SOS' :duplex="@deviceSOS" data-duplex-changed="@handleCheckboxChange">
+                        <span class="checkImage"></span>
+                        <span>离线告警</span>
+                    </div>
+                    <br>
+                    <!-- :attr="{disabled: @customThreshold.TS_STORAGE_SOS > 0 ? false : 'disabled'}" -->
+                    <div class="checkbox-inline">
+                        <input type="checkbox" value='TS_STORAGE_SOS' :duplex="@deviceSOS" data-duplex-changed="@handleCheckboxChange">
+                        <span class="checkImage"></span>
+                        <span>存储阀值告警</span>
+                        <div class="user-define">
+                            <span>自定义阀值：</span>
+                            <input type="input" value='TS_STORAGE_SOS' :duplex="@customThreshold.TS_STORAGE_SOS" :keyup="@regNum('TS_STORAGE_SOS', @customThreshold.TS_STORAGE_SOS)">%
+                        </div>
+                    </div>
+                    <div class="dep_tree" :controller="tyywglpt_gjsz_tree_ts">
+                        <div>
+                            <ms-tree-selecting :widget="{tree: @tree_data, showSearch: true, wrapId: 'gjsz-tree-select', getSelected: @getSelected, selectedKey: @tree_key ? @tree_key : '', selectedTitle: @tree_title ? @tree_title : '', onChange: @select_change, extraExpandHandle: @extraExpandHandle, branchShow:false, clickBranchBack:@clickBranchBack, includedStatus:@included_status}"></ms-tree-selecting>
+                        </div>
+                    </div>
+                    <div :controller="gjgl_gjsz_person_ts" class="dep_tree_person">
+                        <div>
+                            <ms-select :widget="{value:@selValue,options:@options,onChange:@halderChange}"></ms-select>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="checkbox-inline">
+                        <input type="checkbox" value='TS_CPU_SOS' :duplex="@deviceSOS" data-duplex-changed="@handleCheckboxChange">
+                        <span class="checkImage"></span>
+                        <span>CPU阀值告警</span>
+                        <div class="user-define">
+                            <span>自定义阀值：</span>
+                            <input type="input" value='TS_CPU_SOS' :duplex="@customThreshold.TS_CPU_SOS" :keyup="@regNum('TS_CPU_SOS', @customThreshold.TS_CPU_SOS)"
+                                >%
+                        </div>
+                        <!-- :attr="{disabled: @customThreshold.TS_CPU_SOS > 0 ? false : 'disabled'}" -->
+                    </div>
+                    <br>
+                    <div class="checkbox-inline marginTop16">
+                        <input type="checkbox" value='TS_MEMORY_SOS' :duplex="@deviceSOS" data-duplex-changed="@handleCheckboxChange">
+                        <span class="checkImage"></span>
+                        <span>内存阀值告警</span>
+                        <div class="user-define">
+                            <span>自定义阀值：</span>
+                            <input type="input" value='TS_MEMORY_SOS' :duplex="@customThreshold.TS_MEMORY_SOS" :keyup="@regNum('TS_MEMORY_SOS', @customThreshold.TS_MEMORY_SOS)"
+                                >%
+                        </div>
+                        <!-- :attr="{disabled: @customThreshold.TS_MEMORY_SOS > 0 ? false : 'disabled'}" -->
+                    </div>
+
+                </div>
+            </div>
+            <div class="panel-heading">
+                <h3 class="panel-title">系统服务</h3>
+            </div>
+            <div class="panel-body">
+                <div class="params-wrap">
+                    <div class="checkbox-inline">
+                        <input type="checkbox" value='SERVER_OFFLINE_SOS' :duplex="@deviceSOS" data-duplex-changed="@handleCheckboxChange">
+                        <span class="checkImage"></span>
+                        <span>服务停止告警</span>
+                    </div>
+                    <br>
+                    <div class="checkbox-inline">
+                        <input type="checkbox" value='SERVER_CPU_SOS' :duplex="@deviceSOS" data-duplex-changed="@handleCheckboxChange">
+                        <span class="checkImage"></span>
+                        <span>CPU阀值告警</span>
+                        <div class="user-define">
+                            <span>自定义阀值：</span>
+                            <input type="input" value='SERVER_CPU_SOS' :duplex="@customThreshold.SERVER_CPU_SOS" :keyup="@regNum('SERVER_CPU_SOS', @customThreshold.SERVER_CPU_SOS)"
+                                >%
+                        </div>
+                        <!-- :attr="{disabled: @customThreshold.SERVER_CPU_SOS > 0 ? false : 'disabled'}" -->
+                    </div>
+                    <div class="dep_tree" :controller="tyywglpt_gjsz_tree_server">
+                        <div>
+                            <ms-tree-selecting :widget="{tree: @tree_data, showSearch: true, wrapId: 'gjsz-tree-select', getSelected: @getSelected, selectedKey: @tree_key ? @tree_key : '', selectedTitle: @tree_title ? @tree_title : '', onChange: @select_change, extraExpandHandle: @extraExpandHandle, branchShow:false, clickBranchBack:@clickBranchBack, includedStatus:@included_status}"></ms-tree-selecting>
+                        </div>
+                    </div>
+                    <div :controller="gjgl_gjsz_person_server" class="dep_tree_person">
+                        <div>
+                            <ms-select :widget="{value:@selValue,options:@options,onChange:@halderChange}"></ms-select>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="checkbox-inline">
+                        <input type="checkbox" value='SERVER_MEMORY_SOS' :duplex="@deviceSOS" data-duplex-changed="@handleCheckboxChange">
+                        <span class="checkImage"></span>
+                        <span>内存阀值告警</span>
+                        <div class="user-define">
+                            <span>自定义阀值：</span>
+                            <input type="input" value='SERVER_MEMORY_SOS' :duplex="@customThreshold.SERVER_MEMORY_SOS"
+                                :keyup="@regNum('SERVER_MEMORY_SOS', @customThreshold.SERVER_MEMORY_SOS)" >%
+                        </div>
+                        <!-- :attr="{disabled: @customThreshold.SERVER_MEMORY_SOS > 0 ? false : 'disabled'}" -->
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body panel-body-default" :if="!@switchSOS"> </div>
+        </div>
+        <div class="qzpz-btn">
+            <a class="common_btn" :click="@saveBtn">保存</a>
+        </div>
+
+        <div class="qzpz_fresh_tips_vm">
+            <ms-dialog :widget="{$innerVm: 'qzpz_fresh_tips', okText: '确认', cancelText: '取消', className: 'qzpz_fresh_tips_class', show: @qzpz_fresh_tips_show, onCancel: @cancel, onOk:@onOk, isMove:true, width:450, height:200, move_return:@move_return}">
+                <div slot="body" ms-skip>
+                    <span :css="{'color': '#33414f'}" ms-text="@dialog_txt"></span>
+                </div>
+            </ms-dialog>
+        </div>
+    </div>
+</template>

@@ -1,0 +1,534 @@
+.sjzd_item_show {
+    display: block !important;
+}
+
+.sjzd_item_hide {
+    display: none !important;
+}
+
+.xtpzgl_sjzd {
+    width: 100%;
+    height: 100%;
+}
+
+.xtpzgl_sjzd ::-ms-clear,
+.sjzd_dialog_common ::-ms-clear {
+    display: none;
+}
+
+.xtpzgl_sjzd .sidebar_title {
+    width: 360px;
+    height: 50px;
+    line-height: 50px;
+    padding-left: 20px;
+    background-color: #2c477a;
+    color: #fff;
+    font-size: 20px;
+    position: absolute;
+    top: 0px;
+    z-index: 2;
+}
+
+.xtpzgl_sjzd .sidebar_tree {
+    width: 360px;
+    background-color: #e6edf7;
+    border: 1px solid #e6edf7;
+    position: absolute;
+    top: 50px;
+    bottom: 0px;
+    z-index: 2;
+    overflow: auto;
+}
+
+.xtpzgl_sjzd .ztree li span {
+    color: #536b82;
+}
+
+.xtpzgl_sjzd .ztree li a,
+.xtpzgl_sjzd .ztree li a.curSelectedNode {
+    color: #536b82 !important;
+    word-break: keep-all;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.xtpzgl_sjzd .ztree li a.level0 {
+    max-width: 170px;
+}
+
+.xtpzgl_sjzd .ztree li a.level1 {
+    max-width: 153px;
+}
+
+.xtpzgl_sjzd .ztree li a:hover,
+.xtpzgl_sjzd .ztreeli a.curSelectedNode {
+    background-color: #e0e7ec;
+}
+
+.xtpzgl_sjzd .sidebar_tree .ztree li span.button.ico_open,
+.xtpzgl_sjzd .sidebar_tree .ztree li span.button.ico_close,
+.xtpzgl_sjzd .sidebar_tree .ztree li span.button.ico_docu {
+    display: none;
+}
+
+.xtpzgl_sjzd .sidebar_tree .fa-angle-down:before,
+.xtpzgl_sjzd .sidebar_tree .fa-angle-up:before {
+    content: "";
+}
+
+.xtpzgl_sjzd .panel_right {
+    position: relative;
+    top: 0px;
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    padding-left: 370px;
+    z-index: 1;
+}
+
+.xtpzgl_sjzd .btn_panel {
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    background-color: #2c477a;
+    color: #fff;
+    font-size: 20px;
+    padding-left: 20px;
+}
+
+.xtpzgl_sjzd .commonBtn {
+    display: block;
+    width: 16px;
+    height: 16px;
+    margin: 17px 17px;
+    text-align: center;
+    cursor: pointer;
+    float: right;
+}
+
+.xtpzgl_sjzd .disabled,
+.sjzd_dialog_common .sjzd_dialog_item .disabled {
+    cursor: not-allowed;
+}
+
+.xtpzgl_sjzd .commonBtn.disabled,
+.xtpzgl_sjzd .commonBtn.disabled:hover {
+    /* background: #d4d7d9; */
+}
+
+.xtpzgl_sjzd .commonBtn:hover {
+    /* background-color: #107dda; */
+}
+
+.xtpzgl_sjzd .xtpzgl_sjzd_table {
+    position: absolute;
+    bottom: 50px;
+    top: 84px;
+    right: 0px;
+    left: 370px;
+}
+
+.xtpzgl_sjzd .xtpzgl_sjzd_table .table-index .table-index-thead li {
+    height: 44px;
+    line-height: 44px;
+}
+
+.xtpzgl_sjzd .dic_status {
+    color: red;
+}
+
+.xtpzgl_sjzd .curSelectedNode span {
+    color: #a40808 !important;
+}
+
+/*  =================  table start =================  */
+
+.xtpzgl_sjzd .table-saika .table>tbody>tr>td {
+    word-break: keep-all;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.xtpzgl_sjzd .table>thead>tr>th:first-child {
+    min-width: 50px;
+}
+
+.xtpzgl_sjzd .table>thead>tr>th:first-child+th {
+    min-width: 50px;
+}
+
+.xtpzgl_sjzd .table>thead>tr>th:first-child+th+th {
+    min-width: 150px;
+}
+
+.xtpzgl_sjzd .table>thead>tr>th:first-child+th+th+th {
+    min-width: 185px;
+}
+
+.xtpzgl_sjzd .table>thead>tr>th:first-child+th+th+th+th {
+    min-width: 185px;
+}
+
+.xtpzgl_sjzd .table>thead>tr>th:first-child+th+th+th+th+th {
+    min-width: 80px;
+}
+
+.xtpzgl_sjzd .table>thead>tr>th:first-child+th+th+th+th+th+th {
+    min-width: 150px;
+}
+
+.xtpzgl_sjzd .table>thead>tr>th:first-child+th+th+th+th+th+th+th {
+    min-width: 120px;
+}
+
+.xtpzgl_sjzd .table>thead>tr>th:first-child+th+th+th+th+th+th+th+th {
+    min-width: 80px;
+}
+
+.xtpzgl_sjzd .ane-checkbox .ane-checkbox-checked .text {
+    display: inline-block;
+    /* content: "\F00C";
+    background-color: #f5f8fc;
+    border-color: #333333; */
+    background-image: url('/static/image/xtpzgl-yhgl/selectYes.png?__sprite');
+    background-repeat: no-repeat;
+    min-height: 12px;
+    min-width: 12px;
+    font-weight: bold;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.xtpzgl_sjzd .ane-checkbox .ane-checkbox-check .text {
+    border-width: 0px;
+    background-image: url('/static/image/xtpzgl-yhgl/selectNo.png?__sprite');
+    background-repeat: no-repeat;
+    min-height: 12px;
+    min-width: 12px;
+    width: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.xtpzgl_sjzd .ane-checkbox-inner-ie span {
+    display: inline-block !important;
+}
+
+.xtpzgl_sjzd .ane-checkbox input[type="checkbox"]:checked+.text::before {
+    display: none;
+}
+
+.xtpzgl_sjzd .ane-checkbox input[type="checkbox"]+.text::before {
+    display: none;
+}
+
+.xtpzgl_sjzd .ane-checkbox input[type=checkbox] {
+    width: 0px;
+}
+
+/*  =================  table end =================  */
+
+/*  =================  dialog start =================  */
+
+.sjzd_dialog_common .modal-dialog {
+    width: 450px;
+}
+
+.sjzd_dialog_common .sjzd_dialog_item {
+    padding-left: 40px;
+    width: 100%;
+    height: 54px;
+    color: #536b82;
+}
+
+.sjzd_dialog_common .sjzd_dialog_item span {
+    font-size: 16px;
+    font-weight: normal;
+    padding-right: 10px;
+}
+.sjzd_dialog_common .sjzd_dialog_item .input_panel_father {
+    position: relative;
+    display: inline-block;
+    width: 245px;
+    color: #536b82;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background:#d4d7d9;
+}
+.sjzd_dialog_common .sjzd_dialog_item .input_panel_father input {
+    background:#d4d7d9;
+    color: white;
+}
+.sjzd_dialog_common .sjzd_dialog_item .input_panel {
+    position: relative;
+    display: inline-block;
+    width: 245px;
+    color: #536b82;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.sjzd_dialog_common .sjzd_dialog_item .form-control {
+    display: inline-block;
+    width: 245px;
+    color: #536b82;
+}
+
+.sjzd_dialog_common .sjzd_dialog_item .form-control-input {
+    display: inline-block;
+    width: 221px;
+    color: #536b82;
+    height: 32px;
+    line-height: 32px;
+    margin-left: 12px;
+    font-size: 14px;
+    background-color: #fff;
+    border: none;
+    box-sizing: border-box;
+    outline: medium;
+}
+
+.sjzd_dialog_common .modal-header {
+    cursor: move;
+    background-color: #1c2551;
+}
+
+.sjzd_dialog_common .modal-title {
+    color: #fff;
+    font-size: 16px;
+}
+
+.sjzd_dialog_common .modal-body {
+    padding: 20px 15px;
+}
+
+.sjzd_dialog_common .modal-footer {
+    border: 0;
+    background-color: #ccdbf1;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.sjzd_dialog_common .modal-footer .btn {
+    width: 130px;
+    height: 40px;
+    line-height: 40px;
+    padding: 0;
+    color: #fff;
+    background-color: #0078D7;
+    border: 0;
+    border-radius: 0px;
+}
+
+.sjzd_dialog_common .modal-footer .btn:focus {
+    outline: 0px !important;
+}
+
+.sjzd_dialog_common .modal-footer .btn:hover {
+    background-color: #0057a1;
+}
+
+.sjzd_dialog_common .modal-footer .btn-primary {
+    /* float: left; */
+    margin-left: 55px;
+}
+
+.sjzd_dialog_common .modal-footer .btn-default {
+    /* float: right; */
+    margin-right: 55px;
+}
+
+.sjzd_dialog_common .sjzd_dialog_item .red_start {
+    width: 6px;
+    display: inline-block;
+    color: red;
+}
+
+.sjzd_dialog_common .dialog_item_status {
+    height: 34px;
+    margin-top: 23px;
+}
+
+.sjzd_dialog_common .sjzd_input_title_small {
+    display: inline-block;
+    width: 76px;
+    text-align: right;
+}
+
+.sjzd_dialog_common .sjzd_input_title {
+    display: inline-block;
+    width: 86px;
+    text-align: right;   
+}
+.sjzd_dialog_common .sjzd_input_title:before {
+    position: absolute;
+    content: '*';
+    color: red;
+    margin-left: -10px;
+    margin-top: 2px;
+}
+
+.sjzd_dialog_common .dialog_item_status>span {
+    width: 86px;
+    height: 34px;
+    line-height: 34px;
+    float: left;
+    text-align: right;
+}
+
+.sjzd_dialog_common .sjzd_dialog_item .input_error {
+    border-color: #d2403d !important;
+}
+
+.sjzd_tip_box {
+    padding-left: 82px;
+}
+
+.sjzd_tip_box span i {
+    font-size: 12px;
+}
+
+.sjzd_tip {
+    color: #aaa;
+}
+
+.sjzd_null_tip {
+    color: #d2403d;
+}
+
+.sjzd_dialog_item .sjzd_change_padding {
+    width: 203px !important;
+}
+
+.sjzd_right_close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: inline-block;
+    width: 28px;
+    height: 32px;
+    line-height: 32px;
+    vertical-align: middle;
+    text-align: center;
+    cursor: pointer;
+    z-index: 2;
+    font-size: 16px;
+    color: #536b82;
+}
+
+.sjzd_error_close {
+    color: #d2403d;
+}
+
+/*  =================  dialog end =================  */
+
+.xtpzgl_sjzd .sjzd_page {
+    position: absolute;
+    height: 40px;
+    left: 370px;
+    right: 0;
+    bottom: 0;
+    background: #dfe9f7;
+}
+
+.xtpzgl_sjzd .sjzd_page .com-pages {
+    bottom: 4px;
+}
+
+#sjzd_table .table-index-thead li:first-child .ane-checkbox {
+    visibility: hidden;
+}
+
+.xtpzgl_sjzd .editBtn img {
+    cursor: pointer;
+}
+
+.xtpzgl_sjzd .editDiasbled img {
+    cursor: not-allowed;
+}
+
+
+/* 新增业务类别弹窗样式 */
+.sjzd_dialog_common .sjzd_ywlb_dialog_item {
+    width: 49%;
+    height: 58px;
+    vertical-align: top;
+    display: inline-block;
+    color: #536b82;
+    padding-left:0px;
+}
+.sjzd_dialog_common .sjzd_ywlb_dialog_item .fixTips{
+    display: inline-block;
+}
+.sjzd_dialog_common .checkboxDIV{
+    width: 100%;
+    height: 332px;
+    margin-top: 10px;
+}
+.sjzd_dialog_common .checkboxDIV p{
+    margin: 3px;
+}
+.sjzd_dialog_common .checkboxDIV .bzlx,.gwmc,.rylb{
+    width: 100%;
+    height: 33%;
+    color: #536C80;
+    font-size: 16px;
+    background:white;
+    border-top: 1px solid #1c2551;
+    padding-left: 12px;
+}
+
+.sjzd_dialog_common .checkboxDIV input {
+    width: 0;
+    display: none;
+    display: inline-block\0;
+}
+.sjzd_dialog_common .checkboxCSSLabel{
+    height: 25%;
+}
+.sjzd_dialog_common .checkboxCSS{
+    overflow-y: auto;
+    height: 65%;
+}
+.sjzd_dialog_common .checkbox-group {
+    padding-left: 10px;
+}
+
+.sjzd_dialog_common .checkbox-group li {
+    display: inline-block;
+    width: 142px;
+    height: 30px;
+    line-height: 30px;
+}
+.sjzd_dialog_common .checkbox-group .hiddenFont{
+    width: 125px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    height: 30px;
+    vertical-align: middle;
+}
+.sjzd_dialog_common .select-label {
+    width: 12px;
+    height: 12px;
+    margin-bottom: 0px;
+    margin-right: 3px;
+}
+.sjzd_dialog_common .checkbox-group li input {
+    vertical-align: middle;
+    margin: 5px;
+}
+.sjzd_dialog_common .checkbox-group .third-checkbox {
+    width: 110px;
+}
+.sjzd_dialog_common .check_selected {
+    background: url(/static/image/tyywglpt/check_selected.png?__sprite);
+    margin-right: 3px;
+}
+
+.sjzd_dialog_common .check_unselected {
+    background: url(/static/image/tyywglpt/check_unselected.png?__sprite);
+    margin-right: 3px;
+}

@@ -1,0 +1,107 @@
+<!--
+ * @Description: 运维中心-办案区管理-办案区管理
+ * @Author: chenjinxing
+ * @Date: 2019-07-09 11:46:19
+ * @LastEditTime: 2019-09-04 15:58:13
+ * @LastEditors: Please set LastEditors
+ -->
+
+<template>
+    <div class="tyywglpt-rwgl-baqspccrw" :class="[@extra_class ? 'znsb_baqgl_en' : '']">
+        <div class="search_box">
+            <div class="hBox">
+                <div>
+                    <div class="dataFormBox dataTreeBox">
+                        <span>所属办案区:</span>
+                        <div class="dep_tree">
+                            <!-- <ms-tree-selecting :widget="{tree: @tree_data, showSearch: true, wrapId: 'baqgl-tree-select', getSelected: @getSelected, selectedKey: @tree_key ? @tree_key : '', selectedTitle: @tree_title ? @tree_title : '', onChange: @select_change, extraExpandHandle: @extraExpandHandle, branchShow:true, clickBranchBack:@clickBranchBack, includedStatus:@included_status}"></ms-tree-selecting> -->
+                            <ms-select :widget="{onChange:@onChangeBAZX, value:[@BAZX_options.length > 0 ? @BAZX_options[0].value: ''], displayValue:'暂无办案区', options:@BAZX_options}"></ms-select>
+                        </div>
+                    </div>
+                    <div class="dataFormBox" :controller="baqspccrw_rwzt">
+                        <span style="margin-right: 10px;">任务状态:</span>
+                        <ms-select :widget="{col: 'con', options:@count_type_options, value: @count_type, onChange: @onChangeT}" :class="['formInput']"></ms-select>
+                    </div>
+                    <div class="videoStartTime">
+                        <span style="margin-right: 10px;">视频开始时间:</span>
+                        <ms-time-datepicker
+                            :widget="{currentSelect: @currentSelect, timeCallback: @timeCallback, initTime:@initTime}">
+                        </ms-time-datepicker>
+                    </div>
+                    
+                    <!-- :if="@authority.SEARCH" -->
+                    <a class="common_search_btn" :click="@searchBtn" :if="@authority.SEARCH">查询</a>
+                </div>               
+            </div>
+        </div>
+        <div class="tyywglpt-tool-bar">
+            <input type="button" value="重启任务" class="btn btn-tool" :class="[@checkedData.length>0 ? '' : 'disabled']" :click="@restartDownloadTasksDialog" :if="@authority.RESTART">
+        </div>
+        <div class="baqgl-table">
+            <ms-comtable :widget="{id:'znsb-baqgl-table', loading:@loading, data:@table_list,onChange:selectChange, actions:@actions, panelCss:{position: 'absolute',bottom: 60,top: 214,left: 0,right: 0}}">
+                <ms-comtable-header :widget="{dataIndex:'id',type:'selection',colwidth:'5%'}"></ms-comtable-header>
+                <ms-comtable-header :widget="{title:'序号', dataIndex:'table_index', colwidth:'5%', popover:true}"></ms-comtable-header>
+                <ms-comtable-header :widget="{title:'所属办案区', popover:true, colwidth:'15%'}">
+                    <span :skip :attr="{'data-original-title':record.baqName}">{{record.baqName | isNull}}</span>
+                </ms-comtable-header>
+                <ms-comtable-header :widget="{title:'设备名称', popover:true, colwidth:'10%'}">
+                    <span :skip>{{record.deviceName | isNull}}</span>
+                </ms-comtable-header>
+                <ms-comtable-header :widget="{title:'摄像头名称', popover:true, colwidth:'10%'}">
+                    <span :skip>{{record.channelName | isNull}}</span>
+                </ms-comtable-header>
+                <ms-comtable-header :widget="{title:'视频开始时间', popover:true, colwidth:'15%'}">
+                    <span :skip>{{record.startTime | isNull}}</span>
+                </ms-comtable-header>
+                <ms-comtable-header :widget="{title:'视频结束时间', popover:true, colwidth:'15%'}">
+                    <span :skip>{{record.endTime | isNull}}</span>
+                </ms-comtable-header>
+                <ms-comtable-header :widget="{title:'视频个数', popover:true, colwidth:'10%'}">
+                    <span :skip>{{record.fileNum | isNull}}</span>
+                </ms-comtable-header>
+                <ms-comtable-header :widget="{title:'任务状态', colwidth:'10%', popover:true}">
+                    <span :skip>{{record.status | isNull}}</span>
+                </ms-comtable-header>
+                <ms-comtable-header :widget="{title:'操作', colwidth:'5%', popover:true}">
+                    <span :controller="opt_restart_baqspccrw">
+                        <a class="action-btn" :click="@handleLook(record)">{{@rwCheckStr ? '查看': '-'}}</a>
+                    </span>
+                </ms-comtable-header>
+            </ms-comtable>
+        </div>
+        <ms-pages :widget="{total:@table_pagination.total, pageSize:@table_pagination.pageSize, current:@table_pagination.current, onChange:@handlePageChange, getCurrent:@getCurrent, overLimit:@page_type}"></ms-pages>
+
+        <div :controller="rwcqDialog">
+            <xmp :widget="{is:'common-ms-modal', title:@title, modalSelector:'#rwcqDialog', modalWidth:720, modalHeight: 300, btnalign:'center',show:@show,ifokBtn:false ,cancelText:'关闭',onCancel:@handleCancel}">
+                <div id="rwcqDialog">                        
+                    <div class="baqgl-rwlook-table">
+                        <ms-comtable :widget="{id:'baqgl-rwlook-table', loading:@loading, data:@table_list,onChange:@selectChange, actions:@actions, panelCss:{position: 'absolute',bottom: 70,top: 95,left: 10,right: 10}}">
+                            <ms-comtable-header :widget="{title:'序号', dataIndex:'table_index', colwidth:'10%', popover:true}"></ms-comtable-header>
+                            <ms-comtable-header :widget="{title:'视频开始时间', popover:true, colwidth:'30%'}">
+                                <span :skip :attr="{'data-original-title':record.startTime}">{{record.startTime | isNull}}</span>
+                            </ms-comtable-header>
+                            <ms-comtable-header :widget="{title:'视频结束时间', popover:true, colwidth:'30%'}">
+                                <span :skip>{{record.endTime | isNull}}</span>
+                            </ms-comtable-header>
+                            <ms-comtable-header :widget="{title:'下载状态', popover:true, colwidth:'15%'}">
+                                <span :skip>{{record.status | isNull}}</span>
+                            </ms-comtable-header>
+                            <ms-comtable-header :widget="{title:'操作', colwidth:'15%', popover:true}">
+                                <span :controller="opt_restartrw_baqspccrw">
+                                    <a class="action-btn" :click="@restartTaskById(record)">{{record.oparate}}</a>
+                                </span>
+                            </ms-comtable-header>
+                        </ms-comtable>
+                    </div>                            
+                </div>
+            </xmp>
+        </div>
+        <div :controller="restartTaskById" class="deletemodal">
+            <xmp :widget="{is:'common-ms-modal',modalSelector:'#restartTaskById' ,modalWidth:450, modalHeight: 80, btnalign:'center',show:@show, onOk:@handleOk, onCancel:@handleCancel}">
+                <div id="restartTaskById">
+                    <p class="message">是否重启下载失败任务？</p>
+                </div>
+            </xmp>
+        </div>
+    </div>
+</template>

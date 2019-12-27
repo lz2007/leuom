@@ -1,0 +1,35 @@
+.bord{
+    border: 1px solid #e4e4e4;
+    background-color: #f3f5f7;
+}
+
+.lz-container .common_export_btn {
+    width: 110px;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+    color: #fff;
+    cursor: pointer;
+    background-color: #074eb0;
+    position: absolute;
+    right: 19px;
+    top: 19px;
+    z-index: 1;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.lz-container .common_export_btn:hover {
+    background-color: #107dda;
+}
+
+.lz-container .common_export_btn.disabledClick,
+.lz-container .common_export_btn.disabledClick:hover {
+    background: #d4d7d9;
+    color: #fff;
+    cursor: not-allowed;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}

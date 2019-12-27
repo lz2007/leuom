@@ -1,0 +1,105 @@
+/* 圆为红色表示离线，绿色表示在线 */
+
+.online {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin-right: 3px;
+    background: url(/static/image/tyywglpt/online.png?__sprite) 0 0 no-repeat;
+}
+
+.notOnline {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin-right: 3px;
+    background: url(/static/image/tyywglpt/unOnline.png?__sprite) 0 0 no-repeat;
+}
+
+.tyyw-form-box .ane-select-selection .ane-select-selected {
+    position: static;
+}
+
+/*数据上传任务*/
+
+.sjscrw .tyywglpt-search-box .form-inline {
+    top: 0;
+}
+
+.sjscrw .search-line-second .form-item {
+    margin-bottom: 0;
+}
+
+.sjscrw .tyywglpt-search-box {
+    padding: 15px 4px;
+}
+
+.sjscrw .tyywglpt-search-box .search-box-bottom {
+    margin-bottom: 10px;
+}
+
+.sjscrw .tyywglpt-search-box .form-inline .form-item {
+    width: auto;
+    margin-right: 40px;
+    margin-bottom: 0px;
+}
+
+.sjscrw .tyywglpt-search-box .form-inline .form-item.duration-item {
+    margin-right: 15px;
+}
+
+.sjscrw .tyywglpt-search-box .form-item label {
+    margin-bottom: 0px;
+}
+
+.sjscrw .tyywglpt-search-box .btn-query {
+    width: 110px;
+    height: 68px;
+    line-height: 68px;
+    right: 17px;
+    top: 2px;
+}
+
+.sjscrw .tyywglpt-search-box .label-lg label {
+    width: 115px;
+}
+
+.sjscrw .date-line {
+    margin: 0 4px;
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
+}
+
+.sjscrw .duration-container {
+    display: inline-block;
+}
+
+.sjscrw .duration-container .form-control {
+    height: 30px;
+}
+
+.sjscrw .tyywglpt-list-panel {
+    top: 262px;
+}
+
+.sjscrw .sjscrw-modal-restart .tip-text {
+    height: 80px;
+    line-height: 80px;
+    font-size: 16px;
+    color: #536b82;
+    text-align: center;
+    margin-bottom: 0;
+    margin-top: -16px;
+}
+
+/* .tyyw-form-box .tyywglpt-search-box .form-inline .labelLg{
+    width: 280px;
+}
+.tyyw-form-box .tyywglpt-search-box .labelLg label{
+    width: 90px;
+} */
+
+.tyywglpt.sjscrw .tyywglpt-search-box .tree-select-wrap .tree-panel {
+    min-width: 150px;
+}

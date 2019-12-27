@@ -1,0 +1,193 @@
+.common-bk-main{
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 4px;
+    width: 100%;
+    height: 180px;
+    position: absolute;
+    bottom: 70px;
+    left: 8px;
+    text-align: center;
+    z-index: 1;
+    .divCenter{   
+        width: 100%;
+        height: 100%;     
+        
+        .pre{
+            width: 40px;
+            height: 172px;
+            position: absolute;
+            left: 30px;
+            background: url(/static/image/sszhxt-znsb/bk/cpbk/pre.png) 0 0 no-repeat;
+            cursor: pointer;
+            &:hover{
+                background: url(/static/image/sszhxt-znsb/bk/cpbk/preAfter.png) 0 0
+                    no-repeat;
+            }
+            .preBtn{
+                width: 100%;
+                
+            }
+        }
+        .next{
+            width: 40px;
+            position: absolute;
+            right: 30px;
+            height: 172px;
+            background: url(/static/image/sszhxt-znsb/bk/cpbk/next.png) 0 0 no-repeat;
+            cursor: pointer;
+            &:hover{
+                background: url(/static/image/sszhxt-znsb/bk/cpbk/nextAfter.png) 0 0
+                    no-repeat;
+            }
+            .nextBtn{
+                width: 100%;    
+                
+            }
+        }
+        .picContentDIV{        
+            height: 172px;
+            float: left;
+            position: absolute;
+            left: 70px;
+            right: 70px;
+            padding-right: 10px;
+            padding-left: 10px;
+            .nocpbkData{
+                width: 100%;
+                height: 100%;
+                text-align: center;
+                font-size: 68px;
+                padding: 30px;
+                color: red;
+                background: rgba(255, 255, 255, .6);
+            }
+            .result_list{
+                height: 100%;
+                width: 100%;
+                background: rgba(255, 255, 255, .6);
+                // background: #ccdbf1;
+                
+            }
+            ul{            
+                // height: 100%;
+                // width: 100%;
+                // background: #ccdbf1;
+                .select_li {
+                    border: 1px solid #be3335 !important;
+            
+                    .result_txt,
+                    .result_txt_en {
+                        color: #be3335;
+                    }
+                }
+                .result_li {   
+                    &:first-child{
+                        margin-left: 0px;
+                    } 
+                    border: 1px solid #ccdbf1;
+                    width: 15%;
+                    height: 172px;
+                    float: left;
+                    margin-left: 2%;
+                    color: #536b82;
+                    position: relative;
+                    cursor: pointer;
+                    img{
+                        width: 100%;
+                        height: 140px;
+                    }
+                    .picContent{
+                        width: 100%;
+                        height: 30px;
+                        background: #808080;
+                        .result_danger{
+                            position: absolute;
+                            width: 100%;
+                            height: 40px;
+                            text-align: center;
+                            top: 100px;
+                            background: #D72222;
+                            font-size: 21px;
+                            padding: 3px;
+                            opacity: 1;
+                            span{
+                                color: #ffffff;
+                            }
+                        }
+                        .result_danger_normal{
+                            display: none;
+                        }
+                        .result_txt{
+                            width: 100%;
+                            height: 32px;
+                            span{
+                                font-size: 12px;
+                                color: white;
+                            }
+                            P{
+                                margin: 0px;
+                                font-size: 12px;
+                                color: white;
+                                margin-top: -7px;
+                            }
+                        }
+                    }
+                }
+                .result_li_rl {   
+                    &:first-child{
+                        margin-left: 0px;
+                    } 
+                    border: 1px solid #ccdbf1;
+                    width: 10%;
+                    height: 172px;
+                    float: left;
+                    margin-left: 1.25%;
+                    color: #536b82;
+                    position: relative;
+                    cursor: pointer;
+                    img{
+                        width: 100%;
+                        height: 140px;
+                    }
+                    .picContent{
+                        width: 100%;
+                        height: 30px;
+                        background: #808080;
+                        .result_danger{
+                            position: absolute;
+                            width: 100%;
+                            height: 40px;
+                            text-align: center;
+                            top: 100px;
+                            background: #D72222;
+                            font-size: 21px;
+                            padding: 3px;
+                            opacity: 1;
+                            span{
+                                color: #ffffff;
+                            }
+                        }
+                        .result_danger_normal{
+                            display: none;
+                        }
+                        .result_txt{
+                            width: 100%;
+                            height: 32px;
+                            span{
+                                font-size: 12px;
+                                color: white;
+                            }
+                            P{
+                                margin: 0px;
+                                font-size: 12px;
+                                color: white;
+                                margin-top: -7px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

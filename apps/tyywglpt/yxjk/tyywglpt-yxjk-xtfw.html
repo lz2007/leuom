@@ -1,0 +1,44 @@
+<!-- 统一运维管理平台--运行监控--系统服务 -->
+<template>
+    <div class="tyywglpt xtfw" :controller="xtfw-vm">
+        <div class="tyywglpt-list-panel">
+            <div class="tyywglpt-list-header-wrap">
+                <ul class="tyywglpt-list-header">
+                    <li class="col-35">后台服务</li>
+                    <li class="col-30">运行情况</li>
+                    <li class="col-35 last-item">CPU/内存情况</li>
+                </ul>
+            </div>
+            <ul class="tyywglpt-list-content">
+                <li :if="@loading" class="list-loading">
+                    <span>结果加载中</span>
+                </li>
+                <li :if="@isNull" class="list-null">暂无数据</li>
+                <li :if="!@loading && !@isNull" :for="($index, item) in @list">
+                    <div class="col-35" :attr="{'title':item.name || '','data-toggle':'popover'}">{{item.name}}</div>
+                    <div class="col-30" :attr="{'title':item.status == 1 ?
+                    '运行中' : '已停止' || '','data-toggle':'popover'}"
+                        :css="{'color':item.status == 1 ? '#0fb516' : '#d72222'}">{{@item.status == 1 ?
+                        '运行中' : "已停止"}}</div>
+                    <div class="col-35" :attr="{'title':item.cpu+'%'+'/'+item.memory+'%' ,'data-toggle':'popover'}">
+                        <span>{{item.cpu}}% / {{item.memory}}%</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <ms-pages :widget="{total:@table_pagination.total,pageSize:@table_pagination.pageSize,current:@table_pagination.current,onChange:@pageChange,getCurrent:@getCurrent}"></ms-pages>
+
+        <div :controller="xtfw-vm" class="sbzygl-modal xtfw-modal xtfw-modal-select">
+            <xmp :widget="{is:'common-ms-modal', title:'CPU/内存情况', modalSelector:'#xtfw-modal-select', modalWidth:560, modalHeight: auto, btnalign:'center',show:@show, onCancel:@handleCancel,ifokBtn:false,ifcancelBtn:false}">
+                <div id="xtfw-modal-select">
+                    <div class="growth-curve">
+                        <ms-line :widget="{lineObject:@growthCurveLine, lineChangeData:@lineChangeData}"></ms-line>
+                    </div>
+                    <div class="growth-curve">
+                        <ms-line :widget="{lineObject:@growthRAMLine, lineChangeData:@lineChangeData}"></ms-line>
+                    </div>
+                </div>
+            </xmp>
+        </div>
+    </div>
+</template>

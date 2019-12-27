@@ -1,0 +1,221 @@
+<template>
+    <div class="ajgl-container">
+        <div :visible="@ajgl_check.authority.SEARCH && @toggleShow" class="top-form">
+            <xmp is="ms-form" :widget="{$form:@$searchForm,inline:true}">
+                <div class="top-form-inline">
+                    <span style="margin-left: 13px;float: left;">{{@zfda.acceptingUnit}}</span>
+                    <!-- <div class="inline-component" :controller="searchForm_sjdw">
+                        <ms-select-option :widget="{wrapId:'ajglTree',treeData:@rdata,selectedKey: @checkedKeys,showSearch:true,selectedTitle:@selectedTitle,onChange:@handleChange}"></ms-select-option>
+                    </div> -->
+                    <div class="dep_tree" :controller="searchForm_sjdw">
+                        <ms-tree-selecting :widget="{tree: @rdata, showSearch: true, wrapId: 'zfyps-tree-select', getSelected: @getSelected, selectedKey: @sjdw ? @sjdw : '', selectedTitle: @selectedTitle ? @selectedTitle : '', onChange: @select_change, extraExpandHandle: @extraExpandHandle, branchShow:true, clickBranchBack:@clickincludeChild, includedStatus:@includeChild}"></ms-tree-selecting>
+                    </div>
+                    <span class="bjsj_aj">{{@zfda.caseTime}}</span>
+                    <div class="inline-component" :controller="ajgl_searchForm_bjsj">
+                        <!-- <ms-radio-group :widget="{
+                            options:[
+                                { label: '本周', value: 'last-week' },
+                                { label: '本月', value: 'last-month' },
+                                { label: '自定义时间', value: 'last-past-of-time' }
+                            ],
+                            value:['last-week'],
+                            onChange:@searchForm_bjsj_Change
+                        }">
+                        </ms-radio-group> -->
+                        <ms-select :widget="{
+                            col:'bjsj',
+                            value: @bjsj,
+                            onChange:@searchForm_bjsj_Change
+                        }">
+                            <ms-select-option :widget="{value:'last-week'}">本周</ms-select-option>
+                            <ms-select-option :widget="{value:'last-month'}">本月</ms-select-option>
+                            <ms-select-option :widget="{value:'last-past-of-time'}">自定义时间</ms-select-option>
+                        </ms-select>
+                    </div>
+                    <div class="inline-component timeCover" ms-visible="@dateShow">
+                        <ms-form-item>
+                            <ms-datepicker :widget="{
+                                placeholder:'开始时间',
+                               
+                                value: @topform_start_time,
+                                onChange:@startTimeHandleChange,
+                                showTime: false
+                            }"></ms-datepicker>
+                        </ms-form-item>
+                        <span style="margin-left: 6px;margin-right: -3px;">-</span>
+                        <!-- <span class="between-date">-</span> -->
+                        <ms-form-item>
+                            <ms-datepicker :widget="{
+                                placeholder:'结束时间',
+                                value: @topform_end_time,
+                                onChange:@endTimeHandleChange,
+                              
+                                showTime: false
+                            }"></ms-datepicker>
+                        </ms-form-item>
+
+                    </div>
+                    <div class="ajgl-time-null" :css="{display:@show_isNull}">
+                        <div class="yhgl-yhtc-prompt jqgl-prompt-st">
+                            <span :css="{display:@kssj_isNull}">
+                                <i class="fa fa-exclamation-circle"> {{@zfda.startTime}}</i>
+                            </span>
+                        </div>
+                        <div class="yhgl-yhtc-prompt jqgl-prompt-et">
+                            <span :css="{display:@jssj_isNull}">
+                                <i class="fa fa-exclamation-circle"> {{@zfda.endTime}}</i>
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- 远程时候加载数据 -->
+                    <!-- <div :controller="doc-select-remote">
+                        <ms-select :widget="{mode:'multiple',showSearch:true,remote:true,remoteMethod:@fetchOptions}"></ms-select>
+                    </div> -->
+                </div>
+                <div class="top-form-inline">
+                    <ms-form-item :widget="{label: '案件编号'}">
+                        <ms-input :focus="@input_focus('ajbh')" :blur="@input_blur($event, 'ajbh')" :widget="{col: 'ajbh', value:@ajbh}" :keyup="@enter_click"></ms-input>
+                    </ms-form-item>
+                    <ms-form-item :widget="{label: '案件名称'}">
+                        <ms-input :focus="@input_focus('ajmc')" :blur="@input_blur($event, 'ajmc')" :widget="{col: 'ajmc', value:@ajmc}" :keyup="@enter_click"></ms-input>
+                    </ms-form-item>
+                    <ms-form-item :widget="{label: '警情编号'}">
+                        <ms-input :focus="@input_focus('jqbh')" :blur="@input_blur($event, 'jqbh')" :widget="{col: 'jqbh', value:@jqbh}" :keyup="@enter_click"></ms-input>
+                    </ms-form-item>
+                </div>
+                <div class="X-burn">
+                    <span class="fa fa-close jqgl_right_close ajbh_close" :mousedown="@close_click('ajbh')" :visible="@ajgl_close_ajbh"></span>
+                    <span class="fa fa-close jqgl_right_close ajmc_close" :mousedown="@close_click('ajmc')" :visible="@ajgl_close_ajmc"></span>
+                    <span class="fa fa-close jqgl_right_close jqbh_close" :mousedown="@close_click('jqbh')" :visible="@ajgl_close_jqbh"></span>
+                </div>
+                <div class="top-form-inline ajbottomForm">
+                    <ms-form-item :widget="{label: '涉案人员'}">
+                        <ms-input :focus="@input_focus('sary')" :blur="@input_blur($event, 'sary')" :widget="{col: 'sary',value:@sary,placeholder:''}"
+                            :keyup="@enter_click"></ms-input>
+                    </ms-form-item>
+                    <ms-form-item :widget="{label: '主办民警'}">
+                        <ms-input :focus="@input_focus('jy')" :blur="@input_blur($event, 'jy')" :widget="{col: 'jy', value:@jy}" :keyup="@enter_click"></ms-input>
+                    </ms-form-item>
+                    <span class='ajglmt'>关联媒体</span>
+                    <div class="inline-component glmtInput" :controller="searchForm_gllb">
+                        <ms-select :widget="{
+                                    col:'gllb',
+                                    value: @glmt,
+                                    onChange:@searchForm_gllb_Change
+                                }">
+                            <ms-select-option :widget="{value:'99'}">不限</ms-select-option>
+                            <ms-select-option :widget="{value:'1'}">已关联</ms-select-option>
+                            <ms-select-option :widget="{value:'0'}">未关联</ms-select-option>
+                        </ms-select>
+                    </div>
+
+                </div>
+                <div class="X-burn">
+                    <span class="fa fa-close jqgl_right_close sary_close" :mousedown="@close_click('sary')" :visible="@ajgl_close_sary"></span>
+                    <span class="fa fa-close jqgl_right_close jy_close" :mousedown="@close_click('jy')" :visible="@ajgl_close_jy"></span>
+
+                </div>
+            </xmp>
+            <a class="common_export_btn" :class="[@isSearch ? '' : 'disabledClick']" :click="@exportBtn" :if="@ajgl_check.authority.EXPORT">{{@zfda.export}}</a>
+            <button :if="@ajgl_check.authority.SEARCH" class="ajgl_search_btn" :click="@ajgl_search"><span>{{@zfda.query}}</span></button>
+        </div>
+        <div :visible="@toggleShow" class="ajgl-table ajtb" :controller="ajgl-table">
+            <div :visible="@toggleShow" class="ajgl-table jqtb" :controller="jqgl-table-jdkp" style="margin-top:42px;">
+                <div :class="['ajgl-tabCont']">
+                    <div :controller="ajgl_table" :class="['table-index']" id="ajgl_table">
+                        <div class="table-index-thead-fixed">
+                            <ul class="table-index-thead" :css="{paddingRight:@paddingRight}">
+                                <li data-order="1" class="col-5">{{@zfda.tableNo}}</li>
+                                <li data-order="2" class="col-10">{{@zfda.acceptingUnit}}</li>
+                                <li data-order="3" class="col-10">{{@zfda.hostPolice}}</li>
+                                <li data-order="4" class="col-15">{{@zfda.caseNumber}}</li>
+                                <li data-order="5" class="col-10">{{@zfda.caseTime}}</li>
+                                <li data-order="6" class="col-10">{{@zfda.caseName}}</li>
+                                <li data-order="7" class="col-10">{{@zfda.involvedPensonnel}}</li>
+                                <li data-order="8" class="col-10">{{@zfda.caseCategory}}</li>
+                                <li data-order="9" class="col-10">{{@zfda.warningInstanceNumber}}</li>
+                                <li data-order="10" class="col-5">{{@zfda.relatedMedia}}</li>
+                                <li data-order="11" class="col-5">{{@zfda.tableOperation}}</li>
+                            </ul>
+                        </div>
+                        <ul class="table-index-tbody">
+                            <li class="list-null" :if="!@loading && !@data.length">{{@zfda.noRecords}}</li>
+                            <li :for="($index, record) in @data">
+                                <div class="tbody col-5">
+                                    <div class="table-cont">{{(@currentPage-1)*@prePageSize+$index + 1}}</div>
+                                </div>
+                                <div class="tbody col-10">
+                                    <div class="table-cont" :attr="record['zbdwmc'] && (record['zbdwmc'] != '-') ? {rel:'drevil',dep:'dep_switch',fir:'true',tdval:key_dep_switch ? record['sldw'] : record['zbdwmc']}:''">
+                                        {{record['zbdwmc'] | nullFilter}}
+                                    </div>
+                                </div>
+                                <div class="tbody col-10">
+                                    <div class="table-cont" :attr="record['zbmjxm'] && (record['zbmjxm'] != '-') ? {rel:'drevil',tdval:record['zbmjxm']}:''">
+                                        {{record['zbmjxm'] | nullFilter}}
+                                    </div>
+                                </div>
+                                <div class="tbody col-15">
+                                    <div class="table-cont" :attr="record['ajbh'] && (record['ajbh'] != '-') ? {rel:'drevil',tdval:record['ajbh']}:''">
+                                        {{record['ajbh'] | nullFilter}}
+                                    </div>
+                                </div>
+                                <div class="tbody col-10">
+                                    <div class="table-cont" :attr="record['afsj'] && (record['afsj'] != '-') ? {rel:'drevil',tdval:record['afsj']}:''">
+                                        {{record['afsj'] | nullFilter}}
+                                    </div>
+                                </div>
+                                <div class="tbody col-10">
+                                    <div class="table-cont" :attr="record['ajmc'] && (record['ajmc'] != '-') ? {rel:'drevil',tdval:record['ajmc']}:''">
+                                        {{record['ajmc'] | nullFilter}}
+                                    </div>
+                                </div>
+                                <div class="tbody col-10">
+                                    <div class="table-cont" :attr="record['sary'] && (record['sary'] != '-') ? {rel:'drevil',tdval:record['sary']}:''">
+                                        {{record['sary'] | nullFilter}}
+                                    </div>
+                                </div>
+                                <div class="tbody col-10">
+                                    <div class="table-cont" :attr="record['ajlb'] && (record['ajlb'] != '-') ? {rel:'drevil',tdval:record['ajlb']}:''">
+                                        {{record['ajlb'] | nullFilter}}
+                                    </div>
+                                </div>
+                                <div class="tbody col-10">
+                                    <div class="table-cont" :attr="record['jqbh'] && (record['jqbh'] != '-') ? {rel:'drevil',tdval:record['jqbh']}:''">
+                                        {{record['jqbh'] | nullFilter}}
+                                    </div>
+                                </div>
+                                <div class="tbody col-5">
+                                    <div class="table-cont" >
+                                        <!-- {{record['sfgl']}} -->
+                                        <span :if="@record['relation']" class="relationTure">{{@zfda.associated}}</span>
+                                    <span :if="!@record['relation']" class="relationFalse">{{@zfda.unrelated}}</span>
+                                    </div>
+                                </div>
+                                <div class="tbody col-5">
+                                    <div class="table-cont">
+                                        <span>
+                                            <a :if="@ajgl_check.authority.CHECK" class="checkLook" :click="@handle('checkLook','space',record,$index)"><img src="/static/image/zfda-ajgl-ck/check.png"></a>
+                                            <a :if="!@ajgl_check.authority.CHECK">-</a>
+                                        </span>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="table-index-loading" :if="@loading">
+                            <span class="loadingSpan">{{@zfda.loading}}</span>
+                        </div>
+                        <!-- <div :if="!@loading && !@data.length" class="noData">暂无数据</div> -->
+                    </div>
+                </div>
+                <ms-pages :widget="{iszfda:true, total:@pagination.total,overLimit:@pagination.overLimit,pageSize:@pagination.pageSize,current:@pagination.current,onChange:@handleTableChange,getCurrent:@getCurrent}"></ms-pages>
+                <!-- <ms-paging :widget="{current:@pagination.current,pageSize:@pagination.pageSize,total:@pagination.total,onChange:@handleTableChange,getCurrent:@getCurrent,getPageSize:@getPageSize}"></ms-paging> -->
+                <!-- <div class="jqtb-pagi">
+                <button id="jqtbnextPage" :click="@nextPage" class="jqtb-pagi-btn">下一页</button>
+                <button id="jqtblastPage" :click="@lastPage" class="jqtb-pagi-btn">上一页</button>
+                    <span class="jqtb-pagi-word">每页{{@pagination.pageSize}}条,共{{@pagination.total}}条</span>
+            </div> -->
+            </div>
+        </div>
+    </div>
+</template>

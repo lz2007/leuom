@@ -1,0 +1,154 @@
+<!--
+ * @Description: 监督中心-随机抽查-非现场处罚
+ * @Author: liujunlue
+ * @Date: 2019-01-02 11:46:19
+ * @LastEditTime: 2019-01-08 15:50:32
+ * @LastEditors: liujunlue
+ -->
+
+<template>
+    <div class="jdzxpt-sjcc-fxccf" :class="[@extra_class ? 'znsb_fxccf_en' : '']">
+        <div class="search_box">
+            <div class="hBox">
+                <!-- 可生成 -->
+                <div :if="isCreated == 1">
+                    <div class="dataFormBox dataTreeBox">
+                        <span>{{@fxccf_txt.dutyDepartment}}</span>
+                        <div class="dep_tree" :controller="fxccf_tree">
+                            <ms-tree-selecting :widget="{tree: @tree_data, showSearch: true, wrapId: 'fxccf-tree-select', getSelected: @getSelected, selectedKey: @tree_key ? @tree_key : '', selectedTitle: @tree_title ? @tree_title : '', onChange: @select_change, extraExpandHandle: @extraExpandHandle, branchShow:true, clickBranchBack:@clickBranchBack, includedStatus:@included_status}"></ms-tree-selecting>
+                        </div>
+                    </div>
+                    <div class="dataFormBox">
+                        <span>{{@fxccf_txt.generatingNumber}}</span>
+                        <div class="fxccf_input_panel">
+                            <input type="text" ms-duplex="@generateNum" class="form-control-input generateNum" :keyup="@name_input_enter"
+                                id="generateNum" :attr="{title: @generateNum_title}" :focus="@input_focus('generateNum')"
+                                :blur="@input_blur('generateNum')" autocomplete="off" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"
+                                onafterpaste="this.value=this.value.replace(/[^\d]/g,'')">
+                            <span class="fa fa-close fxccf_right_close" :mousedown="@close_click('generateNum')" :if="@generateNum_close"></span>
+                        </div>
+                    </div>
+                    <div class="dataRadioBox" :controller="fxccf_time_range">
+                        <span>{{@fxccf_txt.timeRange}}</span>
+                        <ms-select :widget="{col: 'con', options:@time_range_options, value: @time_range, onChange: @onChangeTR}"
+                            :class="['formInput']"></ms-select>
+                        <div class="dataTimeBox" :if="@range_flag == 2">
+                            <div class="fxccf-dataRight" :controller="fxccf_startTime">
+                                <ms-datepicker :widget="{onChange:@handlerChange, placeholder:@startTime_txt, value:@fxccf_startTime, showTime: false, endDate:@endDate, direction: 'down', languageSelect: @extra_class ? 'en' : ''}"></ms-datepicker>
+                            </div>
+                            <span class="tilde">~</span>
+                            <div class="fxccf-dataRight" :controller="fxccf_endTime">
+                                <ms-datepicker :widget="{onChange:@handlerChange, placeholder:@endTime_txt, value:@fxccf_endTime, showTime: false, endDate:@endDate, direction: 'down', languageSelect: @extra_class ? 'en' : ''}"></ms-datepicker>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="common_search_btn" :click="@searchBtn" :if="@authority.SEARCH">{{@fxccf_txt.generate}}</a>
+                </div>
+                <!-- 不可生成 -->
+                <div :if="isCreated == 2">
+                    <div class="dataFormBox dataTreeBox widthAuto">
+                        <span>{{@fxccf_txt.dutyDepartment}}：</span>
+                        <div class="formData">
+                            <span>{{@depTreeTitle}}</span>
+                        </div>
+                    </div>
+                    <div class="dataFormBox dataTreeBox widthAutoMargin">
+                        <span>{{@fxccf_txt.sportCheckNumber}}：</span>
+                        <div class="formData">
+                            <span>{{@generateNum}}</span>
+                        </div>
+                    </div>
+                    <div class="dataRadioBox widthAutoMargin">
+                        <span>{{@fxccf_txt.timeRange}}：</span>
+                        <div class="formData">
+                            <span>{{@startTime}}</span>
+                            <span>&nbsp;~&nbsp;</span>
+                            <span>{{@endTime}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="fxccf-table" :if="@key_dep_switch">
+            <ms-comtable :widget="{id:'znsb-fxccf-table', loading:@loading, data:@table_list, actions:@actions, panelCss:{position: 'absolute',bottom: 60,top: 100,left: 0,right: 0}}">
+                <ms-comtable-header :widget="{title: @fxccf_txt.tableNo, dataIndex:'table_index', colwidth:'6%', popover:true}"></ms-comtable-header>
+                <ms-comtable-header :widget="{title: @fxccf_txt.dutyDepartment, popover:true, colwidth:'10%'}">
+                    <span :skip :attr="{'data-original-title':record.orgCode,dep:'dep_switch',fir:'true'}">{{record.orgName | isNull}}</span>
+                </ms-comtable-header>
+                <ms-comtable-header :widget="{title: @fxccf_txt.illegalTime, popover:true, colwidth:'10%'}">
+                    <span :skip>{{record.wfsj | isNull}}</span>
+                </ms-comtable-header>
+                <ms-comtable-header :widget="{title: @fxccf_txt.nameId, popover:true, colwidth:'10%'}">
+                    <span :skip>{{record.name_id | isNull}}</span>
+                </ms-comtable-header>
+                <ms-comtable-header :widget="{title: @fxccf_txt.drivingLicenceNumber, colwidth:'10%', popover:true}">
+                    <span :skip>{{record.hphm | isNull}}</span>
+                </ms-comtable-header>
+                <ms-comtable-header :widget="{title: @fxccf_txt.decisionNo, colwidth:'16%', popover:true}">
+                    <span :skip>{{record.jdsbh | isNull}}</span>
+                </ms-comtable-header>
+                <ms-comtable-header :widget="{title: @fxccf_txt.illegalPlace, colwidth:'8%', popover:true}">
+                    <span :skip>{{record.wfdz | isNull}}</span>
+                </ms-comtable-header>
+                <ms-comtable-header :widget="{title: @fxccf_txt.relatedMedia, colwidth:'8%', popover:true}">
+                    <span :skip>{{record.relation | isNull}}</span>
+                </ms-comtable-header>
+                <ms-comtable-header :widget="{title: @fxccf_txt.evaluationState, colwidth:'8%', popover:true}">
+                    <span :skip>{{record.evaStatus | isNull}}</span>
+                </ms-comtable-header>
+                <ms-comtable-header :widget="{title: @fxccf_txt.checkState, colwidth:'8%', popover:true}">
+                    <span :skip>{{record.reviewStatus | isNull}}</span>
+                </ms-comtable-header>
+                <ms-comtable-header :widget="{title: @fxccf_txt.tableOperation, colwidth:'6%', popover:true}">
+                    <span :controller="opt_look_fxccf">
+                        <a :attr="{title:@check_txt}" class="action-btn" :click="@onClick(record)" :if="@authority.SEARCH">
+                            <img src="/static/image/zfsypsjglpt/checkBtn.png?__sprite">
+                        </a>
+                        <a :if="!@authority.SEARCH">-</a>
+                    </span>
+                </ms-comtable-header>
+            </ms-comtable>
+        </div>
+        <div class="fxccf-table" :if="!@key_dep_switch">
+                <ms-comtable :widget="{id:'znsb-fxccf-table', loading:@loading, data:@table_list, actions:@actions, panelCss:{position: 'absolute',bottom: 60,top: 100,left: 0,right: 0}}">
+                    <ms-comtable-header :widget="{title: @fxccf_txt.tableNo, dataIndex:'table_index', colwidth:'6%', popover:true}"></ms-comtable-header>
+                    <ms-comtable-header :widget="{title: @fxccf_txt.dutyDepartment, popover:true, colwidth:'10%'}">
+                        <span :skip :attr="{'data-original-title':record.orgName}">{{record.orgName | isNull}}</span>
+                    </ms-comtable-header>
+                    <ms-comtable-header :widget="{title: @fxccf_txt.illegalTime, popover:true, colwidth:'10%'}">
+                        <span :skip>{{record.wfsj | isNull}}</span>
+                    </ms-comtable-header>
+                    <ms-comtable-header :widget="{title: @fxccf_txt.nameId, popover:true, colwidth:'10%'}">
+                        <span :skip>{{record.name_id | isNull}}</span>
+                    </ms-comtable-header>
+                    <ms-comtable-header :widget="{title: @fxccf_txt.drivingLicenceNumber, colwidth:'10%', popover:true}">
+                        <span :skip>{{record.hphm | isNull}}</span>
+                    </ms-comtable-header>
+                    <ms-comtable-header :widget="{title: @fxccf_txt.decisionNo, colwidth:'16%', popover:true}">
+                        <span :skip>{{record.jdsbh | isNull}}</span>
+                    </ms-comtable-header>
+                    <ms-comtable-header :widget="{title: @fxccf_txt.illegalPlace, colwidth:'8%', popover:true}">
+                        <span :skip>{{record.wfdz | isNull}}</span>
+                    </ms-comtable-header>
+                    <ms-comtable-header :widget="{title: @fxccf_txt.relatedMedia, colwidth:'8%', popover:true}">
+                        <span :skip>{{record.relation | isNull}}</span>
+                    </ms-comtable-header>
+                    <ms-comtable-header :widget="{title: @fxccf_txt.evaluationState, colwidth:'8%', popover:true}">
+                        <span :skip>{{record.evaStatus | isNull}}</span>
+                    </ms-comtable-header>
+                    <ms-comtable-header :widget="{title: @fxccf_txt.checkState, colwidth:'8%', popover:true}">
+                        <span :skip>{{record.reviewStatus | isNull}}</span>
+                    </ms-comtable-header>
+                    <ms-comtable-header :widget="{title: @fxccf_txt.tableOperation, colwidth:'6%', popover:true}">
+                        <span :controller="opt_look_fxccf">
+                            <a :attr="{title:@check_txt}" class="action-btn" :click="@onClick(record)" :if="@authority.SEARCH">
+                                <img src="/static/image/zfsypsjglpt/checkBtn.png?__sprite">
+                            </a>
+                            <a :if="!@authority.SEARCH">-</a>
+                        </span>
+                    </ms-comtable-header>
+                </ms-comtable>
+            </div>
+        <ms-pages :widget="{total:@table_pagination.total, pageSize:@table_pagination.pageSize, current:@table_pagination.current, onChange:@handlePageChange, getCurrent:@getCurrent, overLimit:@page_type}"></ms-pages>
+    </div>
+</template>

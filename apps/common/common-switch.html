@@ -1,0 +1,7 @@
+<template>
+    <span :class="['common-switch', (@loading ? 'common-switch-loading' : ''), (@value ? 'common-switch-on' : '')]" :click="@switchFn">
+        <span class="common-switch-inner">
+            <span :html="@value ? @on : @off"></span>
+        </span>
+    </span>
+</template>

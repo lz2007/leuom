@@ -1,0 +1,103 @@
+<template>
+    <div class="ajgl-table ajtb" :controller="ajgl-table">
+        <div class="ajgl-table jqtb" style="margin-top:42px;">
+            <div :class="['ajgl-tabCont']">
+                <div :controller="zfda-fcfxc-table" :class="['table-index']" id="zfda-fcfxc-table">
+                    <div class="table-index-thead-fixed">
+                        <ul class="table-index-thead" :css="{paddingRight:@paddingRight}">
+                            <li data-order='1' class="col-5">{{@zfda.tableNo}}</li>
+                            <li data-order='2' class="col-15">{{@zfda.dutyDepartment}}</li>
+                            <li data-order='3' class="col-10">{{@zfda.police}}</li>
+                            <li data-order='4' class="col-10">{{@zfda.illegalNumber}}</li>
+                            <!-- 这个字段是客户比较关注，无锡所最新的接口已包含，但还没发布，前端先隐藏这个字段，等无锡所发布最新接口后再放开，后台不需处理。 -->
+                            <!-- <li class="col-9">违法通知书号</li> -->
+                            <li data-order='5' class="col-10">{{@zfda.decisionNo}}</li>
+                            <li data-order='6' class="col-10">{{@zfda.illegalTime}}</li>
+                            <li data-order='7' class="col-10">{{@zfda.illegalPlace}}</li>
+                            <li data-order='8' class="col-10">{{@zfda.drivingLicenceNumber}}</li>
+                            <li data-order='9' class="col-10">{{@zfda.licensePlateType}}</li>
+                            <li data-order='10' class="col-5">{{@zfda.relatedMedia}}</li>
+                            <li data-order='11' class="col-5">{{@zfda.tableOperation}}</li>
+                        </ul>
+                    </div>
+                    <ul class="table-index-tbody">
+                        <li :if="!@loading && !@data.length" class="list-null">{{@zfda.noRecords}}</li>
+                        <li :for="($index, record) in @data">
+                            <div class="tbody col-5">
+                                <div class="table-cont">{{(current-1)*pageSize+$index+1}}</div>
+                            </div>
+                            <div class="tbody col-15">
+                                <div class="table-cont" :attr="record['orgName'] && (record['orgName'] != '-') ? {rel:'drevil',dep:'dep_switch',fir:'true',tdval:key_dep_switch ? record['orgCode'] : record['orgName']}:''">
+                                    {{record['orgName'] | nullFilter}}
+                                </div>
+                            </div>
+                            <div class="tbody col-10">
+                                <div class="table-cont" :attr="record['userCode'] && (record['userCode'] != '-') ? {rel:'drevil',tdval:(record['userName']+'('+record['userCode']+')')}:''">
+                                    {{record['userName'] | nullFilter}} ({{record['userCode'] | nullFilter}})
+                                </div>
+                            </div>
+                            <div class="tbody col-10">
+                                <div class="table-cont" :attr="record['wfbh'] && (record['wfbh'] != '-') ? {rel:'drevil',tdval:record['wfbh']}:''">
+                                    {{record['wfbh'] | nullFilter}}
+                                </div>
+                            </div>
+                            <!-- 这个字段是客户比较关注，无锡所最新的接口已包含，但还没发布，前端先隐藏这个字段，等无锡所发布最新接口后再放开，后台不需处理。 -->
+                            <!-- <div class="tbody col-9">
+                                <div class="table-cont" :attr="record['wftzsbh'] && (record['wftzsbh'] != '-') ? {rel:'drevil',tdval:record['wftzsbh']}:''">
+                                    {{record['wftzsbh']}}
+                                </div>
+                            </div> -->
+                            <div class="tbody col-10">
+                                <div class="table-cont" :attr="record['jdsbh'] && (record['jdsbh'] != '-') ? {rel:'drevil',tdval:record['jdsbh']}:''">
+                                    {{record['jdsbh'] | nullFilter}}
+                                </div>
+                            </div>
+                            <div class="tbody col-10">
+                                <div class="table-cont" :attr="record['wfsj'] && (record['wfsj'] != '-') ? {rel:'drevil',tdval:record['wfsj']}:''">
+                                    {{record['wfsj'] | nullFilter}}
+                                </div>
+                            </div>
+                            <div class="tbody col-10">
+                                <div class="table-cont" :attr="record['wfdz'] && (record['wfdz'] != '-') ? {rel:'drevil',tdval:record['wfdz']}:''">
+                                    {{record['wfdz'] | nullFilter}}
+                                </div>
+                            </div>
+                            <div class="tbody col-10">
+                                <div class="table-cont" :attr="record['hphm'] && (record['hphm'] != '-') ? {rel:'drevil',tdval:record['hphm']}:''">
+                                    {{record['hphm'] | nullFilter}}
+                                </div>
+                            </div>
+                            <div class="tbody col-10">
+                                <div class="table-cont" :attr="record['hpzlmc'] && (record['hpzlmc'] != '-') ? {rel:'drevil',tdval:record['hpzlmc']}:''">
+                                    {{record['hpzlmc'] | nullFilter}}
+                                </div>
+                            </div>
+
+                            <div class="tbody col-5">
+                                <div class="table-cont">
+                                    <!-- {{record['relStatus']?'已关联':'未关联'}} -->
+                                    <span :if="@record['relStatus']" class="relationTure">{{@zfda.associated}}</span>
+                                    <span :if="!@record['relStatus']" class="relationFalse">{{@zfda.unrelated}}</span>
+                                </div>
+                            </div>
+                            <div class="tbody col-5">
+                                <div class="table-cont">
+                                    <span>
+                                        <a :if="@authority.CHECK" class="checkLook" :click="@handle('jycx',record)"><img src="/static/image/zfda-ajgl-ck/check.png"></a>
+                                        <span :if="!@authority.CHECK">-</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="table-index-loading" :if="@loading">
+                        <span class="loadingSpan">{{@zfda.loading}}</span>
+                    </div>
+                    <!-- <div :if="(!@loading && !@data.length)" class="noData">暂无数据</div> -->
+                </div>
+
+            </div>
+        </div>
+        
+    </div>
+</template>

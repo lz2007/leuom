@@ -1,0 +1,69 @@
+<template>
+    <div class="common-layout">
+        <div class="layout-header">
+            <div class="logo">
+                <img src="/static/image/theme/header/logo.png?__sprite" alt="">
+                <h4>{{@titleName}}</h4>
+            </div>
+            <div class="user-info">
+                <img src="/static/image/theme/header/user.png?__sprite" alt="">
+                <span :click="@userInfoClick" :attr="{title: @userName}">{{@userName}}</span>
+                <div class="user-drop-down" :visible="false" :mouseleave="@userDropdownShow = false">
+                    <div class="white-line"></div>
+                    <ul>
+                        <!-- <li>我的图片</li> -->
+                        <li :click="@viewMyAlarm">
+                            <i class="fa fa-spinner fa-spin"></i>
+                            我的告警
+                            <i class="tip"></i>
+                        </li>
+                        <li :click="@editPassword">修改密码</li>
+                        <li :click="@loginOut">退出登录</li>
+                        <iframe src="about:blank" marginheight="0" marginwidth="0" style="position:absolute; visibility:inherit; top:0;left:0;width:100%; height:100%;z-index:-1;opacity:1;filter:alpha(opacity=0);"
+                            frameborder="0"></iframe>
+                    </ul>
+                </div>
+                <!-- <ms-header-operation></ms-header-operation> -->
+            </div>
+            <div class="nav">
+                <ul>
+                    <li :for="($index, item) in @topMenu" :class="[item.icon, @selectedNavKey == item.key ? item.iconActive : '']"
+                        :click="@topMenuItemClick(item, $event, $index)" :mouseover="@topMenuItemMouseOver(item, $event, $index)"
+                        :mouseleave="@topMenuItemMouseLeave(item, $event, $index)">
+                        <h4>{{item.title}}</h4>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="layout-sider" :if="@showSidemenu">
+            <a :visible="@showPrev" class="toPrev" :click="@toPrev($event)"></a>
+            <div class="sider-content">
+                <ul>
+                    <li :for="($index, item) in @sideMenu" :class="[item.icon, @selectedSubnavKey == item.key ? item.iconActive : '']"
+                        :click="@sideMenuItemClick(item, $index) | stop" :mouseover="@sideMenuItemMouseOver(item, $event, $index)"
+                        :mouseleave="@sideMenuItemMouseLeave(item, $event, $index)">
+                        <h4>{{item.title}}</h4>
+                    </li>
+                </ul>
+            </div>
+            <a :visible="@showNext" class="toNext" :click="@toNext($event) | stop"></a>
+        </div>
+        <div class="layout-container">
+            <div class="tree-level-nav" :if="@haveTreeLevelNav">
+                <ul>
+                    <li :for="item in @treeLevelNavList" :click="@treeLevelNavClick(item, $event) | stop" :class="['treeLevelNavLi',@treeLevelNavSelectedKey == item.key ? 'active-tag' : '']">
+                        {{item.title}}
+                        <i :visible="item.children && item.children.length > 0" :class="['drop-icon']"></i>
+                        <ul :if="item.children && item.children.length > 0" class="treeLevelNavChildUl">
+                            <li :for="child in item.children" :click="fourLevelNavClick(child, item, $event)|stop"
+                                :class="[@fourLevelNavSelectedKey == child.key ? 'active-tag' : '']">
+                                {{child.title}}
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <slot></slot>
+        </div>
+    </div>
+</template>

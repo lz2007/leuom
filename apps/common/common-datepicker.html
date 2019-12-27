@@ -1,0 +1,19 @@
+<template>
+	<div class="common-datepicker">
+		<ms-select :widget="{options:@timeSelectOptions, value: @timeSelect, onChange: @onchangeTime}"></ms-select>
+
+		<div class="dataTimeBox" :if="@timeSelectBox">
+			<div class="timePanel">
+				<ms-datepicker
+					:widget="{onChange:@startTimeChange, placeholder:'请选择开始时间', value:@startTime, showTime: false, endDate:@endDate, direction:'down'}">
+				</ms-datepicker>
+			</div>
+			<span class="timeLine">-</span>
+			<div class="timePanel">
+				<ms-datepicker
+					:widget="{onChange:@endTimeChange, placeholder:'请选择结束时间', value:@endTime, showTime: false, endDate:@endDate, direction:'down'}">
+				</ms-datepicker>
+			</div>
+		</div>
+	</div>
+</template>

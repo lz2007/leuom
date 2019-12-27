@@ -1,0 +1,16 @@
+<template>
+	<div class="line-panel">
+		<span class="line-title">{{@lineObject.lineTitle}}</span>
+		<div class="echart-class"></div>
+		<div class="line-tip" :if="@lineObject.seriesName">
+			<span>
+				<i :css="{'background-color':@lineObject.areaStyle.areaColor}"></i>
+				{{@lineObject.seriesName}}
+			</span>
+			<span>
+				<i :css="{'background-color':@lineObject.totalData.color}"></i>
+				{{@lineObject.totalData.name}}
+			</span>
+		</div>
+	</div>
+</template>

@@ -1,0 +1,67 @@
+<template>
+    <div class="tyywglpt zfysjrw">
+        <!-- 顶部表单 begin :if="@authority.SEARCH" -->
+        <div class="tyywglpt-search-box" :if="@authority.SEARCH">
+            <xmp is="ms-form" :widget="{$form:@$searchForm,inline:true}">
+                <ms-form-item :widget="{label:'所属部门:'}" :class="'form-item label-lg'">
+                    <ms-tree-selecting :widget="{tree:@orgData, showSearch:true, wrapId: 'zfysjrw-tree-select-1', getSelected:@getSelected, selectedKey:@dataJson ? @dataJson.orgId : '', selectedTitle:@dataJson ? @dataJson.orgName : '', onChange:@handleTreeChange, extraExpandHandle:@extraExpandHandle}"></ms-tree-selecting>
+                </ms-form-item>
+                <ms-form-item :widget="{label:'国标编码:'}" :class="'form-item label-lg'">
+                    <div class="has-icon-input-wrap">
+                        <input type="input" class="form-control" ms-duplex="@gbcode" :keypress="@handlePress"
+                            :focus="@handleFocus" :blur="@handleBlur" :attr="{title: @gbcode}">
+                        <span class="fa fa-close" :mousedown="@handleClear('gbcode',$event)|prevent" :visible="false"></span>
+                    </div>
+                </ms-form-item>
+                <button :if="@authority.SEARCH" type="button" class="btn btn-query" :click="@query">查询</button>
+            </xmp>
+        </div>
+
+        <!-- 表格数据begin -->
+        <div class="tyywglpt-list-panel">
+            <div class="tyywglpt-list-header-wrap">
+                <ul class="tyywglpt-list-header">
+                    <li class="col-5 first-item">序号</li>
+                    <li class="col-15">所属部门</li>
+                    <li class="col-15">设备名称</li>
+                    <li class="col-20">国标编号</li>
+                    <li class="col-10">当前版本</li>
+                    <li class="col-10">升级包版本</li>
+                    <li class="col-15">发包状态</li>
+                    <li class="col-10 last-item">操作</li>
+                </ul>
+            </div>
+            <ul class="tyywglpt-list-content">
+                <li :if="@loading" class="list-loading">
+                    <span>结果加载中</span>
+                </li>
+                <li :if="@isNull" class="list-null">暂无数据</li>
+                <li :if="!@loading && !@isNull" :for="($index, item) in @list">
+                    <div class="col-5 first-item">{{((current-1)*pageSize+1)+$index}}</div>
+                    <div class="col-15" :attr="{'title':item.orgName  || '-','data-toggle':'popover'}">{{@item.orgName | fillterEmpty}}</div>
+                    <div class="col-15" :attr="{'title':item.deviceName  || '-','data-toggle':'popover'}">{{@item.deviceName | fillterEmpty}}</div>
+                    <div class="col-20" :attr="{'title':item.gbCode  || '-','data-toggle':'popover'}">{{@item.gbCode | fillterEmpty}}</div>
+                    <div class="col-10" :attr="{'title':item.curVersion  || '-','data-toggle':'popover'}">{{@item.curVersion | fillterEmpty}}</div>
+                    <div class="col-10" :attr="{'title':item.packageVersion  || '-','data-toggle':'popover'}">{{@item.packageVersion | fillterEmpty}}</div>
+                    <div class="col-15" :class="[item.updateStatus === 2 && 'isFailed']" :attr="{'title':item.updateStatus === 0 ? '发包中' : '-','data-toggle':'popover'}">{{@item.updateStatus === 0 ? '发包中' : '' | fillterEmpty}}</div>
+                    <div class="col-10" :attr="{'title':'删除','data-toggle':'popover'}">
+                        <a class="oparate" :visible="@authority.DELETE" :click="@delete(item)">
+                            <img src="/static/image/tyywglpt-sbzygl/delete.png?__sprite">
+                        </a>
+                        <span :visible="!@authority.DELETE">-</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <!-- 页码 -->
+        <ms-pages :widget="{total:@total,pageSize:@pageSize,current:@current,onChange:@onChangePage,getCurrent:@getCurrent}"></ms-pages>
+        <!-- 删除弹窗 -->
+        <div :controller="rwgl-zfysjrw-delete-vm" class="sjbgl-modal-delete">
+            <xmp :widget="{is:'common-ms-modal', title:'确定删除', modalSelector:'.sjbgl-del-body', drag:true, btnalign:'center', modalWidth:370, modalHeight:80, show:@show,onOk:@handleOk,onCancel:@handleCancel}">
+                <div class="sjbgl-del-body">
+                    <p class="tip-text">是否确定删除该条数据？</p>
+                </div>
+            </xmp>
+        </div>
+    </div>
+</template>
